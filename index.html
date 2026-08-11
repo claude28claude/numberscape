@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Numberscape — the world, drawn to scale</title>
+<meta name="description" content="Twelve ways to see the numbers you thought you knew. An interactive data-visualisation essay.">
+<meta name="theme-color" content="#0a0c11">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0c11'/%3E%3Crect x='5' y='18' width='4.5' height='9' rx='1' fill='%232ec4b6'/%3E%3Crect x='11.5' y='12' width='4.5' height='15' rx='1' fill='%23ffc857'/%3E%3Crect x='18' y='7' width='4.5' height='20' rx='1' fill='%23ff5d73'/%3E%3Ccircle cx='26.5' cy='9' r='2.6' fill='%23b892ff'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0a0c11;
+  --panel:#12161f;
+  --panel2:#171c27;
+  --line:#252c3a;
+  --ink:#e9ecf3;
+  --dim:#8d96ab;
+  --dimmer:#5d6577;
+  --c1:#ff5d73;
+  --c2:#ffc857;
+  --c3:#2ec4b6;
+  --c4:#4895ef;
+  --c5:#b892ff;
+  --c6:#06d6a0;
+  --c7:#f77f00;
+  --serif:ui-serif,Georgia,'Times New Roman',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:var(--c4)}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+section{padding:92px 0;border-top:1px solid var(--line);position:relative;scroll-margin-top:56px}
+section:first-of-type{border-top:none}
+
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dimmer);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.eyebrow .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line);color:var(--dim);
+  font-size:10px;
+}
+h2{
+  font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.4vw,46px);
+  line-height:1.1;margin:0 0 14px;letter-spacing:-.02em;
+}
+.standfirst{color:var(--dim);font-size:17px;max-width:62ch;margin:0 0 34px}
+.standfirst strong{color:var(--ink);font-weight:600}
+.note{color:var(--dimmer);font-size:12.5px;font-family:var(--mono);margin-top:20px;line-height:1.7}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(10,12,17,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s;
+}
+nav.solid{border-bottom-color:var(--line)}
+.navin{max-width:1080px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:20px}
+.brand{font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:-.01em;white-space:nowrap}
+.brand span{color:var(--c2)}
+.navlinks{display:flex;gap:15px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{
+  color:var(--dim);text-decoration:none;font-size:12.5px;white-space:nowrap;
+  padding:3px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;
+}
+.navlinks a:hover{color:var(--ink);border-bottom-color:var(--c2)}
+@media(max-width:1180px){.navlinks{display:none}}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  position:relative;padding:120px 0 80px;overflow:hidden;
+}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{
+  font-family:var(--serif);font-weight:600;
+  font-size:clamp(46px,10vw,104px);line-height:.94;letter-spacing:-.035em;
+  margin:0 0 26px;
+}
+.hero h1 em{font-style:italic;color:var(--c2)}
+.hero p.lead{font-size:clamp(17px,2.2vw,21px);color:var(--dim);max-width:56ch;margin:0 0 40px}
+.hero p.lead b{color:var(--ink);font-weight:600}
+.herostats{display:flex;flex-wrap:wrap;gap:34px;margin-bottom:44px}
+.herostat .v{font-family:var(--serif);font-size:34px;line-height:1;color:var(--c3)}
+.herostat .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);margin-top:8px}
+.scrollcue{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dimmer);display:flex;align-items:center;gap:10px}
+.scrollcue .bar{width:44px;height:1px;background:var(--line);position:relative;overflow:hidden}
+.scrollcue .bar::after{content:'';position:absolute;inset:0;background:var(--c2);animation:slide 2.2s ease-in-out infinite}
+@keyframes slide{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- generic panel ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
+
+/* ---------- 1. guess ---------- */
+.quiz{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.quizhead{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px 24px;border-bottom:1px solid var(--line);background:var(--panel2);
+}
+.qprog{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--dimmer);text-transform:uppercase}
+.qdots{display:flex;gap:6px}
+.qdot{width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .3s}
+.qdot.done{background:var(--c3)}
+.qdot.now{background:var(--c2);box-shadow:0 0 0 3px rgba(255,200,87,.18)}
+.qbody{padding:30px 24px 26px}
+.qtext{font-family:var(--serif);font-size:clamp(21px,3vw,29px);line-height:1.25;margin:0 0 30px;max-width:34ch}
+.sliderrow{display:flex;align-items:center;gap:18px;margin-bottom:8px}
+.sliderrow input[type=range]{flex:1;-webkit-appearance:none;appearance:none;background:transparent;height:34px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--line);border-radius:2px}
+input[type=range]::-moz-range-track{height:4px;background:var(--line);border-radius:2px}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--c2);
+  margin-top:-9px;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--c2);
+}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--c2);border:3px solid var(--bg)}
+.guessval{font-family:var(--serif);font-size:40px;line-height:1;color:var(--c2);min-width:110px;text-align:right;font-variant-numeric:tabular-nums}
+.guessval small{font-size:18px;color:var(--dim)}
+.scaleends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--dimmer);margin-bottom:24px}
+.btn{
+  background:var(--c2);color:#161009;border:none;border-radius:8px;
+  padding:12px 24px;font-size:14px;font-weight:650;cursor:pointer;font-family:var(--sans);
+  transition:transform .15s,filter .2s;
+}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--c2);color:var(--c2)}
+.reveal{display:none;margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+.reveal.show{display:block;animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.revbars{margin-bottom:20px}
+.revrow{display:flex;align-items:center;gap:14px;margin-bottom:11px}
+.revlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);width:74px;flex-shrink:0}
+.revtrack{flex:1;height:26px;background:var(--panel2);border-radius:5px;overflow:hidden;position:relative}
+.revfill{height:100%;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1);border-radius:5px}
+.revnum{font-family:var(--mono);font-size:13px;width:74px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
+.revtext{color:var(--dim);font-size:15px;max-width:62ch;margin:0 0 20px}
+.revtext b{color:var(--ink)}
+.verdict{font-family:var(--serif);font-size:20px;margin:0 0 8px}
+.quizfoot{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.scoreline{font-family:var(--mono);font-size:11.5px;color:var(--dimmer);margin-left:auto;letter-spacing:.1em}
+
+/* ---------- 2. fear ---------- */
+.legend{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:26px;font-size:13px;color:var(--dim)}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block;margin-right:8px;vertical-align:-1px}
+.fearrow{
+  display:grid;grid-template-columns:150px 1fr 92px;gap:16px;align-items:center;
+  padding:11px 0;border-bottom:1px solid rgba(37,44,58,.5);
+}
+.fearrow:hover{background:rgba(255,255,255,.02)}
+.fearname{font-size:14px}
+.fearbars{display:flex;flex-direction:column;gap:3px}
+.fbar{height:8px;border-radius:2px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1);min-width:1px}
+.feardist{font-family:var(--mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.feardist.hot{color:var(--c1)}
+.feardist.cold{color:var(--c4)}
+.fearhead{
+  display:grid;grid-template-columns:150px 1fr 92px;gap:16px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dimmer);padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:6px;
+}
+.fearhead span:last-child{text-align:right}
+@media(max-width:640px){
+  .fearrow,.fearhead{grid-template-columns:104px 1fr 64px;gap:10px}
+  .fearname{font-size:12.5px}
+}
+
+/* ---------- 3. treemap ---------- */
+.tmwrap{position:relative;width:100%;border-radius:12px;overflow:hidden;background:var(--panel)}
+.tmwrap svg{display:block;width:100%;height:auto}
+.tmtile{cursor:default;transition:opacity .25s}
+.tmwrap.hovering .tmtile{opacity:.42}
+.tmwrap.hovering .tmtile.on{opacity:1}
+.tmlabel{font-family:var(--sans);pointer-events:none;fill:#0b0d12}
+.tmval{font-family:var(--mono);pointer-events:none;fill:#0b0d12;opacity:.72}
+/* Positioned with transform, never left/top: transform is composited, so
+   moving the tooltip never triggers layout on a 6,000-node page. */
+.tip{
+  position:fixed;left:0;top:0;z-index:80;pointer-events:none;opacity:0;
+  transform:translate3d(-9999px,0,0);will-change:transform;transition:opacity .15s;
+  background:#050609;border:1px solid var(--line);border-radius:9px;padding:11px 14px;
+  max-width:270px;font-size:13px;line-height:1.5;box-shadow:0 14px 40px rgba(0,0,0,.6);
+}
+.tip.show{opacity:1}
+.tip .t{font-weight:650;margin-bottom:4px;display:block}
+.tip .v{font-family:var(--mono);font-size:12px;color:var(--c2);display:block;margin-bottom:6px}
+.tip .d{color:var(--dim);font-size:12.5px}
+
+/* ---------- 4. bubbles ---------- */
+.bubwrap{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px}
+.bubwrap svg{display:block;width:100%;height:auto}
+.bub{cursor:pointer;transition:opacity .2s}
+.bubwrap.hovering .bub{opacity:.3}
+.bubwrap.hovering .bub.on{opacity:1}
+.axlabel{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;fill:var(--dimmer)}
+.gridline{stroke:var(--line);stroke-width:1}
+.bublabel{font-family:var(--sans);font-size:10.5px;fill:var(--dim);pointer-events:none}
+
+/* ---------- 5. ticker ---------- */
+.tickgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.tick{background:var(--panel);padding:24px 22px;position:relative;overflow:hidden}
+.tick::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--acc,var(--c3))}
+.tickv{font-family:var(--serif);font-size:clamp(26px,3.6vw,38px);line-height:1;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tickl{font-size:13.5px;color:var(--dim);margin-top:10px}
+.tickr{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dimmer);margin-top:8px}
+.elapsed{font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:20px;letter-spacing:.08em}
+.elapsed b{color:var(--c2)}
+
+/* ---------- 6. life ---------- */
+.lifectl{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.lifectl label{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer)}
+#ageInput{
+  width:78px;background:var(--panel2);border:1px solid var(--line);color:var(--c2);
+  font-family:var(--serif);font-size:26px;padding:6px 12px;border-radius:8px;text-align:center;
+}
+#ageRange{flex:1;min-width:180px}
+.lifelayout{display:grid;grid-template-columns:1fr 300px;gap:36px;align-items:start}
+@media(max-width:860px){.lifelayout{grid-template-columns:1fr}}
+#lifeSvg{display:block;width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.lifefacts{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.fact{background:var(--panel);padding:15px 18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.fact .fl{font-size:13px;color:var(--dim)}
+.fact .fv{font-family:var(--mono);font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.lifekey{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;font-size:12.5px;color:var(--dim)}
+.lifekey i{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:7px}
+
+/* ---------- 7. myths ---------- */
+.mythgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:14px}
+.card{perspective:1100px;height:184px;cursor:pointer}
+.cardin{position:relative;width:100%;height:100%;transition:transform .62s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d}
+.card.flip .cardin{transform:rotateY(180deg)}
+.face{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;
+  padding:20px;display:flex;flex-direction:column;justify-content:space-between;
+  border:1px solid var(--line);
+}
+.front{background:var(--panel)}
+.back{background:var(--panel2);transform:rotateY(180deg);border-color:var(--c1)}
+.mythq{font-family:var(--serif);font-size:17.5px;line-height:1.3}
+.mythhint{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dimmer)}
+.mythverdict{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--c1);margin-bottom:10px}
+.mytha{font-size:13.5px;color:var(--dim);line-height:1.5;overflow:auto}
+.mytha b{color:var(--ink)}
+
+/* ---------- footer ---------- */
+footer{padding:70px 0 90px;border-top:1px solid var(--line);color:var(--dimmer);font-size:13.5px}
+footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14px;font-weight:600}
+.srcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;margin-bottom:36px}
+.srcgrid h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0 0 8px}
+.srcgrid ul{margin:0;padding-left:16px;line-height:1.75}
+.honesty{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--c2);border-radius:0 10px 10px 0;padding:20px 22px;color:var(--dim);max-width:70ch;line-height:1.65}
+.honesty b{color:var(--ink)}
+
+/* ---------- page furniture ---------- */
+/* scaleX rather than width — animating width relayouts, transform doesn't */
+#progress{
+  position:fixed;top:0;left:0;height:2px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--c3),var(--c4),var(--c2),var(--c1));
+  transform:scaleX(0);transform-origin:0 50%;will-change:transform;
+  transition:transform .08s linear;
+}
+.navlinks a.active{color:var(--c2);border-bottom-color:var(--c2)}
+#menuBtn{
+  display:none;margin-left:auto;background:transparent;border:1px solid var(--line);
+  color:var(--dim);border-radius:7px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:var(--mono);
+  letter-spacing:.12em;text-transform:uppercase;
+}
+#menuBtn:hover{color:var(--c2);border-color:var(--c2)}
+#mobileMenu{
+  display:none;background:var(--panel);border-top:1px solid var(--line);
+  max-height:70vh;overflow-y:auto;
+}
+#mobileMenu.open{display:block}
+#mobileMenu a{
+  display:flex;gap:12px;align-items:baseline;padding:13px 22px;color:var(--ink);
+  text-decoration:none;border-bottom:1px solid rgba(37,44,58,.55);font-size:14.5px;
+}
+#mobileMenu a span{font-family:var(--mono);font-size:10.5px;color:var(--dimmer);min-width:18px}
+#mobileMenu a:active{background:var(--panel2)}
+@media(max-width:1180px){#menuBtn{display:block}}
+
+/* Only shown when the viewport is wide enough for it to sit in the page
+   margin — otherwise it floats over the right-hand data column of the
+   charts. Narrow screens use the "Index" menu, which has a Top entry. */
+#toTop{
+  position:fixed;right:20px;bottom:20px;z-index:55;width:44px;height:44px;border-radius:50%;
+  background:var(--panel2);border:1px solid var(--line);color:var(--dim);cursor:pointer;
+  display:none;place-items:center;font-size:16px;opacity:0;pointer-events:none;
+  transition:opacity .3s,transform .2s,color .2s,border-color .2s;
+}
+@media(min-width:1240px){#toTop{display:grid}}
+#toTop.show{opacity:1;pointer-events:auto}
+#toTop:hover{color:var(--c2);border-color:var(--c2);transform:translateY(-3px)}
+
+/* ---------- contents ---------- */
+.toc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.toc a{
+  display:flex;gap:16px;align-items:baseline;padding:20px 22px;background:var(--panel);
+  text-decoration:none;color:var(--ink);transition:background .2s;height:100%;
+}
+.toc a:hover{background:var(--panel2)}
+.toc a:hover .tocn{color:var(--c2)}
+.tocn{font-family:var(--mono);font-size:11px;color:var(--dimmer);min-width:20px;transition:color .2s}
+.toct{font-family:var(--serif);font-size:18px;line-height:1.25;display:block}
+.tocd{font-size:12.5px;color:var(--dim);display:block;margin-top:5px;line-height:1.45}
+
+/* ---------- animals (log bars) ---------- */
+.toggle{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:3px;margin-bottom:26px;gap:3px}
+.toggle button{
+  background:transparent;border:none;color:var(--dim);padding:8px 16px;border-radius:6px;
+  font-size:12.5px;cursor:pointer;font-family:var(--sans);transition:background .2s,color .2s;
+}
+.toggle button.on{background:var(--c2);color:#161009;font-weight:650}
+.animrow{display:grid;grid-template-columns:26px 152px 1fr 96px;gap:14px;align-items:center;padding:7px 0}
+.animrow:hover{background:rgba(255,255,255,.02)}
+.animicon{font-size:17px;text-align:center;line-height:1}
+.animname{font-size:14px}
+.animtrack{height:20px;background:var(--panel2);border-radius:4px;overflow:hidden}
+.animfill{height:100%;width:0;border-radius:4px;transition:width .85s cubic-bezier(.2,.8,.2,1)}
+.animnum{font-family:var(--mono);font-size:12.5px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}
+@media(max-width:640px){
+  .animrow{grid-template-columns:22px 100px 1fr 72px;gap:9px}
+  .animname{font-size:12.5px}.animnum{font-size:11px}
+}
+
+/* ---------- colours in culture ---------- */
+.culwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.culgrid{display:grid;grid-template-columns:118px repeat(7,minmax(112px,1fr));min-width:900px}
+.culcell{padding:13px 11px;border-right:1px solid rgba(37,44,58,.5);border-bottom:1px solid rgba(37,44,58,.5);font-size:12.2px;line-height:1.35;color:var(--dim);cursor:default;transition:background .18s,color .18s}
+.culcell:hover{background:rgba(255,255,255,.05);color:var(--ink)}
+.culhead{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);background:var(--panel2);position:sticky;top:0}
+.culname{display:flex;align-items:center;gap:10px;color:var(--ink);font-size:13.5px;background:var(--panel2)}
+.culswatch{width:16px;height:16px;border-radius:4px;flex-shrink:0;border:1px solid rgba(255,255,255,.16)}
+.culgrid .culcell:last-child{border-right:none}
+.culrow-on .culcell{background:rgba(255,200,87,.07)}
+
+/* ---------- warming stripes ---------- */
+.stripes{display:flex;height:230px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.stripe{flex:1;min-width:0;position:relative;transition:transform .18s;transform-origin:bottom}
+.stripe:hover{transform:scaleY(1.04);z-index:2;outline:1px solid rgba(255,255,255,.5)}
+.stripeaxis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--dimmer);margin-top:10px}
+.stripescale{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:12.5px;color:var(--dim);flex-wrap:wrap}
+.stripebar{display:flex;height:11px;width:190px;border-radius:3px;overflow:hidden}
+.stripebar div{flex:1}
+
+/* ---------- how long it lasts ---------- */
+.lastrow{display:grid;grid-template-columns:172px 1fr 104px;gap:14px;align-items:center;padding:6px 0}
+.lastrow:hover{background:rgba(255,255,255,.02)}
+.lastname{font-size:13.5px;display:flex;align-items:center;gap:8px}
+.lasttrack{position:relative;height:22px}
+.lastline{position:absolute;left:0;top:50%;height:2px;background:var(--panel2);border-radius:2px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.lastdot{position:absolute;top:50%;width:11px;height:11px;border-radius:50%;transform:translate(-50%,-50%);left:0;transition:left 1s cubic-bezier(.2,.8,.2,1);border:2px solid var(--bg)}
+.lasttime{font-family:var(--mono);font-size:12px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}
+.lastaxis{display:grid;grid-template-columns:172px 1fr 104px;gap:14px;margin-top:8px}
+.lastticks{position:relative;height:18px;border-top:1px solid var(--line)}
+.lastticks span{position:absolute;top:5px;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;color:var(--dimmer);white-space:nowrap}
+@media(max-width:640px){
+  .lastrow,.lastaxis{grid-template-columns:112px 1fr 72px;gap:9px}
+  .lastname{font-size:12px}.lasttime{font-size:10.5px}
+  .lastticks span.minor{display:none}
+}
+
+/* ---------- fallacies ---------- */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.chip{
+  background:var(--panel2);border:1px solid var(--line);color:var(--dim);
+  padding:7px 14px;border-radius:20px;font-size:12.5px;cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s;font-family:var(--sans);
+}
+.chip:hover{color:var(--ink);border-color:var(--dim)}
+.chip.on{background:var(--c5);border-color:var(--c5);color:#140a24;font-weight:650}
+.falgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px}
+.fal{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--fc,var(--c5));border-radius:0 12px 12px 0;padding:19px 20px;transition:transform .2s,border-color .2s}
+.fal:hover{transform:translateY(-2px)}
+.falcat{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fc,var(--c5));margin-bottom:8px}
+.falname{font-family:var(--serif);font-size:18.5px;margin-bottom:8px;line-height:1.2}
+.faldef{font-size:13.5px;color:var(--dim);line-height:1.5;margin-bottom:12px}
+.falex{font-size:13px;color:var(--ink);line-height:1.5;padding-left:12px;border-left:2px solid var(--line);font-style:italic}
+
+/* ---------- reduced motion ---------- */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .rv{opacity:1;transform:none}
+}
+
+/* ---------- small screens: let wide charts scroll in their own box ---------- */
+.swipehint{display:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);margin:0 0 10px}
+@media(max-width:760px){
+  .swipehint{display:block}
+  .tmwrap,.bubwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tmwrap svg{min-width:720px}
+  .bubwrap svg{min-width:820px}
+  section{padding:68px 0}
+  .lifefacts{margin-top:8px}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="nav">
+  <div class="navin">
+    <div class="brand">Number<span>scape</span></div>
+    <div class="navlinks" id="navLinks"></div>
+    <button id="menuBtn" aria-expanded="false">Index</button>
+  </div>
+  <div id="mobileMenu"></div>
+</nav>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<!-- ======== HERO ======== -->
+<header class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="wrap">
+    <h1>The world is<br>bigger, weirder<br>and <em>less scary</em><br>than you think.</h1>
+    <p class="lead">Twelve charts about things you already have an opinion on. <b>Guess before you scroll.</b> Most people are wrong — reliably, and in the same direction.</p>
+    <div class="herostats">
+      <div class="herostat"><div class="v" data-count="12">0</div><div class="l">Chapters</div></div>
+      <div class="herostat"><div class="v" data-count="358">0</div><div class="l">Data points</div></div>
+      <div class="herostat"><div class="v" data-count="0" data-suffix="kb">0</div><div class="l">Trackers loaded</div></div>
+    </div>
+    <div class="scrollcue"><span class="bar"></span> Scroll</div>
+  </div>
+</header>
+
+<!-- ======== CONTENTS ======== -->
+<section id="contents"><div class="wrap rv">
+  <div class="eyebrow">Contents</div>
+  <h2>Twelve chapters.</h2>
+  <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip</strong>. Nothing is loaded from the internet.</p>
+  <ol class="toc" id="toc"></ol>
+</div></section>
+
+<!-- ======== 1. GUESS ======== -->
+<section id="guess" data-title="Guess First" data-blurb="Six questions. Commit to a number before the answer appears."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">1</span> Calibration</div>
+  <h2>Guess first.</h2>
+  <p class="standfirst">A chart you disagree with teaches you nothing. So commit to a number <strong>before</strong> you see the answer. Six questions. Chimpanzees picking at random beat most humans on questions like these — because humans aren't wrong at random, we're wrong in a pattern.</p>
+
+  <div class="quiz">
+    <div class="quizhead">
+      <span class="qprog" id="qprog">Question 1 of 6</span>
+      <div class="qdots" id="qdots"></div>
+    </div>
+    <div class="qbody">
+      <p class="qtext" id="qtext"></p>
+      <div class="sliderrow">
+        <input type="range" id="qslider" min="0" max="100" value="50">
+        <div class="guessval"><span id="qval">50</span><small id="qunit">%</small></div>
+      </div>
+      <div class="scaleends"><span id="qmin">0%</span><span id="qmax">100%</span></div>
+      <button class="btn" id="qlock">Lock in my guess</button>
+
+      <div class="reveal" id="qreveal">
+        <div class="revbars">
+          <div class="revrow">
+            <span class="revlabel">You said</span>
+            <div class="revtrack"><div class="revfill" id="barYou" style="background:var(--c2)"></div></div>
+            <span class="revnum" id="numYou"></span>
+          </div>
+          <div class="revrow">
+            <span class="revlabel">Reality</span>
+            <div class="revtrack"><div class="revfill" id="barReal" style="background:var(--c3)"></div></div>
+            <span class="revnum" id="numReal"></span>
+          </div>
+        </div>
+        <p class="verdict" id="qverdict"></p>
+        <p class="revtext" id="qexplain"></p>
+        <div class="quizfoot">
+          <button class="btn" id="qnext">Next question</button>
+          <span class="scoreline" id="qscore"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Sources: ITU (2024), World Bank / PIP (2024), Ember Global Electricity Review (2025), UN WPP (2024), Geyer et al. Science Advances (2017), Sender et al. PLOS Biology (2016).</p>
+</div></section>
+
+<!-- ======== 2. FEAR ======== -->
+<section id="fear" data-title="Fear vs Reality" data-blurb="What kills people, what they Google, and what the press writes about."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">2</span> Distortion</div>
+  <h2>What kills you<br>vs what frightens you.</h2>
+  <p class="standfirst">Three rankings of the same ten causes of death: how often they <strong>actually kill</strong> Americans, how often people <strong>search for them</strong>, and how often the <strong>press writes about them</strong>. The news is not a mirror. It's a funhouse mirror, and it has a consistent bias: it over-reports the sudden and under-reports the slow.</p>
+
+  <div class="legend">
+    <span><i style="background:var(--c3)"></i>Share of actual deaths</span>
+    <span><i style="background:var(--c2)"></i>Share of Google searches</span>
+    <span><i style="background:var(--c1)"></i>Share of news coverage</span>
+  </div>
+
+  <div class="fearhead"><span>Cause</span><span>Share of each ranking</span><span>Over-reported</span></div>
+  <div id="fearChart"></div>
+  <p class="note">US data, 2016. Deaths: CDC. Searches: Google Trends. Coverage: New York Times + The Guardian headlines. After Shen et al., "Death: Reality vs Reported" (2018), popularised by Our World in Data. Right-hand column = coverage share ÷ death share.</p>
+</div></section>
+
+<!-- ======== 3. ANIMALS ======== -->
+<section id="animals" data-title="Deadliest Animals" data-blurb="The most dangerous creature on Earth weighs 2.5 milligrams."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">3</span> Proportion</div>
+  <h2>The deadliest animal<br>on Earth is a mosquito.</h2>
+  <p class="standfirst">Human deaths per year, by animal. Watch what happens when you switch off the log scale: <strong>every creature you were taught to fear disappears entirely</strong>, and two bars are left standing. One of them is us.</p>
+
+  <div class="toggle" id="animToggle">
+    <button class="on" data-mode="log">Logarithmic scale</button>
+    <button data-mode="linear">True scale</button>
+  </div>
+  <div id="animChart"></div>
+  <p class="note" id="animNote">Log scale: each step right is 10× more deaths. It's the only way to show a shark and a mosquito on the same chart — which is exactly why log scales are so quietly misleading.</p>
+  <p class="note">Annual global deaths, best available estimates. Mosquito figure covers malaria, dengue, yellow fever and other vector-borne disease. Sources: WHO, UNODC Global Study on Homicide, Gates Foundation, International Shark Attack File. Snake, snail and insect figures carry wide uncertainty ranges.</p>
+</div></section>
+
+<!-- ======== 4. MONEY ======== -->
+<section id="money" data-title="Billion-Dollar-o-Gram" data-blurb="World spending and the cost of fixing things, as area, at one scale."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">4</span> Scale</div>
+  <h2>The billion-dollar-o-gram.</h2>
+  <p class="standfirst">Big numbers stop meaning anything past about a million. So here they are as <strong>area</strong>, all on one page, at one scale. Red is money the world spends every year. Green is the estimated annual cost of solving a problem we describe as impossible. Hover any block.</p>
+
+  <p class="swipehint">↔ Swipe the chart sideways</p>
+  <div class="tmwrap" id="tmWrap"><svg id="treemap" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet"></svg></div>
+  <div class="legend" style="margin-top:22px">
+    <span><i style="background:var(--c1)"></i>What the world spends, per year</span>
+    <span><i style="background:var(--c6)"></i>Estimated annual cost to fix</span>
+    <span><i style="background:var(--c4)"></i>For reference</span>
+  </div>
+  <p class="note">All figures US$ billions, latest available year (2023–24). Sources: SIPRI, WHO, UNESCO, FAO, UNEP Adaptation Gap Report, OECD DAC, UNODC, Statista, company filings. "Cost to fix" figures are contested estimates of additional annual funding required, not a promise that money alone would work.</p>
+</div></section>
+
+<!-- ======== 4. PILLS ======== -->
+<section id="pills" data-title="Snake Oil?" data-blurb="Eighteen supplements, plotted by popularity against strength of evidence."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">5</span> Evidence</div>
+  <h2>Snake oil, or not?</h2>
+  <p class="standfirst">Every bubble is a supplement. <strong>Up</strong> means better evidence from human trials. <strong>Right</strong> means more people take it. The interesting stuff lives in the bottom-right: hugely popular, barely supported. Bubble size = rough global market.</p>
+
+  <p class="swipehint">↔ Swipe the chart sideways</p>
+  <div class="bubwrap" id="bubWrap"><svg id="bubbles" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet"></svg></div>
+  <p class="note">Evidence tiers are a simplification of Cochrane reviews, NIH ODS fact sheets and major meta-analyses, scored for the <em>headline</em> claim most people buy the product for — a supplement can be excellent for deficiency and useless for everyone else. Not medical advice; talk to a doctor, not a treemap.</p>
+</div></section>
+
+<!-- ======== 6. COLOURS ======== -->
+<section id="colours" data-title="Colours in Culture" data-blurb="White means purity. White also means death. Depends where you're standing."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">6</span> Meaning</div>
+  <h2>White is the colour<br>of weddings. And funerals.</h2>
+  <p class="standfirst">Eight colours, seven cultural traditions, and what each one signifies. Almost every designer has at some point shipped a product into a market where their reassuring colour meant <strong>bereavement</strong>. Hover any cell; click a colour to hold its row.</p>
+
+  <p class="swipehint">↔ Swipe the table sideways</p>
+  <div class="culwrap"><div class="culgrid" id="culGrid"></div></div>
+  <p class="note">Broad cultural generalisations, not rules — every one of these has enormous internal variation by region, religion, generation and context, and a chart like this flattens that badly. Read it as "this association exists and will surprise you", not "everyone here believes this". Sources: standard colour-symbolism references and the tradition established by David McCandless's "Colours in Cultures".</p>
+</div></section>
+
+<!-- ======== 7. STRIPES ======== -->
+<section id="stripes" data-title="Warming Stripes" data-blurb="175 years of global temperature, with the numbers taken away."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">7</span> Trend</div>
+  <h2>175 years,<br>no axes, no numbers.</h2>
+  <p class="standfirst">Each stripe is one year of global average surface temperature. Blue is cooler than the twentieth-century norm, red is warmer. There is no scale, no gridline and no label — and it is still <strong>the most legible climate chart ever made</strong>. Hover any stripe for its year.</p>
+
+  <div class="stripes" id="stripeBar"></div>
+  <div class="stripeaxis"><span id="stripeFirst">1850</span><span>Global average surface temperature, year by year</span><span id="stripeLast">2024</span></div>
+  <div class="stripescale">
+    <span>Cooler</span>
+    <span class="stripebar" id="stripeKey"></span>
+    <span>Warmer</span>
+    <span style="margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--dimmer)" id="stripeStat"></span>
+  </div>
+  <p class="note">After Ed Hawkins's "warming stripes" (University of Reading, 2018). Values are close approximations of the HadCRUT5 annual global mean anomaly series, in °C relative to the 1961–1990 average: the shape, the trend and the record years are right, but individual years may differ from the published figures by a few hundredths of a degree. For decisions, use the source data, not this page.</p>
+</div></section>
+
+<!-- ======== 8. LASTS ======== -->
+<section id="lasts" data-title="How Long It Lasts" data-blurb="You will be dead for a very long time before that bottle is."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">8</span> Duration</div>
+  <h2>The thing you used<br>for four minutes.</h2>
+  <p class="standfirst">Roughly how long common rubbish takes to break down, on a logarithmic scale — so every step right is <strong>ten times longer</strong>. The plastic bottle you drank from at lunch will outlast every person currently alive, and their grandchildren, and their language.</p>
+
+  <div id="lastChart"></div>
+  <div class="lastaxis"><span></span><div class="lastticks" id="lastTicks"></div><span></span></div>
+  <p class="note">Estimates vary enormously with conditions — sunlight, oxygen, temperature and burial depth change these numbers by orders of magnitude, and "biodegrades" often means "fragments into microplastic" rather than "disappears". Glass is the honest outlier: it does not meaningfully biodegrade at all, and the million-year figure is a placeholder for "indefinitely". Sources: NOAA, US National Park Service, WWF marine debris literature.</p>
+</div></section>
+
+<!-- ======== 9. MINUTE ======== -->
+<section id="minute" data-title="Every Minute" data-blurb="Counters that started at zero when you opened this tab."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">9</span> Velocity</div>
+  <h2>What happened while<br>you read this page.</h2>
+  <p class="standfirst">These counters started at zero the moment you opened this tab. They are not a simulation of the future — they're a rate that is already running, everywhere, right now. <strong>The last one is the one to sit with.</strong></p>
+
+  <div class="tickgrid" id="tickGrid"></div>
+  <p class="elapsed">Page open for <b id="elapsedTime">0s</b> — counters are per-minute global rates, scaled to your session.</p>
+  <p class="note">Best-available 2024 estimates; per-minute internet figures vary widely between sources and should be read as order-of-magnitude. Sources: DemandSage/Domo compilations, Google, Meta, Statista, Global Carbon Project (2024: ~41.6 Gt CO₂), UN WPP 2024 (births/deaths).</p>
+</div></section>
+
+<!-- ======== 6. LIFE ======== -->
+<section id="life" data-title="Your Life in Dots" data-blurb="Enter your age. Watch 4,680 weeks fill in."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">10</span> Personal</div>
+  <h2>Your life, in dots.</h2>
+  <p class="standfirst">One dot is one week. Ninety rows, fifty-two dots each — a fairly generous life. Set your age and watch the filled part appear. Nobody finds this chart cheerful. Almost everybody finds it <strong>clarifying</strong>.</p>
+
+  <div class="lifectl">
+    <label for="ageInput">Your age</label>
+    <input type="number" id="ageInput" min="0" max="90" value="30">
+    <input type="range" id="ageRange" min="0" max="90" value="30">
+  </div>
+
+  <div class="lifelayout">
+    <div>
+      <svg id="lifeSvg" viewBox="0 0 420 740" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="lifekey">
+        <span><i style="background:var(--c4)"></i>Childhood &amp; school (0–18)</span>
+        <span><i style="background:var(--c2)"></i>Working years (18–65)</span>
+        <span><i style="background:var(--c5)"></i>After 65</span>
+        <span><i style="background:#232936"></i>Weeks ahead</span>
+      </div>
+    </div>
+    <div class="lifefacts" id="lifeFacts"></div>
+  </div>
+  <p class="note">Rough averages, not a prediction. Sleep ≈ 8h/day, eating ≈ 1h/day, screens ≈ 6h50m/day for adults (DataReportal 2024), heart ≈ 100,000 beats/day, breaths ≈ 20,000/day. Global life expectancy at birth is ~73 years; the grid runs to 90 because you might.</p>
+</div></section>
+
+<!-- ======== 7. MYTHS ======== -->
+<section id="myths" data-title="Mythconceptions" data-blurb="Twelve things almost everyone believes, and almost everyone has wrong."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">11</span> Correction</div>
+  <h2>Mythconceptions.</h2>
+  <p class="standfirst">Twelve things almost everyone believes, that almost everyone is wrong about. Click a card to flip it. <strong>Score yourself honestly</strong> — the fun is in noticing how confident you were.</p>
+  <div class="mythgrid" id="mythGrid"></div>
+  <p class="note">Inspired by David McCandless's original "Common Mythconceptions". Each claim below is the mainstream scientific/historical position as of 2025, not a fringe reading.</p>
+</div></section>
+
+<!-- ======== 12. FALLACIES ======== -->
+<section id="fallacies" data-title="Rhetological Fallacies" data-blurb="Twenty ways an argument goes wrong, filed by failure mode."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">12</span> Defence</div>
+  <h2>Twenty ways to be<br>wrong, persuasively.</h2>
+  <p class="standfirst">Every chapter above can be misused. This is the toolkit for spotting it — including in the charts on this page. Filter by <strong>how the argument breaks</strong>, not by what it's about. The most useful ones are the boring ones: survivorship bias and the sunk cost fallacy will cost you more this year than every conspiracy theory combined.</p>
+
+  <div class="chips" id="falChips"></div>
+  <div class="falgrid" id="falGrid"></div>
+  <p class="note" id="falCount"></p>
+  <p class="note">Named after David McCandless's "Rhetological Fallacies" poster, which merges rhetorical and logical fallacies into one taxonomy. Examples are written to be recognisable rather than fair to any particular side.</p>
+</div></section>
+
+<!-- ======== FOOTER ======== -->
+<footer><div class="wrap">
+  <h3>Where this comes from</h3>
+  <div class="srcgrid">
+    <div>
+      <h4>Institutions</h4>
+      <ul>
+        <li>Our World in Data</li>
+        <li>World Bank &amp; UN Population Division</li>
+        <li>WHO, UNESCO, FAO, UNEP</li>
+        <li>SIPRI, OECD DAC, UNODC</li>
+        <li>CDC, NIH Office of Dietary Supplements</li>
+        <li>Global Carbon Project, Ember</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Papers</h4>
+      <ul>
+        <li>Shen et al., <em>Death: Reality vs Reported</em> (2018)</li>
+        <li>Geyer, Jambeck &amp; Law, <em>Science Advances</em> (2017)</li>
+        <li>Sender, Fuchs &amp; Milo, <em>PLOS Biology</em> (2016)</li>
+        <li>Cochrane systematic reviews (various)</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Standing on</h4>
+      <ul>
+        <li>David McCandless, <em>Information is Beautiful</em></li>
+        <li>Hans Rosling, <em>Factfulness</em></li>
+        <li>Edward Tufte</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="honesty">
+    <b>An honesty note.</b> Every chart here is a simplification, and simplification is where charts lie. Figures come from the sources listed under each section and are the latest available at the time of writing (2025). Where estimates disagree — and for "what it would cost to fix X" they disagree <em>enormously</em> — a mid-range published figure was used and labelled as an estimate. Nothing on this page is medical, legal or financial advice. If a number here surprises you, the correct response is to go and check it, and this page has failed if it makes that feel unnecessary.
+  </div>
+
+  <p style="margin-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase">
+    Numberscape — one HTML file, no trackers, no network calls, works offline.
+  </p>
+</div></footer>
+
+<div class="tip" id="tip"></div>
+
+<script>
+"use strict";
+
+/* =======================================================================
+   Shared helpers
+   ======================================================================= */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const SVGNS = "http://www.w3.org/2000/svg";
+
+function svgEl(tag, attrs = {}, parent = null) {
+  const el = document.createElementNS(SVGNS, tag);
+  for (const k in attrs) el.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(el);
+  return el;
+}
+function fmt(n, dp = 0) {
+  return n.toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp });
+}
+function shortNum(n) {
+  const a = Math.abs(n);
+  if (a >= 1e12) return (n / 1e12).toFixed(1).replace(/\.0$/, "") + " trillion";
+  if (a >= 1e9)  return (n / 1e9 ).toFixed(1).replace(/\.0$/, "") + " billion";
+  if (a >= 1e6)  return (n / 1e6 ).toFixed(1).replace(/\.0$/, "") + " million";
+  return fmt(Math.round(n));
+}
+
+/* Shared tooltip --------------------------------------------------------
+   Content is written once on enter, never on move. Size is measured once
+   per enter. Movement is rAF-throttled and applied as a transform, so a
+   mousemove costs a couple of assignments instead of a forced reflow.   */
+const tipEl = $("#tip");
+let tipW = 0, tipH = 0, tipX = 0, tipY = 0, tipFrame = 0;
+
+function setTip(html) {
+  tipEl.innerHTML = html;
+  tipW = tipEl.offsetWidth;      /* the only layout read, once per enter */
+  tipH = tipEl.offsetHeight;
+  tipEl.classList.add("show");
+}
+function moveTip(evt) {
+  tipX = evt.clientX; tipY = evt.clientY;
+  if (!tipFrame) tipFrame = requestAnimationFrame(placeTip);
+}
+function placeTip() {
+  tipFrame = 0;
+  const pad = 16;
+  let x = tipX + pad, y = tipY + pad;
+  if (x + tipW > window.innerWidth  - 10) x = tipX - tipW - pad;
+  if (y + tipH > window.innerHeight - 10) y = tipY - tipH - pad;
+  tipEl.style.transform =
+    `translate3d(${Math.max(8, x)}px,${Math.max(8, y)}px,0)`;
+}
+function hideTip() {
+  tipEl.classList.remove("show");
+  if (tipFrame) { cancelAnimationFrame(tipFrame); tipFrame = 0; }
+}
+
+/* Attach a tooltip to an element. `html` may be a string or a function of
+   the event. Enter writes, move only repositions.                       */
+function tipOn(el, html) {
+  el.addEventListener("mouseenter", e => { setTip(typeof html === "function" ? html(e) : html); moveTip(e); });
+  el.addEventListener("mousemove", moveTip);
+  el.addEventListener("mouseleave", hideTip);
+}
+
+/* Delegated variant for containers with many identical children — one set
+   of listeners instead of one per child.                                */
+function tipDelegate(container, selector, html) {
+  let current = null;
+  container.addEventListener("mouseover", e => {
+    const t = e.target.closest(selector);
+    if (!t || t === current) return;
+    current = t;
+    setTip(html(t));
+    moveTip(e);
+  });
+  container.addEventListener("mousemove", moveTip);
+  container.addEventListener("mouseleave", () => { current = null; hideTip(); });
+}
+
+/* Scroll reveal --------------------------------------------------------- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+$$(".rv").forEach(el => io.observe(el));
+
+/* Nav shadow ------------------------------------------------------------ */
+window.addEventListener("scroll", () => {
+  $("#nav").classList.toggle("solid", window.scrollY > 40);
+}, { passive: true });
+
+
+/* =======================================================================
+   HERO — drifting number field
+   ======================================================================= */
+(function heroCanvas() {
+  const cv = $("#heroCanvas"), ctx = cv.getContext("2d");
+  let w, h, dots = [];
+  const COLORS = ["#ff5d73", "#ffc857", "#2ec4b6", "#4895ef", "#b892ff"];
+
+  function size() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = cv.clientWidth; h = cv.clientHeight;
+    cv.width = w * dpr; cv.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+  function build() {
+    const n = Math.min(90, Math.round((w * h) / 16000));
+    dots = Array.from({ length: n }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: 1 + Math.random() * 3.4,
+      vx: (Math.random() - 0.5) * 0.16,
+      vy: (Math.random() - 0.5) * 0.16,
+      a: 0.12 + Math.random() * 0.35,
+      c: COLORS[(Math.random() * COLORS.length) | 0]
+    }));
+  }
+  let running = false;
+  function frame() {
+    if (!running) return;
+    ctx.clearRect(0, 0, w, h);
+    for (const d of dots) {
+      d.x += d.vx; d.y += d.vy;
+      if (d.x < -10) d.x = w + 10; if (d.x > w + 10) d.x = -10;
+      if (d.y < -10) d.y = h + 10; if (d.y > h + 10) d.y = -10;
+      ctx.globalAlpha = d.a;
+      ctx.fillStyle = d.c;
+      ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  }
+  function setRunning(on) {
+    if (on === running) return;
+    running = on;
+    if (on) requestAnimationFrame(frame);
+  }
+
+  /* the hero is off-screen for 99% of this page — don't animate into a
+     canvas nobody can see */
+  new IntersectionObserver(es => setRunning(es[0].isIntersecting), { threshold: 0 })
+    .observe(cv);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) setRunning(false);
+    else if (cv.getBoundingClientRect().bottom > 0) setRunning(true);
+  });
+
+  window.addEventListener("resize", size);
+  size();
+})();
+
+/* Hero counters --------------------------------------------------------- */
+(function heroCounters() {
+  $$(".herostat .v").forEach(el => {
+    const target = +el.dataset.count, suffix = el.dataset.suffix || "";
+    if (target === 0) { el.textContent = "0" + suffix; return; }
+    let cur = 0;
+    const step = () => {
+      cur += Math.max(1, target / 26);
+      if (cur >= target) { el.textContent = target + suffix; return; }
+      el.textContent = Math.round(cur) + suffix;
+      requestAnimationFrame(step);
+    };
+    setTimeout(step, 350);
+  });
+})();
+
+
+/* =======================================================================
+   1. GUESS FIRST
+   ======================================================================= */
+const QUESTIONS = [
+  {
+    q: "What percentage of the world's population uses the internet?",
+    unit: "%", min: 0, max: 100, real: 68,
+    explain: "About <b>5.5 billion people</b> are online — but that still leaves roughly 2.6 billion who have never used the internet at all. The gap is mostly rural, mostly poorer countries, and disproportionately women.",
+    src: "ITU, 2024"
+  },
+  {
+    q: "What share of humanity lives in Asia?",
+    unit: "%", min: 0, max: 100, real: 59,
+    explain: "Nearly <b>3 in 5 people alive</b> live in Asia — about 4.8 billion. Europe and North America together are under 15%. Most people's mental world map is drawn at roughly the scale of their news feed.",
+    src: "UN World Population Prospects, 2024"
+  },
+  {
+    q: "What percentage of all plastic ever made has been recycled?",
+    unit: "%", min: 0, max: 100, real: 9,
+    explain: "Around <b>9%</b>. Another 12% has been incinerated. The remaining ~79% is in landfill or loose in the environment. Recycling was, from the beginning, promoted hardest by the people selling the plastic.",
+    src: "Geyer et al., Science Advances, 2017"
+  },
+  {
+    q: "What share of the world's electricity now comes from low-carbon sources?",
+    unit: "%", min: 0, max: 100, real: 41,
+    explain: "<b>Over 40%</b> — renewables plus nuclear. Solar alone has doubled roughly every three years. This is the number people underestimate most, and pessimism about it is itself a barrier to progress.",
+    src: "Ember Global Electricity Review, 2025"
+  },
+  {
+    q: "What percentage of the world lives in extreme poverty (under ~$2.15/day)?",
+    unit: "%", min: 0, max: 100, real: 9,
+    explain: "About <b>9%</b>, down from 38% in 1990. That is roughly 700 million people — still a catastrophe — but the direction of travel is the part most people get backwards. Surveys consistently find the public thinks poverty has <em>risen</em>.",
+    src: "World Bank / PIP, 2024"
+  },
+  {
+    q: "What percentage of the cells in your body are human?",
+    unit: "%", min: 0, max: 100, real: 43,
+    explain: "Roughly <b>43%</b>. The rest are bacteria, archaea and fungi — mostly in your gut. By cell count you are a minority shareholder in yourself. (By mass you're fine: microbes weigh about 0.2 kg.)",
+    src: "Sender, Fuchs & Milo, PLOS Biology, 2016"
+  }
+];
+
+(function quiz() {
+  let idx = 0, locked = false;
+  const errors = [];
+  const dots = $("#qdots"), slider = $("#qslider"), val = $("#qval"), unit = $("#qunit");
+
+  QUESTIONS.forEach(() => dots.appendChild(Object.assign(document.createElement("div"), { className: "qdot" })));
+  const dotEls = $$(".qdot", dots);
+
+  function paintDots() {
+    dotEls.forEach((d, i) => {
+      d.className = "qdot" + (i < idx ? " done" : i === idx ? " now" : "");
+    });
+  }
+
+  function load() {
+    const q = QUESTIONS[idx];
+    $("#qtext").textContent = q.q;
+    $("#qprog").textContent = `Question ${idx + 1} of ${QUESTIONS.length}`;
+    slider.min = q.min; slider.max = q.max; slider.value = Math.round((q.min + q.max) / 2);
+    val.textContent = slider.value; unit.textContent = q.unit;
+    $("#qmin").textContent = q.min + q.unit;
+    $("#qmax").textContent = q.max + q.unit;
+    $("#qreveal").classList.remove("show");
+    $("#qlock").disabled = false;
+    $("#qlock").textContent = "Lock in my guess";
+    slider.disabled = false;
+    locked = false;
+    paintDots();
+  }
+
+  slider.addEventListener("input", () => { val.textContent = slider.value; });
+
+  $("#qlock").addEventListener("click", () => {
+    if (locked) return;
+    locked = true;
+    const q = QUESTIONS[idx];
+    const guess = +slider.value;
+    const err = Math.abs(guess - q.real);
+    errors.push(err);
+
+    slider.disabled = true;
+    $("#qlock").disabled = true;
+
+    const span = q.max - q.min;
+    $("#barYou").style.width  = ((guess  - q.min) / span * 100) + "%";
+    $("#barReal").style.width = ((q.real - q.min) / span * 100) + "%";
+    $("#numYou").textContent  = guess + q.unit;
+    $("#numReal").textContent = q.real + q.unit;
+
+    let verdict, colour;
+    if (err <= 3)       { verdict = "Bullseye. You're better calibrated than most."; colour = "var(--c6)"; }
+    else if (err <= 8)  { verdict = "Close. Off by " + err + " points."; colour = "var(--c3)"; }
+    else if (err <= 20) { verdict = "Off by " + err + " points — a normal human miss."; colour = "var(--c2)"; }
+    else                { verdict = "Off by " + err + " points. This is the one that surprises people."; colour = "var(--c1)"; }
+
+    const v = $("#qverdict");
+    v.textContent = verdict; v.style.color = colour;
+    $("#qexplain").innerHTML = q.explain + ` <span style="color:var(--dimmer);font-family:var(--mono);font-size:12px">— ${q.src}</span>`;
+
+    const avg = errors.reduce((a, b) => a + b, 0) / errors.length;
+    $("#qscore").textContent = `Average miss so far: ${avg.toFixed(1)} points`;
+
+    $("#qnext").textContent = idx === QUESTIONS.length - 1 ? "See my result" : "Next question";
+    $("#qreveal").classList.add("show");
+  });
+
+  let done = false;
+  $("#qnext").addEventListener("click", () => {
+    if (done) { location.reload(); return; }
+    if (idx < QUESTIONS.length - 1) {
+      idx++; load();
+      $("#guess").scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      done = true;
+      finish();
+    }
+  });
+
+  function finish() {
+    const avg = errors.reduce((a, b) => a + b, 0) / errors.length;
+    let line;
+    if (avg <= 6)       line = "Genuinely well calibrated. You are unusual.";
+    else if (avg <= 12) line = "Better than average. You still lean pessimistic on the good news.";
+    else if (avg <= 22) line = "Exactly average — which means exactly wrong, in the usual direction.";
+    else                line = "Comfortably beaten by a chimpanzee guessing at random. You're in good company: so were most senior policymakers Rosling tested.";
+
+    $("#qtext").textContent = "That's all six.";
+    $("#qprog").textContent = "Result";
+    $("#qval").textContent = avg.toFixed(1);
+    $("#qunit").textContent = " avg miss";
+    slider.style.visibility = "hidden";
+    $("#qmin").textContent = ""; $("#qmax").textContent = "";
+    $("#qverdict").textContent = line;
+    $("#qverdict").style.color = "var(--c2)";
+    $("#qexplain").innerHTML = "Notice the direction of your errors. Almost nobody guesses <b>too optimistically</b> about poverty or clean energy, and almost nobody guesses <b>too low</b> on plastic recycling. That systematic tilt — not ignorance, but a consistent lean — is what the rest of this page is about.";
+    $("#qscore").textContent = "";
+    $("#qnext").textContent = "Start again";
+    dotEls.forEach(d => d.className = "qdot done");
+  }
+
+  load();
+})();
+
+
+/* =======================================================================
+   2. FEAR VS REALITY
+   ======================================================================= */
+const FEAR = [
+  { name: "Heart disease",   deaths: 30.2, google: 2.0,  media: 2.5  },
+  { name: "Cancer",          deaths: 29.5, google: 37.0, media: 13.5 },
+  { name: "Road accidents",  deaths: 7.6,  google: 3.5,  media: 4.0  },
+  { name: "Overdose",        deaths: 6.5,  google: 6.5,  media: 12.4 },
+  { name: "Stroke",          deaths: 4.9,  google: 1.5,  media: 1.0  },
+  { name: "Diabetes",        deaths: 2.9,  google: 5.0,  media: 1.5  },
+  { name: "Alzheimer's",     deaths: 2.8,  google: 2.5,  media: 1.5  },
+  { name: "Suicide",         deaths: 1.8,  google: 12.4, media: 10.6 },
+  { name: "Homicide",        deaths: 0.9,  google: 3.3,  media: 22.8 },
+  { name: "Terrorism",       deaths: 0.01, google: 7.2,  media: 35.6 }
+];
+
+(function fearChart() {
+  const host = $("#fearChart");
+  const max = Math.max(...FEAR.flatMap(d => [d.deaths, d.google, d.media]));
+
+  FEAR.forEach((d, i) => {
+    const row = document.createElement("div");
+    row.className = "fearrow";
+
+    const name = document.createElement("div");
+    name.className = "fearname";
+    name.textContent = d.name;
+
+    const bars = document.createElement("div");
+    bars.className = "fearbars";
+    [["deaths", "var(--c3)"], ["google", "var(--c2)"], ["media", "var(--c1)"]].forEach(([k, c]) => {
+      const b = document.createElement("div");
+      b.className = "fbar";
+      b.style.background = c;
+      b.dataset.w = (d[k] / max * 100) + "%";
+      bars.appendChild(b);
+    });
+
+    const dist = document.createElement("div");
+    const ratio = d.media / d.deaths;
+    dist.className = "feardist " + (ratio >= 3 ? "hot" : ratio <= 0.6 ? "cold" : "");
+    dist.textContent = ratio >= 100 ? fmt(Math.round(ratio)) + "×"
+                     : ratio >= 1   ? ratio.toFixed(1) + "×"
+                                    : "÷" + (1 / ratio).toFixed(1);
+
+    row.append(name, bars, dist);
+
+    tipOn(row,
+      `<span class="t">${d.name}</span>
+       <span class="v">${d.deaths}% of deaths · ${d.google}% of searches · ${d.media}% of coverage</span>
+       <span class="d">${ratio >= 1
+          ? `The press writes about it <b>${ratio >= 100 ? fmt(Math.round(ratio)) : ratio.toFixed(1)}×</b> more often than it kills.`
+          : `The press writes about it <b>${(1 / ratio).toFixed(1)}× less</b> often than it kills.`}</span>`);
+
+    host.appendChild(row);
+  });
+
+  const obs = new IntersectionObserver((es) => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      $$(".fbar", host).forEach((b, i) => {
+        setTimeout(() => { b.style.width = b.dataset.w; }, 40 * Math.floor(i / 3));
+      });
+      obs.disconnect();
+    });
+  }, { threshold: 0.25 });
+  obs.observe(host);
+})();
+
+
+/* =======================================================================
+   3. TREEMAP — the billion-dollar-o-gram
+   ======================================================================= */
+const MONEY = [
+  { name: "Global military spending", value: 2718, kind: "spend", desc: "World total, 2024 — the highest ever recorded, and the tenth consecutive annual rise." },
+  { name: "Advertising",              value: 1080, kind: "spend", desc: "Global ad spend across all media. Roughly $135 per human alive, spent on persuading you." },
+  { name: "Tobacco",                  value: 890,  kind: "spend", desc: "Global tobacco industry revenue. The product kills about 8 million people a year." },
+  { name: "Illegal drug trade",       value: 650,  kind: "spend", desc: "Widely cited UNODC-era estimate of the global retail market. Inherently uncertain." },
+  { name: "Cosmetics & beauty",       value: 430,  kind: "spend", desc: "Global beauty and personal care market." },
+  { name: "Climate adaptation gap",   value: 387,  kind: "fix",   desc: "UNEP's estimate of the annual adaptation finance needs of developing countries. Actual flows: about $28bn." },
+  { name: "Pet industry",             value: 320,  kind: "spend", desc: "Global spending on pets: food, vets, toys, outfits." },
+  { name: "Foreign aid (ODA)",        value: 223,  kind: "ref",   desc: "Total official development assistance from all donor governments, 2023. About 8% of military spending." },
+  { name: "Video games",              value: 188,  kind: "spend", desc: "Global games industry revenue — bigger than film and recorded music combined." },
+  { name: "Coffee",                   value: 130,  kind: "spend", desc: "Global coffee market. Roughly 2 billion cups a day." },
+  { name: "Clean water & sanitation", value: 114,  kind: "fix",   desc: "World Bank estimate of annual capital cost to reach universal safe water and sanitation. Around 2 billion people lack safely managed drinking water." },
+  { name: "Universal education gap",  value: 97,   kind: "fix",   desc: "UNESCO's estimated annual financing gap to reach universal pre-primary through secondary education in low- and lower-middle-income countries." },
+  { name: "Ending world hunger",      value: 40,   kind: "fix",   desc: "Widely cited IFPRI/FAO estimate of additional annual spending needed to end hunger by 2030. About 5 days of world military spending." },
+  { name: "NASA, annual budget",      value: 25,   kind: "ref",   desc: "The entire US space programme, for a year." },
+  { name: "Eradicating malaria",      value: 9,    kind: "fix",   desc: "Approximate annual funding gap for malaria control and elimination. Malaria kills ~600,000 people a year, mostly children under five." },
+  { name: "WHO annual budget",        value: 3.4,  kind: "ref",   desc: "The World Health Organization's programme budget, per year — about the same as a large city hospital system." }
+];
+
+(function treemap() {
+  const svg = $("#treemap"), W = 1000, H = 560, PAD = 2;
+  const COL = { spend: "#ff5d73", fix: "#06d6a0", ref: "#4895ef" };
+
+  /* squarified treemap ------------------------------------------------- */
+  function squarify(data, x0, y0, w0, h0) {
+    const items = data.slice().sort((a, b) => b.value - a.value);
+    const total = items.reduce((s, d) => s + d.value, 0);
+    const scale = (w0 * h0) / total;
+    const out = [];
+    let rx = x0, ry = y0, rw = w0, rh = h0;
+    let row = [], rowVal = 0;
+
+    const worst = (r, v, len) => {
+      if (!r.length || v === 0) return Infinity;
+      const areaSum = v * scale;
+      let mx = -Infinity, mn = Infinity;
+      for (const it of r) { const a = it.value * scale; if (a > mx) mx = a; if (a < mn) mn = a; }
+      return Math.max((len * len * mx) / (areaSum * areaSum), (areaSum * areaSum) / (len * len * mn));
+    };
+    const layout = (r, v) => {
+      const areaSum = v * scale;
+      if (rw >= rh) {
+        const cw = areaSum / rh; let cy = ry;
+        for (const it of r) { const ch = (it.value * scale) / cw; out.push({ ...it, x: rx, y: cy, w: cw, h: ch }); cy += ch; }
+        rx += cw; rw -= cw;
+      } else {
+        const ch = areaSum / rw; let cx = rx;
+        for (const it of r) { const cw = (it.value * scale) / ch; out.push({ ...it, x: cx, y: ry, w: cw, h: ch }); cx += cw; }
+        ry += ch; rh -= ch;
+      }
+    };
+
+    while (items.length) {
+      const it = items[0], len = Math.min(rw, rh);
+      if (!row.length || worst(row.concat([it]), rowVal + it.value, len) <= worst(row, rowVal, len)) {
+        row.push(it); rowVal += it.value; items.shift();
+      } else { layout(row, rowVal); row = []; rowVal = 0; }
+    }
+    if (row.length) layout(row, rowVal);
+    return out;
+  }
+
+  const tiles = squarify(MONEY, 0, 0, W, H);
+  const wrap = $("#tmWrap");
+
+  tiles.forEach((t, i) => {
+    const g = svgEl("g", { class: "tmtile" }, svg);
+    const x = t.x + PAD / 2, y = t.y + PAD / 2;
+    const w = Math.max(0, t.w - PAD), h = Math.max(0, t.h - PAD);
+
+    const rect = svgEl("rect", {
+      x, y, width: w, height: h, rx: 3,
+      fill: COL[t.kind], opacity: 0
+    }, g);
+    rect.style.transition = "opacity .5s ease";
+    setTimeout(() => { rect.setAttribute("opacity", "0.92"); }, 40 * i);
+
+    if (w > 74 && h > 34) {
+      const fs = Math.max(10.5, Math.min(17, w / 11, h / 4.4));
+      const words = t.name.split(" ");
+      const lines = [];
+      let line = "";
+      const cpl = Math.max(6, Math.floor(w / (fs * 0.53)));
+      for (const wd of words) {
+        if ((line + " " + wd).trim().length > cpl && line) { lines.push(line); line = wd; }
+        else line = (line + " " + wd).trim();
+      }
+      if (line) lines.push(line);
+      const maxLines = Math.max(1, Math.floor((h - fs * 1.9) / (fs * 1.16)));
+      const shown = lines.slice(0, maxLines);
+
+      shown.forEach((ln, li) => {
+        const tx = svgEl("text", {
+          class: "tmlabel", x: x + 9, y: y + 8 + fs * (li + 1),
+          "font-size": fs, "font-weight": 620
+        }, g);
+        tx.textContent = ln;
+      });
+      const vt = svgEl("text", {
+        class: "tmval", x: x + 9, y: y + 8 + fs * (shown.length + 1) + 3,
+        "font-size": Math.max(9.5, fs * 0.74), "font-weight": 600
+      }, g);
+      vt.textContent = "$" + (t.value >= 1000 ? (t.value / 1000).toFixed(2) + "tn" : t.value + "bn");
+    }
+
+    const label = t.kind === "fix" ? "estimated annual cost to fix" : t.kind === "ref" ? "for reference" : "spent per year, worldwide";
+    g.addEventListener("mouseenter", (e) => {
+      wrap.classList.add("hovering"); g.classList.add("on");
+      setTip(`<span class="t">${t.name}</span>
+              <span class="v">$${fmt(t.value, t.value < 10 ? 1 : 0)} billion — ${label}</span>
+              <span class="d">${t.desc}</span>`);
+      moveTip(e);
+    });
+    g.addEventListener("mousemove", moveTip);
+    g.addEventListener("mouseleave", () => {
+      wrap.classList.remove("hovering"); g.classList.remove("on"); hideTip();
+    });
+  });
+})();
+
+
+/* =======================================================================
+   4. SNAKE OIL BUBBLES
+   ======================================================================= */
+/* evidence: 1 = no good evidence … 5 = strong evidence for the headline claim
+   popularity: rough % of US adults who report using it
+   market: rough global market, US$ bn (bubble area)                       */
+const PILLS = [
+  { n: "Vitamin D",        ev: 3.6, pop: 38, mkt: 8.0,  note: "Strong for deficiency and bone health; disappointing in big trials for preventing cancer, heart disease or fractures in already-replete people." },
+  { n: "Omega-3 / fish oil", ev: 2.6, pop: 22, mkt: 7.5, note: "Very strong for lowering triglycerides; the large REDUCE-IT/VITAL-era trials mostly failed to show general heart protection." },
+  { n: "Multivitamins",    ev: 1.8, pop: 48, mkt: 30.0, note: "Repeatedly fail to reduce mortality, cancer or heart disease in well-fed populations. Cheap insurance, not medicine." },
+  { n: "Probiotics",       ev: 2.6, pop: 18, mkt: 62.0, note: "Good evidence for antibiotic-associated diarrhoea and some IBS; near-zero evidence for the 'gut health' promises on the label." },
+  { n: "Creatine",         ev: 4.6, pop: 9,  mkt: 0.5,  note: "One of the most-studied and best-supported supplements there is — for strength and power output. Boring, cheap, works." },
+  { n: "Vitamin C (colds)", ev: 1.6, pop: 33, mkt: 12.0, note: "Cochrane: routine dosing doesn't stop you catching colds; it trims about 8% off duration in adults. Linus Pauling was wrong." },
+  { n: "Zinc (colds)",     ev: 2.8, pop: 12, mkt: 1.5,  note: "Lozenges started within 24h may shorten a cold by a day or so. Evidence is real but shaky, and the taste is punishment." },
+  { n: "Melatonin",        ev: 3.8, pop: 14, mkt: 3.0,  note: "Genuinely good for jet lag and circadian timing; much weaker as a general sleeping pill, and doses sold are often 10× what's needed." },
+  { n: "Magnesium",        ev: 2.4, pop: 19, mkt: 3.5,  note: "Solid for constipation and deficiency; the sleep and anxiety claims that made it a TikTok star are thin." },
+  { n: "Ginkgo biloba",    ev: 1.3, pop: 5,  mkt: 1.0,  note: "The large GEM trial found no effect on dementia or cognitive decline. Persistently popular anyway." },
+  { n: "Echinacea",        ev: 1.4, pop: 6,  mkt: 0.8,  note: "Meta-analyses hover around 'no reliable effect' for preventing or treating colds." },
+  { n: "Glucosamine",      ev: 1.5, pop: 7,  mkt: 1.2,  note: "Large independent trials find little benefit for knee osteoarthritis beyond placebo." },
+  { n: "Turmeric / curcumin", ev: 2.0, pop: 11, mkt: 1.4, note: "Some signal in arthritis trials, but curcumin is barely absorbed and is a notorious false-positive generator in lab assays." },
+  { n: "Collagen",         ev: 2.2, pop: 13, mkt: 4.5,  note: "Small trials show modest skin-elasticity effects. Your gut digests it into amino acids like any other protein — it does not go to your face." },
+  { n: "Folic acid (pregnancy)", ev: 4.9, pop: 4, mkt: 0.6, note: "Prevents neural tube defects. One of the clearest wins in the history of public health nutrition." },
+  { n: "Iron (deficiency)", ev: 4.7, pop: 8, mkt: 2.2,  note: "Essential and effective when you're actually deficient; pointless and potentially harmful when you're not." },
+  { n: "Green tea extract", ev: 1.4, pop: 4, mkt: 2.8,  note: "Weight-loss effects are negligible; high-dose extracts are a recognised cause of liver injury." },
+  { n: "Ashwagandha",      ev: 2.3, pop: 8, mkt: 2.0,   note: "Several small short trials show reduced stress scores; almost all are small, brief, and often industry-funded." }
+];
+
+(function bubbles() {
+  const svg = $("#bubbles"), W = 1000, H = 620;
+  const M = { l: 74, r: 30, t: 26, b: 66 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+  const wrap = $("#bubWrap");
+
+  const x = p => M.l + (Math.log(p + 1) / Math.log(51)) * iw;
+  const y = e => M.t + ih - ((e - 1) / 4) * ih;
+  const r = m => 8 + Math.sqrt(m) * 4.4;
+
+  /* grid + axis labels */
+  const evLabels = [
+    [1, "No good evidence"],
+    [2, "Weak"],
+    [3, "Mixed / promising"],
+    [4, "Good"],
+    [5, "Strong"]
+  ];
+  evLabels.forEach(([v, lab]) => {
+    svgEl("line", { class: "gridline", x1: M.l, x2: W - M.r, y1: y(v), y2: y(v), opacity: .5 }, svg);
+    const t = svgEl("text", { class: "axlabel", x: M.l - 10, y: y(v) + 3, "text-anchor": "end" }, svg);
+    t.textContent = lab;
+  });
+  [1, 5, 15, 50].forEach(p => {
+    svgEl("line", { class: "gridline", x1: x(p), x2: x(p), y1: M.t, y2: M.t + ih, opacity: .35 }, svg);
+    const t = svgEl("text", { class: "axlabel", x: x(p), y: H - 34, "text-anchor": "middle" }, svg);
+    t.textContent = p + "%";
+  });
+  const xt = svgEl("text", { class: "axlabel", x: M.l + iw / 2, y: H - 12, "text-anchor": "middle" }, svg);
+  xt.textContent = "→  share of adults who take it  (log scale)";
+
+  /* shaded "snake oil corner" */
+  const zone = svgEl("rect", {
+    x: x(9), y: y(2.1), width: W - M.r - x(9), height: M.t + ih - y(2.1),
+    fill: "#ff5d73", opacity: .05, rx: 6
+  }, svg);
+  const zt = svgEl("text", { x: W - M.r - 12, y: M.t + ih - 14, "text-anchor": "end", class: "axlabel", fill: "#ff5d73", opacity: .6 }, svg);
+  zt.textContent = "popular · unproven";
+
+  PILLS.forEach((p, i) => {
+    const g = svgEl("g", { class: "bub" }, svg);
+    const cx = x(p.pop), cy = y(p.ev), rad = r(p.mkt);
+    const hue = p.ev >= 4 ? "#06d6a0" : p.ev >= 3 ? "#4895ef" : p.ev >= 2 ? "#ffc857" : "#ff5d73";
+
+    const c = svgEl("circle", { cx, cy, r: 0, fill: hue, opacity: .34, stroke: hue, "stroke-width": 1.6 }, g);
+    c.style.transition = "r .7s cubic-bezier(.2,.8,.2,1)";
+    setTimeout(() => c.setAttribute("r", rad), 60 * i + 200);
+
+    const lab = svgEl("text", { class: "bublabel", x: cx, y: cy + rad + 13, "text-anchor": "middle" }, g);
+    lab.textContent = p.n;
+
+    const tier = evLabels.find(([v]) => Math.round(p.ev) === v);
+    const tipHtml = `<span class="t">${p.n}</span>
+                     <span class="v">Evidence: ${(tier ? tier[1] : "—")} (${p.ev.toFixed(1)}/5) · ~${p.pop}% of adults use it</span>
+                     <span class="d">${p.note}</span>`;
+    g.addEventListener("mouseenter", (e) => {
+      wrap.classList.add("hovering"); g.classList.add("on");
+      setTip(tipHtml); moveTip(e);
+    });
+    g.addEventListener("mousemove", moveTip);
+    g.addEventListener("mouseleave", () => { wrap.classList.remove("hovering"); g.classList.remove("on"); hideTip(); });
+  });
+})();
+
+
+/* =======================================================================
+   5. EVERY MINUTE
+   ======================================================================= */
+const TICKS = [
+  { label: "Google searches",                 perMin: 6300000,   colour: "var(--c4)", ref: "≈105,000 every second" },
+  { label: "Emails sent (≈46% of it spam)",   perMin: 241000000, colour: "var(--c5)", ref: "≈4 million a second" },
+  { label: "WhatsApp messages",               perMin: 41600000,  colour: "var(--c6)", ref: "≈100bn a day" },
+  { label: "Hours of video uploaded to YouTube", perMin: 500,    colour: "var(--c1)", ref: "you could never watch one day of it" },
+  { label: "Instagram photos & reels shared", perMin: 66000,     colour: "var(--c2)", ref: "≈95 million a day" },
+  { label: "US dollars spent on Amazon",      perMin: 455000,    colour: "var(--c3)", prefix: "$", ref: "≈$650m a day" },
+  { label: "Babies born",                     perMin: 250,       colour: "var(--c5)", ref: "≈134 million a year" },
+  { label: "People who died",                 perMin: 116,       colour: "var(--dim)", ref: "≈61 million a year" },
+  { label: "Tonnes of CO₂ released by humanity", perMin: 79000,  colour: "var(--c1)", ref: "≈41.6 billion tonnes a year" }
+];
+
+(function ticker() {
+  const grid = $("#tickGrid");
+  const start = Date.now();
+  const els = [];
+
+  TICKS.forEach(t => {
+    const d = document.createElement("div");
+    d.className = "tick";
+    d.style.setProperty("--acc", t.colour);
+    d.innerHTML = `<div class="tickv">0</div>
+                   <div class="tickl">${t.label}</div>
+                   <div class="tickr">${t.ref}</div>`;
+    grid.appendChild(d);
+    els.push({ node: $(".tickv", d), t });
+  });
+
+  const elapsedEl = $("#elapsedTime");
+  function paint() {
+    const secs = (Date.now() - start) / 1000;
+    for (const { node, t } of els) {
+      node.textContent = (t.prefix || "") + fmt(Math.floor((t.perMin / 60) * secs));
+    }
+    const s = Math.floor(secs);
+    elapsedEl.textContent = s < 60 ? s + "s" : Math.floor(s / 60) + "m " + (s % 60) + "s";
+  }
+
+  /* 60 fps would mean 540 number-formats a second for no visible gain.
+     Ten updates a second still reads as a live counter. */
+  let running = false, last = 0;
+  function loop(now) {
+    if (!running) return;
+    if (now - last >= 100) { paint(); last = now; }
+    requestAnimationFrame(loop);
+  }
+  function setRunning(on) {
+    if (on === running) return;
+    running = on;
+    if (on) { paint(); requestAnimationFrame(loop); }
+  }
+
+  new IntersectionObserver(es => setRunning(es[0].isIntersecting), { threshold: 0 })
+    .observe(grid);
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) setRunning(false);
+    else if (grid.getBoundingClientRect().bottom > 0 &&
+             grid.getBoundingClientRect().top < innerHeight) setRunning(true);
+  });
+  paint();
+})();
+
+
+/* =======================================================================
+   6. YOUR LIFE IN DOTS
+   ======================================================================= */
+(function lifeGrid() {
+  const svg = $("#lifeSvg");
+  const COLS = 52, ROWS = 90, SIZE = 6, GAP = 2, OX = 26, OY = 22;
+  const cells = [];
+
+  /* year gridlines every 10 rows */
+  for (let yr = 0; yr <= ROWS; yr += 10) {
+    const ty = svgEl("text", {
+      x: OX - 8, y: OY + yr * (SIZE + GAP) + 5,
+      "text-anchor": "end", "font-size": 8.5, fill: "#5d6577",
+      "font-family": "ui-monospace,monospace"
+    }, svg);
+    ty.textContent = yr;
+  }
+  const hdr = svgEl("text", { x: OX, y: 12, "font-size": 8.5, fill: "#5d6577", "font-family": "ui-monospace,monospace" }, svg);
+  hdr.textContent = "← one row = one year, one dot = one week →";
+
+  const phaseColour = (row) => row < 18 ? "#4895ef" : row < 65 ? "#ffc857" : "#b892ff";
+
+  /* built into a fragment and attached once — 4,680 appends straight onto
+     the live SVG invalidates layout 4,680 times */
+  const frag = document.createDocumentFragment();
+  for (let row = 0; row < ROWS; row++) {
+    for (let col = 0; col < COLS; col++) {
+      const rect = svgEl("rect", {
+        x: OX + col * (SIZE + GAP), y: OY + row * (SIZE + GAP),
+        width: SIZE, height: SIZE, rx: 1.4, fill: "#232936", opacity: 0.55
+      });
+      frag.appendChild(rect);
+      cells.push({ rect, colour: phaseColour(row) });   /* colour never changes */
+    }
+  }
+  svg.appendChild(frag);
+
+  /* Only the cells between the old and new age are touched. Dragging the
+     slider one year repaints ~52 rects, not 4,680. */
+  let painted = 0;
+  function paintTo(lived) {
+    lived = Math.max(0, Math.min(cells.length, lived));
+    if (lived === painted) return;
+    if (lived > painted) {
+      for (let i = painted; i < lived; i++) {
+        cells[i].rect.setAttribute("fill", cells[i].colour);
+        cells[i].rect.setAttribute("opacity", "0.95");
+      }
+    } else {
+      for (let i = lived; i < painted; i++) {
+        cells[i].rect.setAttribute("fill", "#232936");
+        cells[i].rect.setAttribute("opacity", "0.55");
+      }
+    }
+    painted = lived;
+  }
+
+  const factsHost = $("#lifeFacts");
+  function fact(l, v) {
+    return `<div class="fact"><span class="fl">${l}</span><span class="fv">${v}</span></div>`;
+  }
+
+  function render(age) {
+    paintTo(Math.round(age * 52.1775));
+    const livedWeeks = Math.round(age * 52.1775);
+    const days = age * 365.25;
+    const weeksLeft = Math.max(0, Math.round(90 * 52.1775) - livedWeeks);
+    const summersLeft = Math.max(0, 80 - age);
+
+    factsHost.innerHTML =
+      fact("Weeks lived",            fmt(livedWeeks)) +
+      fact("Weeks left on this grid", fmt(weeksLeft)) +
+      fact("Days alive",             fmt(Math.round(days))) +
+      fact("Hours slept",            fmt(Math.round(days * 8))) +
+      fact("Years spent asleep",     (days * 8 / 24 / 365.25).toFixed(1)) +
+      fact("Meals eaten",            fmt(Math.round(days * 2.8))) +
+      fact("Heartbeats",             shortNum(Math.round(days * 100000))) +
+      fact("Breaths taken",          shortNum(Math.round(days * 20000))) +
+      fact("Steps walked",           shortNum(Math.round(Math.max(0, (age - 2)) * 365.25 * 5000))) +
+      fact("Hours on screens (adult yrs)", fmt(Math.round(Math.max(0, age - 13) * 365.25 * 6.8))) +
+      fact("Full moons seen",        fmt(Math.round(age * 12.37))) +
+      fact("Summers left, to 80",    summersLeft > 0 ? fmt(Math.round(summersLeft)) : "bonus round");
+  }
+
+  /* Rendering is synchronous: the delta repaint above touches ~52 rects
+     per year of change, so a full drag costs well under a frame and needs
+     no coalescing layer. */
+  const input = $("#ageInput"), range = $("#ageRange");
+  function sync(v, from) {
+    /* an empty box means "mid-edit", not "age zero" — leave it alone */
+    if (from === "input" && String(v).trim() === "") return;
+    const age = Math.max(0, Math.min(90, Math.round(+v || 0)));
+    if (from !== "input") input.value = age;
+    if (from !== "range") range.value = age;
+    render(age);
+  }
+  input.addEventListener("input", () => sync(input.value, "input"));
+  input.addEventListener("blur",  () => sync(input.value === "" ? 0 : input.value));
+  range.addEventListener("input", () => sync(range.value, "range"));
+  render(30);
+})();
+
+
+/* =======================================================================
+   7. MYTHCONCEPTIONS
+   ======================================================================= */
+const MYTHS = [
+  { q: "We only use 10% of our brains.", a: "Brain imaging shows <b>essentially all of it</b> is active over a day, and there are no dormant regions waiting to be unlocked. Damage almost anywhere causes a deficit. The myth's origins are murky — misquoted William James, misread 1930s neurology, and a very persuasive self-help industry." },
+  { q: "Goldfish have a three-second memory.", a: "Goldfish have been trained to remember routes, tones and feeding times for <b>at least five months</b>. Some fish recognise individual human faces. The three seconds was never a finding — it was a punchline." },
+  { q: "Bulls are enraged by the colour red.", a: "Cattle are effectively <b>red-green colourblind</b>. What provokes a charge is the movement of the cape. The colour is for the audience — and to hide the blood." },
+  { q: "The Great Wall is visible from space.", a: "It is <b>not visible to the naked eye from orbit</b> — it's narrow and the same colour as the ground around it. The claim predates spaceflight entirely, appearing in print in the 1750s. Astronauts keep saying so; the myth keeps not dying." },
+  { q: "Vikings wore horned helmets.", a: "No horned helmet has ever been found in a Viking grave. The look was invented by a <b>costume designer for a Wagner opera</b> in 1876, and Scandinavia has been quietly correcting the record ever since." },
+  { q: "Your blood is blue inside your body.", a: "Human blood is <b>always red</b> — bright red when oxygenated, dark brick red when not. Veins look blue because of how skin scatters light, not because of what's inside them." },
+  { q: "Napoleon was unusually short.", a: "He was about <b>5'7\" (170 cm)</b> — average or slightly above for a Frenchman of his era. The error came from confusing French <em>pouces</em> with English inches, helped along enormously by British wartime cartoonists." },
+  { q: "Sugar makes children hyperactive.", a: "Double-blind trials have repeatedly found <b>no effect</b>. In one famous study, parents told their child had eaten sugar rated them as more hyperactive — the child had eaten none. It measures the parent, not the sugar." },
+  { q: "Lightning never strikes the same place twice.", a: "The Empire State Building is hit around <b>25 times a year</b>. Tall, isolated, conductive things get struck repeatedly and predictably — that's the entire operating principle of a lightning rod." },
+  { q: "You lose most of your body heat through your head.", a: "You lose heat roughly <b>in proportion to exposed surface area</b> — the head is about 7–10% of it. The myth traces to a 1950s military experiment in which volunteers wore full arctic gear and nothing on their heads." },
+  { q: "Different parts of the tongue taste different things.", a: "The tongue map is a <b>mistranslation</b> of a 1901 German paper. All five basic tastes are detectable across the whole tongue. It survived a century in textbooks because it draws nicely." },
+  { q: "Humans have five senses.", a: "Aristotle's list misses most of them. Add at least <b>balance, proprioception, temperature, pain, hunger, thirst and the sense of time</b> — reasonable counts run from nine to well over twenty depending on how you slice it." }
+];
+
+(function myths() {
+  const grid = $("#mythGrid");
+  MYTHS.forEach(m => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.innerHTML = `<div class="cardin">
+        <div class="face front">
+          <div class="mythq">“${m.q}”</div>
+          <div class="mythhint">Click to reveal</div>
+        </div>
+        <div class="face back">
+          <div>
+            <div class="mythverdict">✕ Not true</div>
+            <div class="mytha">${m.a}</div>
+          </div>
+        </div>
+      </div>`;
+    const flip = () => card.classList.toggle("flip");
+    card.addEventListener("click", flip);
+    card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+    grid.appendChild(card);
+  });
+})();
+
+
+/* =======================================================================
+   3. DEADLIEST ANIMALS
+   ======================================================================= */
+const ANIMALS = [
+  { n: "Mosquito",            icon: "🦟", d: 725000, note: "Malaria, dengue, yellow fever, Zika, chikungunya. It is not the bite that kills — it's the courier service." },
+  { n: "Humans",              icon: "🧍", d: 440000, note: "Global homicides. Excludes war, which would roughly double it in a bad year." },
+  { n: "Snakes",              icon: "🐍", d: 110000, note: "WHO estimates 81,000–138,000 deaths a year, overwhelmingly in rural South Asia and sub-Saharan Africa. Antivenom exists; distribution doesn't." },
+  { n: "Dogs (rabies)",       icon: "🐕", d: 59000,  note: "Almost entirely rabies, and almost entirely preventable by vaccinating dogs." },
+  { n: "Assassin bugs",       icon: "🪲", d: 10000,  note: "Chagas disease. Named for biting people on the face while they sleep." },
+  { n: "Tsetse fly",          icon: "🪰", d: 9000,   note: "African sleeping sickness — down more than 95% since 2000, one of the great unreported public health wins." },
+  { n: "Freshwater snails",   icon: "🐌", d: 11700,  note: "Schistosomiasis. The snail hosts the parasite; the parasite does the killing." },
+  { n: "Scorpions",           icon: "🦂", d: 3300,   note: "Mostly children, mostly in North Africa, Mexico and the Middle East." },
+  { n: "Crocodiles",          icon: "🐊", d: 1000,   note: "Almost certainly an undercount — most attacks happen where nobody files a report." },
+  { n: "Elephants",           icon: "🐘", d: 500,    note: "Rising, as habitat shrinks and humans and elephants are pushed into the same space." },
+  { n: "Hippos",              icon: "🦛", d: 500,    note: "Territorial, three tonnes, and faster than you over short distances." },
+  { n: "Lions",               icon: "🦁", d: 200,    note: "The entire species kills roughly as many people per year as a mid-sized road junction." },
+  { n: "Bees & wasps",        icon: "🐝", d: 100,    note: "Almost all deaths are anaphylaxis in people already allergic, not venom volume." },
+  { n: "Wolves",              icon: "🐺", d: 10,     note: "Ten. Worldwide. Per year. Against roughly a thousand years of folklore." },
+  { n: "Sharks",              icon: "🦈", d: 6,      note: "About six unprovoked fatal attacks a year, globally. You are far more likely to be killed by a vending machine, a cow, or your own furniture." }
+];
+
+(function animals() {
+  const host = $("#animChart");
+  const data = ANIMALS.slice().sort((a, b) => b.d - a.d);
+  const maxD = data[0].d, minD = Math.min(...data.map(a => a.d));
+  const logMax = Math.log10(maxD);
+  let mode = "log";
+
+  const colourFor = (d) => d >= 100000 ? "#ff5d73" : d >= 10000 ? "#f77f00" : d >= 1000 ? "#ffc857" : d >= 100 ? "#4895ef" : "#2ec4b6";
+  const widthFor = (d) => mode === "log"
+    ? Math.max(1.5, (Math.log10(d) / logMax) * 100)
+    : Math.max(0.06, (d / maxD) * 100);
+
+  data.forEach(a => {
+    const row = document.createElement("div");
+    row.className = "animrow";
+    row.innerHTML =
+      `<div class="animicon">${a.icon}</div>
+       <div class="animname">${a.n}</div>
+       <div class="animtrack"><div class="animfill" style="background:${colourFor(a.d)}"></div></div>
+       <div class="animnum">${fmt(a.d)}</div>`;
+    tipOn(row,
+      `<span class="t">${a.icon} ${a.n}</span>
+       <span class="v">≈ ${fmt(a.d)} human deaths per year</span>
+       <span class="d">${a.note}</span>`);
+    host.appendChild(row);
+  });
+
+  const fills = $$(".animfill", host);
+  function paint(animate) {
+    fills.forEach((f, i) => {
+      const w = widthFor(data[i].d) + "%";
+      if (animate) setTimeout(() => { f.style.width = w; }, i * 32);
+      else f.style.width = w;
+    });
+  }
+
+  $$("#animToggle button").forEach(b => {
+    b.addEventListener("click", () => {
+      $$("#animToggle button").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+      mode = b.dataset.mode;
+      paint(false);
+      $("#animNote").innerHTML = mode === "log"
+        ? "Log scale: each step right is 10× more deaths. It's the only way to show a shark and a mosquito on the same chart — which is exactly why log scales are so quietly misleading."
+        : "True scale — the honest one. The shark bar is now <b>0.0008%</b> of the mosquito bar and is physically invisible at this resolution. This is the actual shape of the risk you have been taught to feel.";
+    });
+  });
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { paint(true); obs.disconnect(); } });
+  }, { threshold: 0.2 });
+  obs.observe(host);
+})();
+
+
+/* =======================================================================
+   6. COLOURS IN CULTURE
+   ======================================================================= */
+const CULTURES = ["Western", "Chinese", "Japanese", "Indian", "Middle Eastern", "African", "Latin American"];
+const COLOURS_C = [
+  { n: "Red",    hex: "#e5383b", m: ["Danger, love, urgency", "Luck, joy, celebration", "Life, energy, anger", "Purity, marriage, fertility", "Danger, caution", "Death, mourning (many regions)", "Passion, religion"] },
+  { n: "Orange", hex: "#f77f00", m: ["Autumn, warning, cheapness", "Change, adaptability", "Courage, energy", "Sacred — the saffron of renunciation", "Mourning, loss", "Vitality, harvest", "Sun, earth, festivity"] },
+  { n: "Yellow", hex: "#ffd60a", m: ["Caution, cowardice, optimism", "Imperial royalty, honour", "Courage, nobility, refinement", "Commerce, knowledge, spring", "Happiness, prosperity", "Wealth, high rank", "Death, mourning (some regions)"] },
+  { n: "Green",  hex: "#2ec4b6", m: ["Nature, money, envy, permission", "Health — but a green hat means infidelity", "Eternal life, youth", "Islam, harvest, new beginnings", "Islam, holiness, paradise", "Fertility, the land itself", "Death (some regions), nature"] },
+  { n: "Blue",   hex: "#4895ef", m: ["Trust, sadness, corporate safety", "Immortality, healing", "Ordinary life; villainy in kabuki", "Krishna, strength, the divine", "Protection against the evil eye", "Love, harmony, peace", "Trust, religious devotion"] },
+  { n: "Purple", hex: "#b892ff", m: ["Royalty, luxury, the mystical", "Nobility, spiritual awareness", "Wealth, nobility, privilege", "Sorrow, mourning", "Wealth, high status", "Royalty — historically the rarest dye", "Mourning, Lent, death"] },
+  { n: "White",  hex: "#f2f2f2", m: ["Purity, weddings, cleanliness", "Death, mourning, funerals", "Death and purity, both at once", "Mourning, widowhood, peace", "Purity — and mourning", "Purity, contact with spirits", "Peace, purity, hope"] },
+  { n: "Black",  hex: "#2b2f3a", m: ["Death, formality, elegance, power", "Evil, water, deep knowledge", "Mystery, formality, the unseen", "Evil, negativity, the unlucky", "Rebirth, mourning", "Age, maturity, masculinity", "Mourning, death"] }
+];
+
+(function coloursInCulture() {
+  const grid = $("#culGrid");
+  const head = document.createElement("div");
+  head.className = "culcell culhead";
+  head.textContent = "Colour";
+  grid.appendChild(head);
+  CULTURES.forEach(c => {
+    const h = document.createElement("div");
+    h.className = "culcell culhead";
+    h.textContent = c;
+    grid.appendChild(h);
+  });
+
+  COLOURS_C.forEach(col => {
+    const rowCells = [];
+    const name = document.createElement("div");
+    name.className = "culcell culname";
+    name.innerHTML = `<span class="culswatch" style="background:${col.hex}"></span>${col.n}`;
+    grid.appendChild(name);
+    rowCells.push(name);
+
+    col.m.forEach((meaning, i) => {
+      const cell = document.createElement("div");
+      cell.className = "culcell";
+      cell.textContent = meaning;
+      tipOn(cell,
+        `<span class="t">${col.n} in ${CULTURES[i]} tradition</span>
+         <span class="v">${meaning}</span>
+         <span class="d">A broad generalisation with large internal variation — treat it as "this association exists", not "everyone believes this".</span>`);
+      grid.appendChild(cell);
+      rowCells.push(cell);
+    });
+
+    const toggle = () => rowCells.forEach(c => c.classList.toggle("culrow-on"));
+    rowCells.forEach(c => c.addEventListener("click", toggle));
+  });
+})();
+
+
+/* =======================================================================
+   7. WARMING STRIPES
+   ======================================================================= */
+/* Annual global mean surface temperature anomaly, °C vs 1961–1990.
+   Close approximation of HadCRUT5 — trend and record years correct,
+   individual years may differ by a few hundredths of a degree.        */
+const ANOMALY = [
+  -0.42,-0.23,-0.23,-0.27,-0.29,-0.30,-0.32,-0.47,-0.39,-0.28,
+  -0.34,-0.45,-0.53,-0.30,-0.42,-0.28,-0.29,-0.32,-0.28,-0.28,
+  -0.30,-0.33,-0.27,-0.31,-0.35,-0.37,-0.39,-0.14,-0.03,-0.30,
+  -0.29,-0.26,-0.27,-0.31,-0.40,-0.41,-0.38,-0.43,-0.33,-0.23,
+  -0.42,-0.38,-0.44,-0.44,-0.41,-0.39,-0.24,-0.23,-0.40,-0.30,
+  -0.20,-0.26,-0.34,-0.42,-0.47,-0.36,-0.27,-0.42,-0.45,-0.45,
+  -0.44,-0.44,-0.39,-0.38,-0.22,-0.15,-0.33,-0.43,-0.35,-0.29,
+  -0.26,-0.21,-0.28,-0.26,-0.26,-0.21,-0.10,-0.18,-0.18,-0.31,
+  -0.13,-0.09,-0.13,-0.25,-0.14,-0.15,-0.12,-0.02, 0.00,-0.02,
+   0.04, 0.07, 0.02, 0.01, 0.14, 0.02,-0.08,-0.06,-0.07,-0.09,
+  -0.16,-0.04, 0.01, 0.07,-0.08,-0.12,-0.18, 0.00, 0.04, 0.02,
+  -0.01, 0.05, 0.03, 0.05,-0.19,-0.10,-0.04,-0.02,-0.06, 0.06,
+   0.02,-0.09, 0.01, 0.13,-0.08,-0.01,-0.10, 0.14, 0.05, 0.11,
+   0.17, 0.20, 0.07, 0.22, 0.07, 0.05, 0.10, 0.22, 0.25, 0.18,
+   0.33, 0.30, 0.15, 0.17, 0.22, 0.32, 0.22, 0.39, 0.53, 0.34,
+   0.33, 0.43, 0.49, 0.50, 0.45, 0.53, 0.50, 0.52, 0.41, 0.51,
+   0.56, 0.44, 0.48, 0.51, 0.58, 0.73, 0.80, 0.72, 0.63, 0.75,
+   0.80, 0.68, 0.71, 0.93, 1.05
+];
+const STRIPE_COLOURS = [
+  "#08306b","#08519c","#2171b5","#4292c6","#6baed6","#9ecae1","#c6dbef","#deebf7",
+  "#fee0d2","#fcbba1","#fc9272","#fb6a4a","#ef3b2c","#cb181d","#a50f15","#67000d"
+];
+
+(function warmingStripes() {
+  const host = $("#stripeBar"), START = 1850;
+  const lo = -0.58, hi = 1.08;
+  const colFor = (v) => STRIPE_COLOURS[Math.max(0, Math.min(STRIPE_COLOURS.length - 1,
+    Math.floor(((v - lo) / (hi - lo)) * STRIPE_COLOURS.length)))];
+
+  const frag = document.createDocumentFragment();
+  ANOMALY.forEach((v, i) => {
+    const s = document.createElement("div");
+    s.className = "stripe";
+    s.style.background = colFor(v);
+    s.dataset.i = i;
+    frag.appendChild(s);
+  });
+  host.appendChild(frag);
+
+  /* one delegated listener for all 175 stripes */
+  tipDelegate(host, ".stripe", (el) => {
+    const i = +el.dataset.i, v = ANOMALY[i];
+    return `<span class="t">${START + i}</span>
+            <span class="v">${v > 0 ? "+" : ""}${v.toFixed(2)} °C vs the 1961–1990 average</span>
+            <span class="d">${v > 0 ? "Warmer" : "Cooler"} than the twentieth-century baseline.</span>`;
+  });
+
+  $("#stripeFirst").textContent = START;
+  $("#stripeLast").textContent = START + ANOMALY.length - 1;
+
+  const key = $("#stripeKey");
+  STRIPE_COLOURS.forEach(c => {
+    const d = document.createElement("div");
+    d.style.background = c;
+    key.appendChild(d);
+  });
+
+  /* 1850–1900 is the standard pre-industrial reference period */
+  const last = ANOMALY[ANOMALY.length - 1];
+  const preIndustrial = ANOMALY.slice(0, 51).reduce((a, b) => a + b, 0) / 51;
+  const warmestIdx = ANOMALY.indexOf(Math.max(...ANOMALY));
+  $("#stripeStat").textContent =
+    `Warmest year: ${START + warmestIdx} · +${(last - preIndustrial).toFixed(2)}°C on the 1850–1900 average`;
+})();
+
+
+/* =======================================================================
+   8. HOW LONG IT LASTS
+   ======================================================================= */
+const RUBBISH = [
+  { n: "Paper towel",        y: 0.05,    label: "2–4 weeks" },
+  { n: "Banana peel",        y: 0.08,    label: "1 month" },
+  { n: "Newspaper",          y: 0.11,    label: "6 weeks" },
+  { n: "Apple core",         y: 0.17,    label: "2 months" },
+  { n: "Cardboard box",      y: 0.25,    label: "3 months" },
+  { n: "Cotton t-shirt",     y: 0.5,     label: "6 months" },
+  { n: "Orange peel",        y: 0.5,     label: "6 months" },
+  { n: "Wool sock",          y: 3,       label: "1–5 years" },
+  { n: "Cigarette butt",     y: 10,      label: "10 years" },
+  { n: "Plastic bag",        y: 20,      label: "20 years" },
+  { n: "Leather shoe",       y: 40,      label: "25–40 years" },
+  { n: "Tin can",            y: 50,      label: "50 years" },
+  { n: "Foam cup",           y: 50,      label: "50 years" },
+  { n: "Rubber boot sole",   y: 60,      label: "50–80 years" },
+  { n: "Aluminium can",      y: 200,     label: "200 years" },
+  { n: "Disposable nappy",   y: 450,     label: "450 years" },
+  { n: "Plastic bottle",     y: 450,     label: "450 years" },
+  { n: "Fishing line",       y: 600,     label: "600 years" },
+  { n: "Glass bottle",       y: 1000000, label: "≈1m years" }
+];
+
+(function howLong() {
+  const host = $("#lastChart");
+  const LO = Math.log10(0.02), HI = Math.log10(2000000);
+  const pos = (y) => ((Math.log10(y) - LO) / (HI - LO)) * 100;
+  const colourFor = (y) => y < 1 ? "#06d6a0" : y < 20 ? "#ffc857" : y < 300 ? "#f77f00" : "#ff5d73";
+
+  RUBBISH.slice().sort((a, b) => a.y - b.y).forEach(r => {
+    const row = document.createElement("div");
+    row.className = "lastrow";
+    const c = colourFor(r.y);
+    row.innerHTML =
+      `<div class="lastname"><span style="width:8px;height:8px;border-radius:50%;background:${c};display:inline-block;flex-shrink:0"></span>${r.n}</div>
+       <div class="lasttrack">
+         <div class="lastline" style="background:${c};opacity:.35"></div>
+         <div class="lastdot" style="background:${c}"></div>
+       </div>
+       <div class="lasttime">${r.label}</div>`;
+    row.dataset.pos = pos(r.y);
+    const human = r.y >= 1000
+      ? `That is longer than all of recorded human history${r.y >= 100000 ? ", roughly 150 times over" : ""}.`
+      : r.y >= 100 ? "Longer than anyone reading this will live."
+      : r.y >= 10 ? "It will outlive most of your possessions."
+      : "It rejoins the world quickly.";
+    tipOn(row, `<span class="t">${r.n}</span><span class="v">${r.label} to break down</span><span class="d">${human}</span>`);
+    host.appendChild(row);
+  });
+
+  const ticks = $("#lastTicks");
+  /* "minor" ticks are dropped on narrow screens, where the track is too
+     short for six labels to sit side by side without overlapping */
+  [[0.08, "1 mo", false], [1, "1 yr", true], [10, "10 yrs", true],
+   [100, "100 yrs", false], [1000, "1k yrs", true], [1000000, "1m yrs", false]]
+    .forEach(([v, lab, minor]) => {
+      const s = document.createElement("span");
+      s.style.left = pos(v) + "%";
+      s.textContent = lab;
+      if (minor) s.className = "minor";
+      ticks.appendChild(s);
+    });
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      $$(".lastrow", host).forEach((row, i) => {
+        setTimeout(() => {
+          $(".lastline", row).style.width = row.dataset.pos + "%";
+          $(".lastdot",  row).style.left  = row.dataset.pos + "%";
+        }, i * 45);
+      });
+      obs.disconnect();
+    });
+  }, { threshold: 0.15 });
+  obs.observe(host);
+})();
+
+
+/* =======================================================================
+   12. RHETOLOGICAL FALLACIES
+   ======================================================================= */
+const FAL_CATS = {
+  "Faulty deduction":     "#4895ef",
+  "Garbled cause & effect": "#f77f00",
+  "Manipulating content": "#b892ff",
+  "Appeal to emotion":    "#ff5d73",
+  "On the attack":        "#ffc857"
+};
+const FALLACIES = [
+  { n: "Ad Hominem", c: "On the attack", d: "Attacking the person making the argument instead of the argument itself.", e: "“You can't take her climate research seriously — she flies to conferences.”" },
+  { n: "Straw Man", c: "On the attack", d: "Replacing your opponent's position with a weaker one, then defeating that.", e: "“He wants better cycle lanes. So he wants to ban all cars.”" },
+  { n: "Appeal to Hypocrisy", c: "On the attack", d: "Deflecting a criticism by pointing out the critic doesn't live up to it. Their inconsistency doesn't make them wrong.", e: "“My doctor told me to quit smoking, but she smokes too.”" },
+  { n: "Moving the Goalposts", c: "On the attack", d: "Demanding new evidence once the evidence you asked for has been supplied.", e: "“Fine, you found the receipt — but do you have the invoice, the email and a witness?”" },
+  { n: "False Dilemma", c: "Faulty deduction", d: "Presenting two options as the only options, when there are more.", e: "“Either we cut the budget entirely or we go bankrupt.”" },
+  { n: "No True Scotsman", c: "Faulty deduction", d: "Redefining a category mid-argument to exclude any counterexample.", e: "“No real fan would have left before the end.”" },
+  { n: "Composition & Division", c: "Faulty deduction", d: "Assuming what's true of the parts is true of the whole, or the reverse.", e: "“Every player is excellent, so the team must be excellent.”" },
+  { n: "Gambler's Fallacy", c: "Faulty deduction", d: "Believing that independent random events even out in the short run.", e: "“Red has come up eight times. Black is due.”" },
+  { n: "Sunk Cost Fallacy", c: "Faulty deduction", d: "Continuing because of what you have already spent, rather than what you will gain. The money is gone either way.", e: "“We've spent three years on this. We can't stop now.”" },
+  { n: "Appeal to Nature", c: "Faulty deduction", d: "Treating 'natural' as a synonym for 'good' and 'synthetic' as 'harmful'.", e: "“It's a completely natural remedy.” So is hemlock." },
+  { n: "Begging the Question", c: "Faulty deduction", d: "Assuming the conclusion inside the premises. The argument goes in a circle.", e: "“It's the best paper because no other paper is as good.”" },
+  { n: "Post Hoc", c: "Garbled cause & effect", d: "Assuming that because B followed A, A caused B.", e: "“I took the supplement and my cold cleared up in a week.” Colds clear up in a week." },
+  { n: "Correlation ≠ Causation", c: "Garbled cause & effect", d: "Two things moving together may share a hidden cause, or be coincidence.", e: "“Ice cream sales predict drownings.” Both are caused by summer." },
+  { n: "Slippery Slope", c: "Garbled cause & effect", d: "Claiming one small step makes an extreme outcome inevitable, without showing the mechanism.", e: "“Allow this and within a decade nothing will be left standing.”" },
+  { n: "Survivorship Bias", c: "Manipulating content", d: "Drawing conclusions only from the things that made it through, and never seeing the failures.", e: "“Every founder I admire dropped out of university.” You never meet the ones who dropped out and failed." },
+  { n: "Cherry Picking", c: "Manipulating content", d: "Presenting the data that supports you and quietly omitting the rest.", e: "“The temperature fell between 1998 and 2012.” It rose either side." },
+  { n: "Texas Sharpshooter", c: "Manipulating content", d: "Finding a pattern in noise after the fact, then treating it as a prediction.", e: "Shoot the barn wall, then paint the target around the tightest cluster of holes." },
+  { n: "Anecdotal Evidence", c: "Manipulating content", d: "Letting one vivid story outweigh a large body of data. Stories are stickier than statistics — that's the bug." },
+  { n: "Appeal to Fear", c: "Appeal to emotion", d: "Substituting a frightening image for an argument. Fear feels like evidence.", e: "“Do you really want to be the one who let this happen?”" },
+  { n: "Appeal to Popularity", c: "Appeal to emotion", d: "Treating widespread belief as proof. Most people once believed the Earth was the centre of everything.", e: "“Ten million users can't be wrong.”" },
+  { n: "Appeal to Tradition", c: "Appeal to emotion", d: "Treating age as evidence of correctness. Bloodletting was traditional for two thousand years.", e: "“We've always done it this way.”" },
+  { n: "Appeal to Authority", c: "Appeal to emotion", d: "Citing an authority outside their field, or citing one where the field genuinely disagrees.", e: "“A Nobel laureate in physics says this diet works.”" }
+];
+
+(function fallacies() {
+  const grid = $("#falGrid"), chips = $("#falChips");
+  let active = "All";
+
+  const makeChip = (label) => {
+    const b = document.createElement("button");
+    b.className = "chip" + (label === "All" ? " on" : "");
+    b.textContent = label;
+    if (label !== "All") b.style.setProperty("--fc", FAL_CATS[label]);
+    b.addEventListener("click", () => {
+      active = label;
+      $$(".chip", chips).forEach(c => c.classList.remove("on"));
+      b.classList.add("on");
+      render();
+    });
+    chips.appendChild(b);
+  };
+  makeChip("All");
+  Object.keys(FAL_CATS).forEach(makeChip);
+
+  function render() {
+    const list = active === "All" ? FALLACIES : FALLACIES.filter(f => f.c === active);
+    grid.innerHTML = "";
+    list.forEach((f, i) => {
+      const card = document.createElement("div");
+      card.className = "fal";
+      card.style.setProperty("--fc", FAL_CATS[f.c]);
+      card.style.animation = `fade .35s ease ${i * 22}ms both`;
+      card.innerHTML =
+        `<div class="falcat">${f.c}</div>
+         <div class="falname">${f.n}</div>
+         <div class="faldef">${f.d}</div>
+         ${f.e ? `<div class="falex">${f.e}</div>` : ""}`;
+      grid.appendChild(card);
+    });
+    $("#falCount").textContent =
+      `Showing ${list.length} of ${FALLACIES.length}${active === "All" ? "" : ` — filtered to “${active}”`}.`;
+  }
+  render();
+})();
+
+
+/* =======================================================================
+   POLISH — contents, nav, scrollspy, progress, back-to-top
+   ======================================================================= */
+(function furniture() {
+  const sections = $$("section[data-title]");
+
+  /* contents list + nav links + mobile menu, all from the same source */
+  const toc = $("#toc"), navLinks = $("#navLinks"), mobile = $("#mobileMenu");
+
+  /* the menu is the only route back to the top on narrow screens */
+  const top = document.createElement("a");
+  top.href = "#";
+  top.innerHTML = `<span>↑</span>Back to the top`;
+  top.addEventListener("click", e => { e.preventDefault(); closeMenu(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+  mobile.appendChild(top);
+
+  sections.forEach((s, i) => {
+    const n = String(i + 1).padStart(2, "0");
+
+    const li = document.createElement("li");
+    li.innerHTML = `<a href="#${s.id}">
+        <span class="tocn">${n}</span>
+        <span><span class="toct">${s.dataset.title}</span><span class="tocd">${s.dataset.blurb}</span></span>
+      </a>`;
+    toc.appendChild(li);
+
+    const a = document.createElement("a");
+    a.href = "#" + s.id;
+    a.textContent = s.dataset.title;
+    a.dataset.for = s.id;
+    navLinks.appendChild(a);
+
+    const m = document.createElement("a");
+    m.href = "#" + s.id;
+    m.innerHTML = `<span>${n}</span>${s.dataset.title}`;
+    m.addEventListener("click", closeMenu);
+    mobile.appendChild(m);
+  });
+
+  /* mobile menu */
+  const btn = $("#menuBtn");
+  function closeMenu() { mobile.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); btn.textContent = "Index"; }
+  btn.addEventListener("click", () => {
+    const open = mobile.classList.toggle("open");
+    btn.setAttribute("aria-expanded", String(open));
+    btn.textContent = open ? "Close" : "Index";
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeMenu(); });
+
+  /* progress bar + back to top + scrollspy */
+  const bar = $("#progress"), toTop = $("#toTop");
+  const navAs = $$("a[data-for]", navLinks);
+
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  /* Section positions are measured once and cached. The scroll handler
+     then does pure arithmetic and writes — no layout reads interleaved
+     with style writes, which is what forces a reflow every frame. */
+  let tops = [], maxScroll = 1, lastActive = null, lastShow = null;
+  function measure() {
+    const y = window.scrollY;
+    tops = sections.map(s => s.getBoundingClientRect().top + y);
+    maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  }
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const y = window.scrollY, line = y + window.innerHeight * 0.42;
+
+      bar.style.transform = `scaleX(${Math.min(1, y / maxScroll)})`;
+
+      const show = y > 900;
+      if (show !== lastShow) { toTop.classList.toggle("show", show); lastShow = show; }
+
+      let current = null;
+      for (let i = 0; i < tops.length; i++) if (tops[i] <= line) current = sections[i].id;
+      if (current !== lastActive) {
+        navAs.forEach(a => a.classList.toggle("active", a.dataset.for === current));
+        lastActive = current;
+      }
+    });
+  }
+
+  /* anything that changes page height — filtering the fallacy deck, a
+     resize, fonts settling — invalidates the cache */
+  let remeasureQueued = false;
+  function queueMeasure() {
+    if (remeasureQueued) return;
+    remeasureQueued = true;
+    requestAnimationFrame(() => { remeasureQueued = false; measure(); onScroll(); });
+  }
+  if (window.ResizeObserver) new ResizeObserver(queueMeasure).observe(document.body);
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", queueMeasure);
+  window.addEventListener("load", queueMeasure);
+  measure(); onScroll();
+})();
+</script>
+</body>
+</html>
