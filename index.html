@@ -6,6 +6,18 @@
 <title>Numberscape — the world, drawn to scale</title>
 <meta name="description" content="Twelve ways to see the numbers you thought you knew. An interactive data-visualisation essay.">
 <meta name="theme-color" content="#0a0c11">
+
+<!-- Installable app: manifest + PNG icons. Chrome needs real 192/512 PNGs;
+     the inline SVG below is only the browser-tab favicon. -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Numberscape">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Numberscape">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0c11'/%3E%3Crect x='5' y='18' width='4.5' height='9' rx='1' fill='%232ec4b6'/%3E%3Crect x='11.5' y='12' width='4.5' height='15' rx='1' fill='%23ffc857'/%3E%3Crect x='18' y='7' width='4.5' height='20' rx='1' fill='%23ff5d73'/%3E%3Ccircle cx='26.5' cy='9' r='2.6' fill='%23b892ff'/%3E%3C/svg%3E">
 <style>
 :root{
@@ -692,7 +704,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   </div>
 
   <p style="margin-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase">
-    Numberscape — one HTML file, no trackers, no network calls, works offline.
+    Numberscape — no trackers, no third-party requests, installable, works offline.
   </p>
 </div></footer>
 
@@ -1979,6 +1991,20 @@ const FALLACIES = [
   window.addEventListener("load", queueMeasure);
   measure(); onScroll();
 })();
+
+
+/* =======================================================================
+   Installable app — register the service worker so the site can be
+   installed from Chrome's address bar and still work with no connection.
+   Skipped on file:// where service workers are not allowed.
+   ======================================================================= */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {
+      /* offline install is a bonus, never a requirement — ignore failures */
+    });
+  });
+}
 </script>
 </body>
 </html>

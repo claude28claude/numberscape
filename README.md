@@ -24,18 +24,30 @@ Twelve chapters, 358 data points, one HTML file.
 | 11 | Mythconceptions | Twelve flip cards busting things everyone "knows" |
 | 12 | Rhetological Fallacies | 22 ways an argument goes wrong, filed by failure mode |
 
+## Install it
+
+The site is a PWA. Open it in Chrome and use **Install** in the address bar (or
+*Add to Home Screen* on mobile) and it runs in its own window with its own icon,
+fully offline. The service worker is network-first for the page itself, so a
+redeploy still reaches you on the next online visit.
+
 ## How it's built
 
-No build step, no framework, no dependencies, no network requests, no trackers.
-Everything is vanilla HTML, CSS and JavaScript in a single `index.html`, including
-hand-rolled SVG charts and a squarified treemap layout. It works offline — save
-the file and open it.
+No build step, no framework, no dependencies, no third-party requests, no
+trackers. All the content and every chart live in a single `index.html` —
+vanilla HTML, CSS and JavaScript, with hand-rolled SVG charts and a squarified
+treemap layout. The only other files are the PWA wrapper (`manifest.webmanifest`,
+`sw.js`) and the icons.
 
-Run it locally by opening `index.html`, or:
+Run it locally by opening `index.html` directly — it works from `file://`, just
+without the installable-app part — or serve it:
 
 ```bash
 npx http-server . -p 8129 -c-1
 ```
+
+Icons are generated from `tools/make-icons.ps1`; edit the palette or bar heights
+there and re-run it rather than editing the PNGs by hand.
 
 ## A note on the data
 
