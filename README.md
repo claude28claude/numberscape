@@ -3,7 +3,8 @@
 **The world is bigger, weirder and less scary than you think.**
 
 An interactive data-visualisation essay in the spirit of *Information is Beautiful*.
-Twelve chapters, 358 data points, one HTML file.
+Fifteen chapters, 366 data points, one HTML file — including three chapters that
+measure the reader rather than the world.
 
 **Live:** https://claude28claude.github.io/numberscape/
 
@@ -11,7 +12,7 @@ Twelve chapters, 358 data points, one HTML file.
 
 | # | Chapter | What it does |
 |---|---------|--------------|
-| 1 | Guess First | A slider quiz that makes you commit to a number *before* the answer appears, then scores your calibration |
+| 1 | Guess First | An eight-question slider quiz that makes you commit to a number *before* the answer appears, then scores your calibration |
 | 2 | Fear vs Reality | What kills people, what they Google, and what the press covers — with a per-cause distortion factor |
 | 3 | Deadliest Animals | Deaths per year by animal, with a log/true-scale toggle that makes every feared predator vanish |
 | 4 | Billion-Dollar-o-Gram | A squarified treemap of world spending against the cost of fixing things, at one scale |
@@ -21,8 +22,11 @@ Twelve chapters, 358 data points, one HTML file.
 | 8 | How Long It Lasts | Decomposition times on a logarithmic scale |
 | 9 | Every Minute | Live counters that start at zero when you open the page |
 | 10 | Your Life in Dots | Enter your age, see it as 4,680 weekly dots |
-| 11 | Mythconceptions | Twelve flip cards busting things everyone "knows" |
-| 12 | Rhetological Fallacies | 22 ways an argument goes wrong, filed by failure mode |
+| 11 | Reaction Time | Five timed rounds, then your median placed against sprinters, F1 drivers and the drink-drive limit — and what it costs in metres at 100 km/h |
+| 12 | Be Random | Fake forty coin tosses, then see your sequence next to a real one. The tell is always the same |
+| 13 | Guess the Correlation | Estimate *r* from a scatter of 90 points, scored against the real sample correlation |
+| 14 | Mythconceptions | Twelve flip cards busting things everyone "knows" |
+| 15 | Rhetological Fallacies | 22 ways an argument goes wrong, filed by failure mode |
 
 ## Install it
 

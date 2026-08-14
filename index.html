@@ -406,6 +406,73 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 .faldef{font-size:13.5px;color:var(--dim);line-height:1.5;margin-bottom:12px}
 .falex{font-size:13px;color:var(--ink);line-height:1.5;padding-left:12px;border-left:2px solid var(--line);font-style:italic}
 
+/* ---------- reaction test ---------- */
+.rt-stage{
+  border-radius:16px;border:1px solid var(--line);background:var(--panel);
+  min-height:290px;display:grid;place-content:center;text-align:center;gap:10px;
+  cursor:pointer;user-select:none;padding:34px 24px;
+  transition:background .12s ease,border-color .12s ease;
+}
+.rt-stage:focus-visible{outline:2px solid var(--c2);outline-offset:3px}
+.rt-stage.wait{background:#4a1220;border-color:#7d2036}
+.rt-stage.go{background:#06d6a0;border-color:#06d6a0}
+.rt-stage.go .rt-msg,.rt-stage.go .rt-sub{color:#04231b}
+.rt-stage.early{background:#3a1a10;border-color:#8a4322}
+.rt-msg{font-family:var(--serif);font-size:clamp(26px,4.4vw,42px);line-height:1.1}
+.rt-sub{font-size:14.5px;color:var(--dim)}
+.rt-runs{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap;align-items:center}
+.rt-run{
+  font-family:var(--mono);font-size:12px;padding:6px 11px;border-radius:7px;
+  background:var(--panel2);border:1px solid var(--line);color:var(--dim);
+}
+.rt-run.done{color:var(--c3);border-color:rgba(46,196,182,.4)}
+.rt-run.bad{color:var(--c1);border-color:rgba(255,93,115,.4)}
+.rt-result{margin-top:30px;display:none}
+.rt-result.show{display:block;animation:fade .5s ease}
+.rt-you{font-family:var(--serif);font-size:clamp(30px,5vw,46px);color:var(--c2);line-height:1}
+.rt-you small{font-size:16px;color:var(--dim);font-family:var(--sans)}
+.benchrow{display:grid;grid-template-columns:190px 1fr 74px;gap:14px;align-items:center;padding:6px 0}
+.benchname{font-size:13.5px}
+.benchtrack{height:16px;background:var(--panel2);border-radius:4px;overflow:hidden}
+.benchfill{height:100%;width:0;border-radius:4px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.benchnum{font-family:var(--mono);font-size:12px;text-align:right;color:var(--dim)}
+.benchrow.me .benchname{color:var(--c2);font-weight:650}
+@media(max-width:640px){
+  .benchrow{grid-template-columns:118px 1fr 58px;gap:9px}
+  .benchname{font-size:12px}.benchnum{font-size:10.5px}
+}
+
+/* ---------- randomness test ---------- */
+.rand-ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+.rand-ctl .count{font-family:var(--mono);font-size:12.5px;color:var(--dimmer);letter-spacing:.1em}
+.seq{margin-bottom:20px}
+.seqlabel{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer);margin-bottom:8px}
+.seqstrip{display:flex;gap:3px;flex-wrap:wrap}
+.seqcell{
+  width:23px;height:30px;border-radius:4px;display:grid;place-items:center;
+  font-family:var(--mono);font-size:11px;font-weight:650;
+  background:var(--panel2);color:var(--dimmer);
+}
+.seqcell.H{background:#4895ef;color:#08182c}
+.seqcell.T{background:#ffc857;color:#2b2004}
+.randstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:22px}
+.randstat{background:var(--panel);padding:17px 19px}
+.randstat .sv{font-family:var(--serif);font-size:27px;line-height:1}
+.randstat .sl{font-size:12.5px;color:var(--dim);margin-top:7px}
+.randstat .sr{font-family:var(--mono);font-size:10.5px;color:var(--dimmer);margin-top:5px}
+#randResult{display:none}
+#randResult.show{display:block;animation:fade .5s ease}
+
+/* ---------- correlation game ---------- */
+.corrlayout{display:grid;grid-template-columns:1fr 290px;gap:28px;align-items:start}
+@media(max-width:820px){.corrlayout{grid-template-columns:1fr}}
+#corrPlot{display:block;width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.corrside{display:flex;flex-direction:column;gap:16px}
+.corrguess{font-family:var(--serif);font-size:44px;color:var(--c2);line-height:1;text-align:center;font-variant-numeric:tabular-nums}
+.corrfeed{font-size:14px;color:var(--dim);line-height:1.5;min-height:66px}
+.corrfeed b{color:var(--ink)}
+.corrscore{font-family:var(--mono);font-size:11.5px;color:var(--dimmer);letter-spacing:.1em}
+
 /* ---------- reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -445,10 +512,10 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <canvas id="heroCanvas"></canvas>
   <div class="wrap">
     <h1>The world is<br>bigger, weirder<br>and <em>less scary</em><br>than you think.</h1>
-    <p class="lead">Twelve charts about things you already have an opinion on. <b>Guess before you scroll.</b> Most people are wrong — reliably, and in the same direction.</p>
+    <p class="lead">Fifteen chapters about things you already have an opinion on — including three that measure <b>you</b>. Guess before you scroll. Most people are wrong, reliably, and in the same direction.</p>
     <div class="herostats">
-      <div class="herostat"><div class="v" data-count="12">0</div><div class="l">Chapters</div></div>
-      <div class="herostat"><div class="v" data-count="358">0</div><div class="l">Data points</div></div>
+      <div class="herostat"><div class="v" data-count="15">0</div><div class="l">Chapters</div></div>
+      <div class="herostat"><div class="v" data-count="366">0</div><div class="l">Data points</div></div>
       <div class="herostat"><div class="v" data-count="0" data-suffix="kb">0</div><div class="l">Trackers loaded</div></div>
     </div>
     <div class="scrollcue"><span class="bar"></span> Scroll</div>
@@ -458,16 +525,16 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== CONTENTS ======== -->
 <section id="contents"><div class="wrap rv">
   <div class="eyebrow">Contents</div>
-  <h2>Twelve chapters.</h2>
-  <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip</strong>. Nothing is loaded from the internet.</p>
+  <h2>Fifteen chapters.</h2>
+  <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip, and three chapters that time you</strong>. Nothing is loaded from the internet.</p>
   <ol class="toc" id="toc"></ol>
 </div></section>
 
 <!-- ======== 1. GUESS ======== -->
-<section id="guess" data-title="Guess First" data-blurb="Six questions. Commit to a number before the answer appears."><div class="wrap rv">
+<section id="guess" data-title="Guess First" data-blurb="Eight questions. Commit to a number before the answer appears."><div class="wrap rv">
   <div class="eyebrow"><span class="num">1</span> Calibration</div>
   <h2>Guess first.</h2>
-  <p class="standfirst">A chart you disagree with teaches you nothing. So commit to a number <strong>before</strong> you see the answer. Six questions. Chimpanzees picking at random beat most humans on questions like these — because humans aren't wrong at random, we're wrong in a pattern.</p>
+  <p class="standfirst">A chart you disagree with teaches you nothing. So commit to a number <strong>before</strong> you see the answer. Eight questions. Chimpanzees picking at random beat most humans on questions like these — because humans aren't wrong at random, we're wrong in a pattern.</p>
 
   <div class="quiz">
     <div class="quizhead">
@@ -645,8 +712,82 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 </div></section>
 
 <!-- ======== 7. MYTHS ======== -->
+<!-- ======== 11. REACTION ======== -->
+<section id="reaction" data-title="Reaction Time" data-blurb="Click when it turns green. Then see what a quarter of a second costs."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">11</span> Reflex</div>
+  <h2>How fast are you,<br>really?</h2>
+  <p class="standfirst">Five rounds. The panel turns red, then — at some point it decides — green. Click the instant it does. <strong>You are measuring the round trip</strong>: light into your eye, signal to your visual cortex, decision, command back down your arm. Nobody is as fast as they think.</p>
+
+  <div class="rt-stage" id="rtStage" role="button" tabindex="0" aria-label="Reaction test. Click or press space to start.">
+    <div class="rt-msg" id="rtMsg">Click to begin</div>
+    <div class="rt-sub" id="rtSub">Five rounds — wait for green, then click fast</div>
+  </div>
+  <div class="rt-runs" id="rtRuns"></div>
+
+  <div class="rt-result" id="rtResult">
+    <div class="rt-you"><span id="rtMedian">—</span><small> ms — your median</small></div>
+    <p class="revtext" id="rtVerdict" style="margin-top:16px"></p>
+    <div id="rtBench" style="margin-top:22px"></div>
+    <p class="revtext" id="rtDriving" style="margin-top:22px"></p>
+    <button class="btn ghost" id="rtAgain" style="margin-top:6px">Try again</button>
+  </div>
+
+  <p class="note">Benchmarks: simple visual reaction time has a population median around 270 ms (Human Benchmark aggregate, millions of trials). World Athletics treats any sprint start under 100 ms as a false start on the grounds that no human can genuinely react that fast. Age and alcohol figures are approximate averages from published driving-simulator studies — individuals vary enormously. Your own score here also includes your mouse, your screen's refresh rate and your browser, so treat it as indicative, not clinical.</p>
+</div></section>
+
+<!-- ======== 12. RANDOM ======== -->
+<section id="random" data-title="Be Random" data-blurb="Try to fake a coin toss. You can't — and the tell is always the same."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">12</span> Instinct</div>
+  <h2>Try to be random.</h2>
+  <p class="standfirst">Tap heads or tails forty times, trying to produce a sequence that looks like a real run of coin tosses. Then we'll put yours next to an actual one. <strong>Almost nobody passes.</strong> There is a specific, predictable way humans fake randomness, and you are probably about to do it.</p>
+
+  <div class="rand-ctl">
+    <button class="btn" data-flip="H">Heads</button>
+    <button class="btn ghost" data-flip="T">Tails</button>
+    <span class="count" id="randCount">0 / 40</span>
+    <button class="btn ghost" id="randReset" style="margin-left:auto">Reset</button>
+  </div>
+
+  <div class="seq">
+    <div class="seqlabel">Your sequence</div>
+    <div class="seqstrip" id="userSeq"></div>
+  </div>
+
+  <div id="randResult">
+    <div class="seq">
+      <div class="seqlabel">An actual fair coin, forty tosses</div>
+      <div class="seqstrip" id="realSeq"></div>
+    </div>
+    <div class="randstats" id="randStats"></div>
+    <p class="revtext" id="randVerdict"></p>
+  </div>
+
+  <p class="note">A fair coin switches sides on about 50% of tosses; people asked to invent a random sequence typically switch around 60% of the time, because a repeat "feels" less random than an alternation. In forty fair tosses the longest run of one side is usually five or six — most invented sequences never go past three. The effect is robust enough that it is used to detect fabricated data.</p>
+</div></section>
+
+<!-- ======== 13. CORRELATION ======== -->
+<section id="correlation" data-title="Guess the Correlation" data-blurb="How strong is that relationship? Your eyes will say weaker than it is."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">13</span> Perception</div>
+  <h2>How strong is<br>that relationship?</h2>
+  <p class="standfirst">Every dot is an observation. Estimate the correlation — <strong>0 is a shapeless cloud, 1 is a perfect straight line</strong> — then see the real figure. Five rounds. There is a well-documented direction to the error people make here, and it matters, because this is the judgement call behind most "X is linked to Y" headlines.</p>
+
+  <div class="corrlayout">
+    <svg id="corrPlot" viewBox="0 0 480 360" preserveAspectRatio="xMidYMid meet" aria-label="Scatter plot"></svg>
+    <div class="corrside">
+      <div class="corrguess" id="corrVal">0.50</div>
+      <input type="range" id="corrSlider" min="0" max="100" value="50" aria-label="Your correlation guess">
+      <div class="scaleends"><span>0 · no relationship</span><span>1 · perfect</span></div>
+      <button class="btn" id="corrLock">Lock in my guess</button>
+      <div class="corrfeed" id="corrFeed">Round 1 of 5.</div>
+      <div class="corrscore" id="corrScore"></div>
+    </div>
+  </div>
+  <p class="note">Each cloud is 90 points drawn from a bivariate normal distribution with a known target correlation; you are scored against the <em>actual</em> sample correlation of the points on screen, computed after they are drawn, not the target. People reliably underestimate correlation from scatter plots — the perceived strength grows roughly with r², not r, so a genuinely strong r = 0.7 looks like a vague smear.</p>
+</div></section>
+
+<!-- ======== 14. MYTHS ======== -->
 <section id="myths" data-title="Mythconceptions" data-blurb="Twelve things almost everyone believes, and almost everyone has wrong."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">11</span> Correction</div>
+  <div class="eyebrow"><span class="num">14</span> Correction</div>
   <h2>Mythconceptions.</h2>
   <p class="standfirst">Twelve things almost everyone believes, that almost everyone is wrong about. Click a card to flip it. <strong>Score yourself honestly</strong> — the fun is in noticing how confident you were.</p>
   <div class="mythgrid" id="mythGrid"></div>
@@ -654,8 +795,8 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 </div></section>
 
 <!-- ======== 12. FALLACIES ======== -->
-<section id="fallacies" data-title="Rhetological Fallacies" data-blurb="Twenty ways an argument goes wrong, filed by failure mode."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">12</span> Defence</div>
+<section id="fallacies" data-title="Rhetological Fallacies" data-blurb="Twenty-two ways an argument goes wrong, filed by failure mode."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">15</span> Defence</div>
   <h2>Twenty ways to be<br>wrong, persuasively.</h2>
   <p class="standfirst">Every chapter above can be misused. This is the toolkit for spotting it — including in the charts on this page. Filter by <strong>how the argument breaks</strong>, not by what it's about. The most useful ones are the boring ones: survivorship bias and the sunk cost fallacy will cost you more this year than every conspiracy theory combined.</p>
 
@@ -920,6 +1061,18 @@ const QUESTIONS = [
     unit: "%", min: 0, max: 100, real: 43,
     explain: "Roughly <b>43%</b>. The rest are bacteria, archaea and fungi — mostly in your gut. By cell count you are a minority shareholder in yourself. (By mass you're fine: microbes weigh about 0.2 kg.)",
     src: "Sender, Fuchs & Milo, PLOS Biology, 2016"
+  },
+  {
+    q: "Of every 100 girls of primary-school age in low-income countries, how many are in school?",
+    unit: "", min: 0, max: 100, real: 78,
+    explain: "About <b>78 in 100</b> — and in the world as a whole, girls' primary enrolment is now within a percentage point of boys'. This is the single question Rosling found people got most catastrophically wrong, and the pessimism has a cost: it makes the remaining gap look hopeless rather than nearly closed.",
+    src: "UNESCO Institute for Statistics, 2023"
+  },
+  {
+    q: "How many of the world's one-year-olds have been vaccinated against at least one disease?",
+    unit: "%", min: 0, max: 100, real: 84,
+    explain: "About <b>84%</b>. Most people guess somewhere near 20–50%. Global vaccination coverage is one of the largest logistical achievements in history and almost nobody knows it happened — which makes the recent slippage in coverage much harder to argue about honestly.",
+    src: "WHO/UNICEF estimates, 2023"
   }
 ];
 
@@ -1886,6 +2039,357 @@ const FALLACIES = [
       `Showing ${list.length} of ${FALLACIES.length}${active === "All" ? "" : ` — filtered to “${active}”`}.`;
   }
   render();
+})();
+
+
+/* =======================================================================
+   11. REACTION TIME
+   ======================================================================= */
+const RT_BENCH = [
+  { n: "Fastest legal sprint start", ms: 100, note: "World Athletics rules any start under 100 ms a false start — the position is that no human can truly react faster.", c: "#b892ff" },
+  { n: "Blink of an eye",            ms: 120, note: "A single blink takes roughly 100–150 ms from start to finish.", c: "#4895ef" },
+  { n: "Formula 1 driver",           ms: 200, note: "Elite racing drivers cluster around 0.2 s off the lights.", c: "#06d6a0" },
+  { n: "Average adult",              ms: 270, note: "The population median for a simple 'click when it changes' test.", c: "#2ec4b6" },
+  { n: "Average 60-year-old",        ms: 340, note: "Simple reaction time drifts upward from roughly the mid-twenties onward.", c: "#ffc857" },
+  { n: "At the drink-drive limit",   ms: 390, note: "Driving-simulator studies find alcohol at legal-limit levels adds well over 100 ms.", c: "#ff5d73" }
+];
+
+(function reactionTest() {
+  const stage = $("#rtStage"), msg = $("#rtMsg"), sub = $("#rtSub");
+  const runsHost = $("#rtRuns"), result = $("#rtResult");
+  const ROUNDS = 5;
+  let state = "idle", times = [], round = 0, timer = 0, goAt = 0, falseStarts = 0;
+
+  function drawRuns() {
+    runsHost.innerHTML = "";
+    for (let i = 0; i < ROUNDS; i++) {
+      const d = document.createElement("span");
+      const v = times[i];
+      d.className = "rt-run" + (v == null ? "" : " done");
+      d.textContent = v == null ? `${i + 1} · —` : `${i + 1} · ${v} ms`;
+      runsHost.appendChild(d);
+    }
+    if (falseStarts) {
+      const d = document.createElement("span");
+      d.className = "rt-run bad";
+      d.textContent = `${falseStarts} false start${falseStarts === 1 ? "" : "s"}`;
+      runsHost.appendChild(d);
+    }
+  }
+
+  function arm() {
+    state = "wait";
+    stage.className = "rt-stage wait";
+    msg.textContent = "Wait…";
+    sub.textContent = "Click the moment it turns green";
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      state = "go";
+      stage.className = "rt-stage go";
+      msg.textContent = "NOW";
+      sub.textContent = "Click!";
+      goAt = performance.now();
+    }, 1000 + Math.random() * 2800);
+  }
+
+  /* A false start doesn't burn a round — you just replay it. Otherwise one
+     twitchy click permanently spoils the run and the only fix is a restart. */
+  function recordEarly() {
+    falseStarts++;
+    state = "between";
+    stage.className = "rt-stage early";
+    msg.textContent = "Too early.";
+    sub.textContent = `You clicked before green. Click to replay round ${round + 1} of ${ROUNDS}`;
+    drawRuns();
+  }
+
+  function record(ms) {
+    times[round] = ms;
+    round++;
+    drawRuns();
+    if (round >= ROUNDS) finish();
+    else {
+      state = "between";
+      stage.className = "rt-stage";
+      msg.textContent = ms + " ms";
+      sub.textContent = `Click for round ${round + 1} of ${ROUNDS}`;
+    }
+  }
+
+  function finish() {
+    state = "done";
+    stage.className = "rt-stage";
+    const good = times.filter(t => t > 0).sort((a, b) => a - b);
+    const median = good.length % 2
+      ? good[(good.length - 1) / 2]
+      : Math.round((good[good.length / 2 - 1] + good[good.length / 2]) / 2);
+
+    msg.textContent = "Done.";
+    sub.textContent = `${good.length} rounds${falseStarts ? ` · ${falseStarts} false start${falseStarts === 1 ? "" : "s"} replayed` : ""}`;
+    $("#rtMedian").textContent = median;
+
+    let verdict;
+    if (median < 180)      verdict = "That is genuinely exceptional — faster than most people manage on their best round, let alone their median.";
+    else if (median < 230) verdict = "Very fast. You're in the range where competitive gamers and racing drivers live.";
+    else if (median < 290) verdict = "Right around the human median. This is what a normal, awake adult looks like.";
+    else if (median < 360) verdict = "A little slower than the population median — tiredness, a trackpad, or a high-latency screen will each cost you 30–50 ms on their own.";
+    else                   verdict = "Slower than the typical median. Input device and screen refresh rate matter a lot here, so don't read anything medical into it.";
+    $("#rtVerdict").textContent = verdict;
+
+    /* benchmark chart, with the reader slotted into it */
+    const rows = RT_BENCH.concat([{ n: "You", ms: median, note: "Your median across the clean rounds.", c: "#ffc857", me: true }])
+      .sort((a, b) => a.ms - b.ms);
+    const max = Math.max(...rows.map(r => r.ms));
+    const bench = $("#rtBench");
+    bench.innerHTML = "";
+    rows.forEach((r, i) => {
+      const row = document.createElement("div");
+      row.className = "benchrow" + (r.me ? " me" : "");
+      row.innerHTML = `<div class="benchname">${r.n}</div>
+                       <div class="benchtrack"><div class="benchfill" style="background:${r.c}"></div></div>
+                       <div class="benchnum">${r.ms} ms</div>`;
+      tipOn(row, `<span class="t">${r.n}</span><span class="v">${r.ms} ms</span><span class="d">${r.note}</span>`);
+      bench.appendChild(row);
+      const fill = $(".benchfill", row);
+      setTimeout(() => { fill.style.width = (r.ms / max * 100) + "%"; }, 40 * i);
+    });
+
+    /* the part that actually matters */
+    const metres = (100 / 3.6) * (median / 1000);
+    $("#rtDriving").innerHTML =
+      `At 100 km/h, your car travels <b>${metres.toFixed(1)} metres</b> in that time — before the brakes are even touched. ` +
+      `That is roughly ${(metres / 4.5).toFixed(1)} car lengths of pure thinking distance, and it is added to every stopping distance you have ever seen on a road-safety poster. ` +
+      `Reading one text message takes your eyes off the road for about 5 seconds: <b>${Math.round((100 / 3.6) * 5)} metres</b> at the same speed.`;
+
+    result.classList.add("show");
+    $("#rtAgain").focus({ preventScroll: true });
+  }
+
+  function reset() {
+    times = []; round = 0; falseStarts = 0; state = "idle";
+    result.classList.remove("show");
+    stage.className = "rt-stage";
+    msg.textContent = "Click to begin";
+    sub.textContent = "Five rounds — wait for green, then click fast";
+    drawRuns();
+  }
+
+  function press() {
+    if (state === "done") { reset(); arm(); return; }
+    if (state === "idle" || state === "between") { arm(); return; }
+    if (state === "wait") {                       /* jumped the gun */
+      clearTimeout(timer);
+      recordEarly();
+      return;
+    }
+    if (state === "go") record(Math.round(performance.now() - goAt));
+  }
+
+  stage.addEventListener("pointerdown", (e) => { e.preventDefault(); press(); });
+  stage.addEventListener("keydown", (e) => {
+    if (e.key === " " || e.key === "Enter") { e.preventDefault(); press(); }
+  });
+  $("#rtAgain").addEventListener("click", (e) => { e.stopPropagation(); reset(); });
+
+  drawRuns();
+})();
+
+
+/* =======================================================================
+   12. BE RANDOM
+   ======================================================================= */
+(function beRandom() {
+  const N = 40;
+  const strip = $("#userSeq"), realStrip = $("#realSeq");
+  const countEl = $("#randCount"), result = $("#randResult");
+  let seq = [];
+
+  function longestRun(a) {
+    let best = 0, cur = 0;
+    for (let i = 0; i < a.length; i++) {
+      cur = (i && a[i] === a[i - 1]) ? cur + 1 : 1;
+      if (cur > best) best = cur;
+    }
+    return best;
+  }
+  function switchRate(a) {
+    if (a.length < 2) return 0;
+    let s = 0;
+    for (let i = 1; i < a.length; i++) if (a[i] !== a[i - 1]) s++;
+    return s / (a.length - 1);
+  }
+  function render(host, a) {
+    host.innerHTML = "";
+    for (let i = 0; i < N; i++) {
+      const c = document.createElement("span");
+      c.className = "seqcell" + (a[i] ? " " + a[i] : "");
+      c.textContent = a[i] || "";
+      host.appendChild(c);
+    }
+  }
+  function stat(v, label, ref) {
+    return `<div class="randstat"><div class="sv">${v}</div><div class="sl">${label}</div><div class="sr">${ref}</div></div>`;
+  }
+
+  function finish() {
+    const real = Array.from({ length: N }, () => Math.random() < 0.5 ? "H" : "T");
+    render(realStrip, real);
+
+    const sr = switchRate(seq), lr = longestRun(seq);
+    const rsr = switchRate(real), rlr = longestRun(real);
+
+    $("#randStats").innerHTML =
+      stat((sr * 100).toFixed(0) + "%", "How often you switched sides", "A fair coin: 50%") +
+      stat(lr, "Your longest run of one side", "40 fair tosses: usually 5–6") +
+      stat((rsr * 100).toFixed(0) + "%", "The real coin's switch rate", "Same 40 tosses, above") +
+      stat(rlr, "The real coin's longest run", "Generated just now");
+
+    const parts = [];
+    if (sr > 0.56) parts.push(`You alternated <b>${(sr * 100).toFixed(0)}%</b> of the time against a fair coin's 50% — the classic tell. A repeat feels "less random", so people keep switching.`);
+    else if (sr < 0.44) parts.push(`You switched only <b>${(sr * 100).toFixed(0)}%</b> of the time — unusually sticky, the opposite of the normal human error.`);
+    else parts.push(`Your switch rate of <b>${(sr * 100).toFixed(0)}%</b> is close to a fair coin's 50%. That is genuinely uncommon.`);
+
+    if (lr <= 3) parts.push(`Your longest run was <b>${lr}</b>. Real randomness is far streakier than it feels: over forty tosses a run of five or six is the norm, and it is the thing invented sequences almost never contain.`);
+    else parts.push(`Your longest run was <b>${lr}</b>, which is in the range a fair coin actually produces — most people never let themselves go past three.`);
+
+    parts.push(`This is why streaks in sport, in markets and in bad luck feel meaningful when they are usually nothing at all. Our sense of "too many in a row to be chance" is calibrated wrong, in a consistent direction.`);
+    $("#randVerdict").innerHTML = parts.join(" ");
+    result.classList.add("show");
+  }
+
+  $$("[data-flip]").forEach(b => b.addEventListener("click", () => {
+    if (seq.length >= N) return;
+    seq.push(b.dataset.flip);
+    render(strip, seq);
+    countEl.textContent = `${seq.length} / ${N}`;
+    if (seq.length === N) finish();
+  }));
+
+  $("#randReset").addEventListener("click", () => {
+    seq = [];
+    render(strip, seq);
+    render(realStrip, []);
+    countEl.textContent = `0 / ${N}`;
+    result.classList.remove("show");
+  });
+
+  render(strip, seq);
+})();
+
+
+/* =======================================================================
+   13. GUESS THE CORRELATION
+   ======================================================================= */
+(function guessCorrelation() {
+  const svg = $("#corrPlot"), W = 480, H = 360, PAD = 26;
+  const ROUNDS = 5, POINTS = 90;
+  const slider = $("#corrSlider"), val = $("#corrVal"), feed = $("#corrFeed");
+  let round = 0, errors = [], actual = 0, locked = false;
+
+  /* Box–Muller: two independent standard normals */
+  function gauss() {
+    let u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+  function pearson(xs, ys) {
+    const n = xs.length;
+    const mx = xs.reduce((a, b) => a + b, 0) / n, my = ys.reduce((a, b) => a + b, 0) / n;
+    let sxy = 0, sxx = 0, syy = 0;
+    for (let i = 0; i < n; i++) {
+      const dx = xs[i] - mx, dy = ys[i] - my;
+      sxy += dx * dy; sxx += dx * dx; syy += dy * dy;
+    }
+    return sxy / Math.sqrt(sxx * syy);
+  }
+
+  function newCloud() {
+    /* target spread across the range so the five rounds aren't all similar */
+    const target = 0.08 + Math.random() * 0.88;
+    const xs = [], ys = [];
+    for (let i = 0; i < POINTS; i++) {
+      const x = gauss(), z = gauss();
+      xs.push(x);
+      ys.push(target * x + Math.sqrt(1 - target * target) * z);
+    }
+    /* score against what is actually on screen, not the target */
+    actual = pearson(xs, ys);
+
+    const xmin = Math.min(...xs), xmax = Math.max(...xs);
+    const ymin = Math.min(...ys), ymax = Math.max(...ys);
+    const sx = v => PAD + ((v - xmin) / (xmax - xmin)) * (W - PAD * 2);
+    const sy = v => H - PAD - ((v - ymin) / (ymax - ymin)) * (H - PAD * 2);
+
+    svg.innerHTML = "";
+    svgEl("rect", { x: 0, y: 0, width: W, height: H, fill: "transparent" }, svg);
+    svgEl("line", { x1: PAD, y1: H - PAD, x2: W - PAD, y2: H - PAD, stroke: "#252c3a", "stroke-width": 1 }, svg);
+    svgEl("line", { x1: PAD, y1: PAD, x2: PAD, y2: H - PAD, stroke: "#252c3a", "stroke-width": 1 }, svg);
+    for (let i = 0; i < POINTS; i++) {
+      const c = svgEl("circle", { cx: sx(xs[i]), cy: sy(ys[i]), r: 0, fill: "#4895ef", opacity: .72 }, svg);
+      c.style.transition = "r .35s ease";
+      setTimeout(() => c.setAttribute("r", 4.2), 4 * i);
+    }
+  }
+
+  function startRound() {
+    locked = false;
+    newCloud();
+    slider.disabled = false;
+    slider.value = 50;
+    val.textContent = "0.50";
+    $("#corrLock").disabled = false;
+    $("#corrLock").textContent = "Lock in my guess";
+    feed.textContent = `Round ${round + 1} of ${ROUNDS}.`;
+  }
+
+  slider.addEventListener("input", () => { val.textContent = (slider.value / 100).toFixed(2); });
+
+  let finished = false;
+  $("#corrLock").addEventListener("click", () => {
+    if (finished) {                     /* button is "Play again" */
+      finished = false; round = 0; errors = [];
+      $("#corrScore").textContent = "";
+      startRound();
+      return;
+    }
+    if (locked) {                       /* button doubles as "next round" */
+      round++;
+      if (round >= ROUNDS) { finished = true; summarise(); return; }
+      startRound();
+      return;
+    }
+    locked = true;
+    slider.disabled = true;
+    const guess = slider.value / 100;
+    const err = Math.abs(guess - actual);
+    errors.push(err);
+
+    let line;
+    if (err < 0.06)      line = `<b>Nearly exact.</b> The real correlation is <b>${actual.toFixed(2)}</b>.`;
+    else if (err < 0.15) line = `Close. The real correlation is <b>${actual.toFixed(2)}</b>.`;
+    else                 line = `The real correlation is <b>${actual.toFixed(2)}</b> — you were out by ${err.toFixed(2)}.`;
+    if (guess < actual - 0.08) line += " You guessed <b>low</b>, which is the direction almost everyone errs in.";
+    else if (guess > actual + 0.08) line += " You guessed <b>high</b> — unusual; most people underestimate.";
+    feed.innerHTML = line;
+
+    $("#corrScore").textContent =
+      `Average miss: ${(errors.reduce((a, b) => a + b, 0) / errors.length).toFixed(2)} over ${errors.length} round${errors.length === 1 ? "" : "s"}`;
+    $("#corrLock").textContent = round === ROUNDS - 1 ? "See my result" : "Next scatter";
+  });
+
+  function summarise() {
+    const avg = errors.reduce((a, b) => a + b, 0) / errors.length;
+    let line;
+    if (avg < 0.08)      line = "You read scatter plots unusually well — that is a genuinely rare skill.";
+    else if (avg < 0.15) line = "Decent calibration, better than most.";
+    else                 line = "A normal human performance, which is to say: not good. Correlation is very hard to see.";
+    feed.innerHTML = `<b>Average miss: ${avg.toFixed(2)}.</b> ${line} Perceived strength tracks r² rather than r, so r = 0.7 — a relationship strong enough to build policy on — still looks to the eye like a vague smudge. That gap is where an enormous number of "linked to" headlines live.`;
+    $("#corrLock").textContent = "Play again";
+    slider.disabled = true;
+  }
+
+  startRound();
 })();
 
 

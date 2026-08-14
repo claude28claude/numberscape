@@ -9,7 +9,7 @@
  * because the icons never change without a filename change.
  */
 
-const VERSION = "numberscape-v1";
+const VERSION = "numberscape-v2";
 const SHELL = [
   "./",
   "./index.html",
