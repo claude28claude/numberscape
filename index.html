@@ -515,6 +515,94 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 .dtpunch{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--c1);border-radius:0 10px 10px 0;padding:20px 22px;color:var(--dim);line-height:1.6;max-width:70ch;margin-top:26px}
 .dtpunch b{color:var(--ink)}
 
+/* ---------- survival cohorts ---------- */
+.survwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 22px 26px}
+.survhead{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:9px;flex-wrap:wrap}
+.survname{font-size:15px}
+.survname i{font-style:normal;width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:9px}
+.survcount{font-family:var(--mono);font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums}
+.survdots{display:grid;grid-template-columns:repeat(50,1fr);gap:2.5px;margin-bottom:22px}
+.sdot{aspect-ratio:1;border-radius:50%;transition:background-color .18s ease,opacity .18s ease}
+.survscrub{display:flex;align-items:center;gap:16px;margin-top:6px;flex-wrap:wrap}
+.survscrub label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer);white-space:nowrap}
+.survage{font-family:var(--serif);font-size:34px;color:var(--c2);line-height:1;min-width:76px;text-align:right;font-variant-numeric:tabular-nums}
+.survage small{font-size:15px;color:var(--dim);font-family:var(--sans)}
+#survSlider{flex:1;min-width:170px}
+#expPlot{display:block;width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.expread{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:18px}
+.expcell{background:var(--panel);padding:16px 18px}
+.expcell .ev{font-family:var(--serif);font-size:26px;line-height:1}
+.expcell .el{font-size:12.5px;color:var(--dim);margin-top:6px;line-height:1.45}
+@media(max-width:640px){.survdots{grid-template-columns:repeat(25,1fr);gap:3px}}
+
+/* ---------- thirty earths ---------- */
+.moonwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 24px}
+.moontrack{position:relative;height:132px;margin:8px 0 6px;cursor:crosshair;touch-action:none}
+.moonrule{position:absolute;left:0;right:0;top:66px;height:1px;background:var(--line)}
+.moonearth{position:absolute;top:66px;transform:translate(-50%,-50%);border-radius:50%;background:#4895ef;box-shadow:0 0 22px rgba(72,149,239,.45)}
+.moonguess,.moontrue{position:absolute;top:66px;transform:translate(-50%,-50%);border-radius:50%;transition:left .9s cubic-bezier(.2,.8,.2,1)}
+.moonguess{background:#ffc857;box-shadow:0 0 14px rgba(255,200,87,.5)}
+.moontrue{background:#e8eaf0;opacity:0;transition:left .9s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.moontrue.on{opacity:1}
+.moonflag{position:absolute;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:left .9s cubic-bezier(.2,.8,.2,1)}
+.moonflag.g{top:12px;color:var(--c2)}
+.moonflag.t{top:96px;color:var(--ink);opacity:0;transition:left .9s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.moonflag.t.on{opacity:1}
+.moonhint{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);text-align:center;margin-top:4px}
+.moonverdict{margin-top:20px;display:none}
+.moonverdict.show{display:block;animation:fade .5s ease}
+.stackwrap{margin-top:14px}
+.stackbar{position:relative;height:46px;border-radius:6px;background:var(--panel2);overflow:hidden;display:flex;align-items:stretch}
+.stackseg{height:100%;position:relative;transition:flex-grow 1s cubic-bezier(.2,.8,.2,1)}
+.stackseg span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:9px;color:#0b0d12;font-weight:700;pointer-events:none}
+.stackover{position:absolute;top:0;bottom:0;border-left:2px dashed #e8eaf0;opacity:.85}
+.stacklab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dimmer);margin-top:8px;letter-spacing:.1em}
+.slivers{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:26px}
+.sliver{background:var(--panel);padding:17px 19px}
+.sliver .sv{font-family:var(--serif);font-size:25px;line-height:1}
+.sliver .sl{font-size:12.5px;color:var(--dim);margin-top:6px;line-height:1.45}
+
+/* ---------- peak child ---------- */
+#birthPlot{display:block;width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.pcstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:20px}
+.pcstat{background:var(--panel);padding:17px 19px}
+.pcstat .pv{font-family:var(--serif);font-size:26px;line-height:1}
+.pcstat .pl{font-size:12.5px;color:var(--dim);margin-top:6px;line-height:1.45}
+.pcstat .pr{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dimmer);margin-top:6px}
+.growthwrap{margin-top:30px}
+.growthbar{display:flex;height:44px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.growthseg{position:relative;transition:flex-grow 1s cubic-bezier(.2,.8,.2,1);flex-grow:0;flex-basis:0}
+.growthseg span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:11px;font-weight:700;color:#0b0d12;white-space:nowrap}
+.growthkey{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--dim)}
+.growthkey i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:8px}
+
+/* ---------- measles ---------- */
+.abwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+.abfield{display:grid;grid-template-columns:repeat(12,1fr);gap:7px;margin:16px 0 20px}
+.abdot{aspect-ratio:1;border-radius:50%;transition:background-color .5s ease,opacity .5s ease}
+.abdot.gone{background:#2b3040 !important;opacity:.5}
+.abctl{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:3px;gap:3px;flex-wrap:wrap}
+.abctl button{background:transparent;border:none;color:var(--dim);padding:9px 17px;border-radius:6px;font-size:12.5px;cursor:pointer;font-family:var(--sans);transition:background .2s,color .2s}
+.abctl button.on{background:var(--c1);color:#2a0810;font-weight:650}
+.abread{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:14px;letter-spacing:.04em}
+.abread b{color:var(--c1);font-family:var(--sans);font-size:15px}
+.rangestrip{position:relative;height:56px;margin-top:26px;background:var(--panel2);border-radius:8px;overflow:hidden}
+.rangeband{position:absolute;top:0;bottom:0;background:rgba(255,93,115,.22)}
+.rangetick{position:absolute;top:0;bottom:0;width:2px;background:var(--c1)}
+.rangetick.pale{background:var(--dim);width:1px}
+.rangelab{position:absolute;bottom:6px;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;color:var(--dimmer);white-space:nowrap}
+.rangeaxis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dimmer);margin-top:8px;letter-spacing:.1em}
+.shadowrow{display:grid;grid-template-columns:180px 1fr 96px;gap:14px;align-items:center;padding:8px 0}
+.shadowtrack{height:20px;background:var(--panel2);border-radius:4px;overflow:hidden}
+.shadowfill{height:100%;width:0;border-radius:4px;background:var(--c1);transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.shadowname{font-size:13.5px}
+.shadownum{font-family:var(--mono);font-size:12.5px;text-align:right;color:var(--dim)}
+@media(max-width:640px){
+  .abfield{grid-template-columns:repeat(10,1fr);gap:6px}
+  .shadowrow{grid-template-columns:104px 1fr 74px;gap:9px}
+  .shadowname{font-size:12px}.shadownum{font-size:11px}
+}
+
 /* ---------- reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -562,10 +650,10 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <canvas id="heroCanvas"></canvas>
   <div class="wrap">
     <h1>The world is<br>bigger, weirder<br>and <em>less scary</em><br>than you think.</h1>
-    <p class="lead">Eighteen chapters about things you already have an opinion on &mdash; where you sit on Earth, what the planet is actually made of, and how fast you really are. <b>Most people are wrong, reliably, and in the same direction.</b></p>
+    <p class="lead">Twenty-two chapters about things you already have an opinion on &mdash; where you sit on Earth, what the planet is made of, how far the Moon really is, and how long a Victorian actually lived. <b>Most people are wrong, reliably, and in the same direction.</b></p>
     <div class="herostats">
-      <div class="herostat"><div class="v" data-count="18">0</div><div class="l">Chapters</div></div>
-      <div class="herostat"><div class="v" data-count="439">0</div><div class="l">Data points</div></div>
+      <div class="herostat"><div class="v" data-count="22">0</div><div class="l">Chapters</div></div>
+      <div class="herostat"><div class="v" data-count="505">0</div><div class="l">Data points</div></div>
       <div class="herostat"><div class="v" data-count="0" data-suffix="kb">0</div><div class="l">Trackers loaded</div></div>
     </div>
     <div class="scrollcue"><span class="bar"></span> Scroll</div>
@@ -575,7 +663,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== CONTENTS ======== -->
 <section id="contents"><div class="wrap rv">
   <div class="eyebrow">Contents</div>
-  <h2>Eighteen chapters.</h2>
+  <h2>Twenty-two chapters.</h2>
   <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip, type in your own numbers, and two chapters that time you</strong>. Nothing is loaded from the internet.</p>
   <ol class="toc" id="toc"></ol>
 </div></section>
@@ -629,9 +717,43 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Annual global deaths, best available estimates. Mosquito figure covers malaria, dengue, yellow fever and other vector-borne disease. Sources: WHO, UNODC Global Study on Homicide, Gates Foundation, International Shark Attack File. Snake, snail and insect figures carry wide uncertainty ranges.</p>
 </div></section>
 
+<!-- ======== SURVIVAL ======== -->
+<section id="survival" data-title="Nobody Died at Forty" data-blurb="Life expectancy was 41. Almost nobody died at 41."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">4</span> Survival</div>
+  <h2>Forty was not a lifespan.<br>It was an average with<br>fifteen dead babies in it.</h2>
+  <p class="standfirst">Life expectancy at birth in England and Wales was <strong>41 in 1841</strong> &mdash; the most quoted number in popular history and the most consistently misread. It is a mean taken over a population in which fifteen of every hundred newborns died before their first birthday and twenty-six before their fifth. Strip those deaths out and the same table says a five-year-old could expect fifty more years. Drag the scrubber and watch two hundred people die.</p>
+
+  <div class="survwrap">
+    <div class="survhead">
+      <div class="survname"><i style="background:var(--c2)"></i>Born 1841 &mdash; England &amp; Wales</div>
+      <div class="survcount" id="survCount1841">100 of 100 alive</div>
+    </div>
+    <div class="survdots" id="survDots1841"></div>
+
+    <div class="survhead">
+      <div class="survname"><i style="background:var(--c3)"></i>Born today &mdash; same country</div>
+      <div class="survcount" id="survCount2016">100 of 100 alive</div>
+    </div>
+    <div class="survdots" id="survDots2016"></div>
+
+    <div class="survscrub">
+      <label for="survSlider">Age reached</label>
+      <input type="range" id="survSlider" min="0" max="90" value="0" step="1">
+      <div class="survage"><span id="survAge">0</span><small> yrs</small></div>
+    </div>
+  </div>
+
+  <p class="revtext" style="margin:30px 0 14px">The other half of the correction. This is <b>how many more years you could still expect</b>, plotted against the age you had already reached. At birth the two eras are forty years apart. By sixty-five they are eight.</p>
+  <svg id="expPlot" viewBox="0 0 900 380" preserveAspectRatio="xMidYMid meet" aria-label="Remaining life expectancy by current age, 1841 versus today"></svg>
+  <div class="expread" id="expRead"></div>
+
+  <p class="revtext" style="margin-top:26px" id="survPunch"></p>
+  <p class="note">Derived from ONS mortality rates (qx) by single year of age, England and Wales 1841&ndash;2016 (ad hoc release 008538), read against the published English Life Tables. The 1841 row is <em>approximate</em>: births were under-registered before the 1874 Act, which biases early-Victorian infant mortality downward, so the amber row is if anything too healthy. The 1841 remaining-life figures are period figures &mdash; they assume mortality never improves, which it promptly did, so a real 1841 five-year-old fared better than the 49.6 years shown. Two claims often attached to this chart are <em>not</em> supported by the table and are omitted: that forty was an unlikely age to die (it ranked 52nd of 125 single ages &mdash; squarely mid-pack; the least likely age was about twelve), and that the second commonest age of death was seventy-five (it was one). Seventy-five was the commonest <em>adult</em> age of death.</p>
+</div></section>
+
 <!-- ======== INCOME ======== -->
 <section id="income" data-title="The Income Ladder" data-blurb="Put your own income in. Find out where you actually stand on Earth."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">4</span> Position</div>
+  <div class="eyebrow"><span class="num">5</span> Position</div>
   <h2>You are probably<br>the rich one.</h2>
   <p class="standfirst">Almost everyone believes they are somewhere in the middle. Very few people are. Put in what your household actually lives on and this will place you against <strong>every person alive</strong>, adjusted for what money buys where you live. It is the most uncomfortable chart on this page, and the only one that is about you specifically.</p>
 
@@ -675,7 +797,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 4. MONEY ======== -->
 <section id="money" data-title="Billion-Dollar-o-Gram" data-blurb="World spending and the cost of fixing things, as area, at one scale."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">5</span> Scale</div>
+  <div class="eyebrow"><span class="num">6</span> Scale</div>
   <h2>The billion-dollar-o-gram.</h2>
   <p class="standfirst">Big numbers stop meaning anything past about a million. So here they are as <strong>area</strong>, all on one page, at one scale. Red is money the world spends every year. Green is the estimated annual cost of solving a problem we describe as impossible. Hover any block.</p>
 
@@ -691,7 +813,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 4. PILLS ======== -->
 <section id="pills" data-title="Snake Oil?" data-blurb="Eighteen supplements, plotted by popularity against strength of evidence."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">6</span> Evidence</div>
+  <div class="eyebrow"><span class="num">7</span> Evidence</div>
   <h2>Snake oil, or not?</h2>
   <p class="standfirst">Every bubble is a supplement. <strong>Up</strong> means better evidence from human trials. <strong>Right</strong> means more people take it. The interesting stuff lives in the bottom-right: hugely popular, barely supported. Bubble size = rough global market.</p>
 
@@ -700,9 +822,36 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Evidence tiers are a simplification of Cochrane reviews, NIH ODS fact sheets and major meta-analyses, scored for the <em>headline</em> claim most people buy the product for — a supplement can be excellent for deficiency and useless for everyone else. Not medical advice; talk to a doctor, not a treemap.</p>
 </div></section>
 
+<!-- ======== MEASLES ======== -->
+<section id="measles" data-title="What Measles Deletes" data-blurb="It does not just make a child ill. It erases what they had already survived."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">8</span> Immunity</div>
+  <h2>The infection that erases<br>what you already survived.</h2>
+  <p class="standfirst">Measles is filed in most heads as a rash and a fortnight off school. A stronger version of the belief holds that having had it leaves a child hardier than a vaccinated one. The truth is precisely inverted. In 2019 two teams studied unvaccinated Dutch children before and after a measles outbreak &mdash; one profiling their antibodies against thousands of pathogen fragments, the other sequencing their B&nbsp;cells &mdash; and found the virus had <strong>deleted a large share of the immune memory those children had already built</strong> against everything else they had ever met.</p>
+
+  <div class="abwrap">
+    <p class="revtext" style="margin-bottom:6px">One child's antibody memory, sixty fragments of it. Choose an outcome:</p>
+    <div class="abctl" id="abCtl">
+      <button class="on" data-sev="0">Before infection</button>
+      <button data-sev="1">After mild measles</button>
+      <button data-sev="2">After severe measles</button>
+    </div>
+    <div class="abfield" id="abField"></div>
+    <div class="abread" id="abRead"></div>
+
+    <div class="rangestrip" id="rangeStrip"></div>
+    <div class="rangeaxis"><span>0% lost</span><span>share of antibody repertoire destroyed</span><span>80% lost</span></div>
+  </div>
+
+  <p class="revtext" style="margin:30px 0 12px">That is the mechanism. This is the consequence, and it is the older and larger finding: for years after an outbreak, children kept dying of <b>other</b> infections at elevated rates. Fitting historical mortality against past measles incidence gives the length of the shadow the virus casts:</p>
+  <div id="shadowChart"></div>
+
+  <p class="revtext" style="margin-top:24px" id="meaPunch"></p>
+  <p class="note">Repertoire loss: Mina et al., <em>Science</em> 366 (2019) &mdash; VirScan antibody profiling of 77 unvaccinated Dutch children roughly two months after infection; Petrova et al., <em>Science Immunology</em> 4 (2019) &mdash; B-cell receptor sequencing in a subset of the same cohort at about forty days. Two teams, two different methods, converging results. The macaque figure is an average across four animals, which is why it is drawn as a band and not a point. Shadow durations: Mina et al., <em>Science</em> 348 (2015), fitted lags from England &amp; Wales, the United States and Denmark. An honest caution about that 2015 result: the raw mortality curves do <em>not</em> show non-measles deaths visibly falling in step behind measles deaths &mdash; non-measles infectious mortality was declining throughout the period anyway, on antibiotics, nutrition and sanitation. The finding is in the fitted model, which uses past measles incidence as a predictor with calendar year as a covariate, not in the shape of the lines. The fitted durations also scatter by disease, from about three months for septicaemia to about thirty for others.</p>
+</div></section>
+
 <!-- ======== BIOMASS ======== -->
 <section id="biomass" data-title="Life on Earth, by Weight" data-blurb="Weigh every mammal alive. Ninety-six per cent of it is us and our food."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">7</span> Dominance</div>
+  <div class="eyebrow"><span class="num">9</span> Dominance</div>
   <h2>Weigh every<br>mammal alive.</h2>
   <p class="standfirst">Not count them &mdash; <strong>weigh</strong> them. Put every mammal on Earth on one enormous scale and sort the mass into three piles: livestock, human beings, and every wild mammal in existence &mdash; every elephant, whale, bat, mouse, deer, tiger and seal. Here is how that divides. Each square is one per cent.</p>
 
@@ -728,7 +877,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== LAND ======== -->
 <section id="land" data-title="How We Use the Earth" data-blurb="Half of all habitable land is farmed. Most of that farm feeds animals, not you."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">8</span> Footprint</div>
+  <div class="eyebrow"><span class="num">10</span> Footprint</div>
   <h2>Half the habitable<br>land is a farm.</h2>
   <p class="standfirst">Zoom in one step at a time. Start with the whole planet's surface, then keep only the part you could stand on, then only the part we farm. Each bar is the highlighted slice of the bar above it, stretched back out to full width. <strong>Watch what happens at the last step.</strong></p>
 
@@ -743,9 +892,32 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Our World in Data, from FAO and Ellis et al. Land is 29% of Earth's surface; 71% of that land is habitable once glaciers and barren desert, salt flat and exposed rock are removed. "Livestock" covers both grazing land and cropland grown for animal feed. Calorie and protein shares are of global supply.</p>
 </div></section>
 
+<!-- ======== PEAKCHILD ======== -->
+<section id="peakchild" data-title="Peak Child" data-blurb="The population is still climbing. The number of children is not."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">11</span> Ageing</div>
+  <h2>More people.<br>Not more children.</h2>
+  <p class="standfirst">Almost everyone assumes a growing world population means a growing number of children, and that the growth is driven by birth rates in poor countries. Neither is true any more. <strong>Annual births peaked around 2012</strong> and have been falling since; the number of under-fifteens peaked in 2020 and is now shrinking. The world is still adding people, but it has stopped adding babies.</p>
+
+  <svg id="birthPlot" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid meet" aria-label="Annual global births, 1950 to 2100"></svg>
+  <div class="pcstats" id="pcStats"></div>
+
+  <div class="growthwrap">
+    <p class="revtext" style="margin-bottom:12px">So where did the extra billions come from? Decomposing world population growth from <b>1950 to 2026</b> by the age group that supplied it:</p>
+    <div class="growthbar" id="growthBar"></div>
+    <div class="growthkey">
+      <span><i style="background:#4895ef"></i>Working age, 15&ndash;64 &mdash; 67.5%</span>
+      <span><i style="background:#2ec4b6"></i>Children under 15 &mdash; 19.5%</span>
+      <span><i style="background:#ff5d73"></i>Aged 65+ &mdash; 13.0%</span>
+    </div>
+  </div>
+
+  <p class="revtext" style="margin-top:26px" id="pcPunch"></p>
+  <p class="note">UN World Population Prospects 2024, medium variant. Two of these peaks are thinner than they look and should not be quoted to the year: the 2012 births maximum and the 2017 under-five maximum are each within a fraction of a percent of neighbouring years, well inside the revision noise between WPP editions. The under-fifteen peak of 2020 is more robust. Projections beyond about 2030 are shown dashed because they are assumptions about fertility, not measurements &mdash; the UN's own 95% interval for annual births in 2100 runs from roughly 85 to 155 million, which is nearly the entire vertical range of this chart.</p>
+</div></section>
+
 <!-- ======== 6. COLOURS ======== -->
 <section id="colours" data-title="Colours in Culture" data-blurb="White means purity. White also means death. Depends where you're standing."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">9</span> Meaning</div>
+  <div class="eyebrow"><span class="num">12</span> Meaning</div>
   <h2>White is the colour<br>of weddings. And funerals.</h2>
   <p class="standfirst">Eight colours, seven cultural traditions, and what each one signifies. Almost every designer has at some point shipped a product into a market where their reassuring colour meant <strong>bereavement</strong>. Hover any cell; click a colour to hold its row.</p>
 
@@ -756,7 +928,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 7. STRIPES ======== -->
 <section id="stripes" data-title="Warming Stripes" data-blurb="175 years of global temperature, with the numbers taken away."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">10</span> Trend</div>
+  <div class="eyebrow"><span class="num">13</span> Trend</div>
   <h2>175 years,<br>no axes, no numbers.</h2>
   <p class="standfirst">Each stripe is one year of global average surface temperature. Blue is cooler than the twentieth-century norm, red is warmer. There is no scale, no gridline and no label — and it is still <strong>the most legible climate chart ever made</strong>. Hover any stripe for its year.</p>
 
@@ -773,7 +945,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 8. LASTS ======== -->
 <section id="lasts" data-title="How Long It Lasts" data-blurb="You will be dead for a very long time before that bottle is."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">11</span> Duration</div>
+  <div class="eyebrow"><span class="num">14</span> Duration</div>
   <h2>The thing you used<br>for four minutes.</h2>
   <p class="standfirst">Roughly how long common rubbish takes to break down, on a logarithmic scale — so every step right is <strong>ten times longer</strong>. The plastic bottle you drank from at lunch will outlast every person currently alive, and their grandchildren, and their language.</p>
 
@@ -784,7 +956,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== DEEPTIME ======== -->
 <section id="deeptime" data-title="The Last Second" data-blurb="Earth's whole history as one day. You arrive with milliseconds to spare."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">12</span> Deep time</div>
+  <div class="eyebrow"><span class="num">15</span> Deep time</div>
   <h2>Everything, in<br>a single day.</h2>
   <p class="standfirst">Compress the 4.54 billion years of Earth into twenty-four hours. Midnight is the planet forming out of dust; midnight again is right now, this second, you reading this. On that scale <strong>one second is 52,500 years</strong> &mdash; comfortably longer than all of recorded history.</p>
 
@@ -809,9 +981,43 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Dates are the mainstream scientific consensus as of 2025 and carry real uncertainty, especially the early ones: the first life is placed somewhere between 4.1 and 3.5 billion years ago, and the origin of <em>Homo sapiens</em> has been pushed back repeatedly. The 24-hour compression is exact arithmetic on those dates &mdash; 4.54 billion years divided into 86,400 seconds is 52,546 years per second.</p>
 </div></section>
 
+<!-- ======== EARTHS ======== -->
+<section id="earths" data-title="Thirty Earths" data-blurb="Drag the Moon to where you think it goes. You will not leave enough room."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">16</span> Distance</div>
+  <h2>The Moon sits<br>thirty Earths away.</h2>
+  <p class="standfirst">Every diagram you have ever seen puts the Moon a few Earth-widths from the planet, hugging it. That picture is a lie of convenience &mdash; the truth does not fit on a page, so nobody draws it. <strong>Click anywhere on the track below</strong> to place the Moon where you think it belongs, then watch where it actually goes.</p>
+
+  <div class="moonwrap">
+    <div class="moontrack" id="moonTrack" role="button" tabindex="0" aria-label="Click to place the Moon">
+      <div class="moonrule"></div>
+      <div class="moonearth" id="moonEarth"></div>
+      <div class="moonflag g" id="moonFlagG" style="display:none">your guess</div>
+      <div class="moonguess" id="moonGuess" style="display:none"></div>
+      <div class="moonflag t" id="moonFlagT">actually here</div>
+      <div class="moontrue" id="moonTrue"></div>
+    </div>
+    <div class="moonhint" id="moonHint">&larr; click to place the Moon &rarr;</div>
+
+    <div class="moonverdict" id="moonVerdict">
+      <p class="revtext" id="moonMsg"></p>
+
+      <div class="stackwrap">
+        <p class="revtext" style="margin-bottom:10px">And here is what fits in that gap. The <b>seven other planets of the solar system, laid end to end</b>, measured against the same distance:</p>
+        <div class="stackbar" id="stackBar"></div>
+        <div class="stacklab"><span>Earth's centre</span><span id="stackNote"></span><span>the Moon</span></div>
+      </div>
+
+      <div class="slivers" id="slivers"></div>
+      <p class="revtext" style="margin-top:22px" id="moonPunch"></p>
+    </div>
+  </div>
+
+  <p class="note">Diameters and lunar distance from the NASA NSSDC planetary and lunar fact sheets; ISS altitude from NASA (the nominal 400 km convention &mdash; the real band is roughly 370&ndash;460 km); atmospheric half-mass level from the US Standard Atmosphere 1976. The Earth&ndash;Moon figure of 384,400 km is the semi-major axis, measured centre to centre; the gap swings between about 363,300 km at perigee and 405,500 km at apogee, which is why the planet stack fits on some nights and not others. Planet discs on the track are drawn to true relative diameter but the Earth marker is enlarged for visibility &mdash; only the <em>distances</em> along the track are to scale.</p>
+</div></section>
+
 <!-- ======== 9. MINUTE ======== -->
 <section id="minute" data-title="Every Minute" data-blurb="Counters that started at zero when you opened this tab."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">13</span> Velocity</div>
+  <div class="eyebrow"><span class="num">17</span> Velocity</div>
   <h2>What happened while<br>you read this page.</h2>
   <p class="standfirst">These counters started at zero the moment you opened this tab. They are not a simulation of the future — they're a rate that is already running, everywhere, right now. <strong>The last one is the one to sit with.</strong></p>
 
@@ -822,7 +1028,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 6. LIFE ======== -->
 <section id="life" data-title="Your Life in Dots" data-blurb="Enter your age. Watch 4,680 weeks fill in."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">14</span> Personal</div>
+  <div class="eyebrow"><span class="num">18</span> Personal</div>
   <h2>Your life, in dots.</h2>
   <p class="standfirst">One dot is one week. Ninety rows, fifty-two dots each — a fairly generous life. Set your age and watch the filled part appear. Nobody finds this chart cheerful. Almost everybody finds it <strong>clarifying</strong>.</p>
 
@@ -850,7 +1056,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== 7. MYTHS ======== -->
 <!-- ======== 11. REACTION ======== -->
 <section id="reaction" data-title="Reaction Time" data-blurb="Click when it turns green. Then see what a quarter of a second costs."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">15</span> Reflex</div>
+  <div class="eyebrow"><span class="num">19</span> Reflex</div>
   <h2>How fast are you,<br>really?</h2>
   <p class="standfirst">Five rounds. The panel turns red, then — at some point it decides — green. Click the instant it does. <strong>You are measuring the round trip</strong>: light into your eye, signal to your visual cortex, decision, command back down your arm. Nobody is as fast as they think.</p>
 
@@ -873,7 +1079,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 13. CORRELATION ======== -->
 <section id="correlation" data-title="Guess the Correlation" data-blurb="How strong is that relationship? Your eyes will say weaker than it is."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">16</span> Perception</div>
+  <div class="eyebrow"><span class="num">20</span> Perception</div>
   <h2>How strong is<br>that relationship?</h2>
   <p class="standfirst">Every dot is an observation. Estimate the correlation — <strong>0 is a shapeless cloud, 1 is a perfect straight line</strong> — then see the real figure. Five rounds. There is a well-documented direction to the error people make here, and it matters, because this is the judgement call behind most "X is linked to Y" headlines.</p>
 
@@ -893,7 +1099,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 14. MYTHS ======== -->
 <section id="myths" data-title="Mythconceptions" data-blurb="Sixteen things almost everyone believes, and almost everyone has wrong."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">17</span> Correction</div>
+  <div class="eyebrow"><span class="num">21</span> Correction</div>
   <h2>Mythconceptions.</h2>
   <p class="standfirst">Sixteen things almost everyone believes, that almost everyone is wrong about. Click a card to flip it. <strong>Score yourself honestly</strong> — the fun is in noticing how confident you were.</p>
   <div class="mythgrid" id="mythGrid"></div>
@@ -902,7 +1108,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 12. FALLACIES ======== -->
 <section id="fallacies" data-title="Rhetological Fallacies" data-blurb="Twenty-two ways an argument goes wrong, filed by failure mode."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">18</span> Defence</div>
+  <div class="eyebrow"><span class="num">22</span> Defence</div>
   <h2>Twenty ways to be<br>wrong, persuasively.</h2>
   <p class="standfirst">Every chapter above can be misused. This is the toolkit for spotting it — including in the charts on this page. Filter by <strong>how the argument breaks</strong>, not by what it's about. The most useful ones are the boring ones: survivorship bias and the sunk cost fallacy will cost you more this year than every conspiracy theory combined.</p>
 
@@ -2726,6 +2932,505 @@ const DEEP_3 = [
     "<b>" + (ind * 1000).toFixed(0) + " milliseconds</b>. A long human life is <b>" + (life * 1000).toFixed(1) + " milliseconds</b>: " +
     "about the time a camera shutter takes to close. Every argument you have ever had happened inside that shutter click.";
 })();
+
+/* =======================================================================
+   SURVIVAL COHORTS - 1841 vs today
+   l(x) survivors per 100 born, England & Wales, at anchor ages only;
+   the scrubber interpolates linearly between them.
+   ======================================================================= */
+const SURV_1841 = [[0,100],[1,85.0],[5,74.1],[20,66.3],[50,47.1],[65,31.8],[80,8.9],[90,0.9]];
+const SURV_NOW  = [[0,100],[1,99.6],[5,99.6],[20,99.4],[50,96.5],[65,89.2],[80,64.4],[90,27.1]];
+
+/* remaining years of life at each age (e_x) */
+const EXP_1841 = [[0,41.0],[5,49.6],[20,40.3],[50,20.2],[65,11.2],[80,4.8]];
+const EXP_NOW  = [[0,81.3],[5,76.6],[20,61.8],[50,33.0],[65,20.0],[80,9.2]];
+
+function lerpTable(tab, x) {
+  if (x <= tab[0][0]) return tab[0][1];
+  for (let i = 1; i < tab.length; i++) {
+    if (x <= tab[i][0]) {
+      const a = tab[i - 1], b = tab[i];
+      return a[1] + (b[1] - a[1]) * ((x - a[0]) / (b[0] - a[0]));
+    }
+  }
+  return tab[tab.length - 1][1];
+}
+
+(function survivalCohorts() {
+  const N = 100;
+  const rows = [
+    { dots: $("#survDots1841"), count: $("#survCount1841"), tab: SURV_1841, colour: "#ffc857", cells: [], alive: N },
+    { dots: $("#survDots2016"), count: $("#survCount2016"), tab: SURV_NOW,  colour: "#2ec4b6", cells: [], alive: N }
+  ];
+
+  rows.forEach(r => {
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < N; i++) {
+      const d = document.createElement("div");
+      d.className = "sdot";
+      d.style.backgroundColor = r.colour;
+      frag.appendChild(d);
+      r.cells.push(d);
+    }
+    r.dots.appendChild(frag);
+  });
+
+  function paint(age) {
+    rows.forEach(r => {
+      const survivors = Math.round(lerpTable(r.tab, age));
+      if (survivors !== r.alive) {
+        /* repaint only the band that changed */
+        const lo = Math.min(survivors, r.alive), hi = Math.max(survivors, r.alive);
+        for (let i = lo; i < hi; i++) {
+          const dead = i >= survivors;
+          r.cells[i].style.backgroundColor = dead ? "#232936" : r.colour;
+          r.cells[i].style.opacity = dead ? "0.5" : "1";
+        }
+        r.alive = survivors;
+      }
+      r.count.textContent = survivors + " of 100 alive";
+    });
+  }
+
+  /* ---- remaining-expectancy plot ---- */
+  const svg = $("#expPlot"), W = 900, H = 380, M = { l: 54, r: 22, t: 22, b: 46 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+  const sx = a => M.l + (a / 80) * iw;
+  const sy = y => M.t + ih - (y / 85) * ih;
+
+  [0, 20, 40, 60, 80].forEach(v => {
+    svgEl("line", { x1: M.l, x2: W - M.r, y1: sy(v), y2: sy(v), stroke: "#252c3a", "stroke-width": 1 }, svg);
+    const t = svgEl("text", { x: M.l - 10, y: sy(v) + 4, "text-anchor": "end", class: "axlabel" }, svg);
+    t.textContent = v;
+  });
+  [0, 20, 40, 60, 80].forEach(a => {
+    const t = svgEl("text", { x: sx(a), y: H - 18, "text-anchor": "middle", class: "axlabel" }, svg);
+    t.textContent = a;
+  });
+  const xl = svgEl("text", { x: M.l + iw / 2, y: H - 4, "text-anchor": "middle", class: "axlabel" }, svg);
+  xl.textContent = "age already reached";
+  const yl = svgEl("text", { x: 15, y: M.t + ih / 2, class: "axlabel", "text-anchor": "middle",
+                             transform: "rotate(-90 15 " + (M.t + ih / 2) + ")" }, svg);
+  yl.textContent = "years still to come";
+
+  const marker = svgEl("line", { x1: sx(0), x2: sx(0), y1: M.t, y2: M.t + ih,
+                                 stroke: "#8d96ab", "stroke-width": 1, "stroke-dasharray": "3 4", opacity: 0 }, svg);
+
+  function drawLine(tab, colour, label) {
+    const d = tab.map((p, i) => (i ? "L" : "M") + sx(p[0]) + "," + sy(p[1])).join(" ");
+    const path = svgEl("path", { d: d, fill: "none", stroke: colour, "stroke-width": 2.6, "stroke-linejoin": "round" }, svg);
+    const len = path.getTotalLength ? path.getTotalLength() : 0;
+    if (len) {
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+      path.style.transition = "stroke-dashoffset 1.4s ease";
+    }
+    tab.forEach(p => svgEl("circle", { cx: sx(p[0]), cy: sy(p[1]), r: 4, fill: colour }, svg));
+    const t = svgEl("text", { x: sx(tab[0][0]) + 12, y: sy(tab[0][1]) - 12, fill: colour,
+                              "font-size": 13, "font-weight": 650 }, svg);
+    t.textContent = label;
+    return path;
+  }
+  const paths = [drawLine(EXP_1841, "#ffc857", "born 1841"), drawLine(EXP_NOW, "#2ec4b6", "born today")];
+
+  function readout(rawAge) {
+    /* the e(x) tables stop at 80; clamp rather than extrapolate past them */
+    const age = Math.min(rawAge, 80);
+    marker.setAttribute("x1", sx(age));
+    marker.setAttribute("x2", sx(age));
+    marker.setAttribute("opacity", rawAge > 0 ? 0.8 : 0);
+    const a = lerpTable(EXP_1841, age), b = lerpTable(EXP_NOW, age);
+    $("#expRead").innerHTML =
+      '<div class="expcell"><div class="ev" style="color:var(--c2)">' + a.toFixed(1) + ' yrs</div>' +
+      '<div class="el">Still to come, at ' + age + ' in 1841 &mdash; dying at about ' + Math.round(age + a) + '</div></div>' +
+      '<div class="expcell"><div class="ev" style="color:var(--c3)">' + b.toFixed(1) + ' yrs</div>' +
+      '<div class="el">Still to come, at ' + age + ' today &mdash; dying at about ' + Math.round(age + b) + '</div></div>' +
+      '<div class="expcell"><div class="ev">' + (b - a).toFixed(1) + ' yrs</div>' +
+      '<div class="el">The gap between the two eras at this age</div></div>';
+  }
+
+  const slider = $("#survSlider"), ageOut = $("#survAge");
+  slider.addEventListener("input", () => {
+    const a = +slider.value;
+    ageOut.textContent = a;
+    paint(a);
+    readout(a);
+  });
+  paint(0);
+  readout(0);
+
+  $("#survPunch").innerHTML =
+    "Forty was never an age at which people died. It was fifteen dead infants per hundred, averaged into everyone else's sixty-odd years. " +
+    "That single year of infancy cost this cohort <b>as many lives as the twenty-five years from twenty to forty-five put together</b>. " +
+    "Almost a third of everyone born in 1841 reached sixty-five, so grey hair was ordinary rather than remarkable. " +
+    "And the modern gain is not mostly extra old age: most of it is the amber row's first two columns simply not happening.";
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      paths.forEach((p, i) => setTimeout(() => { p.style.strokeDashoffset = 0; }, 160 * i));
+      obs.disconnect();
+    });
+  }, { threshold: 0.25 });
+  obs.observe(svg);
+})();
+
+
+/* =======================================================================
+   THIRTY EARTHS - true scale of the Earth-Moon gap
+   All distances km. NASA NSSDC fact sheets.
+   ======================================================================= */
+const EARTH_D = 12756;            /* equatorial diameter */
+const MOON_MEAN = 384400;         /* semi-major axis, centre to centre */
+const MOON_PERIGEE = 363300;
+const MOON_APOGEE = 405500;
+const PLANETS = [
+  { n: "Jupiter", d: 142984, c: "#f77f00" },
+  { n: "Saturn",  d: 120536, c: "#ffc857" },
+  { n: "Uranus",  d: 51118,  c: "#2ec4b6" },
+  { n: "Neptune", d: 49528,  c: "#4895ef" },
+  { n: "Venus",   d: 12104,  c: "#b892ff" },
+  { n: "Mars",    d: 6792,   c: "#ff5d73" },
+  { n: "Mercury", d: 4881,   c: "#8d96ab" }
+];
+
+(function thirtyEarths() {
+  const track = $("#moonTrack");
+  const SPAN = MOON_APOGEE * 1.06;          /* track covers a little past apogee */
+  const pct = km => (km / SPAN) * 100;
+
+  /* Earth marker: enlarged for visibility, and said so in the note */
+  const earthPx = 26;
+  $("#moonEarth").style.width = earthPx + "px";
+  $("#moonEarth").style.height = earthPx + "px";
+  $("#moonEarth").style.left = "0%";
+
+  const moonPx = Math.max(7, earthPx * (3476 / EARTH_D));
+  const guess = $("#moonGuess"), truth = $("#moonTrue");
+  [guess, truth].forEach(el => {
+    el.style.width = moonPx + "px";
+    el.style.height = moonPx + "px";
+    el.style.left = "0%";
+  });
+
+  let answered = false;
+
+  function place(clientX) {
+    if (answered) return;
+    answered = true;
+    const r = track.getBoundingClientRect();
+    const frac = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+    const guessKm = frac * SPAN;
+
+    guess.style.display = "block";
+    $("#moonFlagG").style.display = "block";
+    requestAnimationFrame(() => {
+      guess.style.left = pct(guessKm) + "%";
+      $("#moonFlagG").style.left = pct(guessKm) + "%";
+    });
+
+    setTimeout(() => {
+      truth.classList.add("on");
+      $("#moonFlagT").classList.add("on");
+      truth.style.left = pct(MOON_MEAN) + "%";
+      $("#moonFlagT").style.left = pct(MOON_MEAN) + "%";
+    }, 450);
+
+    const ratio = MOON_MEAN / Math.max(guessKm, 1);
+    const guessEarths = guessKm / EARTH_D;
+    let msg;
+    if (ratio > 4)        msg = "You placed it <b>" + guessEarths.toFixed(1) + " Earth-widths</b> out. The real gap is <b>30.1</b> \u2014 you were short by a factor of " + ratio.toFixed(1) + ", which is the normal answer and the reason every textbook diagram is wrong.";
+    else if (ratio > 1.5) msg = "You placed it <b>" + guessEarths.toFixed(1) + " Earth-widths</b> out, against a true <b>30.1</b>. Closer than most, still short.";
+    else if (ratio > 0.8) msg = "<b>" + guessEarths.toFixed(1) + " Earth-widths</b> against a true <b>30.1</b>. You have either seen this chart before or you think about orbits for a living.";
+    else                  msg = "You overshot \u2014 <b>" + guessEarths.toFixed(1) + " Earth-widths</b> against a true <b>30.1</b>. Almost nobody errs in this direction.";
+    $("#moonMsg").innerHTML = msg;
+
+    $("#moonHint").textContent = "384,400 km, centre to centre \u2014 30.1 Earth diameters";
+    $("#moonVerdict").classList.add("show");
+    buildStack();
+  }
+
+  track.addEventListener("pointerdown", e => { e.preventDefault(); place(e.clientX); });
+  track.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const r = track.getBoundingClientRect();
+      place(r.left + r.width * 0.25);
+    }
+  });
+
+  function buildStack() {
+    const bar = $("#stackBar");
+    const total = PLANETS.reduce((s, p) => s + p.d, 0);          /* 387,943 km */
+    bar.innerHTML = "";
+    PLANETS.forEach((p, i) => {
+      const seg = document.createElement("div");
+      seg.className = "stackseg";
+      seg.style.background = p.c;
+      seg.style.flexGrow = "0";
+      seg.style.flexBasis = "0";
+      const label = document.createElement("span");
+      label.textContent = p.d / total > 0.06 ? p.n : "";
+      seg.appendChild(label);
+      tipOn(seg, '<span class="t">' + p.n + '</span><span class="v">' + fmt(p.d) + ' km across</span>' +
+                 '<span class="d">' + (p.d / total * 100).toFixed(1) + '% of the seven-planet stack.</span>');
+      bar.appendChild(seg);
+      setTimeout(() => { seg.style.flexGrow = String(p.d); }, 60 * i + 120);
+    });
+
+    /* the honest bit: the stack is fractionally LONGER than the mean gap */
+    const over = document.createElement("div");
+    over.className = "stackover";
+    over.style.left = (MOON_MEAN / total * 100) + "%";
+    bar.appendChild(over);
+
+    $("#stackNote").textContent = fmt(total) + " km of planet";
+
+    const diff = total - MOON_MEAN;
+    $("#moonPunch").innerHTML =
+      "Every other planet in the solar system, shoulder to shoulder, comes to <b>" + fmt(total) + " km</b> \u2014 which is not quite a fit. " +
+      "The average Earth\u2013Moon gap is " + fmt(MOON_MEAN) + " km, so the stack overshoots by " + fmt(diff) + " km, about " +
+      (diff / MOON_MEAN * 100).toFixed(1) + "%. It only slots in when the Moon is near apogee. " +
+      "The dashed line marks where the Moon would be. <b>Everything else in the solar system fits in the gap we draw as a finger's width.</b>";
+
+    const CARDS = [
+      { v: "400 km", l: "The International Space Station's nominal altitude \u2014 about one nine-hundred-and-sixtieth of the way to the Moon. On this track it is thinner than the line itself.", c: "var(--c3)" },
+      { v: "5.5 km", l: "Below this height sits half the entire mass of the atmosphere. Everest's summit, at 8.85 km, stands about three and a half kilometres clear of it.", c: "var(--c4)" },
+      { v: "1972", l: "The last year any human went further than low Earth orbit \u2014 until Artemis II, whose 406,771 km record beat Apollo 13's by 6,600 km.", c: "var(--c5)" }
+    ];
+    $("#slivers").innerHTML = CARDS.map(c =>
+      '<div class="sliver"><div class="sv" style="color:' + c.c + '">' + c.v + '</div><div class="sl">' + c.l + '</div></div>').join("");
+  }
+})();
+
+
+/* =======================================================================
+   PEAK CHILD - annual global births, UN WPP 2024 medium variant
+   ======================================================================= */
+const BIRTHS = [
+  [1950, 91.8, 0], [1960, 102.4, 0], [1970, 124.1, 0], [1980, 127.4, 0],
+  [1990, 143.5, 0], [2000, 135.8, 0], [2012, 146.1, 0], [2020, 134.7, 0],
+  [2023, 132.1, 0], [2024, 132.4, 0], [2040, 135.7, 1], [2070, 125.0, 1], [2100, 110.0, 1]
+];
+
+(function peakChild() {
+  const svg = $("#birthPlot"), W = 900, H = 400, M = { l: 58, r: 26, t: 26, b: 46 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+  const X0 = 1950, X1 = 2100, Y0 = 80, Y1 = 160;      /* y range fits the UN 85-155m interval */
+  const sx = y => M.l + ((y - X0) / (X1 - X0)) * iw;
+  const sy = v => M.t + ih - ((v - Y0) / (Y1 - Y0)) * ih;
+
+  [80, 100, 120, 140, 160].forEach(v => {
+    svgEl("line", { x1: M.l, x2: W - M.r, y1: sy(v), y2: sy(v), stroke: "#252c3a", "stroke-width": 1 }, svg);
+    const t = svgEl("text", { x: M.l - 10, y: sy(v) + 4, "text-anchor": "end", class: "axlabel" }, svg);
+    t.textContent = v + "m";
+  });
+  [1950, 1980, 2012, 2050, 2100].forEach(y => {
+    const t = svgEl("text", { x: sx(y), y: H - 18, "text-anchor": "middle", class: "axlabel" }, svg);
+    t.textContent = y;
+  });
+  const xl = svgEl("text", { x: M.l + iw / 2, y: H - 3, "text-anchor": "middle", class: "axlabel" }, svg);
+  xl.textContent = "babies born per year, worldwide";
+
+  /* measured segment solid, projected segment dashed */
+  const measured = BIRTHS.filter(p => p[2] === 0);
+  const projected = BIRTHS.filter(p => p[2] === 1);
+  const joinPoint = measured[measured.length - 1];
+
+  function pathOf(pts) {
+    return pts.map((p, i) => (i ? "L" : "M") + sx(p[0]) + "," + sy(p[1])).join(" ");
+  }
+  const solid = svgEl("path", { d: pathOf(measured), fill: "none", stroke: "#2ec4b6",
+                                "stroke-width": 3, "stroke-linejoin": "round" }, svg);
+  const dashed = svgEl("path", { d: pathOf([joinPoint].concat(projected)), fill: "none", stroke: "#2ec4b6",
+                                 "stroke-width": 2.4, "stroke-dasharray": "7 6", opacity: .55 }, svg);
+
+  [solid, dashed].forEach(p => {
+    const len = p.getTotalLength ? p.getTotalLength() : 0;
+    if (!len) return;
+    p.dataset.len = len;
+    if (p === solid) { p.style.strokeDasharray = len; p.style.strokeDashoffset = len; }
+    else p.style.opacity = 0;
+    p.style.transition = "stroke-dashoffset 1.6s ease, opacity .8s ease";
+  });
+
+  BIRTHS.forEach(p => {
+    const c = svgEl("circle", { cx: sx(p[0]), cy: sy(p[1]), r: p[0] === 2012 ? 6 : 3.6,
+                                fill: p[0] === 2012 ? "#ffc857" : "#2ec4b6", opacity: p[2] ? .55 : 1 }, svg);
+    tipOn(c, '<span class="t">' + p[0] + '</span><span class="v">' + p[1].toFixed(1) + ' million births</span>' +
+             '<span class="d">' + (p[2] ? "Projected (UN medium variant) - an assumption about fertility, not a measurement."
+                                        : "Estimated from registered and surveyed data.") + '</span>');
+  });
+
+  /* peak marker */
+  svgEl("line", { x1: sx(2012), x2: sx(2012), y1: sy(146.1) - 12, y2: M.t, stroke: "#ffc857",
+                  "stroke-width": 1, "stroke-dasharray": "3 4", opacity: .8 }, svg);
+  const pk = svgEl("text", { x: sx(2012), y: M.t - 8, "text-anchor": "middle", fill: "#ffc857",
+                             "font-size": 12.5, "font-weight": 650 }, svg);
+  pk.textContent = "peak births, ~2012";
+
+  const STATS = [
+    { v: "2012", l: "The year annual births peaked, at 146.1 million.", r: "margin over neighbours is thin", c: "var(--c2)" },
+    { v: "2020", l: "The year the under-fifteen population peaked, at 2.04 billion. It has fallen every year since.", r: "UN WPP 2024", c: "var(--c3)" },
+    { v: "+6.6%", l: "Growth in the number of children since 2000 &mdash; against 35% growth in the population as a whole.", r: "1.88bn to 2.00bn", c: "var(--c4)" },
+    { v: "1.77&times;", l: "The world has the same number of births today as in 1982, with 1.77 times as many people alive to have them.", r: "8.16bn vs 4.61bn", c: "var(--c5)" },
+    { v: "1.84&ndash;2.00bn", l: "The band the child population is projected to stay inside for the next fifty years. Essentially a flat line.", r: "2026 to 2076", c: "var(--c6)" }
+  ];
+  $("#pcStats").innerHTML = STATS.map(s =>
+    '<div class="pcstat"><div class="pv" style="color:' + s.c + '">' + s.v + '</div>' +
+    '<div class="pl">' + s.l + '</div><div class="pr">' + s.r + '</div></div>').join("");
+
+  /* growth decomposition, 1950-2026 */
+  const GROWTH = [
+    { n: "Working age 15-64", pct: 67.5, c: "#4895ef", m: 3923 },
+    { n: "Under 15", pct: 19.5, c: "#2ec4b6", m: 1132 },
+    { n: "65 and over", pct: 13.0, c: "#ff5d73", m: 753 }
+  ];
+  const gb = $("#growthBar");
+  GROWTH.forEach((g, i) => {
+    const seg = document.createElement("div");
+    seg.className = "growthseg";
+    seg.style.background = g.c;
+    const sp = document.createElement("span");
+    sp.textContent = g.pct + "%";
+    seg.appendChild(sp);
+    tipOn(seg, '<span class="t">' + g.n + '</span><span class="v">+' + fmt(g.m) + ' million people since 1950</span>' +
+               '<span class="d">' + g.pct + '% of all world population growth over the period.</span>');
+    gb.appendChild(seg);
+    setTimeout(() => { seg.style.flexGrow = String(g.pct); }, 90 * i + 150);
+  });
+
+  $("#pcPunch").innerHTML =
+    "The population is still climbing, but not because more babies are arriving. " +
+    "The additional billions are <b>yesterday's children, now grown</b> \u2014 two-thirds of all growth since 1950 came from the working-age band filling out, " +
+    "as the enormous cohorts born in the 1960s to 1990s survived childhood and aged into adulthood. " +
+    "Only an eighth came from the over-sixty-fives, though that is the share now rising fastest. " +
+    "Growth from here is momentum and longevity, not fertility: <b>the children are already here, and there will not be more of them.</b>";
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      solid.style.strokeDashoffset = 0;
+      setTimeout(() => { dashed.style.opacity = .55; }, 900);
+      obs.disconnect();
+    });
+  }, { threshold: 0.25 });
+  obs.observe(svg);
+})();
+
+
+/* =======================================================================
+   WHAT MEASLES DELETES
+   Dot field = one child's antibody repertoire. The control is ABSOLUTE:
+   mild darkens exactly 20 of 60 (33%), severe exactly 24 (40%), with the
+   mild set a subset of the severe set.
+   ======================================================================= */
+const AB_TARGETS = ["Influenza A", "Influenza B", "RSV", "Adenovirus", "Rhinovirus",
+  "Pneumococcus", "Staph. aureus", "Strep. pyogenes", "H. influenzae", "E. coli",
+  "Herpes simplex", "Epstein-Barr", "Cytomegalovirus", "Varicella", "Norovirus",
+  "Rotavirus", "Enterovirus", "Coronavirus 229E", "Parainfluenza", "Bordetella"];
+
+(function measles() {
+  const N = 60, MILD = 20, SEVERE = 24;
+  const field = $("#abField"), cells = [];
+  const PALETTE = ["#4895ef", "#2ec4b6", "#b892ff", "#ffc857", "#06d6a0"];
+
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < N; i++) {
+    const d = document.createElement("div");
+    d.className = "abdot";
+    d.style.backgroundColor = PALETTE[i % PALETTE.length];
+    const label = AB_TARGETS[i % AB_TARGETS.length];
+    tipOn(d, '<span class="t">' + label + '</span><span class="v">one slice of remembered immunity</span>' +
+             '<span class="d">Antibody memory this child had already built by surviving an infection or two. Measles destroys the memory cells that hold it.</span>');
+    frag.appendChild(d);
+    cells.push(d);
+  }
+  field.appendChild(frag);
+
+  const READ = [
+    'Intact. Every one of these is a pathogen this child had already met and beaten.',
+    '<b>20 of 60 gone</b> &mdash; the median loss after a <b>mild</b> case was 33% of the repertoire.',
+    '<b>24 of 60 gone</b> &mdash; the median loss after a <b>severe</b> case was 40%. The deepest single measurement was 73%.'
+  ];
+
+  function setSeverity(level) {
+    const n = level === 0 ? 0 : level === 1 ? MILD : SEVERE;
+    cells.forEach((c, i) => c.classList.toggle("gone", i < n));
+    $("#abRead").innerHTML = READ[level];
+  }
+
+  $$("#abCtl button").forEach(b => b.addEventListener("click", () => {
+    $$("#abCtl button").forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+    setSeverity(+b.dataset.sev);
+  }));
+  setSeverity(0);
+
+  /* measured range strip, 0-80% */
+  const strip = $("#rangeStrip"), MAX = 80;
+  const at = v => (v / MAX) * 100;
+  const band = document.createElement("div");
+  band.className = "rangeband";
+  band.style.left = at(40) + "%";
+  band.style.width = (at(60) - at(40)) + "%";
+  strip.appendChild(band);
+  tipOn(band, '<span class="t">Rhesus macaques</span><span class="v">40-60% lost, five months on</span>' +
+              '<span class="d">An average across four animals measured before infection and five months after. Drawn as a band because four animals do not support a point estimate.</span>');
+
+  [[11, "11% - shallowest measured", false], [33, "33% - mild median", true],
+   [40, "40% - severe median", true], [73, "73% - deepest measured", true]].forEach(t => {
+    const tick = document.createElement("div");
+    tick.className = "rangetick" + (t[2] ? "" : " pale");
+    tick.style.left = at(t[0]) + "%";
+    strip.appendChild(tick);
+    const lab = document.createElement("div");
+    lab.className = "rangelab";
+    lab.style.left = at(t[0]) + "%";
+    lab.textContent = t[0] + "%";
+    strip.appendChild(lab);
+    tipOn(tick, '<span class="t">' + t[1] + '</span><span class="v">of the antibody repertoire destroyed</span>' +
+                '<span class="d">Measured in 77 unvaccinated children roughly two months after infection.</span>');
+  });
+
+  /* fitted shadow durations - the actual 2015 finding */
+  const SHADOW = [
+    { n: "England &amp; Wales", m: 28.3, note: "Fitted lag from national mortality data. The model uses past measles incidence to predict deaths from other infections, with calendar year included so the general downward trend is not mistaken for the effect." },
+    { n: "United States", m: 30.9, note: "Fitted independently on US data over a different period, and landing in the same range." },
+    { n: "Denmark", m: 26.4, note: "Quarterly-data fit. A separate yearly-data fit centres at 30 months. The Danish window is entirely after MMR introduction, so this one is a regression test rather than a before-and-after comparison." }
+  ];
+  const host = $("#shadowChart"), MAXM = 36;
+  SHADOW.forEach(s => {
+    const row = document.createElement("div");
+    row.className = "shadowrow";
+    row.innerHTML = '<div class="shadowname">' + s.n + '</div>' +
+                    '<div class="shadowtrack"><div class="shadowfill"></div></div>' +
+                    '<div class="shadownum">' + s.m.toFixed(1) + ' mo</div>';
+    tipOn(row, '<span class="t">' + s.n.replace("&amp;", "&") + '</span>' +
+               '<span class="v">' + s.m.toFixed(1) + ' months of raised mortality from other infections</span>' +
+               '<span class="d">' + s.note + '</span>');
+    host.appendChild(row);
+    setTimeout(() => { $(".shadowfill", row).style.width = (s.m / MAXM * 100) + "%"; }, 90);
+  });
+
+  $("#meaPunch").innerHTML =
+    "Measles does not simply make a child sick for a fortnight. It makes them <b>newly vulnerable to everything they had already survived</b>, " +
+    "for somewhere around two to two and a half years afterwards, in three countries fitted independently. " +
+    "The belief that catching it builds a stronger immune system than vaccination is not merely unsupported \u2014 " +
+    "it is the exact inverse of what the virus does. The vaccine provokes the immunity without deleting the archive.";
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      $$(".shadowfill", host).forEach((f, i) => {
+        setTimeout(() => { f.style.width = (SHADOW[i].m / MAXM * 100) + "%"; }, 110 * i);
+      });
+      obs.disconnect();
+    });
+  }, { threshold: 0.2 });
+  obs.observe(host);
+})();
+
 
 /* =======================================================================
    POLISH — contents, nav, scrollspy, progress, back-to-top
