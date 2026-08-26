@@ -720,14 +720,14 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="standfirst">Three rankings of the same ten causes of death: how often they <strong>actually kill</strong> Americans, how often people <strong>search for them</strong>, and how often the <strong>press writes about them</strong>. The news is not a mirror. It's a funhouse mirror, and it has a consistent bias: it over-reports the sudden and under-reports the slow.</p>
 
   <div class="legend">
-    <span><i style="background:var(--c3)"></i>Share of actual deaths</span>
+    <span><i style="background:var(--c3)"></i>Share of these 13 causes of death</span>
     <span><i style="background:var(--c2)"></i>Share of Google searches</span>
-    <span><i style="background:var(--c1)"></i>Share of news coverage</span>
+    <span><i style="background:var(--c1)"></i>Share of New York Times coverage</span>
   </div>
 
   <div class="fearhead"><span>Cause</span><span>Share of each ranking</span><span>Over-reported</span></div>
   <div id="fearChart"></div>
-  <p class="note">US data, 2016. Deaths: CDC. Searches: Google Trends. Coverage: New York Times + The Guardian headlines. After Shen et al., "Death: Reality vs Reported" (2018), popularised by Our World in Data. Right-hand column = coverage share ÷ death share.</p>
+  <p class="note">All three columns are shares of the <strong>same thirteen causes</strong>, not of everything that kills people, and they each sum to 100. That distinction matters: heart disease is 30.2% of these thirteen but only about 23.2% of all US deaths. Figures are the 2016 row of Shen et al., <em>Death: Reality vs Reported</em> (2018), taken from the dataset Our World in Data publishes, using CDC mortality, Google Trends and headline counts. The coverage column is the <strong>New York Times series alone</strong> &mdash; Shen measured the Guardian separately and the two are not averaged here. Terrorism is recorded as exactly zero deaths in this dataset for 2016, so its over-reporting ratio is undefined rather than merely enormous; the Global Terrorism Database counts 68 US deaths that year, about 0.0025% of all American deaths, against 35.6% of the coverage. One year of one country and one newspaper is a narrow base, and 2016 was an election year, which lifts the political categories.</p>
 </div></section>
 
 <!-- ======== 3. ANIMALS ======== -->
@@ -1387,16 +1387,19 @@ window.addEventListener("scroll", () => {
    2. FEAR VS REALITY
    ======================================================================= */
 const FEAR = [
-  { name: "Heart disease",   deaths: 30.2, google: 2.0,  media: 2.5  },
-  { name: "Cancer",          deaths: 29.5, google: 37.0, media: 13.5 },
-  { name: "Road accidents",  deaths: 7.6,  google: 3.5,  media: 4.0  },
-  { name: "Overdose",        deaths: 6.5,  google: 6.5,  media: 12.4 },
-  { name: "Stroke",          deaths: 4.9,  google: 1.5,  media: 1.0  },
-  { name: "Diabetes",        deaths: 2.9,  google: 5.0,  media: 1.5  },
-  { name: "Alzheimer's",     deaths: 2.8,  google: 2.5,  media: 1.5  },
-  { name: "Suicide",         deaths: 1.8,  google: 12.4, media: 10.6 },
-  { name: "Homicide",        deaths: 0.9,  google: 3.3,  media: 22.8 },
-  { name: "Terrorism",       deaths: 0.01, google: 7.2,  media: 35.6 }
+  { name: "Heart disease",        deaths: 30.20, google: 2.00,  media: 2.48  },
+  { name: "Cancer",               deaths: 29.45, google: 36.55, media: 13.47 },
+  { name: "Road accidents",       deaths: 7.64,  google: 10.73, media: 1.90  },
+  { name: "Lower respiratory",    deaths: 7.41,  google: 2.07,  media: 1.17  },
+  { name: "Alzheimer's",          deaths: 5.57,  google: 2.92,  media: 1.01  },
+  { name: "Stroke",               deaths: 4.86,  google: 6.45,  media: 5.04  },
+  { name: "Diabetes",             deaths: 3.84,  google: 8.93,  media: 2.39  },
+  { name: "Drug overdose",        deaths: 2.80,  google: 1.27,  media: 0.40  },
+  { name: "Kidney disease",       deaths: 2.69,  google: 1.08,  media: 0.18  },
+  { name: "Pneumonia & flu",      deaths: 2.47,  google: 5.22,  media: 2.89  },
+  { name: "Suicide",              deaths: 2.15,  google: 12.36, media: 10.75 },
+  { name: "Homicide",             deaths: 0.91,  google: 3.21,  media: 22.75 },
+  { name: "Terrorism",            deaths: 0.00,  google: 7.21,  media: 35.58 }
 ];
 
 (function fearChart() {
@@ -1422,20 +1425,26 @@ const FEAR = [
     });
 
     const dist = document.createElement("div");
-    const ratio = d.media / d.deaths;
-    dist.className = "feardist " + (ratio >= 3 ? "hot" : ratio <= 0.6 ? "cold" : "");
-    dist.textContent = ratio >= 100 ? fmt(Math.round(ratio)) + "×"
-                     : ratio >= 1   ? ratio.toFixed(1) + "×"
-                                    : "÷" + (1 / ratio).toFixed(1);
+    /* Terrorism killed nobody in this dataset's 2016 row, so the ratio is
+       undefined rather than very large. Saying so beats inventing a number. */
+    const ratio = d.deaths > 0 ? d.media / d.deaths : null;
+    dist.className = "feardist " + (ratio === null ? "hot" : ratio >= 3 ? "hot" : ratio <= 0.6 ? "cold" : "");
+    dist.textContent = ratio === null ? "\u221e"
+                     : ratio >= 100 ? fmt(Math.round(ratio)) + "\u00d7"
+                     : ratio >= 1   ? ratio.toFixed(1) + "\u00d7"
+                                    : "\u00f7" + (1 / ratio).toFixed(1);
 
     row.append(name, bars, dist);
 
+    const verdict = ratio === null
+      ? "It killed nobody in this dataset in 2016, and took more than a third of the coverage. The ratio is not a large number \u2014 it is undefined."
+      : ratio >= 1
+        ? `The New York Times wrote about it <b>${ratio.toFixed(1)}\u00d7</b> more often than its share of these deaths.`
+        : `The New York Times wrote about it <b>${(1 / ratio).toFixed(1)}\u00d7 less</b> often than its share of these deaths.`;
     tipOn(row,
       `<span class="t">${d.name}</span>
-       <span class="v">${d.deaths}% of deaths · ${d.google}% of searches · ${d.media}% of coverage</span>
-       <span class="d">${ratio >= 1
-          ? `The press writes about it <b>${ratio >= 100 ? fmt(Math.round(ratio)) : ratio.toFixed(1)}×</b> more often than it kills.`
-          : `The press writes about it <b>${(1 / ratio).toFixed(1)}× less</b> often than it kills.`}</span>`);
+       <span class="v">${d.deaths}% of these deaths \u00b7 ${d.google}% of searches \u00b7 ${d.media}% of coverage</span>
+       <span class="d">${verdict}</span>`);
 
     host.appendChild(row);
   });
