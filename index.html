@@ -710,7 +710,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <div id="gapChart"></div>
 
   <p class="revtext" style="margin-top:28px">The pattern is not random ignorance. We inflate whatever we are frightened of or angry about, and deflate whatever is quietly going right. The last row is the tell: the one question where the world is doing far better than people believe is the one where the error flips direction.</p>
-  <p class="note">Survey averages from Ipsos "Perils of Perception" (2014&ndash;2018), Gallup (2015&ndash;2022) and Gapminder's global public-knowledge surveys. The actual figure is the true value for the year each survey was run, so a row may differ slightly from today's number. Guesses are the mean of respondents' estimates &mdash; medians are less extreme but run the same way. These are national samples, not a claim about any individual.</p>
+  <p class="note">Guess figures are the average estimate given by survey respondents in the country named; actual figures are those the pollster compared them against, in the same year. Ipsos rows are from the <em>Perils of Perception</em> series &mdash; the 2014 global deck for the United States and France rows, and the 2017 wave for UK diabetes. Three caveats the data itself forces. The Gallup row asked what share of Americans are <strong>gay or lesbian</strong> and is compared against the broader LGBT identification figure, because that is the comparison Gallup itself published; the two are not the same category, and the mismatch flatters the estimate rather than the other way round. The vaccination row is <strong>not a free numeric estimate</strong> &mdash; Gapminder offered three fixed options, so the bar is the mean of the options chosen and should be read as "most people picked far too low", not as a precise average guess. And every row is a single country in a single year: misperception varies enormously between countries, and Sweden and Japan were consistently among the least wrong.</p>
 </div></section>
 
 <!-- ======== 2. FEAR ======== -->
@@ -2529,22 +2529,22 @@ const RT_BENCH = [
    1. THE PERCEPTION GAP
    ======================================================================= */
 const GAP = [
-  { q: "Share of the population who are immigrants",        w: "United States",  guess: 33, real: 14,  src: "Ipsos Perils of Perception, 2016",
-    note: "Americans put the foreign-born share at a third of the country. It was about one in seven." },
-  { q: "Share of the population who are Muslim",            w: "France",         guess: 31, real: 8,   src: "Ipsos Perils of Perception, 2016",
-    note: "France has western Europe's largest Muslim population — and its largest overestimate of it." },
-  { q: "Share of adults who are lesbian, gay, bisexual or transgender", w: "United States", guess: 24, real: 7, src: "Gallup, 2022",
-    note: "The average American estimate was 23.6%. Gallup's measured figure that year was 7.1%." },
-  { q: "Share of people aged 65 or over",                   w: "United States",  guess: 36, real: 15,  src: "Ipsos Perils of Perception, 2014",
-    note: "People imagine a far older country than the one they live in — which distorts every argument about pensions and healthcare." },
+  { q: "Share of the population who are immigrants",        w: "United States",  guess: 32, real: 13,  src: "Ipsos Perils of Perception, 2014",
+    note: "Americans put the foreign-born share at a third of the country. It was about one in eight." },
+  { q: "Share of the population who are Muslim",            w: "France",         guess: 31, real: 8,   src: "Ipsos Perils of Perception, 2014",
+    note: "France has western Europe's largest Muslim population \u2014 and its largest overestimate of it." },
+  { q: "Share of the population who are gay or lesbian",    w: "United States",  guess: 23.6, real: 4.5, src: "Gallup, 2019 estimate vs 2017 measure",
+    note: "Gallup asked specifically about gay and lesbian Americans. The 4.5% it compares against is the broader LGBT figure, which includes bisexual and transgender people \u2014 so the true gap for the group actually asked about is wider still." },
+  { q: "Share of people aged 65 or over",                   w: "United States",  guess: 36, real: 14,  src: "Ipsos Perils of Perception, 2014",
+    note: "People imagine a far older country than the one they live in \u2014 which distorts every argument about pensions and healthcare." },
   { q: "Share of the workforce who are unemployed",         w: "United States",  guess: 32, real: 6,   src: "Ipsos Perils of Perception, 2014",
-    note: "A five-fold overestimate, in a year when unemployment was close to a historic low." },
-  { q: "Share of teenage girls who give birth each year",   w: "United States",  guess: 24, real: 2.1, src: "Ipsos Perils of Perception, 2014",
-    note: "The teen birth rate has fallen more than 75% since 1991. Public perception has not moved at all." },
-  { q: "Share of adults who have diabetes",                 w: "United Kingdom", guess: 27, real: 5,   src: "Ipsos Perils of Perception, 2018",
+    note: "More than a five-fold overestimate. The real rate had been falling for four years by then, from a 2009 peak near 10%, and almost nobody had noticed." },
+  { q: "Share of teenage girls who give birth each year",   w: "United States",  guess: 24, real: 3,   src: "Ipsos Perils of Perception, 2014",
+    note: "The teen birth rate has fallen by more than three quarters since 1991. Public perception has barely moved." },
+  { q: "Share of adults who have diabetes",                 w: "United Kingdom", guess: 27, real: 5,   src: "Ipsos Perils of Perception, 2017",
     note: "Health scares scale up in the mind the same way crime does." },
-  { q: "Share of one-year-olds vaccinated against at least one disease", w: "Worldwide", guess: 35, real: 84, src: "Gapminder public-knowledge surveys",
-    note: "Here the error flips. Asked about one of the great global success stories, people guess less than half the truth.", under: true }
+  { q: "Share of one-year-olds vaccinated against some disease", w: "Worldwide", guess: 42, real: 88, src: "Gapminder Fact Question 9; WHO coverage",
+    note: "Here the error flips. Gapminder offered three options \u2014 20%, 50% and 80% \u2014 and only 13% of respondents picked the highest; 45% said half and 43% said a fifth. The bar shows the mean of the options actually chosen, not a free estimate.", under: true }
 ];
 
 (function perceptionGap() {
