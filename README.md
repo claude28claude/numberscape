@@ -3,7 +3,7 @@
 **The world is bigger, weirder and less scary than you think.**
 
 An interactive data-visualisation essay in the spirit of *Information is Beautiful*.
-Twenty-two chapters, 505 data points, one HTML file — including chapters that
+Twenty-three chapters, 518 data points, one HTML file — including chapters that
 measure the reader rather than the world.
 
 **Live:** https://claude28claude.github.io/numberscape/
@@ -17,28 +17,29 @@ measure the reader rather than the world.
 | 3 | Deadliest Animals | Deaths per year by animal, with a log/true-scale toggle that makes every feared predator vanish |
 | 4 | Nobody Died at Forty | Two cohorts of 100 dots die along a shared age axis - why "life expectancy was 41" never meant what you think |
 | 5 | The Income Ladder | Enter your household income and see your real position among everyone alive, PPP-adjusted |
-| 6 | Billion-Dollar-o-Gram | A squarified treemap of world spending against the cost of fixing things, at one scale |
-| 7 | Snake Oil? | 18 supplements plotted by popularity against strength of evidence |
-| 8 | What Measles Deletes | The infection that erases immune memory a child had already built, and the two-year shadow it casts |
-| 9 | Life on Earth, by Weight | Every mammal alive, weighed. 96% of it is humans and their livestock |
-| 10 | How We Use the Earth | Four zoom levels, from the whole planet down to what farmland actually feeds |
-| 11 | Peak Child | Births peaked around 2012 - the extra billions are grown-up children, not new babies |
-| 12 | Colours in Culture | What eight colours signify across seven cultural traditions |
-| 13 | Warming Stripes | 175 years of global temperature with no axes, no numbers |
-| 14 | How Long It Lasts | Decomposition times on a logarithmic scale |
-| 15 | The Last Second | Earth's history as a single day, zoomed three times into the final second |
-| 16 | Thirty Earths | Place the Moon where you think it belongs, then watch it slide far past your guess |
-| 17 | Every Minute | Live counters that start at zero when you open the page |
-| 18 | Your Life in Dots | Enter your age, see it as 4,680 weekly dots |
-| 19 | Reaction Time | Five timed rounds, your median against sprinters and the drink-drive limit, and what it costs in metres |
-| 20 | Guess the Correlation | Estimate *r* from a scatter of 90 points, scored against the real sample correlation |
-| 21 | Mythconceptions | Sixteen flip cards busting things everyone "knows" |
-| 22 | Rhetological Fallacies | 22 ways an argument goes wrong, filed by failure mode |
+| 6 | The Price In Hours | Hours of work to buy a thing, then and now - objects collapsed, rooms and classes did the opposite |
+| 7 | Billion-Dollar-o-Gram | A squarified treemap of world spending against the cost of fixing things, at one scale |
+| 8 | Snake Oil? | 18 supplements plotted by popularity against strength of evidence |
+| 9 | What Measles Deletes | The infection that erases immune memory a child had already built, and the two-year shadow it casts |
+| 10 | Life on Earth, by Weight | Every mammal alive, weighed. 96% of it is humans and their livestock |
+| 11 | How We Use the Earth | Four zoom levels, from the whole planet down to what farmland actually feeds |
+| 12 | Peak Child | Births peaked around 2012 - the extra billions are grown-up children, not new babies |
+| 13 | Colours in Culture | What eight colours signify across seven cultural traditions |
+| 14 | Warming Stripes | 175 years of global temperature with no axes, no numbers |
+| 15 | How Long It Lasts | Decomposition times on a logarithmic scale |
+| 16 | The Last Second | Earth's history as a single day, zoomed three times into the final second |
+| 17 | Thirty Earths | Place the Moon where you think it belongs, then watch it slide far past your guess |
+| 18 | Every Minute | Live counters that start at zero when you open the page |
+| 19 | Your Life in Dots | Enter your age, see it as 4,680 weekly dots |
+| 20 | Reaction Time | Five timed rounds, your median against sprinters and the drink-drive limit, and what it costs in metres |
+| 21 | Guess the Correlation | Estimate *r* from a scatter of 90 points, scored against the real sample correlation |
+| 22 | Mythconceptions | Sixteen flip cards busting things everyone "knows" |
+| 23 | Rhetological Fallacies | 22 ways an argument goes wrong, filed by failure mode |
 
 ## On the numbers
 
-Four chapters here (Nobody Died at Forty, What Measles Deletes, Peak Child,
-Thirty Earths) were researched against primary sources and then put through an
+Five chapters here (Nobody Died at Forty, What Measles Deletes, Peak Child,
+Thirty Earths, The Price In Hours) were researched against primary sources and then put through an
 adversarial fact-check whose brief was to *refute* rather than approve. Every
 one came back needing corrections, and the corrections are applied. A few
 examples of what that removed: the claim that forty was an unlikely age to die
@@ -50,6 +51,13 @@ figure that is really a 40-60% range across four animals.
 
 Where a correction removed a claim, the claim is gone rather than softened, and
 several chapter footnotes now say explicitly what the data cannot support.
+
+The Price In Hours splices two wage series across 1997. That is only legitimate
+because they agree there: the Dallas Fed's manufacturing wage back-computes from
+their own published 1997 work-time figures to about $13.00/hour, against $13.02
+in the BLS total-private series used for the modern figures. One number was cut
+from that chapter for having no source at either end - a 1997 childcare anchor -
+rather than estimated.
 
 ## Install it
 

@@ -603,6 +603,34 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   .shadowname{font-size:12px}.shadownum{font-size:11px}
 }
 
+/* ---------- price in hours ---------- */
+.hrtoggle{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:3px;margin-bottom:8px;gap:3px;flex-wrap:wrap}
+.hrtoggle button{background:transparent;border:none;color:var(--dim);padding:9px 18px;border-radius:6px;font-size:12.5px;cursor:pointer;font-family:var(--sans);transition:background .2s,color .2s}
+.hrtoggle button.on{background:var(--c6);color:#04231b;font-weight:650}
+.hrtoggle button.on.rise{background:var(--c1);color:#2a0810}
+.hrlead{color:var(--dim);font-size:15px;max-width:64ch;margin:14px 0 22px;line-height:1.6}
+.hrlead b{color:var(--ink)}
+.hrrow{display:grid;grid-template-columns:200px 1fr 118px;gap:16px;align-items:center;padding:9px 0;border-bottom:1px solid rgba(37,44,58,.45)}
+.hrname{font-size:13.5px;line-height:1.3}
+.hrname small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--dimmer);margin-top:3px}
+.hrtrack{position:relative;height:34px}
+.hrref{position:absolute;top:0;bottom:0;width:1px;background:var(--dimmer);opacity:.55}
+.hrbar{position:absolute;left:0;height:13px;border-radius:3px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.hrbar.then{top:2px;background:var(--c2);opacity:.85}
+.hrbar.now{bottom:2px}
+.hrnums{font-family:var(--mono);font-size:11.5px;text-align:right;line-height:1.5;font-variant-numeric:tabular-nums}
+.hrnums .a{color:var(--c2)}
+.hrnums .b{display:block}
+.hrfoot{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;color:var(--dimmer);letter-spacing:.1em;margin-top:10px}
+.hrcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:26px}
+.hrcard{background:var(--panel);padding:17px 19px}
+.hrcard .hv{font-family:var(--serif);font-size:25px;line-height:1}
+.hrcard .hl{font-size:12.5px;color:var(--dim);margin-top:6px;line-height:1.45}
+@media(max-width:640px){
+  .hrrow{grid-template-columns:112px 1fr 78px;gap:9px}
+  .hrname{font-size:12px}.hrnums{font-size:10px}
+}
+
 /* ---------- reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -650,10 +678,10 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <canvas id="heroCanvas"></canvas>
   <div class="wrap">
     <h1>The world is<br>bigger, weirder<br>and <em>less scary</em><br>than you think.</h1>
-    <p class="lead">Twenty-two chapters about things you already have an opinion on &mdash; where you sit on Earth, what the planet is made of, how far the Moon really is, and how long a Victorian actually lived. <b>Most people are wrong, reliably, and in the same direction.</b></p>
+    <p class="lead">Twenty-three chapters about things you already have an opinion on &mdash; where you sit on Earth, what the planet is made of, how far the Moon really is, and how long a Victorian actually lived. <b>Most people are wrong, reliably, and in the same direction.</b></p>
     <div class="herostats">
-      <div class="herostat"><div class="v" data-count="22">0</div><div class="l">Chapters</div></div>
-      <div class="herostat"><div class="v" data-count="505">0</div><div class="l">Data points</div></div>
+      <div class="herostat"><div class="v" data-count="23">0</div><div class="l">Chapters</div></div>
+      <div class="herostat"><div class="v" data-count="518">0</div><div class="l">Data points</div></div>
       <div class="herostat"><div class="v" data-count="0" data-suffix="kb">0</div><div class="l">Trackers loaded</div></div>
     </div>
     <div class="scrollcue"><span class="bar"></span> Scroll</div>
@@ -663,7 +691,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== CONTENTS ======== -->
 <section id="contents"><div class="wrap rv">
   <div class="eyebrow">Contents</div>
-  <h2>Twenty-two chapters.</h2>
+  <h2>Twenty-three chapters.</h2>
   <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip, type in your own numbers, and two chapters that time you</strong>. Nothing is loaded from the internet.</p>
   <ol class="toc" id="toc"></ol>
 </div></section>
@@ -795,9 +823,30 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Percentiles are interpolated from the World Bank's global income distribution (PIP, via Our World in Data), in 2021 international dollars at purchasing-power parity &mdash; local prices are already accounted for, so enter your <em>local</em> currency rather than an exchange-rate conversion. Income is counted per person, which is why household size moves the answer so much. This is disposable household income per head; entering a pre-tax salary will flatter you. Treat the percentile as good to a point or two, not to a decimal.</p>
 </div></section>
 
+<!-- ======== HOURS ======== -->
+<section id="hours" data-title="The Price In Hours" data-blurb="Objects became almost free. Everything you cannot put in a box did the opposite."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">6</span> Value</div>
+  <h2>Not what it costs.<br>How much of your life<br>it costs.</h2>
+  <p class="standfirst">"Everything is more expensive than it used to be" is stated as flatly obvious. Measured the only way that really matters &mdash; <strong>how many hours you must work to buy the thing</strong> &mdash; most of it collapsed to a rounding error. Your anxiety is not wrong. It is <strong>attached to the wrong objects</strong>.</p>
+
+  <div class="hrtoggle" id="hrToggle">
+    <button class="on" data-mode="things">Things</button>
+    <button data-mode="services" class="rise">Everything you can't put in a box</button>
+  </div>
+  <p class="hrlead" id="hrLead"></p>
+
+  <div id="hrChart"></div>
+  <div class="hrfoot"><span id="hrFootL"></span><span>bar length = hours of work &middot; dotted line = the earlier year</span></div>
+
+  <div class="hrcards" id="hrCards"></div>
+  <p class="revtext" style="margin-top:26px" id="hrPunch"></p>
+
+  <p class="note">Work time = price divided by the average hourly wage of production and nonsupervisory workers in the same year &mdash; the standard method from the Federal Reserve Bank of Dallas 1997 annual report, <em>Time Well Spent</em> (Cox &amp; Alm), which is also the source of every goods figure here. Service figures are calculated the same way from published prices: College Board <em>Trends in College Pricing</em> for tuition, the Census Housing Vacancy Survey for median asking rent, Child Care Aware of America for childcare. Wage anchors: $13.02/hour in early 1997 and $32.40/hour in July 2026 (BLS, production and nonsupervisory, total private). The Dallas Fed used manufacturing wages, which back-compute from their own 1997 figures to roughly $13.10 &mdash; close enough to splice, and the report itself notes the gap between the two series had all but closed by then.<br><br>Four honest problems with this chart. <strong>Rows use different pairs of years</strong>, because each product is measured from when its price is documented; every bar is labelled with its own. <strong>Quality is not held constant</strong> &mdash; a 1954 colour television and a modern one are not the same object, and the report concedes this in its own first footnote; the comparison flatters the present. <strong>Wages here are pre-tax and exclude benefits</strong>, and both moved: taxes rose from about 5% of wages in the early 1950s to 21%, while non-wage benefits rose from 19% to 44%. <strong>Tuition is the published sticker price</strong>, not what families actually pay after aid &mdash; net tuition is far lower and has recently been falling, so the education bars overstate the burden on the average student while accurately describing the list price. All figures are United States.</p>
+</div></section>
+
 <!-- ======== 4. MONEY ======== -->
 <section id="money" data-title="Billion-Dollar-o-Gram" data-blurb="World spending and the cost of fixing things, as area, at one scale."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">6</span> Scale</div>
+  <div class="eyebrow"><span class="num">7</span> Scale</div>
   <h2>The billion-dollar-o-gram.</h2>
   <p class="standfirst">Big numbers stop meaning anything past about a million. So here they are as <strong>area</strong>, all on one page, at one scale. Red is money the world spends every year. Green is the estimated annual cost of solving a problem we describe as impossible. Hover any block.</p>
 
@@ -813,7 +862,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 4. PILLS ======== -->
 <section id="pills" data-title="Snake Oil?" data-blurb="Eighteen supplements, plotted by popularity against strength of evidence."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">7</span> Evidence</div>
+  <div class="eyebrow"><span class="num">8</span> Evidence</div>
   <h2>Snake oil, or not?</h2>
   <p class="standfirst">Every bubble is a supplement. <strong>Up</strong> means better evidence from human trials. <strong>Right</strong> means more people take it. The interesting stuff lives in the bottom-right: hugely popular, barely supported. Bubble size = rough global market.</p>
 
@@ -824,7 +873,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== MEASLES ======== -->
 <section id="measles" data-title="What Measles Deletes" data-blurb="It does not just make a child ill. It erases what they had already survived."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">8</span> Immunity</div>
+  <div class="eyebrow"><span class="num">9</span> Immunity</div>
   <h2>The infection that erases<br>what you already survived.</h2>
   <p class="standfirst">Measles is filed in most heads as a rash and a fortnight off school. A stronger version of the belief holds that having had it leaves a child hardier than a vaccinated one. The truth is precisely inverted. In 2019 two teams studied unvaccinated Dutch children before and after a measles outbreak &mdash; one profiling their antibodies against thousands of pathogen fragments, the other sequencing their B&nbsp;cells &mdash; and found the virus had <strong>deleted a large share of the immune memory those children had already built</strong> against everything else they had ever met.</p>
 
@@ -851,7 +900,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== BIOMASS ======== -->
 <section id="biomass" data-title="Life on Earth, by Weight" data-blurb="Weigh every mammal alive. Ninety-six per cent of it is us and our food."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">9</span> Dominance</div>
+  <div class="eyebrow"><span class="num">10</span> Dominance</div>
   <h2>Weigh every<br>mammal alive.</h2>
   <p class="standfirst">Not count them &mdash; <strong>weigh</strong> them. Put every mammal on Earth on one enormous scale and sort the mass into three piles: livestock, human beings, and every wild mammal in existence &mdash; every elephant, whale, bat, mouse, deer, tiger and seal. Here is how that divides. Each square is one per cent.</p>
 
@@ -877,7 +926,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== LAND ======== -->
 <section id="land" data-title="How We Use the Earth" data-blurb="Half of all habitable land is farmed. Most of that farm feeds animals, not you."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">10</span> Footprint</div>
+  <div class="eyebrow"><span class="num">11</span> Footprint</div>
   <h2>Half the habitable<br>land is a farm.</h2>
   <p class="standfirst">Zoom in one step at a time. Start with the whole planet's surface, then keep only the part you could stand on, then only the part we farm. Each bar is the highlighted slice of the bar above it, stretched back out to full width. <strong>Watch what happens at the last step.</strong></p>
 
@@ -894,7 +943,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== PEAKCHILD ======== -->
 <section id="peakchild" data-title="Peak Child" data-blurb="The population is still climbing. The number of children is not."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">11</span> Ageing</div>
+  <div class="eyebrow"><span class="num">12</span> Ageing</div>
   <h2>More people.<br>Not more children.</h2>
   <p class="standfirst">Almost everyone assumes a growing world population means a growing number of children, and that the growth is driven by birth rates in poor countries. Neither is true any more. <strong>Annual births peaked around 2012</strong> and have been falling since; the number of under-fifteens peaked in 2020 and is now shrinking. The world is still adding people, but it has stopped adding babies.</p>
 
@@ -917,7 +966,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 6. COLOURS ======== -->
 <section id="colours" data-title="Colours in Culture" data-blurb="White means purity. White also means death. Depends where you're standing."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">12</span> Meaning</div>
+  <div class="eyebrow"><span class="num">13</span> Meaning</div>
   <h2>White is the colour<br>of weddings. And funerals.</h2>
   <p class="standfirst">Eight colours, seven cultural traditions, and what each one signifies. Almost every designer has at some point shipped a product into a market where their reassuring colour meant <strong>bereavement</strong>. Hover any cell; click a colour to hold its row.</p>
 
@@ -928,7 +977,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 7. STRIPES ======== -->
 <section id="stripes" data-title="Warming Stripes" data-blurb="175 years of global temperature, with the numbers taken away."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">13</span> Trend</div>
+  <div class="eyebrow"><span class="num">14</span> Trend</div>
   <h2>175 years,<br>no axes, no numbers.</h2>
   <p class="standfirst">Each stripe is one year of global average surface temperature. Blue is cooler than the twentieth-century norm, red is warmer. There is no scale, no gridline and no label — and it is still <strong>the most legible climate chart ever made</strong>. Hover any stripe for its year.</p>
 
@@ -945,7 +994,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 8. LASTS ======== -->
 <section id="lasts" data-title="How Long It Lasts" data-blurb="You will be dead for a very long time before that bottle is."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">14</span> Duration</div>
+  <div class="eyebrow"><span class="num">15</span> Duration</div>
   <h2>The thing you used<br>for four minutes.</h2>
   <p class="standfirst">Roughly how long common rubbish takes to break down, on a logarithmic scale — so every step right is <strong>ten times longer</strong>. The plastic bottle you drank from at lunch will outlast every person currently alive, and their grandchildren, and their language.</p>
 
@@ -956,7 +1005,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== DEEPTIME ======== -->
 <section id="deeptime" data-title="The Last Second" data-blurb="Earth's whole history as one day. You arrive with milliseconds to spare."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">15</span> Deep time</div>
+  <div class="eyebrow"><span class="num">16</span> Deep time</div>
   <h2>Everything, in<br>a single day.</h2>
   <p class="standfirst">Compress the 4.54 billion years of Earth into twenty-four hours. Midnight is the planet forming out of dust; midnight again is right now, this second, you reading this. On that scale <strong>one second is 52,500 years</strong> &mdash; comfortably longer than all of recorded history.</p>
 
@@ -983,7 +1032,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== EARTHS ======== -->
 <section id="earths" data-title="Thirty Earths" data-blurb="Drag the Moon to where you think it goes. You will not leave enough room."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">16</span> Distance</div>
+  <div class="eyebrow"><span class="num">17</span> Distance</div>
   <h2>The Moon sits<br>thirty Earths away.</h2>
   <p class="standfirst">Every diagram you have ever seen puts the Moon a few Earth-widths from the planet, hugging it. That picture is a lie of convenience &mdash; the truth does not fit on a page, so nobody draws it. <strong>Click anywhere on the track below</strong> to place the Moon where you think it belongs, then watch where it actually goes.</p>
 
@@ -1017,7 +1066,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 9. MINUTE ======== -->
 <section id="minute" data-title="Every Minute" data-blurb="Counters that started at zero when you opened this tab."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">17</span> Velocity</div>
+  <div class="eyebrow"><span class="num">18</span> Velocity</div>
   <h2>What happened while<br>you read this page.</h2>
   <p class="standfirst">These counters started at zero the moment you opened this tab. They are not a simulation of the future — they're a rate that is already running, everywhere, right now. <strong>The last one is the one to sit with.</strong></p>
 
@@ -1028,7 +1077,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 6. LIFE ======== -->
 <section id="life" data-title="Your Life in Dots" data-blurb="Enter your age. Watch 4,680 weeks fill in."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">18</span> Personal</div>
+  <div class="eyebrow"><span class="num">19</span> Personal</div>
   <h2>Your life, in dots.</h2>
   <p class="standfirst">One dot is one week. Ninety rows, fifty-two dots each — a fairly generous life. Set your age and watch the filled part appear. Nobody finds this chart cheerful. Almost everybody finds it <strong>clarifying</strong>.</p>
 
@@ -1056,7 +1105,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== 7. MYTHS ======== -->
 <!-- ======== 11. REACTION ======== -->
 <section id="reaction" data-title="Reaction Time" data-blurb="Click when it turns green. Then see what a quarter of a second costs."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">19</span> Reflex</div>
+  <div class="eyebrow"><span class="num">20</span> Reflex</div>
   <h2>How fast are you,<br>really?</h2>
   <p class="standfirst">Five rounds. The panel turns red, then — at some point it decides — green. Click the instant it does. <strong>You are measuring the round trip</strong>: light into your eye, signal to your visual cortex, decision, command back down your arm. Nobody is as fast as they think.</p>
 
@@ -1079,7 +1128,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 13. CORRELATION ======== -->
 <section id="correlation" data-title="Guess the Correlation" data-blurb="How strong is that relationship? Your eyes will say weaker than it is."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">20</span> Perception</div>
+  <div class="eyebrow"><span class="num">21</span> Perception</div>
   <h2>How strong is<br>that relationship?</h2>
   <p class="standfirst">Every dot is an observation. Estimate the correlation — <strong>0 is a shapeless cloud, 1 is a perfect straight line</strong> — then see the real figure. Five rounds. There is a well-documented direction to the error people make here, and it matters, because this is the judgement call behind most "X is linked to Y" headlines.</p>
 
@@ -1099,7 +1148,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 14. MYTHS ======== -->
 <section id="myths" data-title="Mythconceptions" data-blurb="Sixteen things almost everyone believes, and almost everyone has wrong."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">21</span> Correction</div>
+  <div class="eyebrow"><span class="num">22</span> Correction</div>
   <h2>Mythconceptions.</h2>
   <p class="standfirst">Sixteen things almost everyone believes, that almost everyone is wrong about. Click a card to flip it. <strong>Score yourself honestly</strong> — the fun is in noticing how confident you were.</p>
   <div class="mythgrid" id="mythGrid"></div>
@@ -1108,7 +1157,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 12. FALLACIES ======== -->
 <section id="fallacies" data-title="Rhetological Fallacies" data-blurb="Twenty-two ways an argument goes wrong, filed by failure mode."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">22</span> Defence</div>
+  <div class="eyebrow"><span class="num">23</span> Defence</div>
   <h2>Twenty ways to be<br>wrong, persuasively.</h2>
   <p class="standfirst">Every chapter above can be misused. This is the toolkit for spotting it — including in the charts on this page. Filter by <strong>how the argument breaks</strong>, not by what it's about. The most useful ones are the boring ones: survivorship bias and the sunk cost fallacy will cost you more this year than every conspiracy theory combined.</p>
 
@@ -3429,6 +3478,125 @@ const AB_TARGETS = ["Influenza A", "Influenza B", "RSV", "Adenovirus", "Rhinovir
     });
   }, { threshold: 0.2 });
   obs.observe(host);
+})();
+
+
+/* =======================================================================
+   THE PRICE IN HOURS
+   Hours of work to buy a thing, at the average production/nonsupervisory
+   wage of the year in question. Goods: Dallas Fed "Time Well Spent" 1997.
+   Services: computed the same way from published prices.
+   Wage anchors: $13.02/hr early 1997, $32.40/hr July 2026.
+   ======================================================================= */
+const HOURS_THINGS = [
+  { n: "Microwave oven",        y1: 1947, h1: 2467, y2: 1997, h2: 15,
+    note: "Amana's first microwave cost about $3,000 - roughly a year and a quarter of work. By 1997 a $199 model cost fifteen hours." },
+  { n: "Colour television",     y1: 1954, h1: 562,  y2: 1997, h2: 23,
+    note: "Early colour sets had 9- to 12-inch screens and broke constantly. Three months of work in 1954; three days by 1997." },
+  { n: "Cellular phone",        y1: 1984, h1: 456,  y2: 1997, h2: 9,
+    note: "Motorola's DynaTAC 8000X listed at about $4,195. Thirteen years later a better handset cost nine hours of work." },
+  { n: "Coast-to-coast flight", y1: 1930, h1: 366,  y2: 1997, h2: 16,
+    note: "A 36-hour, ten-stop trip in an unpressurised Ford Tri-Motor, at nearly two months' wages. Passengers were told not to throw things out of the windows." },
+  { n: "Video recorder",        y1: 1972, h1: 365,  y2: 1997, h2: 15,
+    note: "The first cassette recorders started at $1,395. By 1997 a better one cost about 4% of that in work time." },
+  { n: "Soft contact lenses",   y1: 1971, h1: 95,   y2: 1997, h2: 4,
+    note: "$340 a pair when they arrived - more than two weeks of work. Twenty-six years later, four hours." },
+  { n: "Pocket calculator",     y1: 1972, h1: 31,   y2: 1996, h2: 0.767,
+    note: "A bulky $120 Texas Instruments model in 1972; a true pocket calculator for $10 by 1996 - 46 minutes, less than a lunch break." },
+  { n: "A man's suit",          y1: 1927, h1: 79,   y2: 1997, h2: 40,
+    note: "Hart Schaffner & Marx sold Charles Lindbergh a $42.95 suit. The same firm's suits cost half the work time seventy years later - the mildest fall on this list." }
+];
+
+const HOURS_SERVICES = [
+  { n: "A year at a private university", y1: 1966, h1: 537,  y2: 2026, h2: 1389,
+    note: "Published tuition and fees only. $45,000 in 2025-26 against an average wage of $32.40 an hour - about eight months of full-time work, every year, before anyone has eaten." },
+  { n: "A year at a public university",  y1: 1966, h1: 133,  y2: 2026, h2: 369,
+    note: "In-state published tuition and fees, $11,950 in 2025-26. It has nearly trebled in work time since the 1960s." },
+  { n: "A woman's haircut",              y1: 1920, h1: 0.45, y2: 1997, h2: 0.767,
+    note: "Twenty-seven minutes of work in 1920, forty-six in 1997. Nobody has invented a way to cut hair faster." },
+  { n: "One month's rent, median",       y1: 1997, h1: 35.4, y2: 2025, h2: 46.0,
+    note: "Median asking rent for a vacant unit: $461 a month in 1997, $1,492 in 2025. Rent is the purest case - you cannot manufacture proximity." },
+  { n: "Dry-cleaning a dress",           y1: 1970, h1: 0.5,  y2: 1997, h2: 0.5,
+    note: "Exactly flat across twenty-seven years, while every manufactured good on the other tab fell by 50 to 99 per cent. Standing still is what a service looks like." }
+];
+
+(function priceInHours() {
+  const host = $("#hrChart"), REF = 30, CAP = 96;   /* % of track */
+  let mode = "things";
+
+  const fmtHours = h => h < 1 ? Math.round(h * 60) + " min"
+                     : h < 10 ? h.toFixed(1).replace(/\.0$/, "") + " hrs"
+                     : fmt(Math.round(h)) + " hrs";
+
+  const LEAD = {
+    things: 'Each amber bar is what the thing cost <b>then</b>, in hours of work. Each green bar is what it cost <b>later</b>, drawn on the same scale. The dotted line marks the earlier price, so a bar that stops short of it has become cheaper in the only currency you cannot earn more of.',
+    services: 'Same chart, same scale, same dotted line. These bars run <b>past</b> it. Nobody has found a way to automate a room, a lecture, or an adult watching a two-year-old.'
+  };
+  const FOOT = { things: "manufactured goods", services: "things that need a person, or a place" };
+
+  function render() {
+    const data = mode === "things" ? HOURS_THINGS : HOURS_SERVICES;
+    const colour = mode === "things" ? "#06d6a0" : "#ff5d73";
+    $("#hrLead").innerHTML = LEAD[mode];
+    $("#hrFootL").textContent = FOOT[mode];
+    host.innerHTML = "";
+
+    data.forEach((d, i) => {
+      const ratio = d.h2 / d.h1;
+      const w = Math.min(CAP, REF * ratio);
+      const row = document.createElement("div");
+      row.className = "hrrow";
+      row.innerHTML =
+        '<div class="hrname">' + d.n + '<small>' + d.y1 + ' &rarr; ' + d.y2 + '</small></div>' +
+        '<div class="hrtrack">' +
+          '<div class="hrref" style="left:' + REF + '%"></div>' +
+          '<div class="hrbar then" style="width:0"></div>' +
+          '<div class="hrbar now" style="width:0;background:' + colour + '"></div>' +
+        '</div>' +
+        '<div class="hrnums"><span class="a">' + fmtHours(d.h1) + '</span>' +
+          '<span class="b" style="color:' + colour + '">' + fmtHours(d.h2) + '</span></div>';
+
+      const pctTxt = ratio < 1
+        ? "Down to <b>" + (ratio * 100 < 1 ? (ratio * 100).toFixed(1) : Math.round(ratio * 100)) + "%</b> of its former price in work time."
+        : ratio > 1
+          ? "Up to <b>" + Math.round(ratio * 100) + "%</b> - " + ratio.toFixed(2) + " times what it was."
+          : "Exactly unchanged in work time.";
+      tipOn(row, '<span class="t">' + d.n + '</span>' +
+                 '<span class="v">' + fmtHours(d.h1) + ' in ' + d.y1 + ' &rarr; ' + fmtHours(d.h2) + ' in ' + d.y2 + '</span>' +
+                 '<span class="d">' + pctTxt + ' ' + d.note + '</span>');
+      host.appendChild(row);
+
+      setTimeout(() => {
+        $(".hrbar.then", row).style.width = REF + "%";
+        $(".hrbar.now", row).style.width = Math.max(0.35, w) + "%";
+      }, 50 * i + 60);
+    });
+  }
+
+  $$("#hrToggle button").forEach(b => b.addEventListener("click", () => {
+    $$("#hrToggle button").forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+    mode = b.dataset.mode;
+    render();
+  }));
+
+  const CARDS = [
+    { v: "1/164", l: "What a microwave oven costs in work time today, against 1947. The object did not get slightly cheaper. It effectively stopped costing anything.", c: "var(--c6)" },
+    { v: "2.8&times;", l: "What a year at a public university costs in work time, against 1966 &mdash; on the published price.", c: "var(--c1)" },
+    { v: "11 weeks", l: "Full-time work needed each year to pay for one infant's childcare at the national average.", c: "var(--c2)" },
+    { v: "$13 &rarr; $32", l: "The average production wage in 1997 and in July 2026. Both bars in every row are divided by the wage of their own year.", c: "var(--c4)" }
+  ];
+  $("#hrCards").innerHTML = CARDS.map(c =>
+    '<div class="hrcard"><div class="hv" style="color:' + c.c + '">' + c.v + '</div><div class="hl">' + c.l + '</div></div>').join("");
+
+  $("#hrPunch").innerHTML =
+    "The last century made <b>objects</b> almost free and made everything you cannot put in a box cost more of your life than ever. " +
+    "A microwave fell to roughly a six-hundredth of its work-time price; a year of public university nearly trebled. " +
+    "The things that got cheaper are the things a factory can make more of each year. The things that got dearer are <b>a room, a class, an hour of somebody's attention</b> \u2014 " +
+    "and those are precisely the things people mean when they say they cannot afford the life their grandparents had. " +
+    "The complaint is accurate. It is just pointed at the television instead of the rent.";
+
+  render();
 })();
 
 
