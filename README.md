@@ -3,7 +3,7 @@
 **The world is bigger, weirder and less scary than you think.**
 
 An interactive data-visualisation essay in the spirit of *Information is Beautiful*.
-Fifteen chapters, 366 data points, one HTML file — including three chapters that
+Eighteen chapters, 439 data points, one HTML file — including chapters that
 measure the reader rather than the world.
 
 **Live:** https://claude28claude.github.io/numberscape/
@@ -12,21 +12,24 @@ measure the reader rather than the world.
 
 | # | Chapter | What it does |
 |---|---------|--------------|
-| 1 | Guess First | An eight-question slider quiz that makes you commit to a number *before* the answer appears, then scores your calibration |
-| 2 | Fear vs Reality | What kills people, what they Google, and what the press covers — with a per-cause distortion factor |
+| 1 | The Perception Gap | What people believe their country looks like, plotted against what it actually looks like |
+| 2 | Fear vs Reality | What kills people, what they Google, and what the press covers - with a per-cause distortion factor |
 | 3 | Deadliest Animals | Deaths per year by animal, with a log/true-scale toggle that makes every feared predator vanish |
-| 4 | Billion-Dollar-o-Gram | A squarified treemap of world spending against the cost of fixing things, at one scale |
-| 5 | Snake Oil? | 18 supplements plotted by popularity against strength of evidence |
-| 6 | Colours in Culture | What eight colours signify across seven cultural traditions |
-| 7 | Warming Stripes | 175 years of global temperature with no axes, no numbers |
-| 8 | How Long It Lasts | Decomposition times on a logarithmic scale |
-| 9 | Every Minute | Live counters that start at zero when you open the page |
-| 10 | Your Life in Dots | Enter your age, see it as 4,680 weekly dots |
-| 11 | Reaction Time | Five timed rounds, then your median placed against sprinters, F1 drivers and the drink-drive limit — and what it costs in metres at 100 km/h |
-| 12 | Be Random | Fake forty coin tosses, then see your sequence next to a real one. The tell is always the same |
-| 13 | Guess the Correlation | Estimate *r* from a scatter of 90 points, scored against the real sample correlation |
-| 14 | Mythconceptions | Twelve flip cards busting things everyone "knows" |
-| 15 | Rhetological Fallacies | 22 ways an argument goes wrong, filed by failure mode |
+| 4 | The Income Ladder | Enter your household income and see your real position among everyone alive, PPP-adjusted |
+| 5 | Billion-Dollar-o-Gram | A squarified treemap of world spending against the cost of fixing things, at one scale |
+| 6 | Snake Oil? | 18 supplements plotted by popularity against strength of evidence |
+| 7 | Life on Earth, by Weight | Every mammal alive, weighed. 96% of it is humans and their livestock |
+| 8 | How We Use the Earth | Four zoom levels, from the whole planet down to what farmland actually feeds |
+| 9 | Colours in Culture | What eight colours signify across seven cultural traditions |
+| 10 | Warming Stripes | 175 years of global temperature with no axes, no numbers |
+| 11 | How Long It Lasts | Decomposition times on a logarithmic scale |
+| 12 | The Last Second | Earth's history as a single day, zoomed three times into the final second |
+| 13 | Every Minute | Live counters that start at zero when you open the page |
+| 14 | Your Life in Dots | Enter your age, see it as 4,680 weekly dots |
+| 15 | Reaction Time | Five timed rounds, your median against sprinters and the drink-drive limit, and what it costs in metres |
+| 16 | Guess the Correlation | Estimate *r* from a scatter of 90 points, scored against the real sample correlation |
+| 17 | Mythconceptions | Sixteen flip cards busting things everyone "knows" |
+| 18 | Rhetological Fallacies | 22 ways an argument goes wrong, filed by failure mode |
 
 ## Install it
 

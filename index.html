@@ -120,30 +120,7 @@ nav.solid{border-bottom-color:var(--line)}
 /* ---------- generic panel ---------- */
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
 
-/* ---------- 1. guess ---------- */
-.quiz{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.quizhead{
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  padding:16px 24px;border-bottom:1px solid var(--line);background:var(--panel2);
-}
-.qprog{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--dimmer);text-transform:uppercase}
-.qdots{display:flex;gap:6px}
-.qdot{width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .3s}
-.qdot.done{background:var(--c3)}
-.qdot.now{background:var(--c2);box-shadow:0 0 0 3px rgba(255,200,87,.18)}
-.qbody{padding:30px 24px 26px}
-.qtext{font-family:var(--serif);font-size:clamp(21px,3vw,29px);line-height:1.25;margin:0 0 30px;max-width:34ch}
-.sliderrow{display:flex;align-items:center;gap:18px;margin-bottom:8px}
-.sliderrow input[type=range]{flex:1;-webkit-appearance:none;appearance:none;background:transparent;height:34px;cursor:pointer}
-input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--line);border-radius:2px}
-input[type=range]::-moz-range-track{height:4px;background:var(--line);border-radius:2px}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--c2);
-  margin-top:-9px;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--c2);
-}
-input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--c2);border:3px solid var(--bg)}
-.guessval{font-family:var(--serif);font-size:40px;line-height:1;color:var(--c2);min-width:110px;text-align:right;font-variant-numeric:tabular-nums}
-.guessval small{font-size:18px;color:var(--dim)}
+/* ---------- shared form + readout bits (used by several chapters) ---------- */
 .scaleends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:var(--dimmer);margin-bottom:24px}
 .btn{
   background:var(--c2);color:#161009;border:none;border-radius:8px;
@@ -154,20 +131,16 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .btn.ghost:hover{border-color:var(--c2);color:var(--c2)}
-.reveal{display:none;margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
-.reveal.show{display:block;animation:fade .5s ease}
-@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.revbars{margin-bottom:20px}
-.revrow{display:flex;align-items:center;gap:14px;margin-bottom:11px}
-.revlabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);width:74px;flex-shrink:0}
-.revtrack{flex:1;height:26px;background:var(--panel2);border-radius:5px;overflow:hidden;position:relative}
-.revfill{height:100%;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1);border-radius:5px}
-.revnum{font-family:var(--mono);font-size:13px;width:74px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
 .revtext{color:var(--dim);font-size:15px;max-width:62ch;margin:0 0 20px}
 .revtext b{color:var(--ink)}
-.verdict{font-family:var(--serif);font-size:20px;margin:0 0 8px}
-.quizfoot{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.scoreline{font-family:var(--mono);font-size:11.5px;color:var(--dimmer);margin-left:auto;letter-spacing:.1em}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;height:34px;cursor:pointer;width:100%}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--line);border-radius:2px}
+input[type=range]::-moz-range-track{height:4px;background:var(--line);border-radius:2px}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--c2);
+  margin-top:-9px;border:3px solid var(--bg);box-shadow:0 0 0 1px var(--c2);
+}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--c2);border:3px solid var(--bg)}
 
 /* ---------- 2. fear ---------- */
 .legend{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:26px;font-size:13px;color:var(--dim)}
@@ -442,27 +415,6 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   .benchname{font-size:12px}.benchnum{font-size:10.5px}
 }
 
-/* ---------- randomness test ---------- */
-.rand-ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
-.rand-ctl .count{font-family:var(--mono);font-size:12.5px;color:var(--dimmer);letter-spacing:.1em}
-.seq{margin-bottom:20px}
-.seqlabel{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer);margin-bottom:8px}
-.seqstrip{display:flex;gap:3px;flex-wrap:wrap}
-.seqcell{
-  width:23px;height:30px;border-radius:4px;display:grid;place-items:center;
-  font-family:var(--mono);font-size:11px;font-weight:650;
-  background:var(--panel2);color:var(--dimmer);
-}
-.seqcell.H{background:#4895ef;color:#08182c}
-.seqcell.T{background:#ffc857;color:#2b2004}
-.randstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:22px}
-.randstat{background:var(--panel);padding:17px 19px}
-.randstat .sv{font-family:var(--serif);font-size:27px;line-height:1}
-.randstat .sl{font-size:12.5px;color:var(--dim);margin-top:7px}
-.randstat .sr{font-family:var(--mono);font-size:10.5px;color:var(--dimmer);margin-top:5px}
-#randResult{display:none}
-#randResult.show{display:block;animation:fade .5s ease}
-
 /* ---------- correlation game ---------- */
 .corrlayout{display:grid;grid-template-columns:1fr 290px;gap:28px;align-items:start}
 @media(max-width:820px){.corrlayout{grid-template-columns:1fr}}
@@ -472,6 +424,96 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 .corrfeed{font-size:14px;color:var(--dim);line-height:1.5;min-height:66px}
 .corrfeed b{color:var(--ink)}
 .corrscore{font-family:var(--mono);font-size:11.5px;color:var(--dimmer);letter-spacing:.1em}
+
+/* ---------- perception gap (dumbbell) ---------- */
+.gaprow{display:grid;grid-template-columns:236px 1fr 70px;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(37,44,58,.5)}
+.gaprow:hover{background:rgba(255,255,255,.02)}
+.gapq{font-size:13.5px;line-height:1.35}
+.gapq small{display:block;color:var(--dimmer);font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+.gaptrack{position:relative;height:28px}
+.gapaxis{position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+.gapline{position:absolute;top:50%;height:3px;border-radius:2px;transform:translateY(-50%);width:0;transition:left .85s cubic-bezier(.2,.8,.2,1),width .85s cubic-bezier(.2,.8,.2,1)}
+.gapdot{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid var(--bg);left:0;transition:left .85s cubic-bezier(.2,.8,.2,1)}
+.gapmult{font-family:var(--mono);font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.gapmult.over{color:var(--c1)}
+.gapmult.under{color:var(--c4)}
+@media(max-width:680px){
+  .gaprow{grid-template-columns:132px 1fr 50px;gap:10px}
+  .gapq{font-size:12px}.gapmult{font-size:11px}
+}
+
+/* ---------- income ladder ---------- */
+.incform{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:26px}
+.incfield{display:flex;flex-direction:column;gap:7px}
+.incfield label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer)}
+.incfield input,.incfield select{
+  background:var(--panel2);border:1px solid var(--line);color:var(--ink);
+  border-radius:8px;padding:10px 13px;font-family:var(--sans);font-size:15px;
+}
+.incfield input{width:150px;font-family:var(--mono)}
+.incfield input:focus,.incfield select:focus{outline:none;border-color:var(--c2)}
+.incbig{font-family:var(--serif);font-size:clamp(38px,7vw,68px);line-height:1;color:var(--c2);margin-bottom:8px}
+.incsub{font-size:16px;color:var(--dim);max-width:60ch;margin-bottom:26px}
+.incsub b{color:var(--ink)}
+.ladder{position:relative;height:74px;border-radius:10px;overflow:hidden;background:var(--panel2);border:1px solid var(--line);margin-bottom:8px}
+.rung{position:absolute;top:0;bottom:0;width:0}
+.rung span{position:absolute;bottom:6px;left:5px;font-family:var(--mono);font-size:9.5px;color:var(--dimmer);white-space:nowrap}
+.rung.flip span{left:auto;right:5px}
+.rung .rshort{display:none}
+.rung i{position:absolute;top:0;bottom:0;left:0;width:1px;background:var(--line)}
+.youmark{position:absolute;top:0;bottom:0;width:3px;background:var(--c2);transition:left .7s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 14px rgba(255,200,87,.6)}
+.youflag{position:absolute;top:6px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--c2);white-space:nowrap;transition:left .7s cubic-bezier(.2,.8,.2,1)}
+.incrows{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:26px}
+.incrow{background:var(--panel);padding:16px 18px}
+.incrow .iv{font-family:var(--serif);font-size:25px;line-height:1}
+.incrow .il{font-size:12.5px;color:var(--dim);margin-top:6px}
+
+/* ---------- biomass ---------- */
+.bioblock{margin-bottom:34px}
+.biobars{display:flex;flex-direction:column;gap:7px}
+.biobar{display:grid;grid-template-columns:150px 1fr 84px;gap:14px;align-items:center}
+.biobar .bn{font-size:13.5px}
+.biobar .bt{height:22px;background:var(--panel2);border-radius:4px;overflow:hidden}
+.biobar .bf{height:100%;width:0;border-radius:4px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.biobar .bv{font-family:var(--mono);font-size:12px;text-align:right;color:var(--dim)}
+.biogrid{display:grid;grid-template-columns:repeat(20,1fr);gap:3px;max-width:520px}
+.biocell{aspect-ratio:1;border-radius:2px;background:#232936;transition:background .4s}
+.biokey{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;font-size:13px;color:var(--dim)}
+.biokey i{width:11px;height:11px;border-radius:2px;display:inline-block;margin-right:8px}
+@media(max-width:680px){
+  .biobar{grid-template-columns:104px 1fr 62px;gap:9px}
+  .biobar .bn{font-size:12px}.biobar .bv{font-size:10.5px}
+}
+
+/* ---------- land use ---------- */
+.tier{margin-bottom:20px}
+.tierlabel{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dimmer);margin-bottom:8px}
+.tierbar{display:flex;height:52px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.tierseg{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;overflow:hidden;white-space:nowrap;padding:0 6px;transition:filter .2s;position:relative}
+.tierseg.focus{box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)}
+.tierseg small{font-family:var(--mono);font-weight:400;opacity:.75;margin-left:6px}
+.tierlink{display:flex;justify-content:center;padding:3px 0;font-family:var(--mono);font-size:10px;color:var(--dimmer);letter-spacing:.12em}
+.flipbars{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;margin-bottom:9px}
+.flipbars .fn{font-size:13px;color:var(--dim)}
+.fliptrack{display:flex;height:26px;border-radius:5px;overflow:hidden;background:var(--panel2)}
+.flipseg{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1);overflow:hidden}
+@media(max-width:680px){.flipbars{grid-template-columns:96px 1fr;gap:9px}.flipbars .fn{font-size:11.5px}}
+
+/* ---------- deep time ---------- */
+.dtwrap{margin-bottom:30px}
+.dtbar{position:relative;height:58px;border-radius:9px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(90deg,#101828,#1b2436)}
+.dtfill{position:absolute;top:0;bottom:0;left:0;background:linear-gradient(90deg,#0b1a2e,#2ec4b6);opacity:.22}
+.dtmark{position:absolute;top:0;bottom:0;width:2px;background:var(--c2);opacity:.85}
+.dtmark.dim{background:var(--c4);opacity:.55}
+.dtlabels{position:relative;height:98px;margin-top:6px}
+.dtlab{position:absolute;transform:translateX(-50%);text-align:center;font-family:var(--mono);font-size:9.5px;color:var(--dim);line-height:1.35;white-space:nowrap}
+.dtlab b{display:block;color:var(--ink);font-size:10.5px;font-family:var(--sans);font-weight:600}
+.dtlab.alt{top:33px}
+.dtlab.alt2{top:66px}
+.dtzoom{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);margin:26px 0 10px;display:flex;align-items:center;gap:10px}
+.dtzoom::before{content:"";width:26px;height:1px;background:var(--line)}
+.dtpunch{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--c1);border-radius:0 10px 10px 0;padding:20px 22px;color:var(--dim);line-height:1.6;max-width:70ch;margin-top:26px}
+.dtpunch b{color:var(--ink)}
 
 /* ---------- reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){
@@ -489,6 +531,14 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   .bubwrap svg{min-width:820px}
   section{padding:68px 0}
   .lifefacts{margin-top:8px}
+}
+/* ---------- narrow screens, last word (must follow every base rule) ---------- */
+@media(max-width:700px){
+  /* five full rung labels cannot fit a ~330px ladder: drop the two middle
+     rungs and shorten the rest to bare numbers */
+  .rung.minor{display:none}
+  .rung .rlong{display:none}
+  .rung .rshort{display:inline}
 }
 </style>
 </head>
@@ -512,10 +562,10 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <canvas id="heroCanvas"></canvas>
   <div class="wrap">
     <h1>The world is<br>bigger, weirder<br>and <em>less scary</em><br>than you think.</h1>
-    <p class="lead">Fifteen chapters about things you already have an opinion on — including three that measure <b>you</b>. Guess before you scroll. Most people are wrong, reliably, and in the same direction.</p>
+    <p class="lead">Eighteen chapters about things you already have an opinion on &mdash; where you sit on Earth, what the planet is actually made of, and how fast you really are. <b>Most people are wrong, reliably, and in the same direction.</b></p>
     <div class="herostats">
-      <div class="herostat"><div class="v" data-count="15">0</div><div class="l">Chapters</div></div>
-      <div class="herostat"><div class="v" data-count="366">0</div><div class="l">Data points</div></div>
+      <div class="herostat"><div class="v" data-count="18">0</div><div class="l">Chapters</div></div>
+      <div class="herostat"><div class="v" data-count="439">0</div><div class="l">Data points</div></div>
       <div class="herostat"><div class="v" data-count="0" data-suffix="kb">0</div><div class="l">Trackers loaded</div></div>
     </div>
     <div class="scrollcue"><span class="bar"></span> Scroll</div>
@@ -525,54 +575,26 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== CONTENTS ======== -->
 <section id="contents"><div class="wrap rv">
   <div class="eyebrow">Contents</div>
-  <h2>Fifteen chapters.</h2>
-  <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip, and three chapters that time you</strong>. Nothing is loaded from the internet.</p>
+  <h2>Eighteen chapters.</h2>
+  <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip, type in your own numbers, and two chapters that time you</strong>. Nothing is loaded from the internet.</p>
   <ol class="toc" id="toc"></ol>
 </div></section>
 
-<!-- ======== 1. GUESS ======== -->
-<section id="guess" data-title="Guess First" data-blurb="Eight questions. Commit to a number before the answer appears."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">1</span> Calibration</div>
-  <h2>Guess first.</h2>
-  <p class="standfirst">A chart you disagree with teaches you nothing. So commit to a number <strong>before</strong> you see the answer. Eight questions. Chimpanzees picking at random beat most humans on questions like these — because humans aren't wrong at random, we're wrong in a pattern.</p>
+<!-- ======== GAP ======== -->
+<section id="gap" data-title="The Perception Gap" data-blurb="What people think their country looks like, next to what it actually looks like."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">1</span> Misperception</div>
+  <h2>Nobody knows<br>where they live.</h2>
+  <p class="standfirst">Pollsters have spent a decade asking people to estimate basic facts about their own countries. The answers are not slightly off &mdash; they are off by <strong>two, five, sometimes twelve times</strong>. The amber dot is the average guess. The teal dot is reality. Look at which direction the errors run.</p>
 
-  <div class="quiz">
-    <div class="quizhead">
-      <span class="qprog" id="qprog">Question 1 of 6</span>
-      <div class="qdots" id="qdots"></div>
-    </div>
-    <div class="qbody">
-      <p class="qtext" id="qtext"></p>
-      <div class="sliderrow">
-        <input type="range" id="qslider" min="0" max="100" value="50">
-        <div class="guessval"><span id="qval">50</span><small id="qunit">%</small></div>
-      </div>
-      <div class="scaleends"><span id="qmin">0%</span><span id="qmax">100%</span></div>
-      <button class="btn" id="qlock">Lock in my guess</button>
-
-      <div class="reveal" id="qreveal">
-        <div class="revbars">
-          <div class="revrow">
-            <span class="revlabel">You said</span>
-            <div class="revtrack"><div class="revfill" id="barYou" style="background:var(--c2)"></div></div>
-            <span class="revnum" id="numYou"></span>
-          </div>
-          <div class="revrow">
-            <span class="revlabel">Reality</span>
-            <div class="revtrack"><div class="revfill" id="barReal" style="background:var(--c3)"></div></div>
-            <span class="revnum" id="numReal"></span>
-          </div>
-        </div>
-        <p class="verdict" id="qverdict"></p>
-        <p class="revtext" id="qexplain"></p>
-        <div class="quizfoot">
-          <button class="btn" id="qnext">Next question</button>
-          <span class="scoreline" id="qscore"></span>
-        </div>
-      </div>
-    </div>
+  <div class="legend">
+    <span><i style="background:var(--c2)"></i>What people guessed</span>
+    <span><i style="background:var(--c3)"></i>The actual figure</span>
   </div>
-  <p class="note">Sources: ITU (2024), World Bank / PIP (2024), Ember Global Electricity Review (2025), UN WPP (2024), Geyer et al. Science Advances (2017), Sender et al. PLOS Biology (2016).</p>
+
+  <div id="gapChart"></div>
+
+  <p class="revtext" style="margin-top:28px">The pattern is not random ignorance. We inflate whatever we are frightened of or angry about, and deflate whatever is quietly going right. The last row is the tell: the one question where the world is doing far better than people believe is the one where the error flips direction.</p>
+  <p class="note">Survey averages from Ipsos "Perils of Perception" (2014&ndash;2018), Gallup (2015&ndash;2022) and Gapminder's global public-knowledge surveys. The actual figure is the true value for the year each survey was run, so a row may differ slightly from today's number. Guesses are the mean of respondents' estimates &mdash; medians are less extreme but run the same way. These are national samples, not a claim about any individual.</p>
 </div></section>
 
 <!-- ======== 2. FEAR ======== -->
@@ -607,9 +629,53 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Annual global deaths, best available estimates. Mosquito figure covers malaria, dengue, yellow fever and other vector-borne disease. Sources: WHO, UNODC Global Study on Homicide, Gates Foundation, International Shark Attack File. Snake, snail and insect figures carry wide uncertainty ranges.</p>
 </div></section>
 
+<!-- ======== INCOME ======== -->
+<section id="income" data-title="The Income Ladder" data-blurb="Put your own income in. Find out where you actually stand on Earth."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">4</span> Position</div>
+  <h2>You are probably<br>the rich one.</h2>
+  <p class="standfirst">Almost everyone believes they are somewhere in the middle. Very few people are. Put in what your household actually lives on and this will place you against <strong>every person alive</strong>, adjusted for what money buys where you live. It is the most uncomfortable chart on this page, and the only one that is about you specifically.</p>
+
+  <div class="incform">
+    <div class="incfield">
+      <label for="incAmount">Household income, per year</label>
+      <input type="number" id="incAmount" value="30000" min="0" step="1000" inputmode="numeric">
+    </div>
+    <div class="incfield">
+      <label for="incCurrency">Currency</label>
+      <select id="incCurrency">
+        <option value="1" data-sym="$">US dollars</option>
+        <option value="23.5" data-sym="&#8377;">Indian rupees</option>
+        <option value="0.70" data-sym="&pound;">British pounds</option>
+        <option value="0.73" data-sym="&euro;">Euros</option>
+        <option value="4.2" data-sym="&#165;">Chinese yuan</option>
+        <option value="102" data-sym="&#165;">Japanese yen</option>
+      </select>
+    </div>
+    <div class="incfield">
+      <label for="incPeople">People in household</label>
+      <input type="number" id="incPeople" value="1" min="1" max="20" step="1" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="incbig" id="incPct">&mdash;</div>
+  <p class="incsub" id="incLine"></p>
+
+  <div class="ladder" id="incLadder">
+    <div class="youmark" id="incYou" style="left:50%"></div>
+  </div>
+  <div style="position:relative;height:20px">
+    <div class="youflag" id="incFlag" style="left:50%">you</div>
+  </div>
+
+  <div class="incrows" id="incRows"></div>
+
+  <p class="revtext" style="margin-top:26px" id="incNote"></p>
+  <p class="note">Percentiles are interpolated from the World Bank's global income distribution (PIP, via Our World in Data), in 2021 international dollars at purchasing-power parity &mdash; local prices are already accounted for, so enter your <em>local</em> currency rather than an exchange-rate conversion. Income is counted per person, which is why household size moves the answer so much. This is disposable household income per head; entering a pre-tax salary will flatter you. Treat the percentile as good to a point or two, not to a decimal.</p>
+</div></section>
+
 <!-- ======== 4. MONEY ======== -->
 <section id="money" data-title="Billion-Dollar-o-Gram" data-blurb="World spending and the cost of fixing things, as area, at one scale."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">4</span> Scale</div>
+  <div class="eyebrow"><span class="num">5</span> Scale</div>
   <h2>The billion-dollar-o-gram.</h2>
   <p class="standfirst">Big numbers stop meaning anything past about a million. So here they are as <strong>area</strong>, all on one page, at one scale. Red is money the world spends every year. Green is the estimated annual cost of solving a problem we describe as impossible. Hover any block.</p>
 
@@ -625,7 +691,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 4. PILLS ======== -->
 <section id="pills" data-title="Snake Oil?" data-blurb="Eighteen supplements, plotted by popularity against strength of evidence."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">5</span> Evidence</div>
+  <div class="eyebrow"><span class="num">6</span> Evidence</div>
   <h2>Snake oil, or not?</h2>
   <p class="standfirst">Every bubble is a supplement. <strong>Up</strong> means better evidence from human trials. <strong>Right</strong> means more people take it. The interesting stuff lives in the bottom-right: hugely popular, barely supported. Bubble size = rough global market.</p>
 
@@ -634,9 +700,52 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Evidence tiers are a simplification of Cochrane reviews, NIH ODS fact sheets and major meta-analyses, scored for the <em>headline</em> claim most people buy the product for — a supplement can be excellent for deficiency and useless for everyone else. Not medical advice; talk to a doctor, not a treemap.</p>
 </div></section>
 
+<!-- ======== BIOMASS ======== -->
+<section id="biomass" data-title="Life on Earth, by Weight" data-blurb="Weigh every mammal alive. Ninety-six per cent of it is us and our food."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">7</span> Dominance</div>
+  <h2>Weigh every<br>mammal alive.</h2>
+  <p class="standfirst">Not count them &mdash; <strong>weigh</strong> them. Put every mammal on Earth on one enormous scale and sort the mass into three piles: livestock, human beings, and every wild mammal in existence &mdash; every elephant, whale, bat, mouse, deer, tiger and seal. Here is how that divides. Each square is one per cent.</p>
+
+  <div class="bioblock">
+    <div class="biogrid" id="bioGrid"></div>
+    <div class="biokey">
+      <span><i style="background:var(--c1)"></i>Livestock &mdash; cattle, pigs, sheep, goats</span>
+      <span><i style="background:var(--c2)"></i>Human beings</span>
+      <span><i style="background:var(--c6)"></i>All wild mammals on Earth</span>
+    </div>
+  </div>
+
+  <p class="revtext">Birds tell the same story: roughly <b>70% of all bird mass on the planet is poultry</b>. Chickens outweigh every wild bird species combined, twice over.</p>
+
+  <div class="bioblock">
+    <div class="tierlabel">And yet &mdash; all life on Earth, by mass of carbon</div>
+    <div class="biobars" id="bioBars"></div>
+  </div>
+
+  <p class="revtext">Animals are a rounding error. <b>Plants are 82% of all living matter</b>; everything that moves, from krill to blue whales, is under half a per cent of it. Humans are about <b>0.01%</b> of life on Earth &mdash; and in becoming that 0.01% we have removed an estimated 83% of wild mammal biomass and half of all plant matter.</p>
+  <p class="note">Bar-On, Phillips &amp; Milo, "The biomass distribution on Earth", PNAS (2018), measured in gigatonnes of carbon. The wild-mammal and plant loss figures are that paper's comparison against pre-human baselines and carry wide error bars &mdash; the ordering is solid, the exact percentages are not.</p>
+</div></section>
+
+<!-- ======== LAND ======== -->
+<section id="land" data-title="How We Use the Earth" data-blurb="Half of all habitable land is farmed. Most of that farm feeds animals, not you."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">8</span> Footprint</div>
+  <h2>Half the habitable<br>land is a farm.</h2>
+  <p class="standfirst">Zoom in one step at a time. Start with the whole planet's surface, then keep only the part you could stand on, then only the part we farm. Each bar is the highlighted slice of the bar above it, stretched back out to full width. <strong>Watch what happens at the last step.</strong></p>
+
+  <div id="landTiers"></div>
+
+  <div style="margin-top:34px">
+    <div class="tierlabel">Livestock's share of farmland, against what it puts on the table</div>
+    <div id="landFlip"></div>
+  </div>
+
+  <p class="revtext" style="margin-top:24px">Grazing and animal feed occupy <b>77% of all farmland</b> &mdash; an area roughly the size of North and South America combined &mdash; and return <b>18% of the world's calories</b>. That is not an argument for or against eating meat. It is simply the shape of the land, and almost nobody carries an accurate picture of it in their head.</p>
+  <p class="note">Our World in Data, from FAO and Ellis et al. Land is 29% of Earth's surface; 71% of that land is habitable once glaciers and barren desert, salt flat and exposed rock are removed. "Livestock" covers both grazing land and cropland grown for animal feed. Calorie and protein shares are of global supply.</p>
+</div></section>
+
 <!-- ======== 6. COLOURS ======== -->
 <section id="colours" data-title="Colours in Culture" data-blurb="White means purity. White also means death. Depends where you're standing."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">6</span> Meaning</div>
+  <div class="eyebrow"><span class="num">9</span> Meaning</div>
   <h2>White is the colour<br>of weddings. And funerals.</h2>
   <p class="standfirst">Eight colours, seven cultural traditions, and what each one signifies. Almost every designer has at some point shipped a product into a market where their reassuring colour meant <strong>bereavement</strong>. Hover any cell; click a colour to hold its row.</p>
 
@@ -647,7 +756,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 7. STRIPES ======== -->
 <section id="stripes" data-title="Warming Stripes" data-blurb="175 years of global temperature, with the numbers taken away."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">7</span> Trend</div>
+  <div class="eyebrow"><span class="num">10</span> Trend</div>
   <h2>175 years,<br>no axes, no numbers.</h2>
   <p class="standfirst">Each stripe is one year of global average surface temperature. Blue is cooler than the twentieth-century norm, red is warmer. There is no scale, no gridline and no label — and it is still <strong>the most legible climate chart ever made</strong>. Hover any stripe for its year.</p>
 
@@ -664,7 +773,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 8. LASTS ======== -->
 <section id="lasts" data-title="How Long It Lasts" data-blurb="You will be dead for a very long time before that bottle is."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">8</span> Duration</div>
+  <div class="eyebrow"><span class="num">11</span> Duration</div>
   <h2>The thing you used<br>for four minutes.</h2>
   <p class="standfirst">Roughly how long common rubbish takes to break down, on a logarithmic scale — so every step right is <strong>ten times longer</strong>. The plastic bottle you drank from at lunch will outlast every person currently alive, and their grandchildren, and their language.</p>
 
@@ -673,9 +782,36 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Estimates vary enormously with conditions — sunlight, oxygen, temperature and burial depth change these numbers by orders of magnitude, and "biodegrades" often means "fragments into microplastic" rather than "disappears". Glass is the honest outlier: it does not meaningfully biodegrade at all, and the million-year figure is a placeholder for "indefinitely". Sources: NOAA, US National Park Service, WWF marine debris literature.</p>
 </div></section>
 
+<!-- ======== DEEPTIME ======== -->
+<section id="deeptime" data-title="The Last Second" data-blurb="Earth's whole history as one day. You arrive with milliseconds to spare."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">12</span> Deep time</div>
+  <h2>Everything, in<br>a single day.</h2>
+  <p class="standfirst">Compress the 4.54 billion years of Earth into twenty-four hours. Midnight is the planet forming out of dust; midnight again is right now, this second, you reading this. On that scale <strong>one second is 52,500 years</strong> &mdash; comfortably longer than all of recorded history.</p>
+
+  <div class="dtwrap">
+    <div class="dtbar" id="dtBar1"><div class="dtfill" style="width:100%"></div></div>
+    <div class="dtlabels" id="dtLab1"></div>
+  </div>
+
+  <div class="dtzoom">Zoom into the final minute &mdash; the last 3.1 million years</div>
+  <div class="dtwrap">
+    <div class="dtbar" id="dtBar2"><div class="dtfill" style="width:100%"></div></div>
+    <div class="dtlabels" id="dtLab2"></div>
+  </div>
+
+  <div class="dtzoom">And into the final second &mdash; the last 52,546 years</div>
+  <div class="dtwrap">
+    <div class="dtbar" id="dtBar3"><div class="dtfill" style="width:100%"></div></div>
+    <div class="dtlabels" id="dtLab3"></div>
+  </div>
+
+  <div class="dtpunch" id="dtPunch"></div>
+  <p class="note">Dates are the mainstream scientific consensus as of 2025 and carry real uncertainty, especially the early ones: the first life is placed somewhere between 4.1 and 3.5 billion years ago, and the origin of <em>Homo sapiens</em> has been pushed back repeatedly. The 24-hour compression is exact arithmetic on those dates &mdash; 4.54 billion years divided into 86,400 seconds is 52,546 years per second.</p>
+</div></section>
+
 <!-- ======== 9. MINUTE ======== -->
 <section id="minute" data-title="Every Minute" data-blurb="Counters that started at zero when you opened this tab."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">9</span> Velocity</div>
+  <div class="eyebrow"><span class="num">13</span> Velocity</div>
   <h2>What happened while<br>you read this page.</h2>
   <p class="standfirst">These counters started at zero the moment you opened this tab. They are not a simulation of the future — they're a rate that is already running, everywhere, right now. <strong>The last one is the one to sit with.</strong></p>
 
@@ -686,7 +822,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 6. LIFE ======== -->
 <section id="life" data-title="Your Life in Dots" data-blurb="Enter your age. Watch 4,680 weeks fill in."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">10</span> Personal</div>
+  <div class="eyebrow"><span class="num">14</span> Personal</div>
   <h2>Your life, in dots.</h2>
   <p class="standfirst">One dot is one week. Ninety rows, fifty-two dots each — a fairly generous life. Set your age and watch the filled part appear. Nobody finds this chart cheerful. Almost everybody finds it <strong>clarifying</strong>.</p>
 
@@ -714,7 +850,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== 7. MYTHS ======== -->
 <!-- ======== 11. REACTION ======== -->
 <section id="reaction" data-title="Reaction Time" data-blurb="Click when it turns green. Then see what a quarter of a second costs."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">11</span> Reflex</div>
+  <div class="eyebrow"><span class="num">15</span> Reflex</div>
   <h2>How fast are you,<br>really?</h2>
   <p class="standfirst">Five rounds. The panel turns red, then — at some point it decides — green. Click the instant it does. <strong>You are measuring the round trip</strong>: light into your eye, signal to your visual cortex, decision, command back down your arm. Nobody is as fast as they think.</p>
 
@@ -735,39 +871,9 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Benchmarks: simple visual reaction time has a population median around 270 ms (Human Benchmark aggregate, millions of trials). World Athletics treats any sprint start under 100 ms as a false start on the grounds that no human can genuinely react that fast. Age and alcohol figures are approximate averages from published driving-simulator studies — individuals vary enormously. Your own score here also includes your mouse, your screen's refresh rate and your browser, so treat it as indicative, not clinical.</p>
 </div></section>
 
-<!-- ======== 12. RANDOM ======== -->
-<section id="random" data-title="Be Random" data-blurb="Try to fake a coin toss. You can't — and the tell is always the same."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">12</span> Instinct</div>
-  <h2>Try to be random.</h2>
-  <p class="standfirst">Tap heads or tails forty times, trying to produce a sequence that looks like a real run of coin tosses. Then we'll put yours next to an actual one. <strong>Almost nobody passes.</strong> There is a specific, predictable way humans fake randomness, and you are probably about to do it.</p>
-
-  <div class="rand-ctl">
-    <button class="btn" data-flip="H">Heads</button>
-    <button class="btn ghost" data-flip="T">Tails</button>
-    <span class="count" id="randCount">0 / 40</span>
-    <button class="btn ghost" id="randReset" style="margin-left:auto">Reset</button>
-  </div>
-
-  <div class="seq">
-    <div class="seqlabel">Your sequence</div>
-    <div class="seqstrip" id="userSeq"></div>
-  </div>
-
-  <div id="randResult">
-    <div class="seq">
-      <div class="seqlabel">An actual fair coin, forty tosses</div>
-      <div class="seqstrip" id="realSeq"></div>
-    </div>
-    <div class="randstats" id="randStats"></div>
-    <p class="revtext" id="randVerdict"></p>
-  </div>
-
-  <p class="note">A fair coin switches sides on about 50% of tosses; people asked to invent a random sequence typically switch around 60% of the time, because a repeat "feels" less random than an alternation. In forty fair tosses the longest run of one side is usually five or six — most invented sequences never go past three. The effect is robust enough that it is used to detect fabricated data.</p>
-</div></section>
-
 <!-- ======== 13. CORRELATION ======== -->
 <section id="correlation" data-title="Guess the Correlation" data-blurb="How strong is that relationship? Your eyes will say weaker than it is."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">13</span> Perception</div>
+  <div class="eyebrow"><span class="num">16</span> Perception</div>
   <h2>How strong is<br>that relationship?</h2>
   <p class="standfirst">Every dot is an observation. Estimate the correlation — <strong>0 is a shapeless cloud, 1 is a perfect straight line</strong> — then see the real figure. Five rounds. There is a well-documented direction to the error people make here, and it matters, because this is the judgement call behind most "X is linked to Y" headlines.</p>
 
@@ -786,17 +892,17 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 </div></section>
 
 <!-- ======== 14. MYTHS ======== -->
-<section id="myths" data-title="Mythconceptions" data-blurb="Twelve things almost everyone believes, and almost everyone has wrong."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">14</span> Correction</div>
+<section id="myths" data-title="Mythconceptions" data-blurb="Sixteen things almost everyone believes, and almost everyone has wrong."><div class="wrap rv">
+  <div class="eyebrow"><span class="num">17</span> Correction</div>
   <h2>Mythconceptions.</h2>
-  <p class="standfirst">Twelve things almost everyone believes, that almost everyone is wrong about. Click a card to flip it. <strong>Score yourself honestly</strong> — the fun is in noticing how confident you were.</p>
+  <p class="standfirst">Sixteen things almost everyone believes, that almost everyone is wrong about. Click a card to flip it. <strong>Score yourself honestly</strong> — the fun is in noticing how confident you were.</p>
   <div class="mythgrid" id="mythGrid"></div>
   <p class="note">Inspired by David McCandless's original "Common Mythconceptions". Each claim below is the mainstream scientific/historical position as of 2025, not a fringe reading.</p>
 </div></section>
 
 <!-- ======== 12. FALLACIES ======== -->
 <section id="fallacies" data-title="Rhetological Fallacies" data-blurb="Twenty-two ways an argument goes wrong, filed by failure mode."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">15</span> Defence</div>
+  <div class="eyebrow"><span class="num">18</span> Defence</div>
   <h2>Twenty ways to be<br>wrong, persuasively.</h2>
   <p class="standfirst">Every chapter above can be misused. This is the toolkit for spotting it — including in the charts on this page. Filter by <strong>how the argument breaks</strong>, not by what it's about. The most useful ones are the boring ones: survivorship bias and the sunk cost fallacy will cost you more this year than every conspiracy theory combined.</p>
 
@@ -1023,164 +1129,6 @@ window.addEventListener("scroll", () => {
 
 
 /* =======================================================================
-   1. GUESS FIRST
-   ======================================================================= */
-const QUESTIONS = [
-  {
-    q: "What percentage of the world's population uses the internet?",
-    unit: "%", min: 0, max: 100, real: 68,
-    explain: "About <b>5.5 billion people</b> are online — but that still leaves roughly 2.6 billion who have never used the internet at all. The gap is mostly rural, mostly poorer countries, and disproportionately women.",
-    src: "ITU, 2024"
-  },
-  {
-    q: "What share of humanity lives in Asia?",
-    unit: "%", min: 0, max: 100, real: 59,
-    explain: "Nearly <b>3 in 5 people alive</b> live in Asia — about 4.8 billion. Europe and North America together are under 15%. Most people's mental world map is drawn at roughly the scale of their news feed.",
-    src: "UN World Population Prospects, 2024"
-  },
-  {
-    q: "What percentage of all plastic ever made has been recycled?",
-    unit: "%", min: 0, max: 100, real: 9,
-    explain: "Around <b>9%</b>. Another 12% has been incinerated. The remaining ~79% is in landfill or loose in the environment. Recycling was, from the beginning, promoted hardest by the people selling the plastic.",
-    src: "Geyer et al., Science Advances, 2017"
-  },
-  {
-    q: "What share of the world's electricity now comes from low-carbon sources?",
-    unit: "%", min: 0, max: 100, real: 41,
-    explain: "<b>Over 40%</b> — renewables plus nuclear. Solar alone has doubled roughly every three years. This is the number people underestimate most, and pessimism about it is itself a barrier to progress.",
-    src: "Ember Global Electricity Review, 2025"
-  },
-  {
-    q: "What percentage of the world lives in extreme poverty (under ~$2.15/day)?",
-    unit: "%", min: 0, max: 100, real: 9,
-    explain: "About <b>9%</b>, down from 38% in 1990. That is roughly 700 million people — still a catastrophe — but the direction of travel is the part most people get backwards. Surveys consistently find the public thinks poverty has <em>risen</em>.",
-    src: "World Bank / PIP, 2024"
-  },
-  {
-    q: "What percentage of the cells in your body are human?",
-    unit: "%", min: 0, max: 100, real: 43,
-    explain: "Roughly <b>43%</b>. The rest are bacteria, archaea and fungi — mostly in your gut. By cell count you are a minority shareholder in yourself. (By mass you're fine: microbes weigh about 0.2 kg.)",
-    src: "Sender, Fuchs & Milo, PLOS Biology, 2016"
-  },
-  {
-    q: "Of every 100 girls of primary-school age in low-income countries, how many are in school?",
-    unit: "", min: 0, max: 100, real: 78,
-    explain: "About <b>78 in 100</b> — and in the world as a whole, girls' primary enrolment is now within a percentage point of boys'. This is the single question Rosling found people got most catastrophically wrong, and the pessimism has a cost: it makes the remaining gap look hopeless rather than nearly closed.",
-    src: "UNESCO Institute for Statistics, 2023"
-  },
-  {
-    q: "How many of the world's one-year-olds have been vaccinated against at least one disease?",
-    unit: "%", min: 0, max: 100, real: 84,
-    explain: "About <b>84%</b>. Most people guess somewhere near 20–50%. Global vaccination coverage is one of the largest logistical achievements in history and almost nobody knows it happened — which makes the recent slippage in coverage much harder to argue about honestly.",
-    src: "WHO/UNICEF estimates, 2023"
-  }
-];
-
-(function quiz() {
-  let idx = 0, locked = false;
-  const errors = [];
-  const dots = $("#qdots"), slider = $("#qslider"), val = $("#qval"), unit = $("#qunit");
-
-  QUESTIONS.forEach(() => dots.appendChild(Object.assign(document.createElement("div"), { className: "qdot" })));
-  const dotEls = $$(".qdot", dots);
-
-  function paintDots() {
-    dotEls.forEach((d, i) => {
-      d.className = "qdot" + (i < idx ? " done" : i === idx ? " now" : "");
-    });
-  }
-
-  function load() {
-    const q = QUESTIONS[idx];
-    $("#qtext").textContent = q.q;
-    $("#qprog").textContent = `Question ${idx + 1} of ${QUESTIONS.length}`;
-    slider.min = q.min; slider.max = q.max; slider.value = Math.round((q.min + q.max) / 2);
-    val.textContent = slider.value; unit.textContent = q.unit;
-    $("#qmin").textContent = q.min + q.unit;
-    $("#qmax").textContent = q.max + q.unit;
-    $("#qreveal").classList.remove("show");
-    $("#qlock").disabled = false;
-    $("#qlock").textContent = "Lock in my guess";
-    slider.disabled = false;
-    locked = false;
-    paintDots();
-  }
-
-  slider.addEventListener("input", () => { val.textContent = slider.value; });
-
-  $("#qlock").addEventListener("click", () => {
-    if (locked) return;
-    locked = true;
-    const q = QUESTIONS[idx];
-    const guess = +slider.value;
-    const err = Math.abs(guess - q.real);
-    errors.push(err);
-
-    slider.disabled = true;
-    $("#qlock").disabled = true;
-
-    const span = q.max - q.min;
-    $("#barYou").style.width  = ((guess  - q.min) / span * 100) + "%";
-    $("#barReal").style.width = ((q.real - q.min) / span * 100) + "%";
-    $("#numYou").textContent  = guess + q.unit;
-    $("#numReal").textContent = q.real + q.unit;
-
-    let verdict, colour;
-    if (err <= 3)       { verdict = "Bullseye. You're better calibrated than most."; colour = "var(--c6)"; }
-    else if (err <= 8)  { verdict = "Close. Off by " + err + " points."; colour = "var(--c3)"; }
-    else if (err <= 20) { verdict = "Off by " + err + " points — a normal human miss."; colour = "var(--c2)"; }
-    else                { verdict = "Off by " + err + " points. This is the one that surprises people."; colour = "var(--c1)"; }
-
-    const v = $("#qverdict");
-    v.textContent = verdict; v.style.color = colour;
-    $("#qexplain").innerHTML = q.explain + ` <span style="color:var(--dimmer);font-family:var(--mono);font-size:12px">— ${q.src}</span>`;
-
-    const avg = errors.reduce((a, b) => a + b, 0) / errors.length;
-    $("#qscore").textContent = `Average miss so far: ${avg.toFixed(1)} points`;
-
-    $("#qnext").textContent = idx === QUESTIONS.length - 1 ? "See my result" : "Next question";
-    $("#qreveal").classList.add("show");
-  });
-
-  let done = false;
-  $("#qnext").addEventListener("click", () => {
-    if (done) { location.reload(); return; }
-    if (idx < QUESTIONS.length - 1) {
-      idx++; load();
-      $("#guess").scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      done = true;
-      finish();
-    }
-  });
-
-  function finish() {
-    const avg = errors.reduce((a, b) => a + b, 0) / errors.length;
-    let line;
-    if (avg <= 6)       line = "Genuinely well calibrated. You are unusual.";
-    else if (avg <= 12) line = "Better than average. You still lean pessimistic on the good news.";
-    else if (avg <= 22) line = "Exactly average — which means exactly wrong, in the usual direction.";
-    else                line = "Comfortably beaten by a chimpanzee guessing at random. You're in good company: so were most senior policymakers Rosling tested.";
-
-    $("#qtext").textContent = "That's all six.";
-    $("#qprog").textContent = "Result";
-    $("#qval").textContent = avg.toFixed(1);
-    $("#qunit").textContent = " avg miss";
-    slider.style.visibility = "hidden";
-    $("#qmin").textContent = ""; $("#qmax").textContent = "";
-    $("#qverdict").textContent = line;
-    $("#qverdict").style.color = "var(--c2)";
-    $("#qexplain").innerHTML = "Notice the direction of your errors. Almost nobody guesses <b>too optimistically</b> about poverty or clean energy, and almost nobody guesses <b>too low</b> on plastic recycling. That systematic tilt — not ignorance, but a consistent lean — is what the rest of this page is about.";
-    $("#qscore").textContent = "";
-    $("#qnext").textContent = "Start again";
-    dotEls.forEach(d => d.className = "qdot done");
-  }
-
-  load();
-})();
-
-
-/* =======================================================================
    2. FEAR VS REALITY
    ======================================================================= */
 const FEAR = [
@@ -1254,6 +1202,9 @@ const FEAR = [
    3. TREEMAP — the billion-dollar-o-gram
    ======================================================================= */
 const MONEY = [
+  { name: "Fossil fuel subsidies",    value: 1300, kind: "spend", desc: "Explicit government subsidies that lower the price of coal, oil and gas at the point of sale. Counting the unpriced climate and health damage, the IMF puts the true figure nearer $7 trillion." },
+  { name: "Bottled water",            value: 350,  kind: "spend", desc: "Global bottled water market — for a product that, in most of these countries, already arrives through a tap." },
+  { name: "Restoring degraded land",  value: 300,  kind: "fix",   desc: "UN estimate of the annual investment needed by 2030 to restore the world's degraded land and slow desertification." },
   { name: "Global military spending", value: 2718, kind: "spend", desc: "World total, 2024 — the highest ever recorded, and the tenth consecutive annual rise." },
   { name: "Advertising",              value: 1080, kind: "spend", desc: "Global ad spend across all media. Roughly $135 per human alive, spent on persuading you." },
   { name: "Tobacco",                  value: 890,  kind: "spend", desc: "Global tobacco industry revenue. The product kills about 8 million people a year." },
@@ -1478,6 +1429,9 @@ const TICKS = [
   { label: "US dollars spent on Amazon",      perMin: 455000,    colour: "var(--c3)", prefix: "$", ref: "≈$650m a day" },
   { label: "Babies born",                     perMin: 250,       colour: "var(--c5)", ref: "≈134 million a year" },
   { label: "People who died",                 perMin: 116,       colour: "var(--dim)", ref: "≈61 million a year" },
+  { label: "Plastic bottles bought",          perMin: 900000,    colour: "var(--c4)", ref: "\u2248480 billion a year" },
+  { label: "Chickens killed for meat",        perMin: 143000,    colour: "var(--c2)", ref: "\u224875 billion a year" },
+  { label: "Trees cut down",                  perMin: 28500,     colour: "var(--c6)", ref: "\u224815 billion a year" },
   { label: "Tonnes of CO₂ released by humanity", perMin: 79000,  colour: "var(--c1)", ref: "≈41.6 billion tonnes a year" }
 ];
 
@@ -1650,6 +1604,10 @@ const MYTHS = [
   { q: "Lightning never strikes the same place twice.", a: "The Empire State Building is hit around <b>25 times a year</b>. Tall, isolated, conductive things get struck repeatedly and predictably — that's the entire operating principle of a lightning rod." },
   { q: "You lose most of your body heat through your head.", a: "You lose heat roughly <b>in proportion to exposed surface area</b> — the head is about 7–10% of it. The myth traces to a 1950s military experiment in which volunteers wore full arctic gear and nothing on their heads." },
   { q: "Different parts of the tongue taste different things.", a: "The tongue map is a <b>mistranslation</b> of a 1901 German paper. All five basic tastes are detectable across the whole tongue. It survived a century in textbooks because it draws nicely." },
+  { q: "Chameleons change colour to match their surroundings.", a: "They change colour mainly to <b>signal mood, threat and territory</b>, and to regulate temperature — not to blend into wallpaper. A chameleon on a chessboard does not turn into a chessboard." },
+  { q: "Cracking your knuckles gives you arthritis.", a: "No study has found a link. One doctor cracked the knuckles of <b>one hand only for sixty years</b> as a personal experiment and found no difference between his hands. The sound is a gas bubble collapsing in the joint fluid." },
+  { q: "A stiff drink warms you up.", a: "It does the opposite. Alcohol <b>dilates the blood vessels in your skin</b>, which floods the surface with warm blood — you feel hot while your core temperature drops faster. This is why brandy for hypothermia is dangerous rather than helpful." },
+  { q: "You need eight glasses of water a day.", a: "There is <b>no scientific basis</b> for the figure; it appears to be a misreading of a 1945 recommendation that already noted most of it comes from food. Coffee and tea count. So does soup, fruit and, largely, thirst." },
   { q: "Humans have five senses.", a: "Aristotle's list misses most of them. Add at least <b>balance, proprioception, temperature, pain, hunger, thirst and the sense of time</b> — reasonable counts run from nine to well over twenty depending on how you slice it." }
 ];
 
@@ -2196,88 +2154,6 @@ const RT_BENCH = [
 
 
 /* =======================================================================
-   12. BE RANDOM
-   ======================================================================= */
-(function beRandom() {
-  const N = 40;
-  const strip = $("#userSeq"), realStrip = $("#realSeq");
-  const countEl = $("#randCount"), result = $("#randResult");
-  let seq = [];
-
-  function longestRun(a) {
-    let best = 0, cur = 0;
-    for (let i = 0; i < a.length; i++) {
-      cur = (i && a[i] === a[i - 1]) ? cur + 1 : 1;
-      if (cur > best) best = cur;
-    }
-    return best;
-  }
-  function switchRate(a) {
-    if (a.length < 2) return 0;
-    let s = 0;
-    for (let i = 1; i < a.length; i++) if (a[i] !== a[i - 1]) s++;
-    return s / (a.length - 1);
-  }
-  function render(host, a) {
-    host.innerHTML = "";
-    for (let i = 0; i < N; i++) {
-      const c = document.createElement("span");
-      c.className = "seqcell" + (a[i] ? " " + a[i] : "");
-      c.textContent = a[i] || "";
-      host.appendChild(c);
-    }
-  }
-  function stat(v, label, ref) {
-    return `<div class="randstat"><div class="sv">${v}</div><div class="sl">${label}</div><div class="sr">${ref}</div></div>`;
-  }
-
-  function finish() {
-    const real = Array.from({ length: N }, () => Math.random() < 0.5 ? "H" : "T");
-    render(realStrip, real);
-
-    const sr = switchRate(seq), lr = longestRun(seq);
-    const rsr = switchRate(real), rlr = longestRun(real);
-
-    $("#randStats").innerHTML =
-      stat((sr * 100).toFixed(0) + "%", "How often you switched sides", "A fair coin: 50%") +
-      stat(lr, "Your longest run of one side", "40 fair tosses: usually 5–6") +
-      stat((rsr * 100).toFixed(0) + "%", "The real coin's switch rate", "Same 40 tosses, above") +
-      stat(rlr, "The real coin's longest run", "Generated just now");
-
-    const parts = [];
-    if (sr > 0.56) parts.push(`You alternated <b>${(sr * 100).toFixed(0)}%</b> of the time against a fair coin's 50% — the classic tell. A repeat feels "less random", so people keep switching.`);
-    else if (sr < 0.44) parts.push(`You switched only <b>${(sr * 100).toFixed(0)}%</b> of the time — unusually sticky, the opposite of the normal human error.`);
-    else parts.push(`Your switch rate of <b>${(sr * 100).toFixed(0)}%</b> is close to a fair coin's 50%. That is genuinely uncommon.`);
-
-    if (lr <= 3) parts.push(`Your longest run was <b>${lr}</b>. Real randomness is far streakier than it feels: over forty tosses a run of five or six is the norm, and it is the thing invented sequences almost never contain.`);
-    else parts.push(`Your longest run was <b>${lr}</b>, which is in the range a fair coin actually produces — most people never let themselves go past three.`);
-
-    parts.push(`This is why streaks in sport, in markets and in bad luck feel meaningful when they are usually nothing at all. Our sense of "too many in a row to be chance" is calibrated wrong, in a consistent direction.`);
-    $("#randVerdict").innerHTML = parts.join(" ");
-    result.classList.add("show");
-  }
-
-  $$("[data-flip]").forEach(b => b.addEventListener("click", () => {
-    if (seq.length >= N) return;
-    seq.push(b.dataset.flip);
-    render(strip, seq);
-    countEl.textContent = `${seq.length} / ${N}`;
-    if (seq.length === N) finish();
-  }));
-
-  $("#randReset").addEventListener("click", () => {
-    seq = [];
-    render(strip, seq);
-    render(realStrip, []);
-    countEl.textContent = `0 / ${N}`;
-    result.classList.remove("show");
-  });
-
-  render(strip, seq);
-})();
-
-
-/* =======================================================================
    13. GUESS THE CORRELATION
    ======================================================================= */
 (function guessCorrelation() {
@@ -2392,6 +2268,464 @@ const RT_BENCH = [
   startRound();
 })();
 
+
+
+/* =======================================================================
+   1. THE PERCEPTION GAP
+   ======================================================================= */
+const GAP = [
+  { q: "Share of the population who are immigrants",        w: "United States",  guess: 33, real: 14,  src: "Ipsos Perils of Perception, 2016",
+    note: "Americans put the foreign-born share at a third of the country. It was about one in seven." },
+  { q: "Share of the population who are Muslim",            w: "France",         guess: 31, real: 8,   src: "Ipsos Perils of Perception, 2016",
+    note: "France has western Europe's largest Muslim population — and its largest overestimate of it." },
+  { q: "Share of adults who are lesbian, gay, bisexual or transgender", w: "United States", guess: 24, real: 7, src: "Gallup, 2022",
+    note: "The average American estimate was 23.6%. Gallup's measured figure that year was 7.1%." },
+  { q: "Share of people aged 65 or over",                   w: "United States",  guess: 36, real: 15,  src: "Ipsos Perils of Perception, 2014",
+    note: "People imagine a far older country than the one they live in — which distorts every argument about pensions and healthcare." },
+  { q: "Share of the workforce who are unemployed",         w: "United States",  guess: 32, real: 6,   src: "Ipsos Perils of Perception, 2014",
+    note: "A five-fold overestimate, in a year when unemployment was close to a historic low." },
+  { q: "Share of teenage girls who give birth each year",   w: "United States",  guess: 24, real: 2.1, src: "Ipsos Perils of Perception, 2014",
+    note: "The teen birth rate has fallen more than 75% since 1991. Public perception has not moved at all." },
+  { q: "Share of adults who have diabetes",                 w: "United Kingdom", guess: 27, real: 5,   src: "Ipsos Perils of Perception, 2018",
+    note: "Health scares scale up in the mind the same way crime does." },
+  { q: "Share of one-year-olds vaccinated against at least one disease", w: "Worldwide", guess: 35, real: 84, src: "Gapminder public-knowledge surveys",
+    note: "Here the error flips. Asked about one of the great global success stories, people guess less than half the truth.", under: true }
+];
+
+(function perceptionGap() {
+  const host = $("#gapChart");
+  const max = 90;
+  GAP.forEach(d => {
+    const row = document.createElement("div");
+    row.className = "gaprow";
+    const lo = Math.min(d.guess, d.real), hi = Math.max(d.guess, d.real);
+    const ratio = d.guess / d.real;
+    row.innerHTML =
+      `<div class="gapq">${d.q}<small>${d.w}</small></div>
+       <div class="gaptrack">
+         <div class="gapaxis"></div>
+         <div class="gapline" style="background:${d.under ? "#4895ef" : "#ff5d73"};opacity:.55"></div>
+         <div class="gapdot real" style="background:#2ec4b6"></div>
+         <div class="gapdot said" style="background:#ffc857"></div>
+       </div>
+       <div class="gapmult ${d.under ? "under" : "over"}">${d.under ? "&divide;" + (1 / ratio).toFixed(1) : ratio.toFixed(1) + "&times;"}</div>`;
+    row.dataset.lo = (lo / max * 100);
+    row.dataset.hi = (hi / max * 100);
+    row.dataset.real = (d.real / max * 100);
+    row.dataset.said = (d.guess / max * 100);
+    tipOn(row,
+      `<span class="t">${d.q}</span>
+       <span class="v">${d.w} — guessed ${d.guess}%, actually ${d.real}%</span>
+       <span class="d">${d.note} <em style="color:var(--dimmer)">${d.src}</em></span>`);
+    host.appendChild(row);
+  });
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      $$(".gaprow", host).forEach((row, i) => {
+        setTimeout(() => {
+          const lo = +row.dataset.lo, hi = +row.dataset.hi;
+          $(".gapline", row).style.left = lo + "%";
+          $(".gapline", row).style.width = (hi - lo) + "%";
+          $(".gapdot.real", row).style.left = row.dataset.real + "%";
+          $(".gapdot.said", row).style.left = row.dataset.said + "%";
+        }, i * 70);
+      });
+      obs.disconnect();
+    });
+  }, { threshold: 0.2 });
+  obs.observe(host);
+})();
+
+
+/* =======================================================================
+   4. THE INCOME LADDER
+   ======================================================================= */
+/* [daily income per person, international $ (2021 PPP) -> world percentile] */
+const INC_ANCHORS = [
+  [0.9, 1], [1.5, 5], [2.15, 9], [3, 18], [3.65, 24], [5, 34], [6.85, 44],
+  [8.5, 52], [10, 57], [13, 64], [15, 68], [20, 76], [25, 81], [30, 85],
+  [40, 89], [50, 92], [65, 94.5], [80, 96], [100, 97.2], [130, 98.2],
+  [170, 99], [250, 99.6], [400, 99.9], [1000, 99.99]
+];
+const WORLD_POP = 8.1e9, GLOBAL_MEDIAN_DAY = 8.5;
+
+(function incomeLadder() {
+  const amountEl = $("#incAmount"), curEl = $("#incCurrency"), peopleEl = $("#incPeople");
+
+  function percentileFor(daily) {
+    if (daily <= INC_ANCHORS[0][0]) return INC_ANCHORS[0][1];
+    const last = INC_ANCHORS[INC_ANCHORS.length - 1];
+    if (daily >= last[0]) return last[1];
+    for (let i = 1; i < INC_ANCHORS.length; i++) {
+      const [x1, y1] = INC_ANCHORS[i - 1], [x2, y2] = INC_ANCHORS[i];
+      if (daily <= x2) {
+        const t = (Math.log(daily) - Math.log(x1)) / (Math.log(x2) - Math.log(x1));
+        return y1 + t * (y2 - y1);
+      }
+    }
+    return last[1];
+  }
+
+  /* ladder runs $1 -> $300 a day on a log scale */
+  const LO = Math.log(1), HI = Math.log(300);
+  const posFor = d => Math.max(0, Math.min(100, ((Math.log(Math.max(1, d)) - LO) / (HI - LO)) * 100));
+
+  /* Three rungs only. Every extra rung collided with a neighbour at some
+     viewport width; three orientation marks are enough, and the "you"
+     marker below carries the actual answer. */
+  const RUNGS = [
+    [2.15, "extreme poverty line", "$2.15"],
+    [8.5,  "world median",         "$8.5"],
+    [100,  "US median",            "$100"]
+  ];
+  const ladder = $("#incLadder");
+  RUNGS.forEach(([v, label, short, minor]) => {
+    const r = document.createElement("div");
+    r.className = "rung" + (minor ? " minor" : "");
+    const rp = posFor(v);
+    r.style.left = rp + "%";
+    /* past halfway the label would run off the end, so hang it to the left */
+    if (rp > 52) r.classList.add("flip");
+    r.innerHTML = `<i></i><span><span class="rlong">$${v} · ${label}</span><span class="rshort">${short}</span></span>`;
+    ladder.insertBefore(r, $("#incYou"));
+  });
+
+  function fact(v, l) {
+    return `<div class="incrow"><div class="iv">${v}</div><div class="il">${l}</div></div>`;
+  }
+
+  function update() {
+    const amount = Math.max(0, +amountEl.value || 0);
+    const ppp = +curEl.value || 1;
+    const people = Math.max(1, Math.min(20, Math.round(+peopleEl.value || 1)));
+    const intlPerYear = amount / ppp;
+    const daily = intlPerYear / people / 365.25;
+
+    const pct = percentileFor(daily);
+    const top = 100 - pct;
+    const below = (pct / 100) * WORLD_POP;
+
+    /* "Top 91%" reads like wealth when it means the opposite — below the
+       midpoint, say it the other way round. */
+    $("#incPct").textContent = pct < 50
+      ? "Bottom " + Math.max(1, Math.round(pct)) + "%"
+      : (top < 1 ? "Top " + top.toFixed(top < 0.1 ? 2 : 1) + "%"
+                 : "Top " + Math.max(1, Math.round(top)) + "%");
+    $("#incLine").innerHTML =
+      `On <b>$${daily.toFixed(2)} a day per person</b> in international dollars, your household sits above roughly ` +
+      `<b>${(below / 1e9).toFixed(1)} billion people</b> — about ${Math.round(pct)}% of everyone alive.`;
+
+    const posPct = posFor(daily);
+    $("#incYou").style.left = posPct + "%";
+    const flag = $("#incFlag");
+    flag.style.left = posPct + "%";
+    flag.textContent = "you · $" + daily.toFixed(0) + "/day";
+
+    $("#incRows").innerHTML =
+      fact("$" + Math.round(intlPerYear / people).toLocaleString("en-US"), "Your income per person, per year, in international dollars") +
+      fact((daily / GLOBAL_MEDIAN_DAY).toFixed(1) + "&times;", "The global median income per person") +
+      fact(((WORLD_POP - below) / 1e9).toFixed(1) + "bn", "People who have more than you do") +
+      fact((daily / 2.15).toFixed(0) + "&times;", "The international extreme poverty line");
+
+    let note;
+    if (pct >= 97) note = "Almost nobody who lands here believes it. The word people reach for to describe the top few per cent of humanity is normally reserved for someone considerably further up than themselves — which is precisely the point. Wealth is judged against neighbours, colleagues and whoever is on the screen, never against the species.";
+    else if (pct >= 85) note = "This is comfortably inside the global top fifth. It rarely feels like it, because the reference group for 'normal' is the street you live on, not the planet you live on.";
+    else if (pct >= 50) note = "Above the global midpoint — which places this household ahead of roughly four billion people, and is not what most people in this band assume about themselves.";
+    else if (pct >= 20) note = "Below the global median. That is a real thing to sit with, and it is also where a very large share of humanity lives.";
+    else note = "This sits in the lower fifth of the global distribution. If that is genuinely your situation rather than a test of the slider, this chart is the least useful one on the page for you — you already know what it is describing.";
+    $("#incNote").textContent = note;
+  }
+
+  [amountEl, curEl, peopleEl].forEach(el => {
+    el.addEventListener("input", update);
+    el.addEventListener("change", update);
+  });
+  update();
+})();
+
+
+/* =======================================================================
+   7. LIFE ON EARTH, BY WEIGHT
+   ======================================================================= */
+const MAMMALS = [
+  { n: "Livestock", pct: 60, c: "#ff5d73", note: "Cattle alone outweigh every wild land mammal on Earth several times over." },
+  { n: "Humans", pct: 36, c: "#ffc857", note: "Eight billion people, at roughly 0.06 gigatonnes of carbon." },
+  { n: "Wild mammals", pct: 4, c: "#06d6a0", note: "Every elephant, whale, bat, mouse, deer, tiger, seal and wolf alive — four squares." }
+];
+const KINGDOMS = [
+  { n: "Plants", gt: 450, c: "#06d6a0", note: "Trees, mostly. Four-fifths of everything alive is plant matter." },
+  { n: "Bacteria", gt: 70, c: "#4895ef", note: "Most of it deep underground, in rock and sediment." },
+  { n: "Fungi", gt: 12, c: "#b892ff", note: "Six times the mass of all animals combined." },
+  { n: "Archaea", gt: 7, c: "#2ec4b6", note: "Single-celled, ancient, and mostly living somewhere inhospitable." },
+  { n: "Protists", gt: 4, c: "#f77f00", note: "Algae and other single-celled eukaryotes." },
+  { n: "Animals", gt: 2, c: "#ff5d73", note: "Every animal that has ever crawled, swum or flown, alive today: 0.4% of the biosphere." }
+];
+
+(function biomass() {
+  const grid = $("#bioGrid");
+  let i = 0;
+  MAMMALS.forEach(m => {
+    for (let k = 0; k < m.pct; k++, i++) {
+      const c = document.createElement("div");
+      c.className = "biocell";
+      c.dataset.fill = m.c;
+      grid.appendChild(c);
+    }
+  });
+  MAMMALS.forEach(m => {
+    /* one delegated tooltip per band is overkill; attach to the grid instead */
+  });
+  tipDelegate(grid, ".biocell", (el) => {
+    const idx = Array.prototype.indexOf.call(grid.children, el);
+    let acc = 0;
+    for (const m of MAMMALS) {
+      acc += m.pct;
+      if (idx < acc) return `<span class="t">${m.n}</span><span class="v">${m.pct}% of all mammal biomass</span><span class="d">${m.note}</span>`;
+    }
+    return "";
+  });
+
+  const bars = $("#bioBars");
+  const maxGt = KINGDOMS[0].gt;
+  KINGDOMS.forEach(k => {
+    const row = document.createElement("div");
+    row.className = "biobar";
+    row.innerHTML = `<div class="bn">${k.n}</div>
+                     <div class="bt"><div class="bf" style="background:${k.c}"></div></div>
+                     <div class="bv">${k.gt} Gt C</div>`;
+    row.dataset.w = (k.gt / maxGt * 100);
+    tipOn(row, `<span class="t">${k.n}</span><span class="v">${k.gt} gigatonnes of carbon — ${(k.gt / 545 * 100).toFixed(1)}% of all life</span><span class="d">${k.note}</span>`);
+    bars.appendChild(row);
+  });
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      $$(".biocell", grid).forEach((c, n) => {
+        setTimeout(() => { c.style.background = c.dataset.fill; }, n * 9);
+      });
+      $$(".biobar", bars).forEach((r, n) => {
+        setTimeout(() => { $(".bf", r).style.width = r.dataset.w + "%"; }, n * 70);
+      });
+      obs.disconnect();
+    });
+  }, { threshold: 0.15 });
+  obs.observe(grid);
+})();
+
+
+/* =======================================================================
+   8. HOW WE USE THE EARTH
+   ======================================================================= */
+const LAND_TIERS = [
+  { label: "The Earth's surface", segs: [
+    { n: "Ocean", pct: 71, c: "#1b3a5c", ink: "#cfe0f5" },
+    { n: "Land", pct: 29, c: "#2ec4b6", ink: "#04231b", focus: true } ] },
+  { label: "All land", segs: [
+    { n: "Habitable", pct: 71, c: "#2ec4b6", ink: "#04231b", focus: true },
+    { n: "Glaciers", pct: 10, c: "#3d5a80", ink: "#dbe7f5" },
+    { n: "Barren", pct: 19, c: "#5c5241", ink: "#f0e6d2" } ] },
+  { label: "Habitable land", segs: [
+    { n: "Agriculture", pct: 50, c: "#ffc857", ink: "#2b2004", focus: true },
+    { n: "Forest", pct: 37, c: "#1f7a5a", ink: "#e6fff6" },
+    { n: "Shrub", pct: 11, c: "#7a6a3a", ink: "#fff7e0" },
+    { n: "Cities", pct: 1, c: "#ff5d73", ink: "#2b0610" },
+    { n: "Water", pct: 1, c: "#4895ef", ink: "#08182c" } ] },
+  { label: "Farmland", segs: [
+    { n: "Livestock — grazing and feed", pct: 77, c: "#ff5d73", ink: "#2b0610", focus: true },
+    { n: "Crops we eat", pct: 23, c: "#06d6a0", ink: "#04231b" } ] }
+];
+const LAND_FLIP = [
+  { n: "Of all farmland", live: 77, crop: 23 },
+  { n: "Of all calories", live: 18, crop: 82 },
+  { n: "Of all protein", live: 37, crop: 63 }
+];
+
+(function landUse() {
+  const host = $("#landTiers");
+  LAND_TIERS.forEach((t, ti) => {
+    const wrap = document.createElement("div");
+    wrap.className = "tier";
+    const bar = document.createElement("div");
+    bar.className = "tierbar";
+    t.segs.forEach(sg => {
+      const el = document.createElement("div");
+      el.className = "tierseg" + (sg.focus ? " focus" : "");
+      el.style.cssText = `width:${sg.pct}%;background:${sg.c};color:${sg.ink}`;
+      el.innerHTML = sg.pct >= 9 ? `${sg.n}<small>${sg.pct}%</small>` : "";
+      tipOn(el, `<span class="t">${sg.n}</span><span class="v">${sg.pct}% of ${t.label.toLowerCase()}</span>` +
+                (sg.focus ? `<span class="d">The highlighted slice — this is what the next bar zooms into.</span>` : ""));
+      bar.appendChild(el);
+    });
+    wrap.innerHTML = `<div class="tierlabel">${t.label}</div>`;
+    wrap.appendChild(bar);
+    host.appendChild(wrap);
+    if (ti < LAND_TIERS.length - 1) {
+      const link = document.createElement("div");
+      link.className = "tierlink";
+      link.textContent = "▼ zoom into the highlighted slice";
+      host.appendChild(link);
+    }
+  });
+
+  const flip = $("#landFlip");
+  LAND_FLIP.forEach(f => {
+    const row = document.createElement("div");
+    row.className = "flipbars";
+    row.innerHTML = `<div class="fn">${f.n}</div>
+      <div class="fliptrack">
+        <div class="flipseg live" style="background:#ff5d73;color:#2b0610"></div>
+        <div class="flipseg crop" style="background:#06d6a0;color:#04231b"></div>
+      </div>`;
+    row.dataset.live = f.live; row.dataset.crop = f.crop;
+    flip.appendChild(row);
+  });
+
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      $$(".flipbars", flip).forEach((row, i) => {
+        setTimeout(() => {
+          const l = $(".flipseg.live", row), c = $(".flipseg.crop", row);
+          l.style.width = row.dataset.live + "%"; l.textContent = row.dataset.live + "%";
+          c.style.width = row.dataset.crop + "%"; c.textContent = row.dataset.crop + "%";
+        }, i * 140);
+      });
+      obs.disconnect();
+    });
+  }, { threshold: 0.2 });
+  obs.observe(flip);
+})();
+
+
+/* =======================================================================
+   12. THE LAST SECOND
+   ======================================================================= */
+const EARTH_MA = 4540;               /* million years */
+const SEC_PER_DAY = 86400;
+const YEARS_PER_SECOND = (EARTH_MA * 1e6) / SEC_PER_DAY;
+
+const DEEP_1 = [
+  { ma: 4540, n: "Earth forms" },
+  { ma: 3800, n: "First life" },
+  { ma: 2400, n: "Oxygen appears" },
+  { ma: 1800, n: "Complex cells" },
+  { ma: 1200, n: "Multicellular life" },
+  { ma: 538,  n: "Cambrian explosion" },
+  { ma: 230,  n: "Dinosaurs" },
+  { ma: 66,   n: "Dinosaurs die" },
+  { ma: 0.3,  n: "Us" }
+];
+/* the final minute of the day: the last 3.15 million years */
+const DEEP_2 = [
+  { ya: 2600000, n: "Stone tools" },
+  { ya: 2000000, n: "Homo erectus" },
+  { ya: 1000000, n: "Fire" },
+  { ya: 300000,  n: "Homo sapiens" },
+  { ya: 40000,   n: "Cave painting" }
+];
+/* the final second of the day: the last 52,546 years */
+const DEEP_3 = [
+  { ya: 40000, n: "Cave painting" },
+  { ya: 12000, n: "Farming" },
+  { ya: 5200,  n: "Writing" },
+  { ya: 2000,  n: "Rome" },
+  { ya: 250,   n: "Industry" },
+  { ya: 80,    n: "A long life" }
+];
+
+(function deepTime() {
+  function clock(ma) {
+    const totalSec = (1 - ma / EARTH_MA) * SEC_PER_DAY;
+    const h = Math.floor(totalSec / 3600), m = Math.floor((totalSec % 3600) / 60);
+    const sec = totalSec % 60;
+    return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0") +
+           (h === 23 && m === 59 ? ":" + sec.toFixed(1) : "");
+  }
+  function toGo(years) {
+    const sec = years / YEARS_PER_SECOND;
+    if (sec >= 1) return sec.toFixed(1) + "s to go";
+    const ms = sec * 1000;
+    return (ms >= 10 ? ms.toFixed(0) : ms.toFixed(1)) + "ms to go";
+  }
+
+  /* Labels are placed at their true position, then pushed apart so they
+     stay readable where events pile up at the right-hand end. Two
+     staggered rows, each de-collided independently. */
+  function decollide(container) {
+    const W = container.clientWidth;
+    if (!W) return;
+    ["", "alt", "alt2"].forEach(row => {
+      const items = Array.from(container.children)
+        .filter(el => (el.classList.contains("alt2") ? "alt2"
+                     : el.classList.contains("alt") ? "alt" : "") === row)
+        .map(el => ({ el, w: el.offsetWidth, c: parseFloat(el.dataset.pos) / 100 * W }))
+        .sort((a, b) => a.c - b.c);
+      const GAP = 8;
+      for (let i = 1; i < items.length; i++) {
+        const need = items[i - 1].c + items[i - 1].w / 2 + items[i].w / 2 + GAP;
+        if (items[i].c < need) items[i].c = need;
+      }
+      for (let i = items.length - 1; i >= 0; i--) {
+        const max = W - items[i].w / 2 - 2;
+        if (items[i].c > max) items[i].c = max;
+        if (i > 0) {
+          const cap = items[i].c - items[i].w / 2 - items[i - 1].w / 2 - GAP;
+          if (items[i - 1].c > cap) items[i - 1].c = cap;
+        }
+      }
+      items.forEach(it => {
+        it.c = Math.max(it.w / 2 + 2, it.c);
+        it.el.style.left = (it.c / W * 100) + "%";
+      });
+    });
+  }
+
+  const containers = [];
+  function draw(barId, labId, items, posOf, textOf) {
+    const bar = $(barId), lab = $(labId);
+    items.forEach((it, i) => {
+      const pos = Math.max(0, Math.min(100, posOf(it)));
+      const mark = document.createElement("div");
+      mark.className = "dtmark" + (i % 3 ? " dim" : "");
+      mark.style.left = pos + "%";
+      bar.appendChild(mark);
+
+      /* three staggered rows: at 375px there is not room for more than
+         three labels side by side without them colliding */
+      const l = document.createElement("div");
+      l.className = "dtlab" + (i % 3 === 1 ? " alt" : i % 3 === 2 ? " alt2" : "");
+      l.dataset.pos = pos;
+      l.style.left = pos + "%";
+      l.innerHTML = "<b>" + it.n + "</b>" + textOf(it);
+      lab.appendChild(l);
+    });
+    containers.push(lab);
+  }
+
+  const WIN_2 = 60 * YEARS_PER_SECOND;   /* final minute */
+  const WIN_3 = YEARS_PER_SECOND;        /* final second */
+
+  draw("#dtBar1", "#dtLab1", DEEP_1, it => (1 - it.ma / EARTH_MA) * 100, it => clock(it.ma));
+  draw("#dtBar2", "#dtLab2", DEEP_2, it => (1 - it.ya / WIN_2) * 100, it => toGo(it.ya));
+  draw("#dtBar3", "#dtLab3", DEEP_3, it => (1 - it.ya / WIN_3) * 100, it => toGo(it.ya));
+
+  const relayout = () => containers.forEach(decollide);
+  relayout();
+  window.addEventListener("resize", relayout);
+  window.addEventListener("load", relayout);
+
+  const hist = 5200 / YEARS_PER_SECOND;
+  const ind = 250 / YEARS_PER_SECOND;
+  const life = 80 / YEARS_PER_SECOND;
+  $("#dtPunch").innerHTML =
+    "All of recorded history &mdash; every civilisation, every war, every book, every person whose name you know &mdash; is the final " +
+    "<b>" + hist.toFixed(2) + " seconds</b> of the day. The Industrial Revolution and everything it caused occupies the last " +
+    "<b>" + (ind * 1000).toFixed(0) + " milliseconds</b>. A long human life is <b>" + (life * 1000).toFixed(1) + " milliseconds</b>: " +
+    "about the time a camera shutter takes to close. Every argument you have ever had happened inside that shutter click.";
+})();
 
 /* =======================================================================
    POLISH — contents, nav, scrollspy, progress, back-to-top
