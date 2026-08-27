@@ -793,12 +793,12 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
     <div class="incfield">
       <label for="incCurrency">Currency</label>
       <select id="incCurrency">
-        <option value="1" data-sym="$">US dollars</option>
-        <option value="23.5" data-sym="&#8377;">Indian rupees</option>
-        <option value="0.70" data-sym="&pound;">British pounds</option>
-        <option value="0.73" data-sym="&euro;">Euros</option>
-        <option value="4.2" data-sym="&#165;">Chinese yuan</option>
-        <option value="102" data-sym="&#165;">Japanese yen</option>
+        <option value="1" data-sym="$" data-cpi="1.158">US dollars</option>
+        <option value="19.469" data-sym="&#8377;" data-cpi="1.212">Indian rupees</option>
+        <option value="0.736" data-sym="&pound;" data-cpi="1.236">British pounds</option>
+        <option value="0.743" data-sym="&euro;" data-cpi="1.183">Euros</option>
+        <option value="4.013" data-sym="&#165;" data-cpi="1.025">Chinese yuan</option>
+        <option value="109.444" data-sym="&#165;" data-cpi="1.122">Japanese yen</option>
       </select>
     </div>
     <div class="incfield">
@@ -820,7 +820,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <div class="incrows" id="incRows"></div>
 
   <p class="revtext" style="margin-top:26px" id="incNote"></p>
-  <p class="note">Percentiles are interpolated from the World Bank's global income distribution (PIP, via Our World in Data), in 2021 international dollars at purchasing-power parity &mdash; local prices are already accounted for, so enter your <em>local</em> currency rather than an exchange-rate conversion. Income is counted per person, which is why household size moves the answer so much. This is disposable household income per head; entering a pre-tax salary will flatter you. Treat the percentile as good to a point or two, not to a decimal.</p>
+  <p class="note">Percentiles come from the World Bank's Poverty and Inequality Platform: the world distribution for reference year <strong>2024</strong>, in <strong>2021 international dollars</strong> at purchasing-power parity, read at twenty-one income lines and interpolated logarithmically between them. Purchasing-power parity is what makes the comparison meaningful at all &mdash; it prices a rupee by what it buys in India rather than by the exchange rate. Two things happen to the number you type before it is placed. It is <strong>deflated to 2021 prices</strong> using your country's consumer price index (through 2024 for the US, 2025 elsewhere), because the distribution is priced in 2021 money; and it is divided by household size, since a salary supporting four people is not four times the income. The extreme poverty line shown is <strong>$3.00 a day</strong>, the figure the World Bank adopted in June 2025 to replace the old $2.15 line &mdash; the two are not comparable, being denominated in different price bases. This measures <em>income</em>, not wealth, and takes no account of what your country makes you pay for out of it: an American income carries health insurance that a European income does not.</p>
 </div></section>
 
 <!-- ======== HOURS ======== -->
@@ -2607,13 +2607,18 @@ const GAP = [
    4. THE INCOME LADDER
    ======================================================================= */
 /* [daily income per person, international $ (2021 PPP) -> world percentile] */
+/* World Bank PIP, world distribution, reference year 2024, 2021 PPPs.
+   Each pair is [daily income in international $, % of humanity below it].
+   Pulled from api.worldbank.org/pip/v1/pip-grp - not interpolated by hand. */
 const INC_ANCHORS = [
-  [0.9, 1], [1.5, 5], [2.15, 9], [3, 18], [3.65, 24], [5, 34], [6.85, 44],
-  [8.5, 52], [10, 57], [13, 64], [15, 68], [20, 76], [25, 81], [30, 85],
-  [40, 89], [50, 92], [65, 94.5], [80, 96], [100, 97.2], [130, 98.2],
-  [170, 99], [250, 99.6], [400, 99.9], [1000, 99.99]
+  [1.5, 2.74], [2, 4.85], [3, 10.40], [4.2, 18.93], [5, 25.27], [6, 32.92],
+  [8.3, 46.07], [10, 52.69], [12, 58.57], [15, 65.03], [20, 72.32],
+  [25, 77.18], [30, 80.64], [40, 85.49], [50, 88.89], [65, 92.42],
+  [80, 94.75], [100, 96.68], [130, 98.21], [180, 99.24], [250, 99.69]
 ];
-const WORLD_POP = 8.1e9, GLOBAL_MEDIAN_DAY = 8.5;
+/* World median from the same series (2024): the 50th percentile falls
+   between the $8.30 and $10 anchors and interpolates to $9.3. */
+const WORLD_POP = 8.2e9, GLOBAL_MEDIAN_DAY = 9.3;
 
 (function incomeLadder() {
   const amountEl = $("#incAmount"), curEl = $("#incCurrency"), peopleEl = $("#incPeople");
@@ -2640,9 +2645,9 @@ const WORLD_POP = 8.1e9, GLOBAL_MEDIAN_DAY = 8.5;
      viewport width; three orientation marks are enough, and the "you"
      marker below carries the actual answer. */
   const RUNGS = [
-    [2.15, "extreme poverty line", "$2.15"],
-    [8.5,  "world median",         "$8.5"],
-    [100,  "US median",            "$100"]
+    [3,   "extreme poverty line", "$3"],
+    [9.3, "world median",         "$9.3"],
+    [72,  "US median",            "$72"]
   ];
   const ladder = $("#incLadder");
   RUNGS.forEach(([v, label, short, minor]) => {
@@ -2662,9 +2667,15 @@ const WORLD_POP = 8.1e9, GLOBAL_MEDIAN_DAY = 8.5;
 
   function update() {
     const amount = Math.max(0, +amountEl.value || 0);
+    const opt = curEl.selectedOptions[0];
     const ppp = +curEl.value || 1;
+    /* The distribution is priced in 2021 international dollars, so today's
+       money has to be deflated to 2021 before the PPP factor is applied.
+       Without this every reader is credited with a fifth more real income
+       than they have, and lands several percentiles too high. */
+    const cpi = +(opt && opt.dataset.cpi) || 1;
     const people = Math.max(1, Math.min(20, Math.round(+peopleEl.value || 1)));
-    const intlPerYear = amount / ppp;
+    const intlPerYear = (amount / cpi) / ppp;
     const daily = intlPerYear / people / 365.25;
 
     const pct = percentileFor(daily);
