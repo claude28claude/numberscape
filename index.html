@@ -972,7 +972,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
   <p class="swipehint">↔ Swipe the table sideways</p>
   <div class="culwrap"><div class="culgrid" id="culGrid"></div></div>
-  <p class="note">Broad cultural generalisations, not rules — every one of these has enormous internal variation by region, religion, generation and context, and a chart like this flattens that badly. Read it as "this association exists and will surprise you", not "everyone here believes this". Sources: standard colour-symbolism references and the tradition established by David McCandless's "Colours in Cultures".</p>
+  <p class="note">Broad cultural generalisations, not rules — every one of these has enormous internal variation by region, religion, generation and context, and a chart like this flattens that badly. Note also that the columns are not comparable in scale: "Chinese" and "Japanese" are single cultures, while "African" and "Latin American" are continents holding hundreds of them, and squeezing either into one cell is a compromise the chart cannot really justify. Read it as "this association exists and will surprise you", not "everyone here believes this". Sources: standard colour-symbolism references and the tradition established by David McCandless's "Colours in Cultures".</p>
 </div></section>
 
 <!-- ======== 7. STRIPES ======== -->
@@ -1099,7 +1099,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
     </div>
     <div class="lifefacts" id="lifeFacts"></div>
   </div>
-  <p class="note">Rough averages, not a prediction. Sleep ≈ 8h/day, eating ≈ 1h/day, screens ≈ 6h50m/day for adults (DataReportal 2024), heart ≈ 100,000 beats/day, breaths ≈ 20,000/day. Global life expectancy at birth is ~73 years; the grid runs to 90 because you might.</p>
+  <p class="note">Rough averages, not a prediction. Sleep ≈ 8h/day, eating ≈ 1h/day, internet use ≈ 6h40m/day for adults (DataReportal/GWI 2024) — that is time online, which is not the same as all screen time, heart ≈ 100,000 beats/day, breaths ≈ 20,000/day. Global life expectancy at birth is ~73 years; the grid runs to 90 because you might.</p>
 </div></section>
 
 <!-- ======== 7. MYTHS ======== -->
@@ -1143,7 +1143,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
       <div class="corrscore" id="corrScore"></div>
     </div>
   </div>
-  <p class="note">Each cloud is 90 points drawn from a bivariate normal distribution with a known target correlation; you are scored against the <em>actual</em> sample correlation of the points on screen, computed after they are drawn, not the target. People reliably underestimate correlation from scatter plots — the perceived strength grows roughly with r², not r, so a genuinely strong r = 0.7 looks like a vague smear.</p>
+  <p class="note">Each cloud is 90 points drawn from a bivariate normal distribution with a known target correlation; you are scored against the <em>actual</em> sample correlation of the points on screen, computed after they are drawn, not the target. People reliably underestimate correlation from scatter plots — the perceived strength rises much more slowly than r itself — the best-fitting models are logarithmic — so a genuinely strong r = 0.7 still looks like a vague smear.</p>
 </div></section>
 
 <!-- ======== 14. MYTHS ======== -->
@@ -1152,7 +1152,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <h2>Mythconceptions.</h2>
   <p class="standfirst">Sixteen things almost everyone believes, that almost everyone is wrong about. Click a card to flip it. <strong>Score yourself honestly</strong> — the fun is in noticing how confident you were.</p>
   <div class="mythgrid" id="mythGrid"></div>
-  <p class="note">Inspired by David McCandless's original "Common Mythconceptions". Each claim below is the mainstream scientific/historical position as of 2025, not a fringe reading.</p>
+  <p class="note">Inspired by David McCandless's original "Common Mythconceptions". Each claim below is the mainstream scientific or historical position as of 2026, not a fringe reading. Two cards were softened after checking: chameleons really do shift colour toward some backgrounds (they just cannot copy a pattern), and the knuckle-cracking sound is a cavity forming rather than a bubble bursting.</p>
 </div></section>
 
 <!-- ======== 12. FALLACIES ======== -->
@@ -1829,7 +1829,7 @@ const TICKS = [
       fact("Heartbeats",             shortNum(Math.round(days * 100000))) +
       fact("Breaths taken",          shortNum(Math.round(days * 20000))) +
       fact("Steps walked",           shortNum(Math.round(Math.max(0, (age - 2)) * 365.25 * 5000))) +
-      fact("Hours on screens (adult yrs)", fmt(Math.round(Math.max(0, age - 13) * 365.25 * 6.8))) +
+      fact("Hours online (adult yrs)", fmt(Math.round(Math.max(0, age - 13) * 365.25 * 6.8))) +
       fact("Full moons seen",        fmt(Math.round(age * 12.37))) +
       fact("Summers left, to 80",    summersLeft > 0 ? fmt(Math.round(summersLeft)) : "bonus round");
   }
@@ -1860,16 +1860,16 @@ const MYTHS = [
   { q: "We only use 10% of our brains.", a: "Brain imaging shows <b>essentially all of it</b> is active over a day, and there are no dormant regions waiting to be unlocked. Damage almost anywhere causes a deficit. The myth's origins are murky — misquoted William James, misread 1930s neurology, and a very persuasive self-help industry." },
   { q: "Goldfish have a three-second memory.", a: "Goldfish have been trained to remember routes, tones and feeding times for <b>at least five months</b>. Some fish recognise individual human faces. The three seconds was never a finding — it was a punchline." },
   { q: "Bulls are enraged by the colour red.", a: "Cattle are effectively <b>red-green colourblind</b>. What provokes a charge is the movement of the cape. The colour is for the audience — and to hide the blood." },
-  { q: "The Great Wall is visible from space.", a: "It is <b>not visible to the naked eye from orbit</b> — it's narrow and the same colour as the ground around it. The claim predates spaceflight entirely, appearing in print in the 1750s. Astronauts keep saying so; the myth keeps not dying." },
+  { q: "The Great Wall is visible from space.", a: "It is <b>not visible to the naked eye from orbit</b> — it's narrow and the same colour as the ground around it. The claim predates spaceflight entirely — William Stukeley wrote it in a letter in 1754, though that letter stayed unpublished until 1887. Astronauts keep saying so; the myth keeps not dying." },
   { q: "Vikings wore horned helmets.", a: "No horned helmet has ever been found in a Viking grave. The look was invented by a <b>costume designer for a Wagner opera</b> in 1876, and Scandinavia has been quietly correcting the record ever since." },
   { q: "Your blood is blue inside your body.", a: "Human blood is <b>always red</b> — bright red when oxygenated, dark brick red when not. Veins look blue because of how skin scatters light, not because of what's inside them." },
-  { q: "Napoleon was unusually short.", a: "He was about <b>5'7\" (170 cm)</b> — average or slightly above for a Frenchman of his era. The error came from confusing French <em>pouces</em> with English inches, helped along enormously by British wartime cartoonists." },
+  { q: "Napoleon was unusually short.", a: "His autopsy recorded 5 pieds 2 pouces in French units — about <b>168 cm, or 5'6\"</b> — which was ordinary for a Frenchman of his era, not short. The error came from confusing French <em>pouces</em> with English inches, helped along enormously by British wartime cartoonists." },
   { q: "Sugar makes children hyperactive.", a: "Double-blind trials have repeatedly found <b>no effect</b>. In one famous study, parents told their child had eaten sugar rated them as more hyperactive — the child had eaten none. It measures the parent, not the sugar." },
   { q: "Lightning never strikes the same place twice.", a: "The Empire State Building is hit around <b>25 times a year</b>. Tall, isolated, conductive things get struck repeatedly and predictably — that's the entire operating principle of a lightning rod." },
   { q: "You lose most of your body heat through your head.", a: "You lose heat roughly <b>in proportion to exposed surface area</b> — the head is about 7–10% of it. The myth traces to a 1950s military experiment in which volunteers wore full arctic gear and nothing on their heads." },
-  { q: "Different parts of the tongue taste different things.", a: "The tongue map is a <b>mistranslation</b> of a 1901 German paper. All five basic tastes are detectable across the whole tongue. It survived a century in textbooks because it draws nicely." },
-  { q: "Chameleons change colour to match their surroundings.", a: "They change colour mainly to <b>signal mood, threat and territory</b>, and to regulate temperature — not to blend into wallpaper. A chameleon on a chessboard does not turn into a chessboard." },
-  { q: "Cracking your knuckles gives you arthritis.", a: "No study has found a link. One doctor cracked the knuckles of <b>one hand only for sixty years</b> as a personal experiment and found no difference between his hands. The sound is a gas bubble collapsing in the joint fluid." },
+  { q: "Different parts of the tongue taste different things.", a: "The tongue map is a <b>misreading</b> of a 1901 German paper: a later psychologist redrew its threshold graphs, and readers took small differences in sensitivity for whole regions that taste one thing only. All five basic tastes are detectable across the whole tongue. It survived a century in textbooks because it draws nicely." },
+  { q: "Chameleons change colour to match their surroundings.", a: "They change colour mainly to <b>signal mood, threat and territory</b>, and to regulate temperature. Some species do shift brightness and hue toward a background, but none reproduces a pattern — a chameleon on a chessboard does not turn into a chessboard." },
+  { q: "Cracking your knuckles gives you arthritis.", a: "No study has found a link. One doctor cracked the knuckles of <b>one hand only for fifty years</b> — more than 36,500 times — and found no difference between his hands. The sound is not a bubble popping: real-time imaging shows a cavity suddenly forming as the joint surfaces separate, and it lingers afterwards." },
   { q: "A stiff drink warms you up.", a: "It does the opposite. Alcohol <b>dilates the blood vessels in your skin</b>, which floods the surface with warm blood — you feel hot while your core temperature drops faster. This is why brandy for hypothermia is dangerous rather than helpful." },
   { q: "You need eight glasses of water a day.", a: "There is <b>no scientific basis</b> for the figure; it appears to be a misreading of a 1945 recommendation that already noted most of it comes from food. Coffee and tea count. So does soup, fruit and, largely, thirst." },
   { q: "Humans have five senses.", a: "Aristotle's list misses most of them. Add at least <b>balance, proprioception, temperature, pain, hunger, thirst and the sense of time</b> — reasonable counts run from nine to well over twenty depending on how you slice it." }
@@ -1986,9 +1986,9 @@ const COLOURS_C = [
   { n: "Red",    hex: "#e5383b", m: ["Danger, love, urgency", "Luck, joy, celebration", "Life, energy, anger", "Purity, marriage, fertility", "Danger, caution", "Death, mourning (many regions)", "Passion, religion"] },
   { n: "Orange", hex: "#f77f00", m: ["Autumn, warning, cheapness", "Change, adaptability", "Courage, energy", "Sacred — the saffron of renunciation", "Mourning, loss", "Vitality, harvest", "Sun, earth, festivity"] },
   { n: "Yellow", hex: "#ffd60a", m: ["Caution, cowardice, optimism", "Imperial royalty, honour", "Courage, nobility, refinement", "Commerce, knowledge, spring", "Happiness, prosperity", "Wealth, high rank", "Death, mourning (some regions)"] },
-  { n: "Green",  hex: "#2ec4b6", m: ["Nature, money, envy, permission", "Health — but a green hat means infidelity", "Eternal life, youth", "Islam, harvest, new beginnings", "Islam, holiness, paradise", "Fertility, the land itself", "Death (some regions), nature"] },
+  { n: "Green",  hex: "#2ec4b6", m: ["Nature, money, envy, permission", "Health — but a green hat means infidelity", "Eternal life, youth", "Nature, harvest, new beginnings; Islam for Indian Muslims", "Islam, holiness, paradise", "Fertility, the land itself", "Death (some regions), nature"] },
   { n: "Blue",   hex: "#4895ef", m: ["Trust, sadness, corporate safety", "Immortality, healing", "Ordinary life; villainy in kabuki", "Krishna, strength, the divine", "Protection against the evil eye", "Love, harmony, peace", "Trust, religious devotion"] },
-  { n: "Purple", hex: "#b892ff", m: ["Royalty, luxury, the mystical", "Nobility, spiritual awareness", "Wealth, nobility, privilege", "Sorrow, mourning", "Wealth, high status", "Royalty — historically the rarest dye", "Mourning, Lent, death"] },
+  { n: "Purple", hex: "#b892ff", m: ["Royalty, luxury, the mystical", "Nobility, spiritual awareness", "Wealth, nobility, privilege", "Sorrow, mourning", "Wealth, high status", "Royalty and high office in several traditions", "Mourning, Lent, death"] },
   { n: "White",  hex: "#f2f2f2", m: ["Purity, weddings, cleanliness", "Death, mourning, funerals", "Death and purity, both at once", "Mourning, widowhood, peace", "Purity — and mourning", "Purity, contact with spirits", "Peace, purity, hope"] },
   { n: "Black",  hex: "#2b2f3a", m: ["Death, formality, elegance, power", "Evil, water, deep knowledge", "Mystery, formality, the unseen", "Evil, negativity, the unlucky", "Rebirth, mourning", "Age, maturity, masculinity", "Mourning, death"] }
 ];
@@ -2524,7 +2524,7 @@ const RT_BENCH = [
     if (avg < 0.08)      line = "You read scatter plots unusually well — that is a genuinely rare skill.";
     else if (avg < 0.15) line = "Decent calibration, better than most.";
     else                 line = "A normal human performance, which is to say: not good. Correlation is very hard to see.";
-    feed.innerHTML = `<b>Average miss: ${avg.toFixed(2)}.</b> ${line} Perceived strength tracks r² rather than r, so r = 0.7 — a relationship strong enough to build policy on — still looks to the eye like a vague smudge. That gap is where an enormous number of "linked to" headlines live.`;
+    feed.innerHTML = `<b>Average miss: ${avg.toFixed(2)}.</b> ${line} Perceived strength rises far more slowly than r itself, so r = 0.7 — a relationship strong enough to build policy on — still looks to the eye like a vague smudge. That gap is where an enormous number of "linked to" headlines live.`;
     $("#corrLock").textContent = "Play again";
     slider.disabled = true;
   }
