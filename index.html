@@ -1072,7 +1072,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
   <div class="tickgrid" id="tickGrid"></div>
   <p class="elapsed">Page open for <b id="elapsedTime">0s</b> — counters are per-minute global rates, scaled to your session.</p>
-  <p class="note">Best-available 2024 estimates; per-minute internet figures vary widely between sources and should be read as order-of-magnitude. Sources: DemandSage/Domo compilations, Google, Meta, Statista, Global Carbon Project (2024: ~41.6 Gt CO₂), UN WPP 2024 (births/deaths).</p>
+  <p class="note">Per-minute rates, derived by dividing a published annual or daily total. Provenance varies a lot by row and is worth knowing: <strong>Google searches</strong> and <strong>Amazon spend</strong> come from the companies' own disclosures (more than 5 trillion searches a year; $716.9bn of net sales across all segments, AWS included). <strong>CO<sub>2</sub></strong> is the Global Carbon Budget 2025 total of 42.2 Gt. <strong>Births and deaths</strong> are UN World Population Prospects 2024. The remaining rows come from industry compilations rather than primary sources and should be read as order-of-magnitude only &mdash; an earlier version of this chapter carried a WhatsApp figure that contradicted the caption printed beside it, which is the sort of thing compilation sourcing produces. Counters start at zero when you open the page; they are a rate, not a measurement of this minute.</p>
 </div></section>
 
 <!-- ======== 6. LIFE ======== -->
@@ -1123,7 +1123,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
     <button class="btn ghost" id="rtAgain" style="margin-top:6px">Try again</button>
   </div>
 
-  <p class="note">Benchmarks: simple visual reaction time has a population median around 270 ms (Human Benchmark aggregate, millions of trials). World Athletics treats any sprint start under 100 ms as a false start on the grounds that no human can genuinely react that fast. Age and alcohol figures are approximate averages from published driving-simulator studies — individuals vary enormously. Your own score here also includes your mouse, your screen's refresh rate and your browser, so treat it as indicative, not clinical.</p>
+  <p class="note">Benchmarks: simple visual reaction time has a population median around 270 ms (Human Benchmark, more than 81 million tests) &mdash; that is the anchor, and it is a median rather than a mean. Age effects are from Woods et al. (2015), a hardware-calibrated study of 1,469 people, which finds about 0.55 ms added per year of age; a much larger folklore figure was removed from this chart. The sprint-start rule is World Athletics', and applies to an <em>auditory</em> reaction &mdash; hearing is quicker than sight, so that bar is not strictly on the same scale as your click. A drink-drive comparison previously shown here has been dropped: those studies measure braking or choice response, tasks whose absolute latencies run 700&ndash;1,500 ms, so their effect cannot be added to a simple-reaction baseline. Your own score also includes your mouse, browser and display latency &mdash; typically 20&ndash;30 ms &mdash; so read it as indicative, not clinical.</p>
 </div></section>
 
 <!-- ======== 13. CORRELATION ======== -->
@@ -1685,18 +1685,18 @@ const PILLS = [
    5. EVERY MINUTE
    ======================================================================= */
 const TICKS = [
-  { label: "Google searches",                 perMin: 6300000,   colour: "var(--c4)", ref: "≈105,000 every second" },
+  { label: "Google searches",                 perMin: 9513000,   colour: "var(--c4)", ref: "≈158,000 every second" },
   { label: "Emails sent (≈46% of it spam)",   perMin: 241000000, colour: "var(--c5)", ref: "≈4 million a second" },
-  { label: "WhatsApp messages",               perMin: 41600000,  colour: "var(--c6)", ref: "≈100bn a day" },
+  { label: "WhatsApp messages",               perMin: 69400000,  colour: "var(--c6)", ref: "≈100bn a day" },
   { label: "Hours of video uploaded to YouTube", perMin: 500,    colour: "var(--c1)", ref: "you could never watch one day of it" },
   { label: "Instagram photos & reels shared", perMin: 66000,     colour: "var(--c2)", ref: "≈95 million a day" },
-  { label: "US dollars spent on Amazon",      perMin: 455000,    colour: "var(--c3)", prefix: "$", ref: "≈$650m a day" },
+  { label: "US dollars spent on Amazon",      perMin: 1364000,   colour: "var(--c3)", prefix: "$", ref: "≈$717bn a year, every segment" },
   { label: "Babies born",                     perMin: 250,       colour: "var(--c5)", ref: "≈134 million a year" },
   { label: "People who died",                 perMin: 116,       colour: "var(--dim)", ref: "≈61 million a year" },
   { label: "Plastic bottles bought",          perMin: 900000,    colour: "var(--c4)", ref: "\u2248480 billion a year" },
   { label: "Chickens killed for meat",        perMin: 143000,    colour: "var(--c2)", ref: "\u224875 billion a year" },
   { label: "Trees cut down",                  perMin: 28500,     colour: "var(--c6)", ref: "\u224815 billion a year" },
-  { label: "Tonnes of CO₂ released by humanity", perMin: 79000,  colour: "var(--c1)", ref: "≈41.6 billion tonnes a year" }
+  { label: "Tonnes of CO₂ released by humanity", perMin: 80300,  colour: "var(--c1)", ref: "≈42.2 billion tonnes a year" }
 ];
 
 (function ticker() {
@@ -2268,12 +2268,12 @@ const FALLACIES = [
    11. REACTION TIME
    ======================================================================= */
 const RT_BENCH = [
-  { n: "Fastest legal sprint start", ms: 100, note: "World Athletics rules any start under 100 ms a false start — the position is that no human can truly react faster.", c: "#b892ff" },
-  { n: "Blink of an eye",            ms: 120, note: "A single blink takes roughly 100–150 ms from start to finish.", c: "#4895ef" },
-  { n: "Formula 1 driver",           ms: 200, note: "Elite racing drivers cluster around 0.2 s off the lights.", c: "#06d6a0" },
+  { n: "Fastest legal sprint start", ms: 100, note: "World Athletics rules any start under 100 ms a false start, on the view that no human truly reacts faster. Note the mismatch: a sprinter is reacting to a gunshot, and hearing is measurably quicker than sight, so this bar is not quite on the same footing as your visual test.", c: "#b892ff" },
+  { n: "Blink of an eye",            ms: 285, note: "Directly measured mean blink duration. The familiar 100–150 ms figure describes only the closing phase; the eye takes as long again to reopen.", c: "#4895ef" },
+  { n: "Formula 1 driver",           ms: 200, note: "Elite racing drivers cluster around 0.2 s off the lights \u2014 though that is a launch time, bundling the reaction with releasing the clutch, so it is not a pure comparison with your click.", c: "#06d6a0" },
   { n: "Average adult",              ms: 270, note: "The population median for a simple 'click when it changes' test.", c: "#2ec4b6" },
-  { n: "Average 60-year-old",        ms: 340, note: "Simple reaction time drifts upward from roughly the mid-twenties onward.", c: "#ffc857" },
-  { n: "At the drink-drive limit",   ms: 390, note: "Driving-simulator studies find alcohol at legal-limit levels adds well over 100 ms.", c: "#ff5d73" }
+  { n: "Average 60-year-old",        ms: 290, note: "The best hardware-calibrated study finds simple reaction time rising about 0.55 ms a year, so roughly 20 ms slower than a 25-year-old \u2014 not the 70 ms this chart used to show.", c: "#ffc857" },
+  { n: "Average 75-year-old",        ms: 310, note: "Simple reaction time rises by roughly half a millisecond a year through adult life \u2014 a real effect, but a far smaller one than the folklore suggests.", c: "#ff5d73" }
 ];
 
 (function reactionTest() {
