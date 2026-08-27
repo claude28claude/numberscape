@@ -25,39 +25,45 @@ measure the reader rather than the world.
 | 11 | How We Use the Earth | Four zoom levels, from the whole planet down to what farmland actually feeds |
 | 12 | Peak Child | Births peaked around 2012 - the extra billions are grown-up children, not new babies |
 | 13 | Colours in Culture | What eight colours signify across seven cultural traditions |
-| 14 | Warming Stripes | 175 years of global temperature with no axes, no numbers |
+| 14 | Warming Stripes | 176 years of global temperature with no axes, no numbers |
 | 15 | How Long It Lasts | Decomposition times on a logarithmic scale |
 | 16 | The Last Second | Earth's history as a single day, zoomed three times into the final second |
 | 17 | Thirty Earths | Place the Moon where you think it belongs, then watch it slide far past your guess |
 | 18 | Every Minute | Live counters that start at zero when you open the page |
 | 19 | Your Life in Dots | Enter your age, see it as 4,680 weekly dots |
-| 20 | Reaction Time | Five timed rounds, your median against sprinters and the drink-drive limit, and what it costs in metres |
+| 20 | Reaction Time | Five timed rounds, your median against sprinters and F1 drivers, and what it costs in metres |
 | 21 | Guess the Correlation | Estimate *r* from a scatter of 90 points, scored against the real sample correlation |
 | 22 | Mythconceptions | Sixteen flip cards busting things everyone "knows" |
 | 23 | Rhetological Fallacies | 22 ways an argument goes wrong, filed by failure mode |
 
 ## On the numbers
 
-Five chapters here (Nobody Died at Forty, What Measles Deletes, Peak Child,
-Thirty Earths, The Price In Hours) were researched against primary sources and then put through an
-adversarial fact-check whose brief was to *refute* rather than approve. Every
-one came back needing corrections, and the corrections are applied. A few
-examples of what that removed: the claim that forty was an unlikely age to die
-in 1841 (it was mid-pack, 52nd of 125 single ages); the claim that world
-population growth is mostly extra old people (they are 13% of it - working-age
-adults are 67.5%); a "lockstep" reading of the measles mortality curves that
-the underlying figure does not actually show; and a 50% macaque antibody-loss
-figure that is really a 40-60% range across four animals.
+In August 2026 every chapter was audited against primary sources, and a large
+share of the site's figures turned out to be wrong. The corrections are in the
+git history. The worst of them, for the record:
 
-Where a correction removed a claim, the claim is gone rather than softened, and
-several chapter footnotes now say explicitly what the data cannot support.
+- **Fear vs Reality** had six of ten rows carrying values that appear nowhere in
+  the Shen et al. dataset, and three of those *reversed the source's own
+  conclusions* - drug overdose was shown as over-reported when it is one of the
+  most under-reported causes; stroke was shown as badly under-reported when it
+  is the best-calibrated cause on the chart. Rebuilt from the dataset itself,
+  now with all 13 causes so each column actually sums to 100.
+- **The Income Ladder** was running on the 2017-PPP distribution the World Bank
+  retired in June 2025, while its footnote claimed 2021 PPP, and it never
+  deflated the reader's current salary to 2021 prices. It overstated people's
+  global percentile by up to nine points. Rebuilt from the live PIP API.
+- **Warming Stripes** used a series reconstructed from memory rather than
+  downloaded - wrong by 0.17 C in 2023, with 22 of 175 years out by more than
+  0.1 C. Replaced with the published HadCRUT5 file.
+- **Deadliest Animals** carried six unrevised figures from a 2014 blog post. The
+  tsetse fly row contradicted its own tooltip by a factor of nine.
+- **The Perception Gap** had seven of eight rows wrong, including two
+  conflations and one "average guess" that does not exist, because the survey it
+  came from was multiple choice.
 
-The Price In Hours splices two wage series across 1997. That is only legitimate
-because they agree there: the Dallas Fed's manufacturing wage back-computes from
-their own published 1997 work-time figures to about $13.00/hour, against $13.02
-in the BLS total-private series used for the modern figures. One number was cut
-from that chapter for having no source at either end - a 1997 childcare anchor -
-rather than estimated.
+Every chapter footnote now states what its data cannot support, not only what it
+can. Several claims were deleted rather than corrected, because no source could
+be found for them at all.
 
 ## Install it
 
@@ -90,8 +96,8 @@ Every chart is a simplification, and simplification is where charts lie. Sources
 are listed under each section and in the footer. Where published estimates
 disagree — and for "what it would cost to fix X" they disagree enormously — a
 mid-range figure is used and labelled as an estimate. The warming-stripes series
-is a close approximation of HadCRUT5: the trend and record years are right, but
-individual years may differ by a few hundredths of a degree.
+is the published HadCRUT.5.0.2.0 annual file, downloaded rather than
+reconstructed; an earlier version approximated it and was wrong.
 
 Nothing here is medical, legal or financial advice.
 
