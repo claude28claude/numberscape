@@ -295,7 +295,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 #toTop:hover{color:var(--c2);border-color:var(--c2);transform:translateY(-3px)}
 
 /* ---------- contents ---------- */
-.toc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.toc{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .toc a{
   display:flex;gap:16px;align-items:baseline;padding:20px 22px;background:var(--panel);
   text-decoration:none;color:var(--ink);transition:background .2s;height:100%;
@@ -371,7 +371,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 }
 .chip:hover{color:var(--ink);border-color:var(--dim)}
 .chip.on{background:var(--c5);border-color:var(--c5);color:#140a24;font-weight:650}
-.falgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px}
+.falgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
 .fal{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--fc,var(--c5));border-radius:0 12px 12px 0;padding:19px 20px;transition:transform .2s,border-color .2s}
 .fal:hover{transform:translateY(-2px)}
 .falcat{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fc,var(--c5));margin-bottom:8px}
@@ -717,7 +717,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <section id="fear" data-title="Fear vs Reality" data-blurb="What kills people, what they Google, and what the press writes about."><div class="wrap rv">
   <div class="eyebrow"><span class="num">2</span> Distortion</div>
   <h2>What kills you<br>vs what frightens you.</h2>
-  <p class="standfirst">Three rankings of the same ten causes of death: how often they <strong>actually kill</strong> Americans, how often people <strong>search for them</strong>, and how often the <strong>press writes about them</strong>. The news is not a mirror. It's a funhouse mirror, and it has a consistent bias: it over-reports the sudden and under-reports the slow.</p>
+  <p class="standfirst">Three rankings of the same thirteen causes of death: how often they <strong>actually kill</strong> Americans, how often people <strong>search for them</strong>, and how often the <strong>press writes about them</strong>. The news is not a mirror. It's a funhouse mirror, and it has a consistent bias: it over-reports the sudden and under-reports the slow.</p>
 
   <div class="legend">
     <span><i style="background:var(--c3)"></i>Share of these 13 causes of death</span>
@@ -725,7 +725,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
     <span><i style="background:var(--c1)"></i>Share of New York Times coverage</span>
   </div>
 
-  <div class="fearhead"><span>Cause</span><span>Share of each ranking</span><span>Over-reported</span></div>
+  <div class="fearhead"><span>Cause</span><span>Share of each ranking</span><span>Distortion</span></div>
   <div id="fearChart"></div>
   <p class="note">All three columns are shares of the <strong>same thirteen causes</strong>, not of everything that kills people, and they each sum to 100. That distinction matters: heart disease is 30.2% of these thirteen but only about 23.2% of all US deaths. Figures are the 2016 row of Shen et al., <em>Death: Reality vs Reported</em> (2018), taken from the dataset Our World in Data publishes, using CDC mortality, Google Trends and headline counts. The coverage column is the <strong>New York Times series alone</strong> &mdash; Shen measured the Guardian separately and the two are not averaged here. Terrorism is recorded as exactly zero deaths in this dataset for 2016, so its over-reporting ratio is undefined rather than merely enormous; the Global Terrorism Database counts 68 US deaths that year, about 0.0025% of all American deaths, against 35.6% of the coverage. One year of one country and one newspaper is a narrow base, and 2016 was an election year, which lifts the political categories.</p>
 </div></section>
@@ -820,7 +820,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <div class="incrows" id="incRows"></div>
 
   <p class="revtext" style="margin-top:26px" id="incNote"></p>
-  <p class="note">Percentiles come from the World Bank's Poverty and Inequality Platform: the world distribution for reference year <strong>2024</strong>, in <strong>2021 international dollars</strong> at purchasing-power parity, read at twenty-one income lines and interpolated logarithmically between them. Purchasing-power parity is what makes the comparison meaningful at all &mdash; it prices a rupee by what it buys in India rather than by the exchange rate. Two things happen to the number you type before it is placed. It is <strong>deflated to 2021 prices</strong> using your country's consumer price index (through 2024 for the US, 2025 elsewhere), because the distribution is priced in 2021 money; and it is divided by household size, since a salary supporting four people is not four times the income. The extreme poverty line shown is <strong>$3.00 a day</strong>, the figure the World Bank adopted in June 2025 to replace the old $2.15 line &mdash; the two are not comparable, being denominated in different price bases. This measures <em>income</em>, not wealth, and takes no account of what your country makes you pay for out of it: an American income carries health insurance that a European income does not.</p>
+  <p class="note">Percentiles come from the World Bank's Poverty and Inequality Platform: the world distribution of income or consumption per person for reference year <strong>2024</strong>, in <strong>2021 international dollars</strong> at purchasing-power parity, read at twenty-one income lines and interpolated logarithmically between them. Purchasing-power parity is what makes the comparison meaningful at all &mdash; it prices a rupee by what it buys in India rather than by the exchange rate. Two things happen to the number you type before it is placed. It is <strong>deflated to 2021 prices</strong> using your country's consumer price index (through 2024 for the US, 2025 elsewhere), because the distribution is priced in 2021 money; and it is divided by household size, since a salary supporting four people is not four times the income. The extreme poverty line shown is <strong>$3.00 a day</strong>, the figure the World Bank adopted in June 2025 to replace the old $2.15 line &mdash; the two are not comparable, being denominated in different price bases. This measures <em>income</em>, not wealth, and takes no account of what your country makes you pay for out of it: an American income carries health insurance that a European income does not.</p>
 </div></section>
 
 <!-- ======== HOURS ======== -->
@@ -979,7 +979,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <section id="stripes" data-title="Warming Stripes" data-blurb="176 years of global temperature, with the numbers taken away."><div class="wrap rv">
   <div class="eyebrow"><span class="num">14</span> Trend</div>
   <h2>176 years,<br>no axes, no numbers.</h2>
-  <p class="standfirst">Each stripe is one year of global average surface temperature. Blue is cooler than the twentieth-century norm, red is warmer. There is no scale, no gridline and no label — and it is still <strong>the most legible climate chart ever made</strong>. Hover any stripe for its year.</p>
+  <p class="standfirst">Each stripe is one year of global average surface temperature. Blue is cooler than the 1961&ndash;1990 average, red is warmer. There is no scale, no gridline and no label — and it is still <strong>the most legible climate chart ever made</strong>. Hover any stripe for its year.</p>
 
   <div class="stripes" id="stripeBar"></div>
   <div class="stripeaxis"><span id="stripeFirst">1850</span><span>Global average surface temperature, year by year</span><span id="stripeLast">2025</span></div>
@@ -1000,7 +1000,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
   <div id="lastChart"></div>
   <div class="lastaxis"><span></span><div class="lastticks" id="lastTicks"></div><span></span></div>
-  <p class="note">Estimates vary enormously with conditions — sunlight, oxygen, temperature and burial depth change these numbers by orders of magnitude, and "biodegrades" often means "fragments into microplastic" rather than "disappears". Glass is the honest outlier: it does not meaningfully biodegrade at all, and the million-year figure is a placeholder for "indefinitely". These times come from the widely reproduced NOAA / Mote Marine Laboratory / US National Park Service education chart, which is the ancestor of nearly every version of this list. It is a teaching aid rather than a measurement programme: most of its figures have no published experimental basis, real conditions move them by orders of magnitude, and "breaks down" frequently means "fragments into pieces too small to see" rather than "goes away". Read the ordering as meaningful and the individual numbers as folklore with a good pedigree.</p>
+  <p class="note">Estimates vary enormously with conditions — sunlight, oxygen, temperature and burial depth change these numbers by orders of magnitude, and "biodegrades" often means "fragments into microplastic" rather than "disappears". Glass is the honest outlier: it does not meaningfully biodegrade at all, and the million-year figure is a placeholder for "indefinitely". These times come from the widely reproduced NOAA / Mote Marine Laboratory / US National Park Service education chart, which is the ancestor of nearly every version of this list. Our World in Data publishes the same chart from the same three sources, so the lineage is real — but it is an education chart rather than a measurement programme. Few of its figures trace to a published experiment, real conditions move them by orders of magnitude, and "breaks down" often means "fragments into pieces too small to see" rather than "goes away". Read the ordering as solid and the individual numbers as indicative. The leather shoe is the clearest example of the problem: the sources behind this list disagree about it by a factor of fifty.</p>
 </div></section>
 
 <!-- ======== DEEPTIME ======== -->
@@ -1487,7 +1487,7 @@ const MONEY = [
   { name: "Restoring degraded land",  value: 300,  kind: "fix",   desc: "UN estimate of the annual investment needed by 2030 to restore the world's degraded land and slow desertification." },
   { name: "Global military spending", value: 2887, kind: "spend", desc: "World total, 2025 — the highest ever recorded, and the eleventh consecutive annual rise." },
   { name: "Advertising",              value: 1080, kind: "spend", desc: "Global ad spend across all media. Roughly $135 per human alive, spent on persuading you." },
-  { name: "Tobacco",                  value: 890,  kind: "spend", desc: "Global tobacco industry revenue. The product kills about 8 million people a year." },
+  { name: "Tobacco",                  value: 890,  kind: "spend", desc: "Global tobacco industry revenue. The product kills more than 7 million people a year, over 1.6 million of them non-smokers." },
   { name: "Illegal drug trade",       value: 650,  kind: "spend", desc: "Global Financial Integrity's 2014 range of $426–652bn for the retail market. Inherently uncertain — and not a UNODC figure: UNODC's own published retail estimate was $321bn, two decades ago." },
   { name: "Cosmetics & beauty",       value: 430,  kind: "spend", desc: "Global beauty and personal care market." },
   { name: "Climate adaptation gap",   value: 387,  kind: "fix",   desc: "UNEP's 2025 estimate of developing countries' annual adaptation needs by 2035: $310bn modelled, $365bn extrapolated from countries' own plans. Actual international public flows run an order of magnitude below it." },
@@ -1497,7 +1497,7 @@ const MONEY = [
   { name: "Coffee",                   value: 130,  kind: "spend", desc: "Global coffee market. Roughly 2 billion cups a day." },
   { name: "Clean water & sanitation", value: 114,  kind: "fix",   desc: "World Bank estimate of annual capital cost to reach universal safe water and sanitation. Around 2 billion people lack safely managed drinking water." },
   { name: "Universal education gap",  value: 97,   kind: "fix",   desc: "UNESCO's estimated annual financing gap for 79 low- and lower-middle-income countries to reach their own national education targets — which is not the same as, and is cheaper than, universal schooling." },
-  { name: "Ending world hunger",      value: 40,   kind: "fix",   desc: "Widely cited IFPRI/FAO estimate of additional annual spending needed to end hunger by 2030. About 5 days of world military spending." },
+  { name: "Ending world hunger",      value: 40,   kind: "fix",   desc: "A widely repeated figure for the extra annual spending needed to end hunger by 2030. Treat it loosely: the studies usually cited for it do not actually produce $40bn — IFPRI/Ceres2030 arrive at about $33bn a year, split between donors and low-income countries. About 5 days of world military spending." },
   { name: "NASA, annual budget",      value: 25,   kind: "ref",   desc: "The entire US space programme, for a year." },
   { name: "The malaria funding gap",      value: 5.4,    kind: "fix",   desc: "WHO's stated shortfall for 2024 — the difference between what malaria control needs and what it receives. The full annual requirement is about $9.3bn. Malaria kills roughly 600,000 people a year, mostly children under five." },
   { name: "WHO annual budget",        value: 3.4,  kind: "ref",   desc: "The World Health Organization's programme budget, per year — about the same as a large city hospital system." }
@@ -1707,7 +1707,7 @@ const TICKS = [
   { label: "Hours of video uploaded to YouTube", perMin: 500,    colour: "var(--c1)", ref: "you could never watch one day of it" },
   { label: "Instagram photos & reels shared", perMin: 66000,     colour: "var(--c2)", ref: "≈95 million a day" },
   { label: "US dollars spent on Amazon",      perMin: 1364000,   colour: "var(--c3)", prefix: "$", ref: "≈$717bn a year, every segment" },
-  { label: "Babies born",                     perMin: 250,       colour: "var(--c5)", ref: "≈134 million a year" },
+  { label: "Babies born",                     perMin: 250,       colour: "var(--c5)", ref: "≈132 million a year" },
   { label: "People who died",                 perMin: 116,       colour: "var(--dim)", ref: "≈61 million a year" },
   { label: "Plastic bottles bought",          perMin: 900000,    colour: "var(--c4)", ref: "\u2248480 billion a year" },
   { label: "Chickens killed for meat",        perMin: 143000,    colour: "var(--c2)", ref: "\u224875 billion a year" },
@@ -1934,7 +1934,7 @@ const ANIMALS = [
   { n: "Elephants",           icon: "🐘", d: 750,    note: "A floor rather than a total: India alone officially recorded 629 deaths in 2023–24, and Sri Lanka adds a hundred or so, before Africa is counted at all. Rising, as habitat shrinks." },
   { n: "Hippos",              icon: "🦛", d: 500,    note: "Territorial, three tonnes, and faster than you over short distances." },
   { n: "Lions",               icon: "🦁", d: 200,    note: "The entire species kills roughly as many people per year as a mid-sized road junction." },
-  { n: "Bees & wasps",        icon: "🐝", d: 100,    note: "Almost all deaths are anaphylaxis in people already allergic, not venom volume." },
+  { n: "Bees & wasps",        icon: "🐝", d: 250,    note: "Almost all deaths are anaphylaxis in people already allergic, not venom volume." },
   { n: "Wolves",              icon: "🐺", d: 1.4,     note: "The only systematic global review found 26 fatal attacks in the whole of 2002–20, about 1.4 a year. Its authors flag under-reporting in parts of Asia, so the true number is somewhat higher — but nothing supports ten. Against roughly a thousand years of folklore." },
   { n: "Sharks",              icon: "🦈", d: 6,      note: "About six unprovoked fatal attacks a year, globally. You are far more likely to be killed by a vending machine, a cow, or your own furniture." }
 ];
@@ -2081,7 +2081,9 @@ const STRIPE_COLOURS = [
 
 (function warmingStripes() {
   const host = $("#stripeBar"), START = 1850;
-  const lo = -0.60, hi = 1.26;
+  /* symmetric about zero, so the blue/red split falls exactly on the
+     1961-1990 baseline the legend refers to */
+  const lo = -1.26, hi = 1.26;
   const colFor = (v) => STRIPE_COLOURS[Math.max(0, Math.min(STRIPE_COLOURS.length - 1,
     Math.floor(((v - lo) / (hi - lo)) * STRIPE_COLOURS.length)))];
 
@@ -2100,7 +2102,7 @@ const STRIPE_COLOURS = [
     const i = +el.dataset.i, v = ANOMALY[i];
     return `<span class="t">${START + i}</span>
             <span class="v">${v > 0 ? "+" : ""}${v.toFixed(2)} °C vs the 1961–1990 average</span>
-            <span class="d">${v > 0 ? "Warmer" : "Cooler"} than the twentieth-century baseline.</span>`;
+            <span class="d">${v > 0 ? "Warmer" : "Cooler"} than the 1961\u20131990 average.</span>`;
   });
 
   $("#stripeFirst").textContent = START;
@@ -2130,13 +2132,13 @@ const RUBBISH = [
   { n: "Banana peel",        y: 0.08,    label: "1 month" },
   { n: "Newspaper",          y: 0.11,    label: "6 weeks" },
   { n: "Apple core",         y: 0.17,    label: "2 months" },
-  { n: "Cardboard box",      y: 0.25,    label: "3 months" },
+  { n: "Cardboard box",      y: 0.17,    label: "2 months" },
   { n: "Cotton t-shirt",     y: 0.5,     label: "6 months" },
   { n: "Orange peel",        y: 0.5,     label: "6 months" },
   { n: "Wool sock",          y: 3,       label: "1–5 years" },
   { n: "Cigarette butt",     y: 10,      label: "10 years" },
   { n: "Plastic bag",        y: 20,      label: "20 years" },
-  { n: "Leather shoe",       y: 40,      label: "25–40 years" },
+  { n: "Leather shoe",       y: 40,      label: "1–50 years" },
   { n: "Tin can",            y: 50,      label: "50 years" },
   { n: "Foam cup",           y: 50,      label: "50 years" },
   { n: "Rubber boot sole",   y: 60,      label: "50–80 years" },
@@ -2166,7 +2168,7 @@ const RUBBISH = [
        <div class="lasttime">${r.label}</div>`;
     row.dataset.pos = pos(r.y);
     const human = r.y >= 1000
-      ? `That is longer than all of recorded human history${r.y >= 100000 ? ", roughly 150 times over" : ""}.`
+      ? `That is longer than all of recorded human history${r.y >= 100000 ? ", roughly 190 times over" : ""}.`
       : r.y >= 100 ? "Longer than anyone reading this will live."
       : r.y >= 10 ? "It will outlive most of your possessions."
       : "It rejoins the world quickly.";
@@ -2819,9 +2821,9 @@ const LAND_TIERS = [
     { n: "Glaciers", pct: 10, c: "#3d5a80", ink: "#dbe7f5" },
     { n: "Barren", pct: 14, c: "#5c5241", ink: "#f0e6d2" } ] },
   { label: "Habitable land", segs: [
-    { n: "Agriculture", pct: 46, c: "#ffc857", ink: "#2b2004", focus: true },
-    { n: "Forest", pct: 39, c: "#1f7a5a", ink: "#e6fff6" },
-    { n: "Shrub", pct: 13, c: "#7a6a3a", ink: "#fff7e0" },
+    { n: "Agriculture", pct: 44, c: "#ffc857", ink: "#2b2004", focus: true },
+    { n: "Forest", pct: 40, c: "#1f7a5a", ink: "#e6fff6" },
+    { n: "Shrub", pct: 14, c: "#7a6a3a", ink: "#fff7e0" },
     { n: "Cities", pct: 1, c: "#ff5d73", ink: "#2b0610" },
     { n: "Water", pct: 1, c: "#4895ef", ink: "#08182c" } ] },
   { label: "Farmland", segs: [
@@ -2831,7 +2833,7 @@ const LAND_TIERS = [
 ];
 const LAND_FLIP = [
   { n: "Of all farmland", live: 80, crop: 20 },
-  { n: "Of all calories", live: 18, crop: 82 },
+  { n: "Of all calories",  live: 17, crop: 83 },
   { n: "Of all protein", live: 37, crop: 63 }
 ];
 
