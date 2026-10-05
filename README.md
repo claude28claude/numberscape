@@ -3,7 +3,7 @@
 **The world is bigger, weirder and less scary than you think.**
 
 An interactive data-visualisation essay in the spirit of *Information is Beautiful*.
-Twenty-three chapters, 518 data points, one HTML file — including chapters that
+Twenty-nine chapters, 518 data points, one HTML file — including chapters that
 measure the reader rather than the world.
 
 **Live:** https://claude28claude.github.io/numberscape/
@@ -105,3 +105,23 @@ Nothing here is medical, legal or financial advice.
 
 David McCandless (*Information is Beautiful*), Hans Rosling (*Factfulness*),
 Ed Hawkins (warming stripes), Our World in Data, and Edward Tufte.
+
+## 2026-10-05 — six new chapters
+
+All six were built from primary sources fetched in-session, not from memory:
+
+| # | Chapter | Source |
+|---|---------|--------|
+| 7 | The Hours You Sell | Penn World Table 11.0; Huberman & Minns (2005) |
+| 8 | How Big Is a Billion | arithmetic only, derived in the page |
+| 14 | What Dinner Costs the Sky | Poore & Nemecek, *Science* (2018) |
+| 18 | Who Broke the Sky | Global Carbon Budget 2025 |
+| 19 | The Price of Sunlight | IRENA (2025); Nemet (2009); Farmer & Lafond (2016) |
+| 20 | Ten Per Cent to Half | Comin & Hobijn (2004) and others |
+
+Three things were deliberately left out rather than guessed: Mexico's working
+hours (Penn World Table and the OECD disagree by ~570 hours), nuts in the
+per-kilogram food view (a negative land-use term a stacked bar cannot show),
+and television and smartphone adoption (those series begin above 10%, so the
+10% date does not exist in the data). Each omission is stated in the chapter
+it belongs to.

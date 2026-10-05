@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Numberscape — the world, drawn to scale</title>
-<meta name="description" content="Twelve ways to see the numbers you thought you knew. An interactive data-visualisation essay.">
+<meta name="description" content="Twenty-nine ways to see the numbers you thought you knew. An interactive, offline, source-checked data-visualisation essay.">
 <meta name="theme-color" content="#0a0c11">
 
 <!-- Installable app: manifest + PNG icons. Chrome needs real 192/512 PNGs;
@@ -631,6 +631,110 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   .hrname{font-size:12px}.hrnums{font-size:10px}
 }
 
+/* ---------- the hours you sell ---------- */
+.whrow{display:grid;grid-template-columns:168px 1fr 92px;gap:14px;align-items:center;padding:5px 0}
+.whrow:hover{background:rgba(255,255,255,.02)}
+.whname{font-size:13.5px}
+.whname i{font-style:normal;color:var(--dimmer);font-family:var(--mono);font-size:10px;margin-right:8px}
+.whtrack{height:18px;background:var(--panel2);border-radius:4px;overflow:hidden;position:relative}
+.whfill{height:100%;width:0;border-radius:4px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.whnum{font-family:var(--mono);font-size:12px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}
+.whrow.mark .whname{color:var(--c2)}
+#whSlope{display:block;width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.whgap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:24px}
+.whgap div{background:var(--panel);padding:17px 19px}
+.whgap .wv{font-family:var(--serif);font-size:25px;line-height:1.08}
+.whgap .wl{font-size:12.5px;color:var(--dim);margin-top:7px;line-height:1.45}
+@media(max-width:640px){
+  .whrow{grid-template-columns:104px 1fr 70px;gap:9px}
+  .whname{font-size:11.5px}.whname i{display:none}.whnum{font-size:10.5px}
+}
+
+/* ---------- how big is a billion ---------- */
+.bgctl{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:3px;gap:3px;margin-bottom:24px;flex-wrap:wrap}
+.bgctl button{background:transparent;border:none;color:var(--dim);padding:9px 20px;border-radius:6px;font-size:12.5px;cursor:pointer;font-family:var(--sans);transition:background .2s,color .2s}
+.bgctl button.on{background:var(--c5);color:#140a24;font-weight:650}
+.bgbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 24px}
+.bgtrack{position:relative;height:72px;border-radius:8px;background:linear-gradient(90deg,#141a28,#242e46);border:1px solid var(--line);overflow:hidden}
+.bgfill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,rgba(184,146,255,.5),rgba(184,146,255,.12));transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.bgmark{position:absolute;top:0;bottom:0;width:2px;background:var(--c2);transition:left .9s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.bgmark.hair{width:1px;background:var(--c3)}
+.bgmflag{position:absolute;transform:translateX(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:left .9s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.bgmflag.a{color:var(--c2);top:8px}
+.bgmflag.b{color:var(--c3);top:50px}
+.bgmflag.off,.bgmark.off{opacity:0}
+.bgends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dimmer);margin-top:9px;letter-spacing:.1em}
+.bgfacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(214px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:26px}
+.bgfact{background:var(--panel);padding:18px 20px}
+.bgfact .bv{font-family:var(--serif);font-size:25px;line-height:1.08;color:var(--c5)}
+.bgfact .bl{font-size:12.5px;color:var(--dim);margin-top:8px;line-height:1.45}
+
+/* ---------- what dinner costs the sky ---------- */
+.dnhead{display:grid;grid-template-columns:168px 1fr 86px;gap:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dimmer);margin-bottom:10px}
+.dnhead span:last-child{text-align:right}
+.dnrow{display:grid;grid-template-columns:168px 1fr 86px;gap:14px;align-items:center;padding:5px 0}
+.dnname{font-size:13.5px;line-height:1.25}
+.dnstack{display:flex;height:20px;border-radius:4px;overflow:hidden;background:var(--panel2)}
+.dnseg{width:0;transition:width .8s cubic-bezier(.2,.8,.2,1),opacity .25s;min-width:0}
+.dnwrap.focus .dnseg{opacity:.14}
+.dnwrap.focus .dnseg.hot{opacity:1}
+.dnnum{font-family:var(--mono);font-size:12px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}
+.dnkey{display:flex;gap:7px 18px;flex-wrap:wrap;margin-top:18px;font-size:12.5px;color:var(--dim)}
+.dnkey span{cursor:pointer;transition:color .2s}
+.dnkey span:hover{color:var(--ink)}
+.dnkey span.on{color:var(--ink);font-weight:650}
+.dnkey i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:7px;vertical-align:-1px}
+@media(max-width:640px){
+  .dnrow,.dnhead{grid-template-columns:106px 1fr 64px;gap:8px}
+  .dnname{font-size:11.5px}.dnnum{font-size:10.5px}
+}
+
+/* ---------- who broke the sky ---------- */
+.blrow{display:grid;grid-template-columns:26px 150px 1fr 96px;gap:13px;align-items:center;padding:7px 0;will-change:transform}
+.blrow.anim{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.blrank{font-family:var(--mono);font-size:11px;color:var(--dimmer);text-align:right}
+.blname{font-size:13.5px}
+.bltrack{position:relative;height:20px;background:var(--panel2);border-radius:4px}
+.blfill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:4px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.blpop{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:0;transition:left .6s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.blpop.on{opacity:.8}
+.blnum{font-family:var(--mono);font-size:12px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}
+.blnote{font-family:var(--mono);font-size:11.5px;color:var(--dimmer);margin-top:18px;letter-spacing:.03em;line-height:1.8}
+.blnote b{color:var(--ink);font-family:var(--sans);letter-spacing:0}
+@media(max-width:640px){
+  .blrow{grid-template-columns:20px 92px 1fr 66px;gap:8px}
+  .blname{font-size:11.5px}.blnum{font-size:10.5px}
+}
+
+/* ---------- the price of sunlight ---------- */
+.slwrap{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px}
+.slwrap svg{display:block;width:100%;height:auto}
+.sldot{cursor:default;transition:opacity .2s}
+.slwrap.hovering .sldot{opacity:.28}
+.slwrap.hovering .sldot.on{opacity:1}
+.slfit{stroke:var(--c5);stroke-width:1.4;stroke-dasharray:5 4;fill:none;opacity:.75}
+.slpath{fill:none;stroke:var(--c2);stroke-width:2;opacity:.5}
+.slcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:24px}
+.slcard{background:var(--panel);padding:17px 19px}
+.slcard .sv{font-family:var(--serif);font-size:25px;line-height:1.08;color:var(--c2)}
+.slcard .sl{font-size:12.5px;color:var(--dim);margin-top:7px;line-height:1.45}
+
+/* ---------- ten per cent to half ---------- */
+.arrow{display:grid;grid-template-columns:186px 1fr 58px;gap:14px;align-items:center;padding:4px 0}
+.arrow:hover{background:rgba(255,255,255,.02)}
+.arname{font-size:13.5px}
+.artrack{position:relative;height:22px}
+.arbase{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(37,44,58,.85)}
+.arbar{position:absolute;top:50%;height:10px;transform:translateY(-50%);border-radius:5px;width:0;transition:left .9s cubic-bezier(.2,.8,.2,1),width .9s cubic-bezier(.2,.8,.2,1)}
+.aryears{font-family:var(--mono);font-size:12px;text-align:right;color:var(--dim);font-variant-numeric:tabular-nums}
+.araxis{display:grid;grid-template-columns:186px 1fr 58px;gap:14px;margin-top:6px}
+.articks{position:relative;height:18px;border-top:1px solid var(--line)}
+.articks span{position:absolute;top:5px;transform:translateX(-50%);font-family:var(--mono);font-size:9.5px;color:var(--dimmer)}
+@media(max-width:640px){
+  .arrow,.araxis{grid-template-columns:120px 1fr 46px;gap:9px}
+  .arname{font-size:11.5px}.aryears{font-size:10.5px}
+}
+
 /* ---------- reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -678,10 +782,10 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <canvas id="heroCanvas"></canvas>
   <div class="wrap">
     <h1>The world is<br>bigger, weirder<br>and <em>less scary</em><br>than you think.</h1>
-    <p class="lead">Twenty-three chapters about things you already have an opinion on &mdash; where you sit on Earth, what the planet is made of, how far the Moon really is, and how long a Victorian actually lived. <b>Most people are wrong, reliably, and in the same direction.</b></p>
+    <p class="lead">Twenty-nine chapters about things you already have an opinion on &mdash; where you sit on Earth, who actually broke the sky, how many hours of your life you sell, and what a steak costs that a flight does not. <b>Most people are wrong, reliably, and in the same direction.</b></p>
     <div class="herostats">
-      <div class="herostat"><div class="v" data-count="23">0</div><div class="l">Chapters</div></div>
-      <div class="herostat"><div class="v" data-count="518">0</div><div class="l">Data points</div></div>
+      <div class="herostat"><div class="v" data-count="29">0</div><div class="l">Chapters</div></div>
+      <div class="herostat"><div class="v" data-count="999">0</div><div class="l">Data points</div></div>
       <div class="herostat"><div class="v" data-count="0" data-suffix="kb">0</div><div class="l">Trackers loaded</div></div>
     </div>
     <div class="scrollcue"><span class="bar"></span> Scroll</div>
@@ -691,14 +795,14 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== CONTENTS ======== -->
 <section id="contents"><div class="wrap rv">
   <div class="eyebrow">Contents</div>
-  <h2>Twenty-three chapters.</h2>
-  <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip, type in your own numbers, and two chapters that time you</strong>. Nothing is loaded from the internet.</p>
+  <h2>Twenty-nine chapters.</h2>
+  <p class="standfirst">Read it straight through, or jump. Everything is interactive — <strong>drag, click, hover, flip, re-sort, type in your own numbers, and two chapters that time you</strong>. Nothing is loaded from the internet.</p>
   <ol class="toc" id="toc"></ol>
 </div></section>
 
 <!-- ======== GAP ======== -->
 <section id="gap" data-title="The Perception Gap" data-blurb="What people think their country looks like, next to what it actually looks like."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">1</span> Misperception</div>
+  <div class="eyebrow"><span class="num"></span> Misperception</div>
   <h2>Nobody knows<br>where they live.</h2>
   <p class="standfirst">Pollsters have spent a decade asking people to estimate basic facts about their own countries. The answers are not slightly off &mdash; they are off by <strong>two, five, sometimes twelve times</strong>. The amber dot is the average guess. The teal dot is reality. Look at which direction the errors run.</p>
 
@@ -715,7 +819,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 2. FEAR ======== -->
 <section id="fear" data-title="Fear vs Reality" data-blurb="What kills people, what they Google, and what the press writes about."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">2</span> Distortion</div>
+  <div class="eyebrow"><span class="num"></span> Distortion</div>
   <h2>What kills you<br>vs what frightens you.</h2>
   <p class="standfirst">Three rankings of the same thirteen causes of death: how often they <strong>actually kill</strong> Americans, how often people <strong>search for them</strong>, and how often the <strong>press writes about them</strong>. The news is not a mirror. It's a funhouse mirror, and it has a consistent bias: it over-reports the sudden and under-reports the slow.</p>
 
@@ -732,7 +836,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 3. ANIMALS ======== -->
 <section id="animals" data-title="Deadliest Animals" data-blurb="The most dangerous creature on Earth weighs 2.5 milligrams."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">3</span> Proportion</div>
+  <div class="eyebrow"><span class="num"></span> Proportion</div>
   <h2>The deadliest animal<br>on Earth is a mosquito.</h2>
   <p class="standfirst">Human deaths per year, by animal. Watch what happens when you switch off the log scale: <strong>almost every creature you were taught to fear becomes invisible</strong>, and the bars still worth looking at belong to things nobody is frightened of. One of them is us.</p>
 
@@ -747,7 +851,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== SURVIVAL ======== -->
 <section id="survival" data-title="Nobody Died at Forty" data-blurb="Life expectancy was 41. Almost nobody died at 41."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">4</span> Survival</div>
+  <div class="eyebrow"><span class="num"></span> Survival</div>
   <h2>Forty was not a lifespan.<br>It was an average with<br>fifteen dead babies in it.</h2>
   <p class="standfirst">Life expectancy at birth in England and Wales was <strong>41 in 1841</strong> &mdash; the most quoted number in popular history and the most consistently misread. It is a mean taken over a population in which fifteen of every hundred newborns died before their first birthday and twenty-six before their fifth. Strip those deaths out and the same table says a five-year-old could expect fifty more years. Drag the scrubber and watch two hundred people die.</p>
 
@@ -781,7 +885,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== INCOME ======== -->
 <section id="income" data-title="The Income Ladder" data-blurb="Put your own income in. Find out where you actually stand on Earth."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">5</span> Position</div>
+  <div class="eyebrow"><span class="num"></span> Position</div>
   <h2>You are probably<br>the rich one.</h2>
   <p class="standfirst">Almost everyone believes they are somewhere in the middle. Very few people are. Put in what your household actually lives on and this will place you against <strong>every person alive</strong>, adjusted for what money buys where you live. It is the most uncomfortable chart on this page, and the only one that is about you specifically.</p>
 
@@ -825,7 +929,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== HOURS ======== -->
 <section id="hours" data-title="The Price In Hours" data-blurb="Objects became almost free. Everything you cannot put in a box did the opposite."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">6</span> Value</div>
+  <div class="eyebrow"><span class="num"></span> Value</div>
   <h2>Not what it costs.<br>How much of your life<br>it costs.</h2>
   <p class="standfirst">"Everything is more expensive than it used to be" is stated as flatly obvious. Measured the only way that really matters &mdash; <strong>how many hours you must work to buy the thing</strong> &mdash; most of it collapsed to a rounding error. Your anxiety is not wrong. It is <strong>attached to the wrong objects</strong>.</p>
 
@@ -844,9 +948,61 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Work time = price divided by the average hourly wage of production and nonsupervisory workers in the same year &mdash; the standard method from the Federal Reserve Bank of Dallas 1997 annual report, <em>Time Well Spent</em> (Cox &amp; Alm), which is also the source of every goods figure here. Service figures are calculated the same way from published prices: College Board <em>Trends in College Pricing</em> for tuition, the Census Housing Vacancy Survey for median asking rent, Child Care Aware of America for childcare. Wage anchors: $13.02/hour in early 1997 and $32.40/hour in July 2026 (BLS, production and nonsupervisory, total private). The Dallas Fed used manufacturing wages, which back-compute from their own 1997 figures to roughly $13.10 &mdash; close enough to splice, and the report itself notes the gap between the two series had all but closed by then.<br><br>Four honest problems with this chart. <strong>Rows use different pairs of years</strong>, because each product is measured from when its price is documented; every bar is labelled with its own. <strong>Quality is not held constant</strong> &mdash; a 1954 colour television and a modern one are not the same object, and the report concedes this in its own first footnote; the comparison flatters the present. <strong>Wages here are pre-tax and exclude benefits</strong>, and both moved: taxes rose from about 5% of wages in the early 1950s to 21%, while non-wage benefits rose from 19% to 44%. <strong>Tuition is the published sticker price</strong>, not what families actually pay after aid &mdash; net tuition is far lower and has recently been falling, so the education bars overstate the burden on the average student while accurately describing the list price. All figures are United States.</p>
 </div></section>
 
+<!-- ======== WORKHOURS ======== -->
+<section id="workhours" data-title="The Hours You Sell" data-blurb="Same job, same year, same planet. Twenty-eight working weeks apart."><div class="wrap rv">
+  <div class="eyebrow"><span class="num"></span> Labour</div>
+  <h2>Twenty-eight weeks<br>of your life, or not.</h2>
+  <p class="standfirst">Average hours worked per worker, per year, 2023. Thirty economies, every one of them counted the same way. The gap between the top and the bottom of this list is <strong>1,135 hours</strong> &mdash; twenty-eight forty-hour weeks. Not twenty-eight weeks of pay. Twenty-eight weeks of <em>being somewhere else</em>.</p>
+
+  <div id="whRank"></div>
+  <div class="whgap" id="whCards"></div>
+
+  <p class="revtext" style="margin-top:34px">The spread is not rich against poor in the way you would guess. <b>Germany sits at the bottom of this list and Singapore near the top</b>, and both are rich. The strongest pattern in the modern numbers is not income at all &mdash; it is how much of a country's productivity gain was taken as money and how much was taken as time.</p>
+
+  <div style="margin-top:30px">
+    <div class="tierlabel">The same question over 150 years &mdash; and a visible seam</div>
+    <svg id="whSlope" viewBox="0 0 900 430" preserveAspectRatio="xMidYMid meet" aria-label="Annual working hours per worker, 1870 to 2023, six countries"></svg>
+    <div class="legend" id="whKey" style="margin-top:18px"></div>
+  </div>
+
+  <p class="revtext" style="margin-top:26px">In 1870 an American worked 3,096 hours a year and a German 3,284 &mdash; the German worked <b>more</b>. Both have roughly halved since. But Germany kept going and America stopped: the American year has been flat within about 50 hours since 1990, while the German year fell another 250. The two countries are now <b>454 hours apart</b>, which is eleven and a half working weeks, every year, for a working life.</p>
+
+  <p class="note">Our World in Data, from the <strong>Penn World Table 11.0</strong> (1950 onward) and <strong>Huberman &amp; Minns (2005)</strong> (1870&ndash;1938). Read the seam in the chart literally: the two sources measure different things. Huberman &amp; Minns count full-time production workers outside agriculture; the Penn World Table counts all employees and self-employed people in the whole economy, part-time included. That is why the lines are drawn with a gap at 1938&ndash;1950 and not joined &mdash; the apparent <em>rise</em> in Germany and France across that gap is mostly the change of source, not a real reversal, and the 1938 dip in America and France is Depression short-time working rather than leisure. Within each era the comparison is sound; across the seam it is indicative only. One country is deliberately missing: the Penn World Table puts Mexico at about 1,629 hours while the OECD puts it near 2,200, a disagreement of some 570 hours that this chart cannot adjudicate, so Mexico is left out rather than shown at a number that may be wrong. Averages per <em>worker</em> also hide hours per <em>adult</em>: a country with many part-timers looks restful here even if the same total work is spread across more people.</p>
+</div></section>
+
+<!-- ======== BILLION ======== -->
+<section id="billion" data-title="How Big Is a Billion" data-blurb="A million seconds is eleven days. A billion seconds is a career."><div class="wrap rv">
+  <div class="eyebrow"><span class="num"></span> Magnitude</div>
+  <h2>A million is a rounding<br>error on a billion.</h2>
+  <p class="standfirst">Every chart on this site that compares a million of something to a billion of something is quietly lying to you, because the page is not wide enough to be honest. Pick a number. The bar below is <strong>that whole number, drawn at full width</strong> &mdash; and the markers show you where the smaller ones fall on it.</p>
+
+  <div class="bgctl" id="bgCtl">
+    <button data-exp="6" class="on">One million</button>
+    <button data-exp="9">One billion</button>
+    <button data-exp="12">One trillion</button>
+  </div>
+
+  <div class="bgbox">
+    <div class="bgtrack" id="bgTrack">
+      <div class="bgfill" id="bgFill"></div>
+      <div class="bgmark" id="bgMarkA"></div>
+      <div class="bgmark hair" id="bgMarkB"></div>
+      <div class="bgmflag a" id="bgFlagA"></div>
+      <div class="bgmflag b" id="bgFlagB"></div>
+    </div>
+    <div class="bgends"><span>0</span><span id="bgEnd">1,000,000</span></div>
+  </div>
+
+  <div class="bgfacts" id="bgFacts"></div>
+
+  <p class="revtext" style="margin-top:30px">Hold the three in your head at once. <b>A million seconds is a long holiday. A billion seconds is most of a working life. A trillion seconds is older than cave painting.</b> The words are one syllable apart and the things are not remotely comparable &mdash; which is exactly why &ldquo;billions&rdquo; in a headline does no work at all, and why the next chapter has to draw money as area instead of length.</p>
+
+  <p class="note">Arithmetic, not data &mdash; every figure here is derived on the spot from the number you picked, so you can check all of it with a calculator. Seconds are converted at 365.2425 days per year, the mean Gregorian year, which is why a billion seconds is 31.69 years and not 31.7. The &ldquo;that long ago&rdquo; line is computed from your device's clock when the page loads. Counting is priced at one number per second for eight hours a day, which is generous: saying &ldquo;seven hundred and seventy-six thousand, four hundred and twelve&rdquo; takes rather longer than a second. The distance line uses a flat 1&nbsp;mm per dollar and the Moon's mean distance of 384,400&nbsp;km. The British billion &mdash; a million million &mdash; was abandoned in UK government statistics in 1974; a billion here is 10<sup>9</sup> throughout, as it is everywhere else on this site.</p>
+</div></section>
+
 <!-- ======== 4. MONEY ======== -->
 <section id="money" data-title="Billion-Dollar-o-Gram" data-blurb="World spending and the cost of fixing things, as area, at one scale."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">7</span> Scale</div>
+  <div class="eyebrow"><span class="num"></span> Scale</div>
   <h2>The billion-dollar-o-gram.</h2>
   <p class="standfirst">Big numbers stop meaning anything past about a million. So here they are as <strong>area</strong>, all on one page, at one scale. Red is money the world spends every year. Green is the estimated annual cost of solving a problem we describe as impossible. Hover any block.</p>
 
@@ -862,7 +1018,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 4. PILLS ======== -->
 <section id="pills" data-title="Snake Oil?" data-blurb="Eighteen supplements, plotted by popularity against strength of evidence."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">8</span> Evidence</div>
+  <div class="eyebrow"><span class="num"></span> Evidence</div>
   <h2>Snake oil, or not?</h2>
   <p class="standfirst">Every bubble is a supplement. <strong>Up</strong> means better evidence from human trials. <strong>Right</strong> means more people take it. The interesting stuff lives in the bottom-right: hugely popular, barely supported. Bubble size = rough global market.</p>
 
@@ -873,7 +1029,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== MEASLES ======== -->
 <section id="measles" data-title="What Measles Deletes" data-blurb="It does not just make a child ill. It erases what they had already survived."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">9</span> Immunity</div>
+  <div class="eyebrow"><span class="num"></span> Immunity</div>
   <h2>The infection that erases<br>what you already survived.</h2>
   <p class="standfirst">Measles is filed in most heads as a rash and a fortnight off school. A stronger version of the belief holds that having had it leaves a child hardier than a vaccinated one. The truth is precisely inverted. In 2019 two teams studied unvaccinated Dutch children before and after a measles outbreak &mdash; one profiling their antibodies against thousands of pathogen fragments, the other sequencing their B&nbsp;cells &mdash; and found the virus had <strong>deleted a large share of the immune memory those children had already built</strong> against everything else they had ever met.</p>
 
@@ -900,7 +1056,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== BIOMASS ======== -->
 <section id="biomass" data-title="Life on Earth, by Weight" data-blurb="Weigh every mammal alive. Ninety-six per cent of it is us and our food."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">10</span> Dominance</div>
+  <div class="eyebrow"><span class="num"></span> Dominance</div>
   <h2>Weigh every<br>mammal alive.</h2>
   <p class="standfirst">Not count them &mdash; <strong>weigh</strong> them. Put every mammal on Earth on one enormous scale and sort the mass into three piles: livestock, human beings, and every wild mammal in existence &mdash; every elephant, whale, bat, mouse, deer, tiger and seal. Here is how that divides. Each square is one per cent.</p>
 
@@ -926,7 +1082,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== LAND ======== -->
 <section id="land" data-title="How We Use the Earth" data-blurb="Half of all habitable land is farmed. Most of that farm feeds animals, not you."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">11</span> Footprint</div>
+  <div class="eyebrow"><span class="num"></span> Footprint</div>
   <h2>Half the habitable<br>land is a farm.</h2>
   <p class="standfirst">Zoom in one step at a time. Start with the whole planet's surface, then keep only the part you could stand on, then only the part we farm. Each bar is the highlighted slice of the bar above it, stretched back out to full width. <strong>Watch what happens at the last step.</strong></p>
 
@@ -941,9 +1097,39 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">Our World in Data, from FAO and Ellis et al. Land is 29% of Earth's surface; 71% of that land is habitable once glaciers and barren desert, salt flat and exposed rock are removed. "Livestock" covers both grazing land and cropland grown for animal feed. Calorie and protein shares are of global supply.</p>
 </div></section>
 
+<!-- ======== DINNER ======== -->
+<section id="dinner" data-title="What Dinner Costs the Sky" data-blurb="Eat local, people say. Transport is half of one per cent of a steak."><div class="wrap rv">
+  <div class="eyebrow"><span class="num"></span> Appetite</div>
+  <h2>Transport is 0.5%<br>of a steak.</h2>
+  <p class="standfirst">Greenhouse gas emissions for a kilogram of food, split across the eight stages between a field and your bin. The advice almost everyone has absorbed is <strong>buy local</strong>. Click <em>Transport</em> in the key and watch what happens to the chart.</p>
+
+  <div class="bgctl" id="dnCtl">
+    <button data-m="kg" class="on">Per kilogram</button>
+    <button data-m="pr">Per 100 g of protein</button>
+  </div>
+
+  <p class="swipehint">&#8596; Swipe the chart sideways</p>
+  <div class="dnhead" id="dnHead"><span>Food</span><span id="dnAxis">Kilograms of CO&#8322;-equivalent per kilogram of food</span><span id="dnUnit">kg CO&#8322;e</span></div>
+  <div class="dnwrap" id="dnWrap"></div>
+  <div class="dnkey" id="dnKey"></div>
+
+  <p class="revtext" style="margin-top:30px">Transport is <b>0.5% of beef, 0.6% of cheese, 1.7% of lamb</b>; the median food on this chart spends 2% of its footprint getting to you. Four fifths of beef's total is in the first two bars &mdash; the land that was cleared and the farm itself &mdash; and a further <b>14.5% is simply food thrown away</b>, five times transport, retail, packaging and processing put together.</p>
+
+  <p class="revtext">Which is the uncomfortable arithmetic: <b>beef from the farm down the road is worse than peas flown in</b>. Not marginally &mdash; beef is 102 times a pea per kilogram, and freight is a rounding error against that. Buying local does several other good things. It is not the lever people think it is.</p>
+
+  <p class="revtext">There is an honest flip side, and the chart shows it if you look at the bottom. <b>Transport is a third of a banana's footprint and over a fifth of an apple's</b> &mdash; local really does dominate those. It is just that their whole footprint is under one kilogram. <b>Transport matters most, proportionally, for the foods that matter least, absolutely.</b></p>
+
+  <div style="margin-top:34px">
+    <div class="tierlabel">And now change the denominator</div>
+    <p class="revtext">Switch the chart to <b>per 100 g of protein</b> and the order rearranges itself. Beef is still <b>8.8 times chicken and 113 times peas</b>. But a tomato is now a worse way to buy protein than pork, and an apple is worse than cheese &mdash; because fruit is mostly water and sugar, and the denominator has stopped being kind to it. The denominator you pick decides who looks guilty. That is not a reason to distrust the numbers. It is a reason to always ask <b>per what</b>.</p>
+  </div>
+
+  <p class="note">Poore &amp; Nemecek, &ldquo;Reducing food's environmental impacts through producers and consumers&rdquo;, <em>Science</em> (2018), via Our World in Data &mdash; a meta-analysis of some 38,700 commercial farms in 119 countries, and still the standard reference. These are <strong>global averages</strong>, which is the figure's main weakness: the spread between the best and worst producers of the same food is often larger than the gap between two different foods, so a specific steak may be far better or far worse than this bar. Three bars &mdash; rice, bananas and apples &mdash; have a slightly negative land-use-change term, meaning land reverting to carbon storage; those are drawn as zero, which widens each of those bars by at most 0.03&nbsp;kg. Nuts are omitted from the per-kilogram view for the same reason taken to an extreme: their land-use term is &minus;3.26, so a stacked bar cannot represent them honestly; they appear in the protein view, where the figure is a single net number, and they are the lowest thing on it. &ldquo;Losses&rdquo; is food produced and never eaten, allocated back onto what is eaten. Transport here is the freight of the food itself and excludes the consumer's own drive to the shop.</p>
+</div></section>
+
 <!-- ======== PEAKCHILD ======== -->
 <section id="peakchild" data-title="Peak Child" data-blurb="The population is still climbing. The number of children is not."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">12</span> Ageing</div>
+  <div class="eyebrow"><span class="num"></span> Ageing</div>
   <h2>More people.<br>Not more children.</h2>
   <p class="standfirst">Almost everyone assumes a growing world population means a growing number of children, and that the growth is driven by birth rates in poor countries. Neither is true any more. <strong>Annual births peaked around 2012</strong> and have been falling since; the number of under-fifteens peaked in 2020 and is now shrinking. The world is still adding people, but it has stopped adding babies.</p>
 
@@ -966,7 +1152,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 6. COLOURS ======== -->
 <section id="colours" data-title="Colours in Culture" data-blurb="White means purity. White also means death. Depends where you're standing."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">13</span> Meaning</div>
+  <div class="eyebrow"><span class="num"></span> Meaning</div>
   <h2>White is the colour<br>of weddings. And funerals.</h2>
   <p class="standfirst">Eight colours, seven cultural traditions, and what each one signifies. Almost every designer has at some point shipped a product into a market where their reassuring colour meant <strong>bereavement</strong>. Hover any cell; click a colour to hold its row.</p>
 
@@ -977,7 +1163,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 7. STRIPES ======== -->
 <section id="stripes" data-title="Warming Stripes" data-blurb="176 years of global temperature, with the numbers taken away."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">14</span> Trend</div>
+  <div class="eyebrow"><span class="num"></span> Trend</div>
   <h2>176 years,<br>no axes, no numbers.</h2>
   <p class="standfirst">Each stripe is one year of global average surface temperature. Blue is cooler than the 1961&ndash;1990 average, red is warmer. There is no scale, no gridline and no label — and it is still <strong>the most legible climate chart ever made</strong>. Hover any stripe for its year.</p>
 
@@ -992,9 +1178,77 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
   <p class="note">After Ed Hawkins's "warming stripes" (University of Reading, 2018). The series is the published <strong>HadCRUT.5.0.2.0 annual global mean</strong>, downloaded from the Met Office Hadley Centre &mdash; degrees Celsius relative to the 1961&ndash;1990 average, one stripe per year from 1850 to 2025. An earlier version of this chapter used values reconstructed from memory rather than the file; they were wrong by an average of 0.05&deg;C and by as much as 0.17&deg;C in 2023, so they have been replaced wholesale. Two honest notes on the newest stripe: <strong>2025 is provisional</strong> and carries a much wider uncertainty band than the years before it, and the headline warming figure depends on which pre-industrial baseline you pick &mdash; 1850&ndash;1900 is the IPCC convention and is what is used here. Anomalies before about 1900 rest on far sparser observations, particularly at sea and in the southern hemisphere, and their error bars are several times wider than the modern ones.</p>
 </div></section>
 
+<!-- ======== BLAME ======== -->
+<section id="blame" data-title="Who Broke the Sky" data-blurb="Four honest ways to answer one question. They give four different villains."><div class="wrap rv">
+  <div class="eyebrow"><span class="num"></span> Blame</div>
+  <h2>Four honest answers.<br>Four different villains.</h2>
+  <p class="standfirst">The chapter above shows the sky warming. This one asks who did it &mdash; and the answer changes completely depending on which perfectly defensible question you ask. <strong>Press each button.</strong> The bars re-sort themselves, and so should you.</p>
+
+  <div class="bgctl" id="blCtl">
+    <button data-m="ann" class="on">Emitting now</button>
+    <button data-m="cum">Emitted ever</button>
+    <button data-m="pc">Per person</button>
+    <button data-m="cons">Per person, imports counted</button>
+  </div>
+
+  <div class="blrows" id="blRows"></div>
+  <div class="blnote" id="blLegend"></div>
+
+  <p class="revtext" style="margin-top:32px">Ask <b>who is emitting now</b> and the answer is China, by a distance &mdash; 31.8% of the world's carbon dioxide in a single year. Ask <b>who put it there</b>, counting every tonne since 1750, and China drops to 15.4% while the United States rises to <b>23.5%: very nearly a quarter of all the CO&#8322; ever emitted by anyone</b>. The United States and the European Union together hold 39.8% of the all-time total, with 9.7% of the world's people.</p>
+
+  <p class="revtext">The United Kingdom is the sharpest version of it. Britain is <b>0.85% of the world's population and 0.81% of today's emissions</b> &mdash; a country that has, on the face of it, more or less stopped mattering. It is also responsible for <b>4.33% of every tonne of carbon dioxide ever emitted</b>, which is more than India's 3.57%, with one twenty-first of India's people. That is what being first to the Industrial Revolution looks like when you add it all up.</p>
+
+  <p class="revtext">Then there is the fourth button, which is the one that spoils everyone's story. Territorial accounting credits emissions to whoever burns the fuel. Move to consumption accounting &mdash; credit them to whoever ends up with the object &mdash; and <b>Britain's footprint rises by 58%</b>, Germany's by 29%, while <b>China's falls by 11%</b>. A good part of the West's decarbonisation is a change of address.</p>
+
+  <p class="revtext">And the per-person spread is the widest thing here. <b>Qatar emits 40.1 tonnes per person a year. Ethiopia emits 0.14</b> &mdash; a ratio of 294 to one. The world average is 4.7. There is no arrangement of this data in which the people most exposed to warming are the people who caused it.</p>
+
+  <p class="note">Global Carbon Budget 2025 and Our World in Data; territorial and cumulative figures are 2024, consumption-based figures are 2023, the latest year for which they exist. All of it <strong>excludes land-use change and forestry</strong>, which is the biggest caveat on the page: including it would raise Brazil, Indonesia, Nigeria and the Democratic Republic of Congo substantially and lower the industrial countries' relative share, and it is excluded here because the consumption-based series is only published on that basis, so including it in some columns and not others would be worse. It is CO&#8322; only &mdash; no methane, which moves agricultural countries up. Cumulative totals run from 1750 and are therefore a statement about <em>states</em>, not people: nobody alive emitted most of Britain's 4.33%. Population shares are derived from the same dataset's own per-capita denominators so the columns stay internally consistent. The European Union is quoted in the text but kept out of the chart, because listing it alongside Germany would double-count. Qatar's per-capita figure is genuine but reflects a small population next to very large gas liquefaction and export infrastructure.</p>
+</div></section>
+
+<!-- ======== SOLAR ======== -->
+<section id="solar" data-title="The Price of Sunlight" data-blurb="The steepest cost collapse in industrial history, and almost nobody noticed."><div class="wrap rv">
+  <div class="eyebrow"><span class="num"></span> Collapse</div>
+  <h2>Down 99.8%,<br>and still falling.</h2>
+  <p class="standfirst">Both axes here are logarithmic, so each gridline is ten times the last. One dot per year from 1975 to 2024: price of a solar panel going down the page, total solar ever installed going across it. <strong>A straight line on this chart means a fixed percentage fall for every doubling of the industry.</strong> Hover any dot for its year.</p>
+
+  <p class="swipehint">&#8596; Swipe the chart sideways</p>
+  <div class="slwrap" id="slWrap">
+    <svg id="slPlot" viewBox="0 0 900 480" preserveAspectRatio="xMidYMid meet" aria-label="Solar module price against cumulative installed capacity, 1975 to 2024, both axes logarithmic"></svg>
+  </div>
+
+  <div class="slcards" id="slCards"></div>
+
+  <p class="revtext" style="margin-top:32px">A solar module cost <b>$132.38 a watt in 1975</b> and <b>26.5 cents a watt in 2024</b>, in the same 2025 dollars. One hundred dollars bought you <b>0.76 watts</b> then &mdash; not enough to light one modern LED bulb. The same hundred dollars buys <b>377 watts</b> now, which will run a fridge.</p>
+
+  <p class="revtext">The line is the interesting part. Fitting all fifty points gives a fall of about <b>23.5% for every doubling of cumulative installed capacity</b>, and the industry has doubled <b>21.7 times</b> since 1975. That is the whole mechanism: nothing was invented in 2016 that made solar cheap. It got cheap the way it had been getting cheap for forty years, and the forty years simply kept going until the numbers became absurd.</p>
+
+  <p class="revtext">Which is also the warning. This is a <b>correlation with cumulative production, not a law of nature</b> &mdash; it describes what happened, it does not promise what happens next, and the fitted rate wanders between about 23% and 33% depending on which decade you fit it to. A learning rate is a property of an industry rather than a law of physics, and industries can stop learning &mdash; some have run their curve backwards, getting more expensive as they built more. Nothing here says solar will not.</p>
+
+  <p class="note">Our World in Data, from <strong>IRENA (2025)</strong>, <strong>Nemet (2009)</strong> and <strong>Farmer &amp; Lafond (2016)</strong>; prices are constant 2025 US dollars per watt, so inflation is already removed. Note carefully what is being priced: the <em>module</em>, not the installation. Modules are now a minority of the cost of a finished rooftop system &mdash; inverters, mounting, wiring, scaffolding, permits and labour have fallen far less, which is why household solar has not got 500 times cheaper even though the panel has. Capacity is on-grid installed capacity, which is why the 1975 figure is a barely-believable 0.54&nbsp;MW: the market then was essentially satellites. The fitted learning rate is an ordinary least-squares fit in log-log space over 1975&ndash;2024 and is quoted to one decimal place only because that is what the fit returns, not because it is known to that precision; published estimates of the solar learning rate commonly sit in the 20&ndash;25% range. The 2024 price point is the last one in the dataset &mdash; cumulative capacity is published for 2025 (2.38&nbsp;TW) but the price for it is not yet, so there is no 2025 dot rather than an extrapolated one.</p>
+</div></section>
+
+<!-- ======== ARRIVAL ======== -->
+<section id="arrival" data-title="Ten Per Cent to Half" data-blurb="The radio reached half of America faster than the internet did."><div class="wrap rv">
+  <div class="eyebrow"><span class="num"></span> Arrival</div>
+  <h2>The radio beat<br>the internet.</h2>
+  <p class="standfirst">Each bar starts the year a technology reached <strong>one in ten</strong> American households and ends the year it reached <strong>one in two</strong>. The bar is how long that took. Everyone knows the modern ones were fast. Almost nobody expects which of the old ones were faster.</p>
+
+  <p class="swipehint">&#8596; Swipe the chart sideways</p>
+  <div id="arRows"></div>
+  <div class="araxis"><span></span><div class="articks" id="arTicks"></div><span></span></div>
+
+  <p class="revtext" style="margin-top:30px">The <b>radio took six years</b>, from 1925 to 1931. The <b>internet took eight</b>, from 1993 to 2001. A box of valves in the age of the Model T spread through America faster than the World Wide Web did &mdash; and the microwave oven, starting in 1981, was faster than either, at four years.</p>
+
+  <p class="revtext">Meanwhile the <b>washing machine took thirty-five years</b> and the <b>telephone forty-three</b>. The pattern is not old-versus-new at all. It is <b>whether the thing needs the ground dug up.</b> Radio, microwaves, tablets and social media needed no infrastructure &mdash; buy it, plug it in, done. Plumbing, mains electricity and telephone lines needed trenches down every street in the country, and trenches move at the speed of capital and municipal politics, which is to say decades.</p>
+
+  <p class="revtext">Which is worth holding onto when something is described as spreading impossibly fast. <b>The thing that spreads fast is usually the thing that arrived on top of something slow that someone else already paid for.</b> Social media reached half of America in five years, on wires that took the telephone forty-three.</p>
+
+  <p class="note">Our World in Data, from <strong>Comin &amp; Hobijn (2004) and others</strong>; United States only, and &ldquo;households&rdquo; is the unit for the older entries while the internet, social media and mobile series measure individual use &mdash; that difference is small here but it is real. One structural caveat matters more than it looks. Most of these series <em>begin</em> at exactly 10%, because that is where the dataset's compilers chose to start them, so for those the left end of the bar is the dataset's own starting point rather than an independently measured crossing. Only five &mdash; the flush toilet, the refrigerator, the microwave, social media and the tablet &mdash; begin below 10% and have a genuinely interpolated start. Two famous technologies are <strong>deliberately absent</strong>: the dataset's television and smartphone series both begin already above 10% adoption, so their 10% dates are simply not in the file, and a bar for them would have had to be invented. The flush-toilet series is sparse before 1931, so its 50% crossing is interpolated across an eleven-year gap and should be read as 1930 or so, not 1931 exactly. Durations are rounded to whole years.</p>
+</div></section>
+
 <!-- ======== 8. LASTS ======== -->
 <section id="lasts" data-title="How Long It Lasts" data-blurb="You will be dead for a very long time before that bottle is."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">15</span> Duration</div>
+  <div class="eyebrow"><span class="num"></span> Duration</div>
   <h2>The thing you used<br>for four minutes.</h2>
   <p class="standfirst">Roughly how long common rubbish takes to break down, on a logarithmic scale — so every step right is <strong>ten times longer</strong>. The plastic bottle you drank from at lunch will outlast every person currently alive, and their grandchildren, and their language.</p>
 
@@ -1005,7 +1259,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== DEEPTIME ======== -->
 <section id="deeptime" data-title="The Last Second" data-blurb="Earth's whole history as one day. You arrive with milliseconds to spare."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">16</span> Deep time</div>
+  <div class="eyebrow"><span class="num"></span> Deep time</div>
   <h2>Everything, in<br>a single day.</h2>
   <p class="standfirst">Compress the 4.54 billion years of Earth into twenty-four hours. Midnight is the planet forming out of dust; midnight again is right now, this second, you reading this. On that scale <strong>one second is 52,500 years</strong> &mdash; comfortably longer than all of recorded history.</p>
 
@@ -1032,7 +1286,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== EARTHS ======== -->
 <section id="earths" data-title="Thirty Earths" data-blurb="Drag the Moon to where you think it goes. You will not leave enough room."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">17</span> Distance</div>
+  <div class="eyebrow"><span class="num"></span> Distance</div>
   <h2>The Moon sits<br>thirty Earths away.</h2>
   <p class="standfirst">Every diagram you have ever seen puts the Moon a few Earth-widths from the planet, hugging it. That picture is a lie of convenience &mdash; the truth does not fit on a page, so nobody draws it. <strong>Click anywhere on the track below</strong> to place the Moon where you think it belongs, then watch where it actually goes.</p>
 
@@ -1066,7 +1320,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 9. MINUTE ======== -->
 <section id="minute" data-title="Every Minute" data-blurb="Counters that started at zero when you opened this tab."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">18</span> Velocity</div>
+  <div class="eyebrow"><span class="num"></span> Velocity</div>
   <h2>What happened while<br>you read this page.</h2>
   <p class="standfirst">These counters started at zero the moment you opened this tab. They are not a simulation of the future — they're a rate that is already running, everywhere, right now. <strong>The last one is the one to sit with.</strong></p>
 
@@ -1077,7 +1331,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 6. LIFE ======== -->
 <section id="life" data-title="Your Life in Dots" data-blurb="Enter your age. Watch 4,680 weeks fill in."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">19</span> Personal</div>
+  <div class="eyebrow"><span class="num"></span> Personal</div>
   <h2>Your life, in dots.</h2>
   <p class="standfirst">One dot is one week. Ninety rows, fifty-two dots each — a fairly generous life. Set your age and watch the filled part appear. Nobody finds this chart cheerful. Almost everybody finds it <strong>clarifying</strong>.</p>
 
@@ -1105,7 +1359,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 <!-- ======== 7. MYTHS ======== -->
 <!-- ======== 11. REACTION ======== -->
 <section id="reaction" data-title="Reaction Time" data-blurb="Click when it turns green. Then see what a quarter of a second costs."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">20</span> Reflex</div>
+  <div class="eyebrow"><span class="num"></span> Reflex</div>
   <h2>How fast are you,<br>really?</h2>
   <p class="standfirst">Five rounds. The panel turns red, then — at some point it decides — green. Click the instant it does. <strong>You are measuring the round trip</strong>: light into your eye, signal to your visual cortex, decision, command back down your arm. Nobody is as fast as they think.</p>
 
@@ -1128,7 +1382,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 13. CORRELATION ======== -->
 <section id="correlation" data-title="Guess the Correlation" data-blurb="How strong is that relationship? Your eyes will say weaker than it is."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">21</span> Perception</div>
+  <div class="eyebrow"><span class="num"></span> Perception</div>
   <h2>How strong is<br>that relationship?</h2>
   <p class="standfirst">Every dot is an observation. Estimate the correlation — <strong>0 is a shapeless cloud, 1 is a perfect straight line</strong> — then see the real figure. Five rounds. There is a well-documented direction to the error people make here, and it matters, because this is the judgement call behind most "X is linked to Y" headlines.</p>
 
@@ -1148,7 +1402,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 14. MYTHS ======== -->
 <section id="myths" data-title="Mythconceptions" data-blurb="Sixteen things almost everyone believes, and almost everyone has wrong."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">22</span> Correction</div>
+  <div class="eyebrow"><span class="num"></span> Correction</div>
   <h2>Mythconceptions.</h2>
   <p class="standfirst">Sixteen things almost everyone believes, that almost everyone is wrong about. Click a card to flip it. <strong>Score yourself honestly</strong> — the fun is in noticing how confident you were.</p>
   <div class="mythgrid" id="mythGrid"></div>
@@ -1157,7 +1411,7 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
 
 <!-- ======== 12. FALLACIES ======== -->
 <section id="fallacies" data-title="Rhetological Fallacies" data-blurb="Twenty-two ways an argument goes wrong, filed by failure mode."><div class="wrap rv">
-  <div class="eyebrow"><span class="num">23</span> Defence</div>
+  <div class="eyebrow"><span class="num"></span> Defence</div>
   <h2>Twenty ways to be<br>wrong, persuasively.</h2>
   <p class="standfirst">Every chapter above can be misused. This is the toolkit for spotting it — including in the charts on this page. Filter by <strong>how the argument breaks</strong>, not by what it's about. The most useful ones are the boring ones: survivorship bias and the sunk cost fallacy will cost you more this year than every conspiracy theory combined.</p>
 
@@ -1179,13 +1433,17 @@ footer h3{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 14
         <li>WHO, UNESCO, FAO, UNEP</li>
         <li>SIPRI, OECD DAC, UNODC</li>
         <li>CDC, NIH Office of Dietary Supplements</li>
-        <li>Global Carbon Project, Ember</li>
+        <li>Global Carbon Project, Ember, IRENA</li>
+        <li>Penn World Table, Met Office Hadley Centre</li>
       </ul>
     </div>
     <div>
       <h4>Papers</h4>
       <ul>
         <li>Shen et al., <em>Death: Reality vs Reported</em> (2018)</li>
+        <li>Poore &amp; Nemecek, <em>Science</em> (2018)</li>
+        <li>Huberman &amp; Minns (2005); Comin &amp; Hobijn (2004)</li>
+        <li>Nemet (2009); Farmer &amp; Lafond (2016)</li>
         <li>Geyer, Jambeck &amp; Law, <em>Science Advances</em> (2017)</li>
         <li>Sender, Fuchs &amp; Milo, <em>PLOS Biology</em> (2016)</li>
         <li>Cochrane systematic reviews (various)</li>
@@ -3640,6 +3898,613 @@ const HOURS_SERVICES = [
 
 
 /* =======================================================================
+   THE HOURS YOU SELL — annual hours per worker
+   Penn World Table 11.0 (1950-) + Huberman & Minns (2005) (1870-1938),
+   via Our World in Data. The two sources are drawn as separate segments
+   with a visible gap because they do not measure the same thing.
+   ======================================================================= */
+(function workHours() {
+  const WH = [
+    { n: "Colombia", h: 2471 }, { n: "Cambodia", h: 2389 }, { n: "Bangladesh", h: 2383 },
+    { n: "India", h: 2383 }, { n: "China", h: 2328 }, { n: "Singapore", h: 2283 },
+    { n: "Myanmar", h: 2197 }, { n: "Costa Rica", h: 2177 }, { n: "Chile", h: 1950 },
+    { n: "South Korea", h: 1910 }, { n: "Greece", h: 1893 }, { n: "Israel", h: 1890 },
+    { n: "Poland", h: 1807 }, { n: "United States", h: 1789 }, { n: "Turkey", h: 1747 },
+    { n: "Canada", h: 1731 }, { n: "Italy", h: 1701 }, { n: "Ireland", h: 1654 },
+    { n: "Japan", h: 1654 }, { n: "Australia", h: 1611 }, { n: "Belgium", h: 1593 },
+    { n: "Switzerland", h: 1529 }, { n: "United Kingdom", h: 1523 }, { n: "France", h: 1487 },
+    { n: "Netherlands", h: 1439 }, { n: "Austria", h: 1438 }, { n: "Sweden", h: 1432 },
+    { n: "Norway", h: 1412 }, { n: "Denmark", h: 1380 }, { n: "Germany", h: 1335 }
+  ];
+  /* milestone years; the 1938 / 1950 step is the source seam */
+  const SERIES = [
+    { n: "Germany", c: "#ff5d73", old: [[1870,3284],[1900,3056],[1913,2723],[1929,2128],[1938,2187]],
+      now: [[1950,2427],[1960,2181],[1970,1972],[1980,1756],[1990,1583],[2000,1465],[2010,1425],[2023,1335]] },
+    { n: "United States", c: "#4895ef", old: [[1870,3096],[1900,2938],[1913,2900],[1929,2316],[1938,1756]],
+      now: [[1950,2022],[1960,1968],[1970,1931],[1980,1840],[1990,1836],[2000,1888],[2010,1773],[2023,1789]] },
+    { n: "United Kingdom", c: "#ffc857", old: [[1870,2755],[1900,2656],[1913,2656],[1929,2257],[1938,2200]],
+      now: [[1950,2023],[1960,1948],[1970,1733],[1980,1654],[1990,1617],[2000,1568],[2010,1522],[2023,1523]] },
+    { n: "France", c: "#b892ff", old: [[1870,3168],[1900,3115],[1913,2933],[1929,2198],[1938,1760]],
+      now: [[1950,2351],[1960,2188],[1970,1993],[1980,1776],[1990,1622],[2000,1542],[2010,1528],[2023,1487]] },
+    { n: "Sweden", c: "#2ec4b6", old: [[1870,3436],[1900,2745],[1913,2745],[1929,2152],[1938,2131]],
+      now: [[1950,1800],[1960,1695],[1970,1545],[1980,1370],[1990,1410],[2000,1489],[2010,1486],[2023,1432]] },
+    { n: "Japan", c: "#06d6a0", old: [],
+      now: [[1950,2076],[1960,2222],[1970,2185],[1980,2121],[1990,2049],[2000,1847],[2010,1773],[2023,1654]] }
+  ];
+
+  const rank = $("#whRank"), cards = $("#whCards"), key = $("#whKey");
+  if (!rank) return;
+  const MARK = new Set(["United States", "Germany", "India", "United Kingdom"]);
+  const max = WH[0].h;
+
+  /* ---- ranked bars ---- */
+  const frag = document.createDocumentFragment();
+  WH.forEach((d, i) => {
+    const row = document.createElement("div");
+    row.className = "whrow" + (MARK.has(d.n) ? " mark" : "");
+    /* a cool-to-warm ramp by position in the list, so the eye reads the sort */
+    const t = i / (WH.length - 1);
+    const col = t < .5 ? "#ff5d73" : "#2ec4b6";
+    row.innerHTML = `<div class="whname"><i>${String(i + 1).padStart(2, "0")}</i>${d.n}</div>
+      <div class="whtrack"><div class="whfill" data-w="${(d.h / max * 100).toFixed(2)}" style="background:${col}"></div></div>
+      <div class="whnum">${fmt(d.h)} h</div>`;
+    frag.appendChild(row);
+  });
+  rank.appendChild(frag);
+
+  const CARDS = [
+    ["1,135 h", "Between Colombia at the top and Germany at the bottom &mdash; twenty-eight forty-hour weeks a year"],
+    ["454 h", "Between an American worker and a German one: eleven and a half working weeks, every year"],
+    ["&minus;59%", "Germany's fall in annual hours since 1870, from 3,284 to 1,335"],
+    ["&minus;42%", "America's fall over the same 153 years, from 3,096 to 1,789"]
+  ];
+  cards.innerHTML = CARDS.map(c => `<div><div class="wv">${c[0]}</div><div class="wl">${c[1]}</div></div>`).join("");
+
+  /* ---- slope chart ---- */
+  const svg = $("#whSlope");
+  const W = 900, H = 430, L = 54, R = 118, T = 22, B = 46;
+  const x0 = 1860, x1 = 2030, y0 = 1200, y1 = 3500;
+  const sx = y => L + (y - x0) / (x1 - x0) * (W - L - R);
+  const sy = v => T + (y1 - v) / (y1 - y0) * (H - T - B);
+
+  for (let v = 1500; v <= 3500; v += 500) {
+    svgEl("line", { x1: L, x2: W - R, y1: sy(v), y2: sy(v), class: "gridline", opacity: .55 }, svg);
+    const t = svgEl("text", { x: L - 9, y: sy(v) + 4, "text-anchor": "end", class: "axlabel" }, svg);
+    t.textContent = fmt(v);
+  }
+  [1870, 1900, 1930, 1960, 1990, 2023].forEach(y => {
+    const t = svgEl("text", { x: sx(y), y: H - B + 20, "text-anchor": "middle", class: "axlabel" }, svg);
+    t.textContent = y;
+  });
+  /* the seam */
+  const seam = (sx(1938) + sx(1950)) / 2;
+  svgEl("rect", { x: sx(1938), y: T, width: sx(1950) - sx(1938), height: H - T - B, fill: "#ffffff", opacity: .035 }, svg);
+  const sl = svgEl("text", { x: seam, y: T + 13, "text-anchor": "middle", class: "axlabel", opacity: .8 }, svg);
+  sl.textContent = "source changes";
+
+  const line = pts => pts.map((p, i) => (i ? "L" : "M") + sx(p[0]).toFixed(1) + " " + sy(p[1]).toFixed(1)).join(" ");
+  SERIES.forEach(s => {
+    if (s.old.length) {
+      svgEl("path", { d: line(s.old), fill: "none", stroke: s.c, "stroke-width": 2, opacity: .85 }, svg);
+      s.old.forEach(p => svgEl("circle", { cx: sx(p[0]), cy: sy(p[1]), r: 2.6, fill: s.c, opacity: .85 }, svg));
+    }
+    svgEl("path", { d: line(s.now), fill: "none", stroke: s.c, "stroke-width": 2 }, svg);
+    s.now.forEach(p => svgEl("circle", { cx: sx(p[0]), cy: sy(p[1]), r: 2.6, fill: s.c }, svg));
+    const last = s.now[s.now.length - 1];
+    const lab = svgEl("text", { x: sx(last[0]) + 8, y: sy(last[1]) + 4, fill: s.c, "font-size": 11.5, "font-family": "var(--sans)" }, svg);
+    lab.textContent = s.n === "United Kingdom" ? "UK " + fmt(last[1]) : s.n === "United States" ? "US " + fmt(last[1]) : s.n + " " + fmt(last[1]);
+  });
+  const ylab = svgEl("text", { x: L - 9, y: T - 6, "text-anchor": "end", class: "axlabel" }, svg);
+  ylab.textContent = "hours / yr";
+
+  key.innerHTML =
+    `<span><i style="background:var(--dim);width:22px;height:2px;border-radius:0"></i>1870&ndash;1938: Huberman &amp; Minns &mdash; full-time production workers</span>
+     <span><i style="background:var(--ink);width:22px;height:2px;border-radius:0"></i>1950&ndash;2023: Penn World Table &mdash; all workers, part-time included</span>`;
+
+  new IntersectionObserver((es, o) => {
+    if (!es[0].isIntersecting) return;
+    o.disconnect();
+    $$(".whfill", rank).forEach(f => { f.style.width = f.dataset.w + "%"; });
+  }, { threshold: .1 }).observe(rank);
+})();
+
+
+/* =======================================================================
+   HOW BIG IS A BILLION — pure arithmetic, derived on the fly
+   ======================================================================= */
+(function bigBillion() {
+  const ctl = $("#bgCtl"), fill = $("#bgFill"), end = $("#bgEnd"), facts = $("#bgFacts");
+  const mA = $("#bgMarkA"), mB = $("#bgMarkB"), fA = $("#bgFlagA"), fB = $("#bgFlagB");
+  if (!ctl) return;
+
+  const YEAR = 365.2425 * 86400;                /* mean Gregorian year, seconds */
+  const NAME = { 3: "a thousand", 6: "a million", 9: "a billion", 12: "a trillion" };
+  const MOON = 384400;                          /* km, mean Earth-Moon distance */
+
+  function dur(sec) {
+    if (sec < 86400) return Math.round(sec / 3600) + " hours";
+    if (sec < 86400 * 90) {
+      const d = Math.floor(sec / 86400), h = Math.floor((sec % 86400) / 3600);
+      return d + " days " + h + " hours";
+    }
+    const y = sec / YEAR;
+    if (y < 1) return Math.round(sec / 86400) + " days";
+    if (y < 1000) return y.toFixed(y < 100 ? 2 : 0) + " years";
+    if (y >= 1e6) return (y / 1e6).toFixed(2) + " million years";
+    return fmt(Math.round(y)) + " years";
+  }
+  function ago(sec) {
+    const d = new Date(Date.now() - sec * 1000);
+    const y = d.getFullYear();
+    if (y > 0) return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    return fmt(Math.round(sec / YEAR)) + " years ago";
+  }
+
+  function render(exp) {
+    const N = Math.pow(10, exp);
+    end.textContent = fmt(N);
+
+    /* smaller magnitudes, placed on a bar whose full width is N */
+    const sub = [exp - 3, exp - 6].filter(e => e >= 3);
+    const place = (mark, flag, e) => {
+      if (e === undefined) { mark.classList.add("off"); flag.classList.add("off"); return; }
+      const pct = Math.pow(10, e) / N * 100;     /* always 0.1 or 0.0001 here */
+      mark.classList.remove("off"); flag.classList.remove("off");
+      /* CSS rejects exponential notation, which 0.0001% stringifies to */
+      mark.style.left = pct.toFixed(6) + "%";
+      flag.style.left = pct.toFixed(6) + "%";
+      flag.style.transform = "translateX(0)";
+      flag.innerHTML = NAME[e] + " &mdash; " +
+        (pct >= 1 ? pct.toFixed(0) : pct.toFixed(pct >= .1 ? 1 : 4)) + "% along";
+    };
+    place(mA, fA, sub[0]);
+    place(mB, fB, sub[1]);
+    fill.style.width = "100%";
+
+    const km = N / 1e6;                          /* 1 mm per dollar */
+    const moon = km / MOON;
+    facts.innerHTML = [
+      [dur(N), "if it were seconds"],
+      [ago(N), "that many seconds ago"],
+      [dur(N / 1000 * 86400), "to spend it at $1,000 a day"],
+      [dur(N * 3), "to count it out loud, one a second, eight hours a day"],
+      [fmt(Math.round(km)) + " km", "end to end at one millimetre per dollar"],
+      [moon >= .5 ? moon.toFixed(2) + "&times;" : (moon * 100).toPrecision(2) + "%", "of the distance to the Moon"]
+    ].map(r => `<div class="bgfact"><div class="bv">${r[0]}</div><div class="bl">${r[1]}</div></div>`).join("");
+  }
+
+  ctl.addEventListener("click", e => {
+    const b = e.target.closest("button[data-exp]");
+    if (!b) return;
+    $$("button", ctl).forEach(x => x.classList.toggle("on", x === b));
+    render(+b.dataset.exp);
+  });
+  render(6);
+})();
+
+
+/* =======================================================================
+   WHAT DINNER COSTS THE SKY — Poore & Nemecek (2018) via OWID
+   Per-kilogram figures are split across the eight supply-chain stages;
+   three bars have a slightly negative land-use term clamped to zero
+   (<=0.03 kg each) and nuts are excluded from this view because theirs is
+   -3.26 and a stack cannot show it honestly. See the chapter footnote.
+   ======================================================================= */
+(function dinner() {
+  const STAGE = [
+    { n: "Land use change", c: "#b892ff" },
+    { n: "Farm", c: "#ff5d73" },
+    { n: "Animal feed", c: "#f77f00" },
+    { n: "Processing", c: "#ffc857" },
+    { n: "Transport", c: "#4895ef" },
+    { n: "Retail", c: "#2ec4b6" },
+    { n: "Packaging", c: "#06d6a0" },
+    { n: "Losses", c: "#8d96ab" }
+  ];
+  const KG = [
+    { n: "Beef, beef herd", t: 99.48, s: [23.24, 56.23, 2.68, 1.81, 0.49, 0.23, 0.35, 14.44] },
+    { n: "Dark chocolate", t: 46.65, s: [25.81, 6.69, 0.00, 0.33, 0.11, 0.04, 0.72, 12.94] },
+    { n: "Lamb &amp; mutton", t: 39.72, s: [0.65, 27.03, 3.28, 1.54, 0.68, 0.30, 0.35, 5.90] },
+    { n: "Beef, dairy herd", t: 33.30, s: [1.27, 21.92, 3.50, 1.55, 0.59, 0.25, 0.37, 3.85] },
+    { n: "Coffee", t: 28.53, s: [3.82, 10.75, 0.00, 0.61, 0.13, 0.05, 1.69, 11.47] },
+    { n: "Prawns, farmed", t: 26.87, s: [0.33, 13.45, 4.03, 0.00, 0.33, 0.35, 0.54, 7.83] },
+    { n: "Cheese", t: 23.88, s: [4.47, 13.10, 2.35, 0.74, 0.14, 0.33, 0.17, 2.58] },
+    { n: "Fish, farmed", t: 13.63, s: [1.19, 8.06, 1.83, 0.04, 0.25, 0.09, 0.14, 2.03] },
+    { n: "Pork", t: 12.31, s: [2.24, 2.48, 4.30, 0.42, 0.50, 0.28, 0.43, 1.66] },
+    { n: "Chicken", t: 9.87, s: [3.51, 0.93, 2.45, 0.61, 0.38, 0.24, 0.29, 1.45] },
+    { n: "Eggs", t: 4.67, s: [0.71, 1.32, 2.21, 0.00, 0.08, 0.04, 0.16, 0.15] },
+    { n: "Rice", t: 4.45, s: [0.00, 3.55, 0.00, 0.07, 0.10, 0.06, 0.08, 0.61] },
+    { n: "Tofu", t: 3.16, s: [0.96, 0.49, 0.00, 0.79, 0.18, 0.27, 0.18, 0.29] },
+    { n: "Milk", t: 3.15, s: [0.51, 1.51, 0.24, 0.15, 0.09, 0.27, 0.10, 0.27] },
+    { n: "Tomatoes", t: 2.09, s: [0.37, 0.71, 0.00, 0.01, 0.18, 0.02, 0.15, 0.66] },
+    { n: "Wheat &amp; rye", t: 1.57, s: [0.10, 0.82, 0.00, 0.21, 0.13, 0.06, 0.09, 0.18] },
+    { n: "Peas", t: 0.98, s: [0.00, 0.72, 0.00, 0.00, 0.10, 0.04, 0.04, 0.08] },
+    { n: "Bananas", t: 0.86, s: [0.00, 0.27, 0.00, 0.06, 0.30, 0.02, 0.07, 0.18] },
+    { n: "Apples", t: 0.43, s: [0.00, 0.23, 0.00, 0.00, 0.10, 0.02, 0.04, 0.07] }
+  ];
+  const PROT = [
+    { n: "Beef, beef herd", v: 49.89 }, { n: "Lamb &amp; mutton", v: 19.85 }, { n: "Tomatoes", v: 19.00 },
+    { n: "Prawns, farmed", v: 18.19 }, { n: "Beef, dairy herd", v: 16.87 }, { n: "Cassava", v: 14.67 },
+    { n: "Apples", v: 14.33 }, { n: "Cheese", v: 10.82 }, { n: "Bananas", v: 9.56 }, { n: "Milk", v: 9.50 },
+    { n: "Pork", v: 7.61 }, { n: "Rice", v: 6.27 }, { n: "Fish, farmed", v: 5.98 }, { n: "Chicken", v: 5.70 },
+    { n: "Root vegetables", v: 4.30 }, { n: "Eggs", v: 4.21 }, { n: "Potatoes", v: 2.71 },
+    { n: "Grains", v: 2.70 }, { n: "Tofu", v: 1.98 }, { n: "Oatmeal", v: 1.91 },
+    { n: "Wheat &amp; rye", v: 1.29 }, { n: "Groundnuts", v: 1.23 }, { n: "Pulses", v: 0.84 },
+    { n: "Peas", v: 0.44 }, { n: "Nuts", v: 0.26 }
+  ];
+
+  const wrap = $("#dnWrap"), keyEl = $("#dnKey"), ctl = $("#dnCtl");
+  const axis = $("#dnAxis"), unit = $("#dnUnit");
+  if (!wrap) return;
+
+  let mode = "kg", focus = -1, seen = false;
+
+  keyEl.innerHTML = STAGE.map((s, i) =>
+    `<span data-i="${i}"><i style="background:${s.c}"></i>${s.n}</span>`).join("");
+
+  function buildKg() {
+    const max = Math.max(...KG.map(d => d.s.reduce((a, b) => a + b, 0)));
+    wrap.innerHTML = KG.map((d, k) => {
+      const segs = d.s.map((v, i) =>
+        `<div class="dnseg" data-i="${i}" data-w="${(v / max * 100).toFixed(3)}" style="background:${STAGE[i].c}"></div>`).join("");
+      return `<div class="dnrow" data-k="${k}"><div class="dnname">${d.n}</div>
+        <div class="dnstack">${segs}</div><div class="dnnum">${d.t.toFixed(2)}</div></div>`;
+    }).join("");
+  }
+  function buildProt() {
+    const max = Math.max(...PROT.map(d => d.v));
+    wrap.innerHTML = PROT.map(d =>
+      `<div class="dnrow"><div class="dnname">${d.n}</div>
+        <div class="dnstack"><div class="dnseg" data-w="${(d.v / max * 100).toFixed(3)}" style="background:${d.v > 9 ? "#ff5d73" : d.v > 2.5 ? "#ffc857" : "#2ec4b6"}"></div></div>
+        <div class="dnnum">${d.v.toFixed(2)}</div></div>`).join("");
+  }
+  function paint() {
+    requestAnimationFrame(() => {
+      $$(".dnseg", wrap).forEach(s => { s.style.width = s.dataset.w + "%"; });
+    });
+  }
+  function render() {
+    if (mode === "kg") {
+      buildKg();
+      axis.textContent = "Kilograms of CO₂-equivalent per kilogram of food";
+      unit.innerHTML = "kg CO&#8322;e";
+      keyEl.style.display = "";
+    } else {
+      buildProt();
+      axis.textContent = "Kilograms of CO₂-equivalent per 100 g of protein";
+      unit.innerHTML = "kg CO&#8322;e";
+      keyEl.style.display = "none";
+      wrap.classList.remove("focus");
+      focus = -1;
+      $$("span", keyEl).forEach(s => s.classList.remove("on"));
+    }
+    if (seen) paint();
+  }
+
+  ctl.addEventListener("click", e => {
+    const b = e.target.closest("button[data-m]");
+    if (!b || b.dataset.m === mode) return;
+    $$("button", ctl).forEach(x => x.classList.toggle("on", x === b));
+    mode = b.dataset.m;
+    render();
+  });
+
+  /* clicking a stage in the key dims every other stage */
+  keyEl.addEventListener("click", e => {
+    const s = e.target.closest("span[data-i]");
+    if (!s || mode !== "kg") return;
+    const i = +s.dataset.i;
+    focus = (focus === i) ? -1 : i;
+    $$("span", keyEl).forEach(x => x.classList.toggle("on", +x.dataset.i === focus));
+    wrap.classList.toggle("focus", focus >= 0);
+    $$(".dnseg", wrap).forEach(g => g.classList.toggle("hot", +g.dataset.i === focus));
+  });
+
+  tipDelegate(wrap, ".dnseg[data-i]", el => {
+    const row = el.closest(".dnrow"), i = +el.dataset.i;
+    const d = KG[+row.dataset.k];
+    return `<span class="t">${d.n} &mdash; ${STAGE[i].n}</span>
+      <span class="v">${d.s[i].toFixed(2)} kg CO&#8322;e per kg</span>
+      <span class="d">${(d.s[i] / d.t * 100).toFixed(1)}% of this food's footprint of ${d.t.toFixed(2)} kg</span>`;
+  });
+
+  render();
+  new IntersectionObserver((es, o) => {
+    if (!es[0].isIntersecting) return;
+    o.disconnect(); seen = true; paint();
+  }, { threshold: .1 }).observe(wrap);
+})();
+
+
+/* =======================================================================
+   WHO BROKE THE SKY — four ways to apportion CO2
+   Global Carbon Budget 2025 via OWID. Territorial and cumulative shares
+   are 2024; per-capita figures are 2023 so that the two per-person modes
+   are the same year and directly comparable. CO2 only, excluding
+   land-use change. Rows re-sort with a FLIP transform.
+   ======================================================================= */
+(function whoBroke() {
+  const BLAME = [
+    { n: "China",          pop: 17.39, ann: 31.84, cum: 15.42, pc:  8.56, cons:  7.63 },
+    { n: "United States",  pop:  4.23, ann: 12.71, cum: 23.52, pc: 14.32, cons: 15.81 },
+    { n: "India",          pop: 17.78, ann:  8.27, cum:  3.57, pc:  2.13, cons:  1.77 },
+    { n: "Russia",         pop:  1.77, ann:  4.61, cum:  6.64, pc: 11.92, cons:  9.67 },
+    { n: "Japan",          pop:  1.52, ann:  2.49, cum:  3.76, pc:  7.94, cons:  9.18 },
+    { n: "Germany",        pop:  1.04, ann:  1.48, cum:  5.14, pc:  7.02, cons:  9.09 },
+    { n: "United Kingdom", pop:  0.85, ann:  0.81, cum:  4.33, pc:  4.48, cons:  7.09 },
+    { n: "Canada",         pop:  0.49, ann:  1.38, cum:  1.93, pc: 13.88, cons: 13.23 },
+    { n: "Australia",      pop:  0.33, ann:  1.00, cum:  1.08, pc: 14.53, cons: 14.07 },
+    { n: "Saudi Arabia",   pop:  0.42, ann:  1.79, cum:  1.03, pc: 20.37, cons: 19.66 },
+    { n: "Qatar",          pop:  0.04, ann:  0.33, cum:  0.14, pc: 40.13, cons: 27.60 },
+    { n: "Indonesia",      pop:  3.47, ann:  2.10, cum:  0.94, pc:  2.71, cons:  2.59 },
+    { n: "Brazil",         pop:  2.60, ann:  1.25, cum:  0.98, pc:  2.29, cons:  2.23 },
+    { n: "Nigeria",        pop:  2.85, ann:  0.35, cum:  0.25, pc:  0.57, cons:  0.58 },
+    { n: "Ethiopia",       pop:  1.62, ann:  0.05, cum:  0.02, pc:  0.14, cons:  0.18 }
+  ];
+  const MODE = {
+    ann:  { c: "#ff5d73", share: true,  unit: "%",   lab: "Share of the world's CO₂ emissions in 2024" },
+    cum:  { c: "#ffc857", share: true,  unit: "%",   lab: "Share of all CO₂ ever emitted, 1750 to 2024" },
+    pc:   { c: "#4895ef", share: false, unit: " t",  lab: "Tonnes per person in 2023, counted where the fuel was burned" },
+    cons: { c: "#b892ff", share: false, unit: " t",  lab: "Tonnes per person in 2023, counted where the goods were consumed" }
+  };
+
+  const host = $("#blRows"), ctl = $("#blCtl"), legend = $("#blLegend");
+  if (!host) return;
+
+  let mode = "ann", seen = false;
+  const rows = new Map();
+
+  BLAME.forEach(d => {
+    const el = document.createElement("div");
+    el.className = "blrow";
+    el.innerHTML = `<div class="blrank"></div><div class="blname">${d.n}</div>
+      <div class="bltrack"><div class="blfill"></div><div class="blpop"></div></div>
+      <div class="blnum"></div>`;
+    host.appendChild(el);
+    rows.set(d.n, el);
+    tipOn(el, () => {
+      const m = MODE[mode];
+      return `<span class="t">${d.n}</span>
+        <span class="v">${d[mode].toFixed(2)}${m.unit}</span>
+        <span class="d">${m.share
+          ? d.pop.toFixed(2) + "% of the world's people"
+          : "world average 4.71 t &middot; " + d.pop.toFixed(2) + "% of the world's people"}</span>`;
+    });
+  });
+
+  function render(animate) {
+    const m = MODE[mode];
+    const sorted = BLAME.slice().sort((a, b) => b[mode] - a[mode]);
+    const max = sorted[0][mode];
+
+    /* FLIP: read every current position, reorder, read again, then write */
+    const before = animate ? BLAME.map(d => rows.get(d.n).offsetTop) : null;
+    sorted.forEach(d => host.appendChild(rows.get(d.n)));
+    const after = animate ? BLAME.map(d => rows.get(d.n).offsetTop) : null;
+
+    if (animate) {
+      BLAME.forEach((d, i) => {
+        const el = rows.get(d.n);
+        el.classList.remove("anim");
+        el.style.transform = `translate3d(0,${before[i] - after[i]}px,0)`;
+      });
+      /* Commit those inverted offsets with a forced style flush rather than a
+         requestAnimationFrame. rAF does not fire in a backgrounded tab, and a
+         frame missed there would strand every row at its inverted offset with
+         nothing to put it back. One read, then one batch of writes. */
+      void host.offsetHeight;
+      BLAME.forEach(d => {
+        const el = rows.get(d.n);
+        el.classList.add("anim");
+        el.style.transform = "";
+      });
+    }
+
+    sorted.forEach((d, i) => {
+      const el = rows.get(d.n);
+      $(".blrank", el).textContent = i + 1;
+      const fill = $(".blfill", el);
+      fill.style.background = m.c;
+      fill.style.width = (seen ? d[mode] / max * 100 : 0) + "%";
+      const pop = $(".blpop", el);
+      pop.classList.toggle("on", m.share && seen);
+      pop.style.left = (m.share ? d.pop / max * 100 : 0) + "%";
+      $(".blnum", el).textContent = m.share
+        ? d[mode].toFixed(2) + "%"
+        : d[mode].toFixed(2) + " t";
+    });
+
+    legend.innerHTML = m.lab +
+      (m.share
+        ? `<br><b>|</b> the white tick is that country's share of the world's population &mdash; where the bar overtakes the tick, a country is emitting more than its number of people`
+        : `<br>The world average is 4.71 tonnes per person. Fifteen countries shown; they are 70% of today's emissions and 56% of the world's people.`);
+  }
+
+  ctl.addEventListener("click", e => {
+    const b = e.target.closest("button[data-m]");
+    if (!b || b.dataset.m === mode) return;
+    $$("button", ctl).forEach(x => x.classList.toggle("on", x === b));
+    mode = b.dataset.m;
+    render(true);
+  });
+
+  render(false);
+  new IntersectionObserver((es, o) => {
+    if (!es[0].isIntersecting) return;
+    o.disconnect(); seen = true; render(false);
+  }, { threshold: .1 }).observe(host);
+})();
+
+
+/* =======================================================================
+   THE PRICE OF SUNLIGHT — solar module price against cumulative capacity
+   Constant 2025 US$/W and MW installed, 1975-2024. IRENA (2025),
+   Nemet (2009), Farmer & Lafond (2016) via Our World in Data. Fifty
+   [year, $/W, MW] triples, straight from the published file.
+   ======================================================================= */
+(function priceOfSunlight() {
+  const SOLAR = [
+    [1975,132.3757,0.54], [1976,99.5976,1.08], [1977,72.6611,2.16], [1978,51.4082,3.51], [1979,43.1951,5.24],
+    [1980,36.6050,7.96], [1981,29.2664,12.88], [1982,26.2952,19.41], [1983,21.2281,29.25], [1984,19.7250,46.70],
+    [1985,17.2204,66.45], [1986,14.2447,89.16], [1987,12.1104,114], [1988,11.3116,141], [1989,11.6901,173],
+    [1990,12.0911,212], [1991,11.2008,257], [1992,10.4351,309], [1993,9.7587,366], [1994,9.2315,424],
+    [1995,8.5355,489], [1996,7.9798,565], [1997,7.9520,651], [1998,7.1656,771], [1999,6.6193,914],
+    [2000,6.4959,1103], [2001,6.2844,1373], [2002,5.7473,1738], [2003,5.4638,2229], [2004,4.6955,2916],
+    [2005,4.7457,4391], [2006,5.1727,5912], [2007,5.2111,8266], [2008,4.7492,14445], [2009,3.1743,22483],
+    [2010,2.5118,39849], [2011,2.0609,70428], [2012,1.1107,99541], [2013,0.8566,134728], [2014,0.7905,172967],
+    [2015,0.7357,220151], [2016,0.6803,291686], [2017,0.5714,384915], [2018,0.5091,479046], [2019,0.4669,580467],
+    [2020,0.3697,710726], [2021,0.3319,854812], [2022,0.3658,1045691], [2023,0.3218,1410556], [2024,0.2652,1866898]
+  ];
+
+  const svg = $("#slPlot"), wrap = $("#slWrap"), cards = $("#slCards");
+  if (!svg) return;
+
+  const W = 900, H = 480, L = 62, R = 20, T = 26, B = 56;
+  const QMIN = 0.3, QMAX = 3e6;        /* MW,  log x */
+  const PMIN = 0.2, PMAX = 200;        /* $/W, log y */
+  const lg = Math.log10;
+  const sx = q => L + (lg(q) - lg(QMIN)) / (lg(QMAX) - lg(QMIN)) * (W - L - R);
+  const sy = p => T + (lg(PMAX) - lg(p)) / (lg(PMAX) - lg(PMIN)) * (H - T - B);
+
+  /* gridlines, decade by decade */
+  for (let e = 0; e <= 6; e++) {
+    const q = Math.pow(10, e);
+    if (q < QMIN || q > QMAX) continue;
+    svgEl("line", { x1: sx(q), x2: sx(q), y1: T, y2: H - B, class: "gridline", opacity: .5 }, svg);
+    const t = svgEl("text", { x: sx(q), y: H - B + 19, "text-anchor": "middle", class: "axlabel" }, svg);
+    t.textContent = ["1 MW","10 MW","100 MW","1 GW","10 GW","100 GW","1 TW"][e];
+  }
+  for (let e = -1; e <= 2; e++) {
+    const p = Math.pow(10, e);
+    svgEl("line", { x1: L, x2: W - R, y1: sy(p), y2: sy(p), class: "gridline", opacity: .5 }, svg);
+    const t = svgEl("text", { x: L - 10, y: sy(p) + 4, "text-anchor": "end", class: "axlabel" }, svg);
+    t.textContent = e < 0 ? "$0.10" : "$" + fmt(p);
+  }
+  const xl = svgEl("text", { x: (L + W - R) / 2, y: H - 14, "text-anchor": "middle", class: "axlabel" }, svg);
+  xl.textContent = "Total solar ever installed, log scale →";
+  const yl = svgEl("text", { x: 16, y: (T + H - B) / 2, class: "axlabel",
+    transform: `rotate(-90 16 ${(T + H - B) / 2})`, "text-anchor": "middle" }, svg);
+  yl.textContent = "← Price per watt, log scale";
+
+  /* fitted learning curve: OLS in log-log over all fifty points */
+  const xs = SOLAR.map(d => Math.log(d[2])), ys = SOLAR.map(d => Math.log(d[1]));
+  const n = xs.length, mx = xs.reduce((a, b) => a + b) / n, my = ys.reduce((a, b) => a + b) / n;
+  let num = 0, den = 0;
+  for (let i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); den += (xs[i] - mx) ** 2; }
+  const slope = num / den, intercept = my - slope * mx;
+  const rate = (1 - Math.pow(2, slope)) * 100;
+  const predict = q => Math.exp(intercept + slope * Math.log(q));
+  svgEl("path", { d: `M${sx(QMIN)} ${sy(predict(QMIN))} L${sx(QMAX)} ${sy(predict(QMAX))}`, class: "slfit" }, svg);
+  const fl = svgEl("text", { x: sx(3e4), y: sy(predict(3e4)) - 12, class: "axlabel", fill: "#b892ff" }, svg);
+  fl.textContent = `fitted: −${rate.toFixed(1)}% per doubling`;
+
+  /* the path the industry actually walked, then the dots */
+  svgEl("path", {
+    d: SOLAR.map((d, i) => (i ? "L" : "M") + sx(d[2]).toFixed(1) + " " + sy(d[1]).toFixed(1)).join(" "),
+    class: "slpath"
+  }, svg);
+
+  const g = svgEl("g", {}, svg);
+  SOLAR.forEach(d => {
+    const c = svgEl("circle", {
+      cx: sx(d[2]).toFixed(1), cy: sy(d[1]).toFixed(1),
+      r: d[0] % 10 === 0 || d[0] === 2024 || d[0] === 1975 ? 5.5 : 4,
+      fill: d[0] >= 2010 ? "#ffc857" : d[0] >= 1995 ? "#2ec4b6" : "#4895ef",
+      class: "sldot"
+    }, g);
+    c.dataset.year = d[0]; c.dataset.p = d[1]; c.dataset.q = d[2];
+  });
+  /* decade labels, placed clear of the line */
+  [1975, 1985, 1995, 2005, 2015, 2024].forEach(y => {
+    const d = SOLAR.find(s => s[0] === y);
+    const t = svgEl("text", {
+      x: sx(d[2]) + (y === 2024 ? -6 : 10), y: sy(d[1]) - 10,
+      "text-anchor": y === 2024 ? "end" : "start", class: "bublabel", "font-size": 11
+    }, svg);
+    t.textContent = y;
+  });
+
+  tipDelegate(wrap, "circle.sldot", el => {
+    const q = +el.dataset.q, p = +el.dataset.p;
+    $$("circle.sldot", g).forEach(c => c.classList.toggle("on", c === el));
+    wrap.classList.add("hovering");
+    return `<span class="t">${el.dataset.year}</span>
+      <span class="v">$${p.toFixed(p < 1 ? 4 : 2)} per watt</span>
+      <span class="d">${q < 1000 ? q.toFixed(2) + " MW" : fmt(Math.round(q / 1000)) + " GW"} installed worldwide
+        &middot; $100 buys ${(100 / p).toFixed(100 / p < 10 ? 2 : 0)} W</span>`;
+  });
+  wrap.addEventListener("mouseleave", () => {
+    wrap.classList.remove("hovering");
+    $$("circle.sldot", g).forEach(c => c.classList.remove("on"));
+  });
+
+  const doublings = Math.log2(SOLAR[49][2] / SOLAR[0][2]);
+  cards.innerHTML = [
+    ["$132.38 &rarr; $0.27", "Price of a watt of solar module, 1975 against 2024, both in 2025 dollars"],
+    ["&minus;99.80%", "The fall over those forty-nine years &mdash; a factor of 499"],
+    ["&minus;" + rate.toFixed(1) + "%", "Fitted fall for every doubling of all the solar ever built"],
+    ["&times;" + doublings.toFixed(1), "Doublings since 1975: 0.54 MW installed then, 1.87 TW now"]
+  ].map(c => `<div class="slcard"><div class="sv">${c[0]}</div><div class="sl">${c[1]}</div></div>`).join("");
+})();
+
+
+/* =======================================================================
+   TEN PER CENT TO HALF — US adoption, 10% of households to 50%
+   Comin & Hobijn (2004) and others, via Our World in Data. Start and end
+   years are interpolated crossings of the published series; see the
+   chapter footnote for which starts are measured and which are the
+   dataset's own starting point.
+   ======================================================================= */
+(function arrival() {
+  const TECH = [
+    { n: "Flush toilet",       a: 1885, b: 1931, c: "#8d96ab", est: true },
+    { n: "Telephone landline", a: 1903, b: 1946, c: "#8d96ab" },
+    { n: "Mains electricity",  a: 1908, b: 1924, c: "#ffc857" },
+    { n: "Automobile",         a: 1915, b: 1925, c: "#ffc857" },
+    { n: "Radio",              a: 1925, b: 1931, c: "#06d6a0" },
+    { n: "Refrigerator",       a: 1929, b: 1937, c: "#06d6a0" },
+    { n: "Washing machine",    a: 1930, b: 1965, c: "#8d96ab" },
+    { n: "Air conditioning",   a: 1957, b: 1974, c: "#ffc857" },
+    { n: "Microwave oven",     a: 1981, b: 1985, c: "#06d6a0" },
+    { n: "The internet",       a: 1993, b: 2001, c: "#4895ef" },
+    { n: "Mobile phone",       a: 1994, b: 2001, c: "#4895ef" },
+    { n: "Social media",       a: 2006, b: 2011, c: "#b892ff" },
+    { n: "Tablet",             a: 2011, b: 2016, c: "#b892ff" }
+  ];
+  const host = $("#arRows"), ticks = $("#arTicks");
+  if (!host) return;
+
+  const X0 = 1875, X1 = 2025;
+  const pos = y => (y - X0) / (X1 - X0) * 100;
+
+  host.innerHTML = TECH.map((d, k) => {
+    const years = d.b - d.a;
+    return `<div class="arrow" data-k="${k}"><div class="arname">${d.n}</div>
+      <div class="artrack"><div class="arbase"></div>
+        <div class="arbar" data-l="${pos(d.a).toFixed(2)}" data-w="${(pos(d.b) - pos(d.a)).toFixed(2)}"
+             style="left:${pos(d.a).toFixed(2)}%;background:${d.c}"></div></div>
+      <div class="aryears">${years} yr</div></div>`;
+  }).join("");
+
+  ticks.innerHTML = [1880, 1910, 1940, 1970, 2000, 2020]
+    .map(y => `<span style="left:${pos(y).toFixed(2)}%">${y}</span>`).join("");
+
+  tipDelegate(host, ".arbar", el => {
+    const d = TECH[+el.closest(".arrow").dataset.k];
+    return `<span class="t">${d.n}</span>
+      <span class="v">${d.b - d.a} years &mdash; ${d.a} to ${d.b}</span>
+      <span class="d">One in ten American households in ${d.a}; one in two by ${d.b}${d.est ? ". The series is sparse here, so the 50% crossing is interpolated across an eleven-year gap" : ""}</span>`;
+  });
+
+  new IntersectionObserver((es, o) => {
+    if (!es[0].isIntersecting) return;
+    o.disconnect();
+    $$(".arbar", host).forEach(b => { b.style.width = b.dataset.w + "%"; });
+  }, { threshold: .1 }).observe(host);
+})();
+
+
+/* =======================================================================
    POLISH — contents, nav, scrollspy, progress, back-to-top
    ======================================================================= */
 (function furniture() {
@@ -3657,6 +4522,10 @@ const HOURS_SERVICES = [
 
   sections.forEach((s, i) => {
     const n = String(i + 1).padStart(2, "0");
+
+    /* chapter number in the eyebrow, so inserting a chapter renumbers itself */
+    const eb = s.querySelector(".eyebrow .num");
+    if (eb) eb.textContent = i + 1;
 
     const li = document.createElement("li");
     li.innerHTML = `<a href="#${s.id}">
